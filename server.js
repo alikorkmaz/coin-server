@@ -33,4 +33,8 @@ app.get("/btcturk", (req, res) => {
     .then(json => res.send(json));
 });
 
+app.get("/wakemydyno.txt", (req, res) => {
+  res.send("olala");
+});
+
 app.listen(process.env.PORT || 3001, () => console.log("listening"));
