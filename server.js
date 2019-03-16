@@ -11,6 +11,8 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(express.static("public"));
+
 app.get("/", (req, res) => {
   res.send("hi");
 });
@@ -31,10 +33,6 @@ app.get("/btcturk", (req, res) => {
   fetch("https://www.btcturk.com/api/ticker")
     .then(response => response.json())
     .then(json => res.send(json));
-});
-
-app.get("/wakemydyno.txt", (req, res) => {
-  res.send("olala");
 });
 
 app.listen(process.env.PORT || 3001, () => console.log("listening"));
