@@ -33,4 +33,4 @@ app.get("/btcturk", (req, res) => {
     .then(json => res.send(json));
 });
 
-app.listen(3001, () => console.log("listening on 3001"));
+app.listen(process.env.PORT || 3001, () => console.log("listening"));
