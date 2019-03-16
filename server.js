@@ -11,6 +11,10 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.get("/", (req, res) => {
+  res.send("hi");
+});
+
 app.get("/koineks", (req, res) => {
   fetch("https://koineks.com/ticker")
     .then(response => response.json())
