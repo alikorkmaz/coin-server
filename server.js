@@ -2,6 +2,21 @@ const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
 
+let kur;
+setInterval(() => {
+  fetch(
+    "http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e"
+  )
+    .then(response => response.json())
+    .then(data => {
+      kur = data.rates.TRY / data.rates.USD;
+      console.log(kur);
+    })
+    .catch(x => {
+      console.log(x);
+    });
+}, 3600000);
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -14,7 +29,11 @@ app.use(function(req, res, next) {
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.send("hi");
+  res.send(state);
+});
+
+app.get("/kur", (req, res) => {
+  res.send({ kur: kur });
 });
 
 app.get("/koineks", (req, res) => {
