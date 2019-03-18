@@ -10,7 +10,7 @@ setInterval(() => {
     .then(response => response.json())
     .then(data => {
       kur = data.rates.TRY / data.rates.USD;
-      console.log(kur);
+      console.log(kur.toFixed(4));
     })
     .catch(x => {
       console.log(x);
@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/kur", (req, res) => {
-  res.send({ kur: kur });
+  res.send({ kur: kur.toFixed(4) });
 });
 
 app.get("/koineks", (req, res) => {
