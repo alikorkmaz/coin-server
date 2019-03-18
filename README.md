@@ -1,1 +1,1 @@
-# coin-server
+# personal trash
