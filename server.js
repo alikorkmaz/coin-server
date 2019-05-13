@@ -460,4 +460,171 @@ app.get("/coinbase", async (req, res) => {
   res.send(pairs.sort((a, b) => b.result - a.result));
 });
 
+app.get("/coinbase-cross", async (req, res) => {
+  let pairs = [];
+  let commission = 0.008;
+
+  let cbBtc = await fetch(
+    "https://api.pro.coinbase.com/products/btc-usd/ticker"
+  ).then(r => r.json());
+
+  let cbEth = await fetch(
+    "https://api.pro.coinbase.com/products/eth-usd/ticker"
+  ).then(r => r.json());
+
+  let cbXrp = await fetch(
+    "https://api.pro.coinbase.com/products/xrp-usd/ticker"
+  ).then(r => r.json());
+
+  let cbLtc = await fetch(
+    "https://api.pro.coinbase.com/products/ltc-usd/ticker"
+  ).then(r => r.json());
+
+  let cbXlm = await fetch(
+    "https://api.pro.coinbase.com/products/xlm-usd/ticker"
+  ).then(r => r.json());
+
+  let cbBch = await fetch(
+    "https://api.pro.coinbase.com/products/bch-usd/ticker"
+  ).then(r => r.json());
+
+  let cbEos = await fetch(
+    "https://api.pro.coinbase.com/products/eos-usd/ticker"
+  ).then(r => r.json());
+
+  let cbEtc = await fetch(
+    "https://api.pro.coinbase.com/products/etc-usd/ticker"
+  ).then(r => r.json());
+
+  let paribu = await fetch("https://paribu.com/ticker").then(r => r.json());
+
+  let btcturk = await fetch("https://www.btcturk.com/api/ticker").then(r =>
+    r.json()
+  );
+
+  let koineks = await fetch("https://koineks.com/ticker").then(r => r.json());
+
+  pairs.push({
+    title: "BTC - PARIBU",
+    group: 1,
+    cb2p: +paribu.BTC_TL.highestBid / +cbBtc.ask,
+    p2cb: +cbBtc.bid / +paribu.BTC_TL.lowestAsk
+  });
+  pairs.push({
+    title: "ETH - PARIBU",
+    group: 1,
+    cb2p: +paribu.ETH_TL.highestBid / +cbEth.ask,
+    p2cb: +cbEth.bid / +paribu.ETH_TL.lowestAsk
+  });
+  pairs.push({
+    title: "XRP - PARIBU",
+    group: 1,
+    cb2p: +paribu.XRP_TL.highestBid / +cbXrp.ask,
+    p2cb: +cbXrp.bid / +paribu.XRP_TL.lowestAsk
+  });
+  pairs.push({
+    title: "LTC - PARIBU",
+    group: 1,
+    cb2p: +paribu.LTC_TL.highestBid / +cbLtc.ask,
+    p2cb: +cbLtc.bid / +paribu.LTC_TL.lowestAsk
+  });
+  pairs.push({
+    title: "XLM - PARIBU",
+    group: 1,
+    cb2p: +paribu.XLM_TL.highestBid / +cbXlm.ask,
+    p2cb: +cbXlm.bid / +paribu.XLM_TL.lowestAsk
+  });
+  pairs.push({
+    title: "EOS - PARIBU",
+    group: 1,
+    cb2p: +paribu.EOS_TL.highestBid / +cbEos.ask,
+    p2cb: +cbEos.bid / +paribu.EOS_TL.lowestAsk
+  });
+
+  pairs.push({
+    title: "BTC - BTCTURK",
+    group: 2,
+    cb2p: +btcturk.find(x => x.pair === "BTCTRY").bid / +cbBtc.ask,
+    p2cb: +cbBtc.bid / +btcturk.find(x => x.pair === "BTCTRY").ask
+  });
+  pairs.push({
+    title: "ETH - BTCTURK",
+    group: 2,
+    cb2p: +btcturk.find(x => x.pair === "ETHTRY").bid / +cbEth.ask,
+    p2cb: +cbEth.bid / +btcturk.find(x => x.pair === "ETHTRY").ask
+  });
+  pairs.push({
+    title: "XRP - BTCTURK",
+    group: 2,
+    cb2p: +btcturk.find(x => x.pair === "XRPTRY").bid / +cbXrp.ask,
+    p2cb: +cbXrp.bid / +btcturk.find(x => x.pair === "XRPTRY").ask
+  });
+  pairs.push({
+    title: "LTC - BTCTURK",
+    group: 2,
+    cb2p: +btcturk.find(x => x.pair === "LTCTRY").bid / +cbLtc.ask,
+    p2cb: +cbLtc.bid / +btcturk.find(x => x.pair === "LTCTRY").ask
+  });
+  pairs.push({
+    title: "XLM - BTCTURK",
+    group: 2,
+    cb2p: +btcturk.find(x => x.pair === "XLMTRY").bid / +cbXlm.ask,
+    p2cb: +cbXlm.bid / +btcturk.find(x => x.pair === "XLMTRY").ask
+  });
+
+  pairs.push({
+    title: "BTC - KOINEKS",
+    group: 3,
+    cb2p: +koineks.BTC.bid / +cbBtc.ask,
+    p2cb: +cbBtc.bid / +koineks.BTC.ask
+  });
+  pairs.push({
+    title: "ETH - KOINEKS",
+    group: 3,
+    cb2p: +koineks.ETH.bid / +cbEth.ask,
+    p2cb: +cbEth.bid / +koineks.ETH.ask
+  });
+  pairs.push({
+    title: "XRP - KOINEKS",
+    group: 3,
+    cb2p: +koineks.XRP.bid / +cbXrp.ask,
+    p2cb: +cbXrp.bid / +koineks.XRP.ask
+  });
+  pairs.push({
+    title: "LTC - KOINEKS",
+    group: 3,
+    cb2p: +koineks.LTC.bid / +cbLtc.ask,
+    p2cb: +cbLtc.bid / +koineks.LTC.ask
+  });
+
+  pairs.push({
+    title: "XLM - KOINEKS",
+    group: 3,
+    cb2p: +koineks.XLM.bid / +cbXlm.ask,
+    p2cb: +cbXlm.bid / +koineks.XLM.ask
+  });
+
+  pairs.push({
+    title: "EOS - KOINEKS",
+    group: 3,
+    cb2p: +koineks.EOS.bid / +cbEos.ask,
+    p2cb: +cbEos.bid / +koineks.EOS.ask
+  });
+
+  result = [];
+  pairs.map(pair1 => {
+    pairs.map(pair2 => {
+      result.push({
+        getir: pair1.title,
+        gotur: pair2.title,
+        result:
+          pair1.group === pair2.group
+            ? (pair1.cb2p * pair2.p2cb * (1 - commission) * 1000).toFixed(2)
+            : 0
+      });
+    });
+  });
+  res.send(result.sort((a, b) => b.result - a.result));
+});
+
 app.listen(process.env.PORT || 3001, () => console.log("listening"));
