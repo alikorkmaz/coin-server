@@ -296,6 +296,10 @@ app.get("/coinbase", async (req, res) => {
     "https://api.pro.coinbase.com/products/etc-usd/ticker"
   ).then(r => r.json());
 
+  let cbBat = await fetch(
+    "https://api.pro.coinbase.com/products/bat-usdc/ticker"
+  ).then(r => r.json());
+
   let paribu = await fetch("https://paribu.com/ticker").then(r => r.json());
 
   let btcturk = await fetch("https://www.btcturk.com/api/ticker").then(r =>
@@ -352,6 +356,13 @@ app.get("/coinbase", async (req, res) => {
     buy: +cbEos.ask,
     sell: +paribu.EOS_TL.highestBid,
     result: (+paribu.EOS_TL.highestBid * (1 - commission)) / +cbEos.ask
+  });
+  pairs.push({
+    title: "BAT - PARIBU",
+    commission,
+    buy: +cbBat.ask,
+    sell: +paribu.BAT_TL.highestBid,
+    result: (+paribu.BAT_TL.highestBid * (1 - commission)) / +cbBat.ask
   });
 
   pairs.push({
