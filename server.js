@@ -59,7 +59,7 @@ app.get("/kraken", async (req, res) => {
   let commission = 0.005;
 
   let kraken = await fetch(
-    "https://api.kraken.com/0/public/Ticker?pair=xbteur,etheur,xrpeur,ltceur,xlmeur,bcheur,adaeur,eoseur,dasheur,etceur"
+    "https://api.kraken.com/0/public/Ticker?pair=xbteur,etheur,xrpeur,ltceur,xlmeur,adaeur,eoseur,dasheur"
   ).then(r => r.json());
 
   let paribu = await fetch("https://paribu.com/ticker").then(r => r.json());
@@ -114,14 +114,6 @@ app.get("/kraken", async (req, res) => {
     result:
       (+paribu.XLM_TL.highestBid * (1 - commission)) /
       kraken.result.XXLMZEUR.a[0]
-  });
-  pairs.push({
-    title: "BCH - PARIBU",
-    commission,
-    buy: +kraken.result.BCHEUR.a[0],
-    sell: +paribu.BCH_TL.highestBid,
-    result:
-      (+paribu.BCH_TL.highestBid * (1 - commission)) / kraken.result.BCHEUR.a[0]
   });
   pairs.push({
     title: "ADA - PARIBU",
@@ -222,13 +214,6 @@ app.get("/kraken", async (req, res) => {
     result: (+koineks.XLM.bid * (1 - commission)) / kraken.result.XXLMZEUR.a[0]
   });
   pairs.push({
-    title: "BCH - KOINEKS",
-    commission,
-    buy: +kraken.result.BCHEUR.a[0],
-    sell: +koineks.BCH.bid,
-    result: (+koineks.BCH.bid * (1 - commission)) / kraken.result.BCHEUR.a[0]
-  });
-  pairs.push({
     title: "ADA - KOINEKS",
     commission,
     buy: +kraken.result.ADAEUR.a[0],
@@ -248,13 +233,6 @@ app.get("/kraken", async (req, res) => {
     buy: +kraken.result.DASHEUR.a[0],
     sell: +koineks.DASH.bid,
     result: (+koineks.DASH.bid * (1 - commission)) / kraken.result.DASHEUR.a[0]
-  });
-  pairs.push({
-    title: "ETC - KOINEKS",
-    commission,
-    buy: +kraken.result.XETCZEUR.a[0],
-    sell: +koineks.ETC.bid,
-    result: (+koineks.ETC.bid * (1 - commission)) / kraken.result.XETCZEUR.a[0]
   });
 
   res.send(pairs.sort((a, b) => b.result - a.result));
@@ -284,16 +262,8 @@ app.get("/coinbase", async (req, res) => {
     "https://api.pro.coinbase.com/products/xlm-usd/ticker"
   ).then(r => r.json());
 
-  let cbBch = await fetch(
-    "https://api.pro.coinbase.com/products/bch-usd/ticker"
-  ).then(r => r.json());
-
   let cbEos = await fetch(
     "https://api.pro.coinbase.com/products/eos-usd/ticker"
-  ).then(r => r.json());
-
-  let cbEtc = await fetch(
-    "https://api.pro.coinbase.com/products/etc-usd/ticker"
   ).then(r => r.json());
 
   let cbBat = await fetch(
@@ -342,13 +312,6 @@ app.get("/coinbase", async (req, res) => {
     buy: +cbXlm.ask,
     sell: +paribu.XLM_TL.highestBid,
     result: (+paribu.XLM_TL.highestBid * (1 - commission)) / +cbXlm.ask
-  });
-  pairs.push({
-    title: "BCH - PARIBU",
-    commission,
-    buy: +cbBch.ask,
-    sell: +paribu.BCH_TL.highestBid,
-    result: (+paribu.BCH_TL.highestBid * (1 - commission)) / +cbBch.ask
   });
   pairs.push({
     title: "EOS - PARIBU",
@@ -447,31 +410,17 @@ app.get("/coinbase", async (req, res) => {
     result: (+koineks.XLM.bid * (1 - commission)) / +cbXlm.ask
   });
   pairs.push({
-    title: "BCH - KOINEKS",
-    commission,
-    buy: +cbBch.ask,
-    sell: +koineks.BCH.bid,
-    result: (+koineks.BCH.bid * (1 - commission)) / +cbBch.ask
-  });
-  pairs.push({
     title: "EOS - KOINEKS",
     commission,
     buy: +cbEos.ask,
     sell: +koineks.EOS.bid,
     result: (+koineks.EOS.bid * (1 - commission)) / +cbEos.ask
   });
-  pairs.push({
-    title: "ETC - KOINEKS",
-    commission,
-    buy: +cbEtc.ask,
-    sell: +koineks.ETC.bid,
-    result: (+koineks.ETC.bid * (1 - commission)) / +cbEtc.ask
-  });
 
   res.send(pairs.sort((a, b) => b.result - a.result));
 });
 
-app.get("/coinbase-cross", async (req, res) => {
+app.get("/coinbasecross", async (req, res) => {
   let pairs = [];
   let commission = 0.008;
 
@@ -495,16 +444,8 @@ app.get("/coinbase-cross", async (req, res) => {
     "https://api.pro.coinbase.com/products/xlm-usd/ticker"
   ).then(r => r.json());
 
-  let cbBch = await fetch(
-    "https://api.pro.coinbase.com/products/bch-usd/ticker"
-  ).then(r => r.json());
-
   let cbEos = await fetch(
     "https://api.pro.coinbase.com/products/eos-usd/ticker"
-  ).then(r => r.json());
-
-  let cbEtc = await fetch(
-    "https://api.pro.coinbase.com/products/etc-usd/ticker"
   ).then(r => r.json());
 
   let paribu = await fetch("https://paribu.com/ticker").then(r => r.json());
@@ -626,8 +567,8 @@ app.get("/coinbase-cross", async (req, res) => {
   pairs.map(pair1 => {
     pairs.map(pair2 => {
       result.push({
-        getir: pair1.title,
-        gotur: pair2.title,
+        bring: pair1.title,
+        take: pair2.title,
         result:
           pair1.group === pair2.group
             ? (pair1.cb2p * pair2.p2cb * (1 - commission) * 1000).toFixed(2)
@@ -636,6 +577,288 @@ app.get("/coinbase-cross", async (req, res) => {
     });
   });
   res.send(result.sort((a, b) => b.result - a.result));
+});
+
+app.get("/coinbasereverse", async (req, res) => {
+  let pairs = [];
+  let commission = 0.004;
+
+  let cbBtc = await fetch(
+    "https://api.pro.coinbase.com/products/btc-usd/ticker"
+  ).then(r => r.json());
+
+  let cbEth = await fetch(
+    "https://api.pro.coinbase.com/products/eth-usd/ticker"
+  ).then(r => r.json());
+
+  let cbXrp = await fetch(
+    "https://api.pro.coinbase.com/products/xrp-usd/ticker"
+  ).then(r => r.json());
+
+  let cbLtc = await fetch(
+    "https://api.pro.coinbase.com/products/ltc-usd/ticker"
+  ).then(r => r.json());
+
+  let cbXlm = await fetch(
+    "https://api.pro.coinbase.com/products/xlm-usd/ticker"
+  ).then(r => r.json());
+
+  let cbEos = await fetch(
+    "https://api.pro.coinbase.com/products/eos-usd/ticker"
+  ).then(r => r.json());
+
+  let cbBat = await fetch(
+    "https://api.pro.coinbase.com/products/bat-usdc/ticker"
+  ).then(r => r.json());
+
+  let paribu = await fetch("https://paribu.com/ticker").then(r => r.json());
+
+  let btcturk = await fetch("https://www.btcturk.com/api/ticker").then(r =>
+    r.json()
+  );
+
+  let koineks = await fetch("https://koineks.com/ticker").then(r => r.json());
+
+  pairs.push({
+    title: "BTC - PARIBU",
+    commission,
+    sell: +cbBtc.bid,
+    buy: +paribu.BTC_TL.lowestAsk,
+    result: (+paribu.BTC_TL.lowestAsk * (1 + commission)) / +cbBtc.bid
+  });
+  pairs.push({
+    title: "ETH - PARIBU",
+    commission,
+    sell: +cbEth.bid,
+    buy: +paribu.ETH_TL.lowestAsk,
+    result: (+paribu.ETH_TL.lowestAsk * (1 + commission)) / +cbEth.bid
+  });
+  pairs.push({
+    title: "XRP - PARIBU",
+    commission,
+    sell: +cbXrp.bid,
+    buy: +paribu.XRP_TL.lowestAsk,
+    result: (+paribu.XRP_TL.lowestAsk * (1 + commission)) / +cbXrp.bid
+  });
+  pairs.push({
+    title: "LTC - PARIBU",
+    commission,
+    sell: +cbLtc.bid,
+    buy: +paribu.LTC_TL.lowestAsk,
+    result: (+paribu.LTC_TL.lowestAsk * (1 + commission)) / +cbLtc.bid
+  });
+  pairs.push({
+    title: "XLM - PARIBU",
+    commission,
+    sell: +cbXlm.bid,
+    buy: +paribu.XLM_TL.lowestAsk,
+    result: (+paribu.XLM_TL.lowestAsk * (1 + commission)) / +cbXlm.bid
+  });
+  pairs.push({
+    title: "EOS - PARIBU",
+    commission,
+    sell: +cbEos.bid,
+    buy: +paribu.EOS_TL.lowestAsk,
+    result: (+paribu.EOS_TL.lowestAsk * (1 + commission)) / +cbEos.bid
+  });
+  pairs.push({
+    title: "BAT - PARIBU",
+    commission,
+    sell: +cbBat.bid,
+    buy: +paribu.BAT_TL.lowestAsk,
+    result: (+paribu.BAT_TL.lowestAsk * (1 + commission)) / +cbBat.bid
+  });
+
+  pairs.push({
+    title: "BTC - BTCTURK",
+    commission,
+    sell: +cbBtc.bid,
+    buy: +btcturk.find(x => x.pair === "BTCTRY").ask,
+    result:
+      (+btcturk.find(x => x.pair === "BTCTRY").ask * (1 + commission)) /
+      +cbBtc.bid
+  });
+  pairs.push({
+    title: "ETH - BTCTURK",
+    commission,
+    sell: +cbEth.bid,
+    buy: +btcturk.find(x => x.pair === "ETHTRY").ask,
+    result:
+      (+btcturk.find(x => x.pair === "ETHTRY").ask * (1 + commission)) /
+      +cbEth.bid
+  });
+  pairs.push({
+    title: "XRP - BTCTURK",
+    commission,
+    sell: +cbXrp.bid,
+    buy: +btcturk.find(x => x.pair === "XRPTRY").ask,
+    result:
+      (+btcturk.find(x => x.pair === "XRPTRY").ask * (1 + commission)) /
+      +cbXrp.bid
+  });
+  pairs.push({
+    title: "LTC - BTCTURK",
+    commission,
+    sell: +cbLtc.bid,
+    buy: +btcturk.find(x => x.pair === "LTCTRY").ask,
+    result:
+      (+btcturk.find(x => x.pair === "LTCTRY").ask * (1 + commission)) /
+      +cbLtc.bid
+  });
+  pairs.push({
+    title: "XLM - BTCTURK",
+    commission,
+    sell: +cbXlm.bid,
+    buy: +btcturk.find(x => x.pair === "XLMTRY").ask,
+    result:
+      (+btcturk.find(x => x.pair === "XLMTRY").ask * (1 + commission)) /
+      +cbXlm.bid
+  });
+
+  pairs.push({
+    title: "BTC - KOINEKS",
+    commission,
+    sell: +cbBtc.bid,
+    buy: +koineks.BTC.ask,
+    result: (+koineks.BTC.ask * (1 + commission)) / +cbBtc.bid
+  });
+  pairs.push({
+    title: "ETH - KOINEKS",
+    commission,
+    sell: +cbEth.bid,
+    buy: +koineks.ETH.ask,
+    result: (+koineks.ETH.ask * (1 + commission)) / +cbEth.bid
+  });
+  pairs.push({
+    title: "XRP - KOINEKS",
+    commission,
+    sell: +cbXrp.bid,
+    buy: +koineks.XRP.ask,
+    result: (+koineks.XRP.ask * (1 + commission)) / +cbXrp.bid
+  });
+  pairs.push({
+    title: "LTC - KOINEKS",
+    commission,
+    sell: +cbLtc.bid,
+    buy: +koineks.LTC.ask,
+    result: (+koineks.LTC.ask * (1 + commission)) / +cbLtc.bid
+  });
+  pairs.push({
+    title: "XLM - KOINEKS",
+    commission,
+    sell: +cbXlm.bid,
+    buy: +koineks.XLM.ask,
+    result: (+koineks.XLM.ask * (1 + commission)) / +cbXlm.bid
+  });
+  pairs.push({
+    title: "EOS - KOINEKS",
+    commission,
+    sell: +cbEos.bid,
+    buy: +koineks.EOS.ask,
+    result: (+koineks.EOS.ask * (1 + commission)) / +cbEos.bid
+  });
+
+  res.send(pairs.sort((a, b) => a.result - b.result));
+});
+
+app.get("/kraken2coinbase", async (req, res) => {
+  let pairs = [];
+  let commission = 0.004;
+
+  let cbBtc = await fetch(
+    "https://api.pro.coinbase.com/products/btc-usd/ticker"
+  ).then(r => r.json());
+
+  let cbEth = await fetch(
+    "https://api.pro.coinbase.com/products/eth-usd/ticker"
+  ).then(r => r.json());
+
+  let cbXrp = await fetch(
+    "https://api.pro.coinbase.com/products/xrp-usd/ticker"
+  ).then(r => r.json());
+
+  let cbLtc = await fetch(
+    "https://api.pro.coinbase.com/products/ltc-usd/ticker"
+  ).then(r => r.json());
+
+  let cbXlm = await fetch(
+    "https://api.pro.coinbase.com/products/xlm-usd/ticker"
+  ).then(r => r.json());
+
+  let cbEos = await fetch(
+    "https://api.pro.coinbase.com/products/eos-usd/ticker"
+  ).then(r => r.json());
+
+  let cbRep = await fetch(
+    "https://api.pro.coinbase.com/products/rep-usd/ticker"
+  ).then(r => r.json());
+
+  let cbZec = await fetch(
+    "https://api.pro.coinbase.com/products/zec-usdc/ticker"
+  ).then(r => r.json());
+
+  let kraken = await fetch(
+    "https://api.kraken.com/0/public/Ticker?pair=xbteur,etheur,xrpeur,ltceur,xlmeur,adaeur,eoseur,dasheur,repeur,zeceur"
+  ).then(r => r.json());
+
+  pairs.push({
+    title: "BTC",
+    commission,
+    sell: +cbBtc.bid,
+    buy: +kraken.result.XXBTZEUR.a[0],
+    result: 1 / ((+kraken.result.XXBTZEUR.a[0] * (1 + commission)) / +cbBtc.bid)
+  });
+  pairs.push({
+    title: "ETH",
+    commission,
+    sell: +cbEth.bid,
+    buy: +kraken.result.XETHZEUR.a[0],
+    result: 1 / ((+kraken.result.XETHZEUR.a[0] * (1 + commission)) / +cbEth.bid)
+  });
+  pairs.push({
+    title: "LTC",
+    commission,
+    sell: +cbLtc.bid,
+    buy: +kraken.result.XLTCZEUR.a[0],
+    result: 1 / ((+kraken.result.XLTCZEUR.a[0] * (1 + commission)) / +cbLtc.bid)
+  });
+  pairs.push({
+    title: "XRP",
+    commission,
+    sell: +cbXrp.bid,
+    buy: +kraken.result.XXRPZEUR.a[0],
+    result: 1 / ((+kraken.result.XXRPZEUR.a[0] * (1 + commission)) / +cbXrp.bid)
+  });
+  pairs.push({
+    title: "XLM",
+    commission,
+    sell: +cbXlm.bid,
+    buy: +kraken.result.XXLMZEUR.a[0],
+    result: 1 / ((+kraken.result.XXLMZEUR.a[0] * (1 + commission)) / +cbXlm.bid)
+  });
+  pairs.push({
+    title: "EOS",
+    commission,
+    sell: +cbEos.bid,
+    buy: +kraken.result.EOSEUR.a[0],
+    result: 1 / ((+kraken.result.EOSEUR.a[0] * (1 + commission)) / +cbEos.bid)
+  });
+  pairs.push({
+    title: "REP",
+    commission,
+    sell: +cbRep.bid,
+    buy: +kraken.result.XREPZEUR.a[0],
+    result: 1 / ((+kraken.result.XREPZEUR.a[0] * (1 + commission)) / +cbRep.bid)
+  });
+  pairs.push({
+    title: "ZEC",
+    commission,
+    sell: +cbZec.bid,
+    buy: +kraken.result.XZECZEUR.a[0],
+    result: 1 / ((+kraken.result.XZECZEUR.a[0] * (1 + commission)) / +cbZec.bid)
+  });
+
+  res.send(pairs.sort((a, b) => b.result - a.result));
 });
 
 app.listen(process.env.PORT || 3001, () => console.log("listening"));
