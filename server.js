@@ -241,6 +241,8 @@ app.get("/kraken", async (req, res) => {
 app.get("/coinbase", async (req, res) => {
   let pairs = [];
   let commission = 0.0065;
+  let commissionWithBinance = 0.0065;
+  let commissionWithBinanceUSDT = 0.0055;
 
   let cbBtc = await fetch(
     "https://api.pro.coinbase.com/products/btc-usd/ticker"
@@ -268,6 +270,10 @@ app.get("/coinbase", async (req, res) => {
 
   let cbBat = await fetch(
     "https://api.pro.coinbase.com/products/bat-usdc/ticker"
+  ).then(r => r.json());
+
+  let binance = await fetch(
+    "https://api.binance.com/api/v3/ticker/bookTicker"
   ).then(r => r.json());
 
   let paribu = await fetch("https://paribu.com/ticker").then(r => r.json());
@@ -327,6 +333,65 @@ app.get("/coinbase", async (req, res) => {
     sell: +paribu.BAT_TL.highestBid,
     result: (+paribu.BAT_TL.highestBid * (1 - commission)) / +cbBat.ask
   });
+  pairs.push({
+    title: "BTT* - PARIBU",
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === "BTTUSDT").askPrice,
+    sell: +paribu.BTT_TL.highestBid,
+    result:
+      (+paribu.BTT_TL.highestBid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "BTTUSDT").askPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").bidPrice)
+  });
+  pairs.push({
+    title: "TRX* - PARIBU",
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === "TRXUSDT").askPrice,
+    sell: +paribu.TRX_TL.highestBid,
+    result:
+      (+paribu.TRX_TL.highestBid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "TRXUSDT").askPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").bidPrice)
+  });
+  pairs.push({
+    title: "HOT* - PARIBU",
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === "HOTUSDT").askPrice,
+    sell: +paribu.HOT_TL.highestBid,
+    result:
+      (+paribu.HOT_TL.highestBid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "HOTUSDT").askPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").bidPrice)
+  });
+  pairs.push({
+    title: "ADA* - PARIBU",
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === "ADAUSDT").askPrice,
+    sell: +paribu.ADA_TL.highestBid,
+    result:
+      (+paribu.ADA_TL.highestBid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "ADAUSDT").askPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").bidPrice)
+  });
+  pairs.push({
+    title: "NEO* - PARIBU",
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === "NEOUSDT").askPrice,
+    sell: +paribu.NEO_TL.highestBid,
+    result:
+      (+paribu.NEO_TL.highestBid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "NEOUSDT").askPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").bidPrice)
+  });
+  pairs.push({
+    title: "USDT* - PARIBU",
+    commission: commissionWithBinanceUSDT,
+    buy: 1 / +binance.find(x => x.symbol === "USDCUSDT").bidPrice,
+    sell: +paribu.USDT_TL.highestBid,
+    result:
+      (+paribu.USDT_TL.highestBid * (1 - commissionWithBinanceUSDT)) /
+      (1 / +binance.find(x => x.symbol === "USDCUSDT").bidPrice)
+  });
 
   pairs.push({
     title: "BTC - BTCTURK",
@@ -373,6 +438,16 @@ app.get("/coinbase", async (req, res) => {
       (+btcturk.find(x => x.pair === "XLMTRY").bid * (1 - commission)) /
       +cbXlm.ask
   });
+  pairs.push({
+    title: "USDT* - BTCTURK",
+    commission: commissionWithBinanceUSDT,
+    buy: 1 / +binance.find(x => x.symbol === "USDCUSDT").bidPrice,
+    sell: +btcturk.find(x => x.pair === "USDTTRY").bid,
+    result:
+      (+btcturk.find(x => x.pair === "USDTTRY").bid *
+        (1 - commissionWithBinanceUSDT)) /
+      (1 / +binance.find(x => x.symbol === "USDCUSDT").bidPrice)
+  });
 
   pairs.push({
     title: "BTC - KOINEKS",
@@ -415,6 +490,55 @@ app.get("/coinbase", async (req, res) => {
     buy: +cbEos.ask,
     sell: +koineks.EOS.bid,
     result: (+koineks.EOS.bid * (1 - commission)) / +cbEos.ask
+  });
+  pairs.push({
+    title: "BTT* - KOINEKS",
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === "BTTUSDT").askPrice,
+    sell: +koineks.BTT.bid,
+    result:
+      (+koineks.BTT.bid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "BTTUSDT").askPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").bidPrice)
+  });
+  pairs.push({
+    title: "TRX* - KOINEKS",
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === "TRXUSDT").askPrice,
+    sell: +koineks.TRX.bid,
+    result:
+      (+koineks.TRX.bid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "TRXUSDT").askPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").bidPrice)
+  });
+  pairs.push({
+    title: "ADA* - KOINEKS",
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === "ADAUSDT").askPrice,
+    sell: +koineks.ADA.bid,
+    result:
+      (+koineks.ADA.bid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "ADAUSDT").askPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").bidPrice)
+  });
+  pairs.push({
+    title: "DASH* - KOINEKS",
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === "DASHUSDT").askPrice,
+    sell: +koineks.DASH.bid,
+    result:
+      (+koineks.DASH.bid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "DASHUSDT").askPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").bidPrice)
+  });
+  pairs.push({
+    title: "USDT* - KOINEKS",
+    commission: commissionWithBinanceUSDT,
+    buy: 1 / +binance.find(x => x.symbol === "USDCUSDT").bidPrice,
+    sell: +koineks.USDT.bid,
+    result:
+      (+koineks.USDT.bid * (1 - commissionWithBinanceUSDT)) /
+      (1 / +binance.find(x => x.symbol === "USDCUSDT").bidPrice)
   });
 
   res.send(pairs.sort((a, b) => b.result - a.result));
@@ -582,6 +706,8 @@ app.get("/coinbasecross", async (req, res) => {
 app.get("/coinbasereverse", async (req, res) => {
   let pairs = [];
   let commission = 0.004;
+  let commissionWithBinance = 0.004;
+  let commissionWithBinanceUSDT = 0.003;
 
   let cbBtc = await fetch(
     "https://api.pro.coinbase.com/products/btc-usd/ticker"
@@ -609,6 +735,10 @@ app.get("/coinbasereverse", async (req, res) => {
 
   let cbBat = await fetch(
     "https://api.pro.coinbase.com/products/bat-usdc/ticker"
+  ).then(r => r.json());
+
+  let binance = await fetch(
+    "https://api.binance.com/api/v3/ticker/bookTicker"
   ).then(r => r.json());
 
   let paribu = await fetch("https://paribu.com/ticker").then(r => r.json());
@@ -668,6 +798,65 @@ app.get("/coinbasereverse", async (req, res) => {
     buy: +paribu.BAT_TL.lowestAsk,
     result: (+paribu.BAT_TL.lowestAsk * (1 + commission)) / +cbBat.bid
   });
+  pairs.push({
+    title: "BTT* - PARIBU",
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === "BTTUSDT").bidPrice,
+    buy: +paribu.BTT_TL.lowestAsk,
+    result:
+      (+paribu.BTT_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "BTTUSDT").bidPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").askPrice)
+  });
+  pairs.push({
+    title: "TRX* - PARIBU",
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === "TRXUSDT").bidPrice,
+    buy: +paribu.TRX_TL.lowestAsk,
+    result:
+      (+paribu.TRX_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "TRXUSDT").bidPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").askPrice)
+  });
+  pairs.push({
+    title: "HOT* - PARIBU",
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === "HOTUSDT").bidPrice,
+    buy: +paribu.HOT_TL.lowestAsk,
+    result:
+      (+paribu.HOT_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "HOTUSDT").bidPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").askPrice)
+  });
+  pairs.push({
+    title: "ADA* - PARIBU",
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === "ADAUSDT").bidPrice,
+    buy: +paribu.ADA_TL.lowestAsk,
+    result:
+      (+paribu.ADA_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "ADAUSDT").bidPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").askPrice)
+  });
+  pairs.push({
+    title: "NEO* - PARIBU",
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === "NEOUSDT").bidPrice,
+    buy: +paribu.NEO_TL.lowestAsk,
+    result:
+      (+paribu.NEO_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "NEOUSDT").bidPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").askPrice)
+  });
+  pairs.push({
+    title: "USDT* - PARIBU",
+    commission: commissionWithBinanceUSDT,
+    sell: 1 / +binance.find(x => x.symbol === "USDCUSDT").askPrice,
+    buy: +paribu.USDT_TL.lowestAsk,
+    result:
+      (+paribu.USDT_TL.lowestAsk * (1 + commissionWithBinanceUSDT)) /
+      (1 / +binance.find(x => x.symbol === "USDCUSDT").askPrice)
+  });
 
   pairs.push({
     title: "BTC - BTCTURK",
@@ -714,6 +903,16 @@ app.get("/coinbasereverse", async (req, res) => {
       (+btcturk.find(x => x.pair === "XLMTRY").ask * (1 + commission)) /
       +cbXlm.bid
   });
+  pairs.push({
+    title: "USDT* - BTCTURK",
+    commission: commissionWithBinanceUSDT,
+    sell: 1 / +binance.find(x => x.symbol === "USDCUSDT").askPrice,
+    buy: +btcturk.find(x => x.pair === "USDTTRY").ask,
+    result:
+      (+btcturk.find(x => x.pair === "USDTTRY").ask *
+        (1 + commissionWithBinanceUSDT)) /
+      (1 / +binance.find(x => x.symbol === "USDCUSDT").askPrice)
+  });
 
   pairs.push({
     title: "BTC - KOINEKS",
@@ -756,6 +955,55 @@ app.get("/coinbasereverse", async (req, res) => {
     sell: +cbEos.bid,
     buy: +koineks.EOS.ask,
     result: (+koineks.EOS.ask * (1 + commission)) / +cbEos.bid
+  });
+  pairs.push({
+    title: "BTT* - KOINEKS",
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === "BTTUSDT").bidPrice,
+    buy: +koineks.BTT.ask,
+    result:
+      (+koineks.BTT.ask * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "BTTUSDT").bidPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").askPrice)
+  });
+  pairs.push({
+    title: "TRX* - KOINEKS",
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === "TRXUSDT").bidPrice,
+    buy: +koineks.TRX.ask,
+    result:
+      (+koineks.TRX.ask * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "TRXUSDT").bidPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").askPrice)
+  });
+  pairs.push({
+    title: "ADA* - KOINEKS",
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === "ADAUSDT").bidPrice,
+    buy: +koineks.ADA.ask,
+    result:
+      (+koineks.ADA.ask * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "ADAUSDT").bidPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").askPrice)
+  });
+  pairs.push({
+    title: "DASH* - KOINEKS",
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === "DASHUSDT").bidPrice,
+    buy: +koineks.DASH.ask,
+    result:
+      (+koineks.DASH.ask * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === "DASHUSDT").bidPrice /
+        +binance.find(x => x.symbol === "USDCUSDT").askPrice)
+  });
+  pairs.push({
+    title: "USDT* - KOINEKS",
+    commission: commissionWithBinanceUSDT,
+    sell: 1 / +binance.find(x => x.symbol === "USDCUSDT").askPrice,
+    buy: +koineks.USDT.ask,
+    result:
+      (+koineks.USDT.ask * (1 + commissionWithBinanceUSDT)) /
+      (1 / +binance.find(x => x.symbol === "USDCUSDT").askPrice)
   });
 
   res.send(pairs.sort((a, b) => a.result - b.result));
@@ -861,4 +1109,4 @@ app.get("/kraken2coinbase", async (req, res) => {
   res.send(pairs.sort((a, b) => b.result - a.result));
 });
 
-app.listen(process.env.PORT || 3001, () => console.log("listening"));
+app.listen(process.env.PORT || 3001, () => console.log("listening.."));
