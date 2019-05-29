@@ -531,16 +531,17 @@ app.get("/coinbase", async (req, res) => {
       (+binance.find(x => x.symbol === "DASHUSDT").askPrice /
         +binance.find(x => x.symbol === "USDCUSDT").bidPrice)
   });
-  pairs.push({
-    title: "XMR* - KOINEKS",
-    commission: commissionWithBinance,
-    buy: +binance.find(x => x.symbol === "XMRUSDT").askPrice,
-    sell: +koineks.XMR.bid,
-    result:
-      (+koineks.XMR.bid * (1 - commissionWithBinance)) /
-      (+binance.find(x => x.symbol === "XMRUSDT").askPrice /
-        +binance.find(x => x.symbol === "USDCUSDT").bidPrice)
-  });
+  if (koineks.XMR)
+    pairs.push({
+      title: "XMR* - KOINEKS",
+      commission: commissionWithBinance,
+      buy: +binance.find(x => x.symbol === "XMRUSDT").askPrice,
+      sell: +koineks.XMR.bid,
+      result:
+        (+koineks.XMR.bid * (1 - commissionWithBinance)) /
+        (+binance.find(x => x.symbol === "XMRUSDT").askPrice /
+          +binance.find(x => x.symbol === "USDCUSDT").bidPrice)
+    });
   pairs.push({
     title: "USDT* - KOINEKS",
     commission: commissionWithBinanceUSDT,
@@ -1006,16 +1007,17 @@ app.get("/coinbasereverse", async (req, res) => {
       (+binance.find(x => x.symbol === "DASHUSDT").bidPrice /
         +binance.find(x => x.symbol === "USDCUSDT").askPrice)
   });
-  pairs.push({
-    title: "XMR* - KOINEKS",
-    commission: commissionWithBinance,
-    sell: +binance.find(x => x.symbol === "XMRUSDT").bidPrice,
-    buy: +koineks.XMR.ask,
-    result:
-      (+koineks.XMR.ask * (1 + commissionWithBinance)) /
-      (+binance.find(x => x.symbol === "XMRUSDT").bidPrice /
-        +binance.find(x => x.symbol === "USDCUSDT").askPrice)
-  });
+  if (koineks.XMR)
+    pairs.push({
+      title: "XMR* - KOINEKS",
+      commission: commissionWithBinance,
+      sell: +binance.find(x => x.symbol === "XMRUSDT").bidPrice,
+      buy: +koineks.XMR.ask,
+      result:
+        (+koineks.XMR.ask * (1 + commissionWithBinance)) /
+        (+binance.find(x => x.symbol === "XMRUSDT").bidPrice /
+          +binance.find(x => x.symbol === "USDCUSDT").askPrice)
+    });
   pairs.push({
     title: "USDT* - KOINEKS",
     commission: commissionWithBinanceUSDT,
