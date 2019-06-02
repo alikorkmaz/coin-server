@@ -2,21 +2,37 @@ const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
 
-const { exec } = require("child_process");
+let alert = [];
+let alertReverse = [];
 
-// Set port (default: 3000). For Heroku, we need to use
-// the port set by the environment variable $PORT
-const port = process.env.PORT || 3000;
+app.post("alert", (req, res) => {
+  req.forEach(item => {
+    alert.push(item);
+  });
+  alert = [...new Set(alert)];
+});
+app.post("alert-delete", (req, res) => {
+  req.forEach(item => {
+    alert = alert.filter(itemInAlert => itemInAlert !== item);
+  });
+});
+app.get("alert", (req, res) => {
+  res.send(alert);
+});
 
-const command = `json-server --watch db.json --port ${port}`;
-
-exec(command, (err, stdout, stderr) => {
-  if (err) {
-    console.log("Error running exec", err);
-    return;
-  }
-  console.log("stdout:", stdout);
-  console.log("stderr:", stderr);
+app.post("alert-reverse", (req, res) => {
+  req.forEach(item => {
+    alertReverse.push(item);
+  });
+  alertReverse = [...new Set(alertReverse)];
+});
+app.post("alert-reverse-delete", (req, res) => {
+  req.forEach(item => {
+    alertReverse = alertReverse.filter(itemInAlert => itemInAlert !== item);
+  });
+});
+app.get("alert-reverse", (req, res) => {
+  res.send(alertReverse);
 });
 
 let kur;

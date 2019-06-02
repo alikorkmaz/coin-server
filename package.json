@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
+    "firebase": "^6.1.0",
+    "firebase-admin": "^8.0.0",
     "heroku": "^7.24.4",
     "json-server": "^0.15.0",
     "node-fetch": "^2.3.0",
