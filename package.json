@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
+    "heroku": "^7.24.4",
+    "json-server": "^0.15.0",
     "node-fetch": "^2.3.0",
     "nodemon": "^1.18.10"
   }
