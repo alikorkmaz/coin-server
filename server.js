@@ -5,33 +5,33 @@ const fetch = require("node-fetch");
 let alert = [];
 let alertReverse = [];
 
-app.post("alert", (req, res) => {
+app.post("/alert", (req, res) => {
   req.forEach(item => {
     alert.push(item);
   });
   alert = [...new Set(alert)];
 });
-app.post("alert-delete", (req, res) => {
+app.post("/alert-delete", (req, res) => {
   req.forEach(item => {
     alert = alert.filter(itemInAlert => itemInAlert !== item);
   });
 });
-app.get("alert", (req, res) => {
+app.get("/alert", (req, res) => {
   res.send(alert);
 });
 
-app.post("alert-reverse", (req, res) => {
+app.post("/alert-reverse", (req, res) => {
   req.forEach(item => {
     alertReverse.push(item);
   });
   alertReverse = [...new Set(alertReverse)];
 });
-app.post("alert-reverse-delete", (req, res) => {
+app.post("/alert-reverse-delete", (req, res) => {
   req.forEach(item => {
     alertReverse = alertReverse.filter(itemInAlert => itemInAlert !== item);
   });
 });
-app.get("alert-reverse", (req, res) => {
+app.get("/alert-reverse", (req, res) => {
   res.send(alertReverse);
 });
 
