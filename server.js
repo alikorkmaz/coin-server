@@ -7,13 +7,13 @@ let alert = [];
 let alertReverse = [];
 
 app.post("/alert", (req, res) => {
-  req.arr.forEach(item => {
+  req.body.forEach(item => {
     alert.push(item);
   });
   alert = [...new Set(alert)];
 });
 app.post("/alert-delete", (req, res) => {
-  req.arr.forEach(item => {
+  req.body.forEach(item => {
     alert = alert.filter(itemInAlert => itemInAlert !== item);
   });
 });
@@ -22,13 +22,13 @@ app.get("/alert", (req, res) => {
 });
 
 app.post("/alert-reverse", (req, res) => {
-  req.arr.forEach(item => {
+  req.body.forEach(item => {
     alertReverse.push(item);
   });
   alertReverse = [...new Set(alertReverse)];
 });
 app.post("/alert-reverse-delete", (req, res) => {
-  req.arr.forEach(item => {
+  req.body.forEach(item => {
     alertReverse = alertReverse.filter(itemInAlert => itemInAlert !== item);
   });
 });
