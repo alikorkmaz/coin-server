@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
+app.use(express.json());
 
 let alert = [];
 let alertReverse = [];
