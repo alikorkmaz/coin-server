@@ -48,7 +48,7 @@ app.get("/alert-reverse", (req, res) => {
   res.send(alertReverse);
 });
 
-let kur;
+let kur = 0;
 setInterval(() => {
   fetch(
     "http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e"
@@ -62,6 +62,76 @@ setInterval(() => {
       console.log(x);
     });
 }, 3600000);
+
+var Push = require("pushover-notifications");
+
+var p = new Push({
+  user: "uvk1kkq9mi7zkrhs65wq1bj117s68m",
+  token: "a26qjmrach23epfar8zatfh7apcyfd"
+});
+
+);
+let profitMargin = 0.05;
+let text = "";
+setInterval(() => {
+  if (kur === 0) return;
+  text = "";
+  fetch("http://coin-serv.herokuapp.com/coinbase")
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(pair => {
+        if (
+          pair.result > kur + profitMargin &&
+          text === "" &&
+          alert.some(title => title === pair.title)
+        ) {
+          text = pair.title;
+
+          p.send(
+            {
+              message: text
+            },
+            function(err, result) {
+              if (err) {
+                throw err;
+              }
+
+              console.log(result);
+            }
+          );
+
+          return;
+        }
+      });
+    });
+  fetch("http://coin-serv.herokuapp.com/coinbasereverse")
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(pair => {
+        if (
+          pair.result < kur &&
+          text === "" &&
+          alertReverse.some(title => title === pair.title)
+        ) {
+          text = pair.title;
+          p.send(
+            {
+              message: text
+            },
+            function(err, result) {
+              if (err) {
+                throw err;
+              }
+
+              console.log(result);
+            }
+          );
+
+          return;
+        }
+      });
+    });
+}, 300000);
 
 app.get("/", (req, res) => {
   res.send(state);
