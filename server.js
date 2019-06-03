@@ -70,7 +70,6 @@ var p = new Push({
   token: "a26qjmrach23epfar8zatfh7apcyfd"
 });
 
-);
 let profitMargin = 0.05;
 let text = "";
 setInterval(() => {
