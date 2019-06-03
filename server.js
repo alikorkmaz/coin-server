@@ -133,7 +133,7 @@ setInterval(() => {
 }, 300000);
 
 app.get("/", (req, res) => {
-  res.send(state);
+  res.send({});
 });
 
 app.get("/kur", (req, res) => {
