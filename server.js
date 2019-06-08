@@ -91,10 +91,6 @@ setInterval(() => {
               message: text
             },
             function(err, result) {
-              if (err) {
-                throw err;
-              }
-
               console.log(result);
             }
           );
@@ -118,10 +114,6 @@ setInterval(() => {
               message: text
             },
             function(err, result) {
-              if (err) {
-                throw err;
-              }
-
               console.log(result);
             }
           );
@@ -1236,3 +1228,12 @@ app.get("/kraken2coinbase", async (req, res) => {
 });
 
 app.listen(process.env.PORT || 3001, () => console.log("listening.."));
+
+process.on("uncaughtException", function(err) {
+  p.send(
+    {
+      message: err
+    },
+    function(err, result) {}
+  );
+});
