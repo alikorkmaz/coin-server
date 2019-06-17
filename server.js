@@ -452,6 +452,17 @@ app.get('/coinbase', async (req, res) => {
       (+binance.find(x => x.symbol === 'NEOUSDT').askPrice /
         +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
   });
+  if (paribu.LINK_TL)
+    pairs.push({
+      title: 'LINK* - PARIBU',
+      commission: commissionWithBinance,
+      buy: +binance.find(x => x.symbol === 'LINKUSDT').askPrice,
+      sell: +paribu.LINK_TL.highestBid,
+      result:
+        (+paribu.LINK_TL.highestBid * (1 - commissionWithBinance)) /
+        (+binance.find(x => x.symbol === 'LINKUSDT').askPrice /
+          +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+    });
   pairs.push({
     title: 'USDT* - PARIBU',
     commission: commissionWithBinanceUSDT,
