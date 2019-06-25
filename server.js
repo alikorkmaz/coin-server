@@ -913,13 +913,13 @@ app.get('/coinbasereverse', async (req, res) => {
         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
   pairs.push({
-    title: 'NEO* - PARIBU',
+    title: 'LINK* - PARIBU',
     commission: commissionWithBinance,
-    sell: +binance.find(x => x.symbol === 'NEOUSDT').bidPrice,
-    buy: +paribu.NEO_TL.lowestAsk,
+    sell: +binance.find(x => x.symbol === 'LINKUSDT').bidPrice,
+    buy: +paribu.LINK_TL.lowestAsk,
     result:
-      (+paribu.NEO_TL.lowestAsk * (1 + commissionWithBinance)) /
-      (+binance.find(x => x.symbol === 'NEOUSDT').bidPrice /
+      (+paribu.LINK_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'LINKUSDT').bidPrice /
         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
   pairs.push({
