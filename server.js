@@ -1193,7 +1193,7 @@ app.get('/kraken2coinbase', async (req, res) => {
   res.send(pairs.sort((a, b) => b.result - a.result));
 });
 
-app.listen(process.env.PORT || 3001, () => console.log('listening..'));
+app.listen(process.env.PORT || 3001, () => console.log('listening..,'));
 
 process.on('uncaughtException', function(err) {
   p.send(
