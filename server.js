@@ -349,7 +349,7 @@ app.get('/coinbase', async (req, res) => {
     r.json(),
   );
 
-  let cbZrx = await fetch('https://api.pro.coinbase.com/products/zrx-usdc/ticker').then(r =>
+  let cbZrx = await fetch('https://api.pro.coinbase.com/products/zrx-usd/ticker').then(r =>
     r.json(),
   );
 
