@@ -704,7 +704,7 @@ app.get('/coinbase', async (req, res) => {
   pairs.push({
     title: 'HOT* - VEBITCOIN',
     commissionWithBinance,
-    buy: binance.find(x => x.symbol === 'HOTUSDT').askPrice,
+    buy: +binance.find(x => x.symbol === 'HOTUSDT').askPrice,
     sell: +vebitcoin.find(x => x.SourceCoinCode === 'HOT').Bid,
     result:
       (+vebitcoin.find(x => x.SourceCoinCode === 'HOT').Bid * (1 - commissionWithBinance)) /
@@ -714,7 +714,7 @@ app.get('/coinbase', async (req, res) => {
   pairs.push({
     title: 'DASH* - VEBITCOIN',
     commissionWithBinance,
-    buy: binance.find(x => x.symbol === 'DASHUSDT').askPrice,
+    buy: +binance.find(x => x.symbol === 'DASHUSDT').askPrice,
     sell: +vebitcoin.find(x => x.SourceCoinCode === 'DASH').Bid,
     result:
       (+vebitcoin.find(x => x.SourceCoinCode === 'DASH').Bid * (1 - commissionWithBinance)) /
@@ -724,7 +724,7 @@ app.get('/coinbase', async (req, res) => {
   pairs.push({
     title: 'OMG* - VEBITCOIN',
     commissionWithBinance,
-    buy: binance.find(x => x.symbol === 'OMGUSDT').askPrice,
+    buy: +binance.find(x => x.symbol === 'OMGUSDT').askPrice,
     sell: +vebitcoin.find(x => x.SourceCoinCode === 'OMG').Bid,
     result:
       (+vebitcoin.find(x => x.SourceCoinCode === 'OMG').Bid * (1 - commissionWithBinance)) /
@@ -734,7 +734,7 @@ app.get('/coinbase', async (req, res) => {
   pairs.push({
     title: 'TUSD* - VEBITCOIN',
     commissionWithBinance,
-    buy: binance.find(x => x.symbol === 'TUSDUSDT').askPrice,
+    buy: +binance.find(x => x.symbol === 'TUSDUSDT').askPrice,
     sell: +vebitcoin.find(x => x.SourceCoinCode === 'TUSD').Bid,
     result:
       (+vebitcoin.find(x => x.SourceCoinCode === 'TUSD').Bid * (1 - commissionWithBinance)) /
