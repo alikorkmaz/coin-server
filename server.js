@@ -944,6 +944,18 @@ app.get('/coinbasereverse', async (req, res) => {
       (+binance.find(x => x.symbol === 'LINKUSDT').bidPrice /
         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
+  if (paribu.RVN_TL)
+    pairs.push({
+      title: 'RVN* - PARIBU',
+      commission: commissionWithBinance,
+      sell: +binance.find(x => x.symbol === 'RVNBTC').bidPrice,
+      buy: +paribu.RVN_TL.lowestAsk,
+      result:
+        (+paribu.RVN_TL.lowestAsk * (1 + commissionWithBinance)) /
+        ((binance.find(x => x.symbol === 'RVNBTC').bidPrice *
+          binance.find(x => x.symbol === 'BTCUSDT').bidPrice) /
+          +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    });
   pairs.push({
     title: 'USDT* - PARIBU',
     commission: commissionWithBinanceUSDT,
