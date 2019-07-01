@@ -361,9 +361,9 @@ app.get('/coinbase', async (req, res) => {
 
   let koineks = await fetch('https://koineks.com/ticker').then(r => r.json());
 
-  let vebitcoin = await fetch(
-    'https://us-central1-vebitcoin-market.cloudfunctions.net/app/api/ticker',
-  ).then(r => r.json());
+  // let vebitcoin = await fetch(
+  //   'https://us-central1-vebitcoin-market.cloudfunctions.net/app/api/ticker',
+  // ).then(r => r.json());
 
   pairs.push({
     title: 'BTC - PARIBU',
@@ -645,102 +645,102 @@ app.get('/coinbase', async (req, res) => {
       (1 / +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
   });
 
-  pairs.push({
-    title: 'BTC - VEBITCOIN',
-    commission,
-    buy: +cbBtc.ask,
-    sell: +vebitcoin.find(x => x.SourceCoinCode === 'BTC').Bid,
-    result: (+vebitcoin.find(x => x.SourceCoinCode === 'BTC').Bid * (1 - commission)) / +cbBtc.ask,
-  });
-  pairs.push({
-    title: 'ETH - VEBITCOIN',
-    commission,
-    buy: +cbEth.ask,
-    sell: +vebitcoin.find(x => x.SourceCoinCode === 'ETH').Bid,
-    result: (+vebitcoin.find(x => x.SourceCoinCode === 'ETH').Bid * (1 - commission)) / +cbEth.ask,
-  });
-  pairs.push({
-    title: 'XRP - VEBITCOIN',
-    commission,
-    buy: +cbXrp.ask,
-    sell: +vebitcoin.find(x => x.SourceCoinCode === 'XRP').Bid,
-    result: (+vebitcoin.find(x => x.SourceCoinCode === 'XRP').Bid * (1 - commission)) / +cbXrp.ask,
-  });
-  pairs.push({
-    title: 'XLM - VEBITCOIN',
-    commission,
-    buy: +cbXlm.ask,
-    sell: +vebitcoin.find(x => x.SourceCoinCode === 'XLM').Bid,
-    result: (+vebitcoin.find(x => x.SourceCoinCode === 'XLM').Bid * (1 - commission)) / +cbXlm.ask,
-  });
-  pairs.push({
-    title: 'LTC - VEBITCOIN',
-    commission,
-    buy: +cbLtc.ask,
-    sell: +vebitcoin.find(x => x.SourceCoinCode === 'LTC').Bid,
-    result: (+vebitcoin.find(x => x.SourceCoinCode === 'LTC').Bid * (1 - commission)) / +cbLtc.ask,
-  });
-  pairs.push({
-    title: 'ZEC - VEBITCOIN',
-    commission,
-    buy: +cbZec.ask,
-    sell: +vebitcoin.find(x => x.SourceCoinCode === 'ZEC').Bid,
-    result: (+vebitcoin.find(x => x.SourceCoinCode === 'ZEC').Bid * (1 - commission)) / +cbZec.ask,
-  });
-  pairs.push({
-    title: 'ZRX - VEBITCOIN',
-    commission,
-    buy: +cbZrx.ask,
-    sell: +vebitcoin.find(x => x.SourceCoinCode === 'ZRX').Bid,
-    result: (+vebitcoin.find(x => x.SourceCoinCode === 'ZRX').Bid * (1 - commission)) / +cbZrx.ask,
-  });
-  pairs.push({
-    title: 'BAT - VEBITCOIN',
-    commission,
-    buy: +cbBat.ask,
-    sell: +vebitcoin.find(x => x.SourceCoinCode === 'BAT').Bid,
-    result: (+vebitcoin.find(x => x.SourceCoinCode === 'BAT').Bid * (1 - commission)) / +cbBat.ask,
-  });
-  pairs.push({
-    title: 'HOT* - VEBITCOIN',
-    commissionWithBinance,
-    buy: +binance.find(x => x.symbol === 'HOTUSDT').askPrice,
-    sell: +vebitcoin.find(x => x.SourceCoinCode === 'HOT').Bid,
-    result:
-      (+vebitcoin.find(x => x.SourceCoinCode === 'HOT').Bid * (1 - commissionWithBinance)) /
-      (+binance.find(x => x.symbol === 'HOTUSDT').askPrice /
-        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
-  });
-  pairs.push({
-    title: 'DASH* - VEBITCOIN',
-    commissionWithBinance,
-    buy: +binance.find(x => x.symbol === 'DASHUSDT').askPrice,
-    sell: +vebitcoin.find(x => x.SourceCoinCode === 'DASH').Bid,
-    result:
-      (+vebitcoin.find(x => x.SourceCoinCode === 'DASH').Bid * (1 - commissionWithBinance)) /
-      (+binance.find(x => x.symbol === 'DASHUSDT').askPrice /
-        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
-  });
-  pairs.push({
-    title: 'OMG* - VEBITCOIN',
-    commissionWithBinance,
-    buy: +binance.find(x => x.symbol === 'OMGUSDT').askPrice,
-    sell: +vebitcoin.find(x => x.SourceCoinCode === 'OMG').Bid,
-    result:
-      (+vebitcoin.find(x => x.SourceCoinCode === 'OMG').Bid * (1 - commissionWithBinance)) /
-      (+binance.find(x => x.symbol === 'OMGUSDT').askPrice /
-        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
-  });
-  pairs.push({
-    title: 'TUSD* - VEBITCOIN',
-    commissionWithBinance,
-    buy: +binance.find(x => x.symbol === 'TUSDUSDT').askPrice,
-    sell: +vebitcoin.find(x => x.SourceCoinCode === 'TUSD').Bid,
-    result:
-      (+vebitcoin.find(x => x.SourceCoinCode === 'TUSD').Bid * (1 - commissionWithBinance)) /
-      (+binance.find(x => x.symbol === 'TUSDUSDT').askPrice /
-        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
-  });
+  // pairs.push({
+  //   title: 'BTC - VEBITCOIN',
+  //   commission,
+  //   buy: +cbBtc.ask,
+  //   sell: +vebitcoin.find(x => x.SourceCoinCode === 'BTC').Bid,
+  //   result: (+vebitcoin.find(x => x.SourceCoinCode === 'BTC').Bid * (1 - commission)) / +cbBtc.ask,
+  // });
+  // pairs.push({
+  //   title: 'ETH - VEBITCOIN',
+  //   commission,
+  //   buy: +cbEth.ask,
+  //   sell: +vebitcoin.find(x => x.SourceCoinCode === 'ETH').Bid,
+  //   result: (+vebitcoin.find(x => x.SourceCoinCode === 'ETH').Bid * (1 - commission)) / +cbEth.ask,
+  // });
+  // pairs.push({
+  //   title: 'XRP - VEBITCOIN',
+  //   commission,
+  //   buy: +cbXrp.ask,
+  //   sell: +vebitcoin.find(x => x.SourceCoinCode === 'XRP').Bid,
+  //   result: (+vebitcoin.find(x => x.SourceCoinCode === 'XRP').Bid * (1 - commission)) / +cbXrp.ask,
+  // });
+  // pairs.push({
+  //   title: 'XLM - VEBITCOIN',
+  //   commission,
+  //   buy: +cbXlm.ask,
+  //   sell: +vebitcoin.find(x => x.SourceCoinCode === 'XLM').Bid,
+  //   result: (+vebitcoin.find(x => x.SourceCoinCode === 'XLM').Bid * (1 - commission)) / +cbXlm.ask,
+  // });
+  // pairs.push({
+  //   title: 'LTC - VEBITCOIN',
+  //   commission,
+  //   buy: +cbLtc.ask,
+  //   sell: +vebitcoin.find(x => x.SourceCoinCode === 'LTC').Bid,
+  //   result: (+vebitcoin.find(x => x.SourceCoinCode === 'LTC').Bid * (1 - commission)) / +cbLtc.ask,
+  // });
+  // pairs.push({
+  //   title: 'ZEC - VEBITCOIN',
+  //   commission,
+  //   buy: +cbZec.ask,
+  //   sell: +vebitcoin.find(x => x.SourceCoinCode === 'ZEC').Bid,
+  //   result: (+vebitcoin.find(x => x.SourceCoinCode === 'ZEC').Bid * (1 - commission)) / +cbZec.ask,
+  // });
+  // pairs.push({
+  //   title: 'ZRX - VEBITCOIN',
+  //   commission,
+  //   buy: +cbZrx.ask,
+  //   sell: +vebitcoin.find(x => x.SourceCoinCode === 'ZRX').Bid,
+  //   result: (+vebitcoin.find(x => x.SourceCoinCode === 'ZRX').Bid * (1 - commission)) / +cbZrx.ask,
+  // });
+  // pairs.push({
+  //   title: 'BAT - VEBITCOIN',
+  //   commission,
+  //   buy: +cbBat.ask,
+  //   sell: +vebitcoin.find(x => x.SourceCoinCode === 'BAT').Bid,
+  //   result: (+vebitcoin.find(x => x.SourceCoinCode === 'BAT').Bid * (1 - commission)) / +cbBat.ask,
+  // });
+  // pairs.push({
+  //   title: 'HOT* - VEBITCOIN',
+  //   commissionWithBinance,
+  //   buy: +binance.find(x => x.symbol === 'HOTUSDT').askPrice,
+  //   sell: +vebitcoin.find(x => x.SourceCoinCode === 'HOT').Bid,
+  //   result:
+  //     (+vebitcoin.find(x => x.SourceCoinCode === 'HOT').Bid * (1 - commissionWithBinance)) /
+  //     (+binance.find(x => x.symbol === 'HOTUSDT').askPrice /
+  //       +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  // });
+  // pairs.push({
+  //   title: 'DASH* - VEBITCOIN',
+  //   commissionWithBinance,
+  //   buy: +binance.find(x => x.symbol === 'DASHUSDT').askPrice,
+  //   sell: +vebitcoin.find(x => x.SourceCoinCode === 'DASH').Bid,
+  //   result:
+  //     (+vebitcoin.find(x => x.SourceCoinCode === 'DASH').Bid * (1 - commissionWithBinance)) /
+  //     (+binance.find(x => x.symbol === 'DASHUSDT').askPrice /
+  //       +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  // });
+  // pairs.push({
+  //   title: 'OMG* - VEBITCOIN',
+  //   commissionWithBinance,
+  //   buy: +binance.find(x => x.symbol === 'OMGUSDT').askPrice,
+  //   sell: +vebitcoin.find(x => x.SourceCoinCode === 'OMG').Bid,
+  //   result:
+  //     (+vebitcoin.find(x => x.SourceCoinCode === 'OMG').Bid * (1 - commissionWithBinance)) /
+  //     (+binance.find(x => x.symbol === 'OMGUSDT').askPrice /
+  //       +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  // });
+  // pairs.push({
+  //   title: 'TUSD* - VEBITCOIN',
+  //   commissionWithBinance,
+  //   buy: +binance.find(x => x.symbol === 'TUSDUSDT').askPrice,
+  //   sell: +vebitcoin.find(x => x.SourceCoinCode === 'TUSD').Bid,
+  //   result:
+  //     (+vebitcoin.find(x => x.SourceCoinCode === 'TUSD').Bid * (1 - commissionWithBinance)) /
+  //     (+binance.find(x => x.symbol === 'TUSDUSDT').askPrice /
+  //       +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  // });
 
   res.send(pairs.sort((a, b) => b.result - a.result));
 });
