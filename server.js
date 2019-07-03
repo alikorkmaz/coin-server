@@ -138,7 +138,8 @@ app.get('/paribu', (req, res) => {
 app.get('/btcturk', (req, res) => {
   fetch('https://www.btcturk.com/api/ticker')
     .then(response => response.json())
-    .then(json => res.send(json));
+    .then(json => res.send(json))
+    .catch(e => console.log(e));
 });
 
 app.get('/kraken', async (req, res) => {
