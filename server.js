@@ -488,6 +488,26 @@ app.get('/coinbase', async (req, res) => {
           binance.find(x => x.symbol === 'BTCUSDT').askPrice) /
           +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
     });
+  if (binance.some(x => x.symbol === 'DOGEUSDT'))
+    pairs.push({
+      title: 'DOGE* - PARIBU',
+      commission: commissionWithBinance,
+      buy: +binance.find(x => x.symbol === 'DOGEUSDT').askPrice,
+      sell: +paribu.DOGE_TL.highestBid,
+      result:
+        (+paribu.DOGE_TL.highestBid * (1 - commissionWithBinance)) /
+        (+binance.find(x => x.symbol === 'DOGEUSDT').askPrice /
+          +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+    });
+  pairs.push({
+    title: 'fakeDOGE* - PARIBU',
+    commission: commissionWithBinance,
+    buy: 0.0042,
+    sell: +paribu.DOGE_TL.highestBid,
+    result:
+      (+paribu.DOGE_TL.highestBid * (1 - commissionWithBinance)) /
+      (0.0042 / +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  });
   pairs.push({
     title: 'USDT* - PARIBU',
     commission: commissionWithBinanceUSDT,
@@ -634,6 +654,17 @@ app.get('/coinbase', async (req, res) => {
       result:
         (+koineks.XMR.bid * (1 - commissionWithBinance)) /
         (+binance.find(x => x.symbol === 'XMRUSDT').askPrice /
+          +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+    });
+  if (binance.some(x => x.symbol === 'DOGEUSDT'))
+    pairs.push({
+      title: 'DOGE* - KOINEKS',
+      commission: commissionWithBinance,
+      buy: +binance.find(x => x.symbol === 'DOGEUSDT').askPrice,
+      sell: +koineks.DOGE.bid,
+      result:
+        (+koineks.DOGE.bid * (1 - commissionWithBinance)) /
+        (+binance.find(x => x.symbol === 'DOGEUSDT').askPrice /
           +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
     });
   pairs.push({
@@ -1054,6 +1085,26 @@ app.get('/coinbasereverse', async (req, res) => {
       (+binance.find(x => x.symbol === 'LINKUSDT').bidPrice /
         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
+  if (binance.some(x => x.symbol === 'DOGEUSDT'))
+    pairs.push({
+      title: 'DOGE* - PARIBU',
+      commission: commissionWithBinance,
+      sell: +binance.find(x => x.symbol === 'DOGEUSDT').bidPrice,
+      buy: +paribu.DOGE_TL.lowestAsk,
+      result:
+        (+paribu.DOGE_TL.lowestAsk * (1 + commissionWithBinance)) /
+        (+binance.find(x => x.symbol === 'DOGEUSDT').bidPrice /
+          +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    });
+  pairs.push({
+    title: 'fakeDOGE* - PARIBU',
+    commission: commissionWithBinance,
+    sell: 0.0042,
+    buy: +paribu.DOGE_TL.lowestAsk,
+    result:
+      (+paribu.DOGE_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (0.0042 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });
   if (paribu.RVN_TL)
     pairs.push({
       title: 'RVN* - PARIBU',
@@ -1214,6 +1265,18 @@ app.get('/coinbasereverse', async (req, res) => {
         (+binance.find(x => x.symbol === 'XMRUSDT').bidPrice /
           +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
     });
+  if (binance.some(x => x.symbol === 'DOGEUSDT'))
+    pairs.push({
+      title: 'DOGE* - KOINEKS',
+      commission: commissionWithBinance,
+      sell: +binance.find(x => x.symbol === 'DOGEUSDT').bidPrice,
+      buy: +koineks.DOGE.ask,
+      result:
+        (+koineks.DOGE.ask * (1 + commissionWithBinance)) /
+        (+binance.find(x => x.symbol === 'DOGEUSDT').bidPrice /
+          +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    });
+
   pairs.push({
     title: 'USDT* - KOINEKS',
     commission: commissionWithBinanceUSDT,
