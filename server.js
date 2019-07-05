@@ -500,15 +500,6 @@ app.get('/coinbase', async (req, res) => {
           +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
     });
   pairs.push({
-    title: 'fakeDOGE* - PARIBU',
-    commission: commissionWithBinance,
-    buy: 0.0042,
-    sell: +paribu.DOGE_TL.highestBid,
-    result:
-      (+paribu.DOGE_TL.highestBid * (1 - commissionWithBinance)) /
-      (0.0042 / +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
-  });
-  pairs.push({
     title: 'USDT* - PARIBU',
     commission: commissionWithBinanceUSDT,
     buy: 1 / +binance.find(x => x.symbol === 'USDCUSDT').bidPrice,
@@ -1096,15 +1087,6 @@ app.get('/coinbasereverse', async (req, res) => {
         (+binance.find(x => x.symbol === 'DOGEUSDT').bidPrice /
           +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
     });
-  pairs.push({
-    title: 'fakeDOGE* - PARIBU',
-    commission: commissionWithBinance,
-    sell: 0.0042,
-    buy: +paribu.DOGE_TL.lowestAsk,
-    result:
-      (+paribu.DOGE_TL.lowestAsk * (1 + commissionWithBinance)) /
-      (0.0042 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
-  });
   if (paribu.RVN_TL)
     pairs.push({
       title: 'RVN* - PARIBU',
