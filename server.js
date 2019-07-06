@@ -66,6 +66,7 @@ var p = new Push({
 });
 
 let profitMargin = 0.1;
+let profitMarginReverse = 0.03;
 let text = '';
 setInterval(() => {
   if (kur === 0) return;
@@ -98,7 +99,11 @@ setInterval(() => {
     .then(response => response.json())
     .then(data => {
       data.forEach(pair => {
-        if (pair.result < kur && text === '' && alertReverse.some(title => title === pair.title)) {
+        if (
+          pair.result < kur - profitMarginReverse &&
+          text === '' &&
+          alertReverse.some(title => title === pair.title)
+        ) {
           text = pair.title;
           p.send(
             {
@@ -114,6 +119,18 @@ setInterval(() => {
       });
     });
 }, 300000);
+
+setTimeout(() => {
+  fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
+    .then(response => response.json())
+    .then(data => {
+      kur = data.rates.TRY / data.rates.USD;
+      console.log(kur.toFixed(4));
+    })
+    .catch(x => {
+      console.log(x);
+    });
+}, 10000);
 
 app.get('/', (req, res) => {
   res.send({});
