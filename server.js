@@ -375,7 +375,7 @@ app.get('/coinbase', async (req, res) => {
 
   let paribu = await fetch('https://paribu.com/ticker').then(r => r.json());
 
-  // let btcturk = await fetch('https://www.btcturk.com/api/ticker').then(r => r.json());
+  let btcturk = await fetch('https://www.btcturk.com/api/ticker').then(r => r.json());
 
   let koineks = await fetch('https://koineks.com/ticker').then(r => r.json());
 
@@ -526,50 +526,50 @@ app.get('/coinbase', async (req, res) => {
       (1 / +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
   });
 
-  // pairs.push({
-  //   title: 'BTC - BTCTURK',
-  //   commission,
-  //   buy: +cbBtc.ask,
-  //   sell: +btcturk.find(x => x.pair === 'BTCTRY').bid,
-  //   result: (+btcturk.find(x => x.pair === 'BTCTRY').bid * (1 - commission)) / +cbBtc.ask,
-  // });
-  // pairs.push({
-  //   title: 'ETH - BTCTURK',
-  //   commission,
-  //   buy: +cbEth.ask,
-  //   sell: +btcturk.find(x => x.pair === 'ETHTRY').bid,
-  //   result: (+btcturk.find(x => x.pair === 'ETHTRY').bid * (1 - commission)) / +cbEth.ask,
-  // });
-  // pairs.push({
-  //   title: 'XRP - BTCTURK',
-  //   commission,
-  //   buy: +cbXrp.ask,
-  //   sell: +btcturk.find(x => x.pair === 'XRPTRY').bid,
-  //   result: (+btcturk.find(x => x.pair === 'XRPTRY').bid * (1 - commission)) / +cbXrp.ask,
-  // });
-  // pairs.push({
-  //   title: 'LTC - BTCTURK',
-  //   commission,
-  //   buy: +cbLtc.ask,
-  //   sell: +btcturk.find(x => x.pair === 'LTCTRY').bid,
-  //   result: (+btcturk.find(x => x.pair === 'LTCTRY').bid * (1 - commission)) / +cbLtc.ask,
-  // });
-  // pairs.push({
-  //   title: 'XLM - BTCTURK',
-  //   commission,
-  //   buy: +cbXlm.ask,
-  //   sell: +btcturk.find(x => x.pair === 'XLMTRY').bid,
-  //   result: (+btcturk.find(x => x.pair === 'XLMTRY').bid * (1 - commission)) / +cbXlm.ask,
-  // });
-  // pairs.push({
-  //   title: 'USDT* - BTCTURK',
-  //   commission: commissionWithBinanceUSDT,
-  //   buy: 1 / +binance.find(x => x.symbol === 'USDCUSDT').bidPrice,
-  //   sell: +btcturk.find(x => x.pair === 'USDTTRY').bid,
-  //   result:
-  //     (+btcturk.find(x => x.pair === 'USDTTRY').bid * (1 - commissionWithBinanceUSDT)) /
-  //     (1 / +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
-  // });
+  pairs.push({
+    title: 'BTC - BTCTURK',
+    commission,
+    buy: +cbBtc.ask,
+    sell: +btcturk.find(x => x.pair === 'BTCTRY').bid,
+    result: (+btcturk.find(x => x.pair === 'BTCTRY').bid * (1 - commission)) / +cbBtc.ask,
+  });
+  pairs.push({
+    title: 'ETH - BTCTURK',
+    commission,
+    buy: +cbEth.ask,
+    sell: +btcturk.find(x => x.pair === 'ETHTRY').bid,
+    result: (+btcturk.find(x => x.pair === 'ETHTRY').bid * (1 - commission)) / +cbEth.ask,
+  });
+  pairs.push({
+    title: 'XRP - BTCTURK',
+    commission,
+    buy: +cbXrp.ask,
+    sell: +btcturk.find(x => x.pair === 'XRPTRY').bid,
+    result: (+btcturk.find(x => x.pair === 'XRPTRY').bid * (1 - commission)) / +cbXrp.ask,
+  });
+  pairs.push({
+    title: 'LTC - BTCTURK',
+    commission,
+    buy: +cbLtc.ask,
+    sell: +btcturk.find(x => x.pair === 'LTCTRY').bid,
+    result: (+btcturk.find(x => x.pair === 'LTCTRY').bid * (1 - commission)) / +cbLtc.ask,
+  });
+  pairs.push({
+    title: 'XLM - BTCTURK',
+    commission,
+    buy: +cbXlm.ask,
+    sell: +btcturk.find(x => x.pair === 'XLMTRY').bid,
+    result: (+btcturk.find(x => x.pair === 'XLMTRY').bid * (1 - commission)) / +cbXlm.ask,
+  });
+  pairs.push({
+    title: 'USDT* - BTCTURK',
+    commission: commissionWithBinanceUSDT,
+    buy: 1 / +binance.find(x => x.symbol === 'USDCUSDT').bidPrice,
+    sell: +btcturk.find(x => x.pair === 'USDTTRY').bid,
+    result:
+      (+btcturk.find(x => x.pair === 'USDTTRY').bid * (1 - commissionWithBinanceUSDT)) /
+      (1 / +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  });
 
   pairs.push({
     title: 'BTC - KOINEKS',
@@ -980,7 +980,7 @@ app.get('/coinbasereverse', async (req, res) => {
 
   let paribu = await fetch('https://paribu.com/ticker').then(r => r.json());
 
-  // let btcturk = await fetch('https://www.btcturk.com/api/ticker').then(r => r.json());
+  let btcturk = await fetch('https://www.btcturk.com/api/ticker').then(r => r.json());
 
   let koineks = await fetch('https://koineks.com/ticker').then(r => r.json());
 
@@ -1126,50 +1126,50 @@ app.get('/coinbasereverse', async (req, res) => {
       (1 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
 
-  // pairs.push({
-  //   title: 'BTC - BTCTURK',
-  //   commission,
-  //   sell: +cbBtc.bid,
-  //   buy: +btcturk.find(x => x.pair === 'BTCTRY').ask,
-  //   result: (+btcturk.find(x => x.pair === 'BTCTRY').ask * (1 + commission)) / +cbBtc.bid,
-  // });
-  // pairs.push({
-  //   title: 'ETH - BTCTURK',
-  //   commission,
-  //   sell: +cbEth.bid,
-  //   buy: +btcturk.find(x => x.pair === 'ETHTRY').ask,
-  //   result: (+btcturk.find(x => x.pair === 'ETHTRY').ask * (1 + commission)) / +cbEth.bid,
-  // });
-  // pairs.push({
-  //   title: 'XRP - BTCTURK',
-  //   commission,
-  //   sell: +cbXrp.bid,
-  //   buy: +btcturk.find(x => x.pair === 'XRPTRY').ask,
-  //   result: (+btcturk.find(x => x.pair === 'XRPTRY').ask * (1 + commission)) / +cbXrp.bid,
-  // });
-  // pairs.push({
-  //   title: 'LTC - BTCTURK',
-  //   commission,
-  //   sell: +cbLtc.bid,
-  //   buy: +btcturk.find(x => x.pair === 'LTCTRY').ask,
-  //   result: (+btcturk.find(x => x.pair === 'LTCTRY').ask * (1 + commission)) / +cbLtc.bid,
-  // });
-  // pairs.push({
-  //   title: 'XLM - BTCTURK',
-  //   commission,
-  //   sell: +cbXlm.bid,
-  //   buy: +btcturk.find(x => x.pair === 'XLMTRY').ask,
-  //   result: (+btcturk.find(x => x.pair === 'XLMTRY').ask * (1 + commission)) / +cbXlm.bid,
-  // });
-  // pairs.push({
-  //   title: 'USDT* - BTCTURK',
-  //   commission: commissionWithBinanceUSDT,
-  //   sell: 1 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice,
-  //   buy: +btcturk.find(x => x.pair === 'USDTTRY').ask,
-  //   result:
-  //     (+btcturk.find(x => x.pair === 'USDTTRY').ask * (1 + commissionWithBinanceUSDT)) /
-  //     (1 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
-  // });
+  pairs.push({
+    title: 'BTC - BTCTURK',
+    commission,
+    sell: +cbBtc.bid,
+    buy: +btcturk.find(x => x.pair === 'BTCTRY').ask,
+    result: (+btcturk.find(x => x.pair === 'BTCTRY').ask * (1 + commission)) / +cbBtc.bid,
+  });
+  pairs.push({
+    title: 'ETH - BTCTURK',
+    commission,
+    sell: +cbEth.bid,
+    buy: +btcturk.find(x => x.pair === 'ETHTRY').ask,
+    result: (+btcturk.find(x => x.pair === 'ETHTRY').ask * (1 + commission)) / +cbEth.bid,
+  });
+  pairs.push({
+    title: 'XRP - BTCTURK',
+    commission,
+    sell: +cbXrp.bid,
+    buy: +btcturk.find(x => x.pair === 'XRPTRY').ask,
+    result: (+btcturk.find(x => x.pair === 'XRPTRY').ask * (1 + commission)) / +cbXrp.bid,
+  });
+  pairs.push({
+    title: 'LTC - BTCTURK',
+    commission,
+    sell: +cbLtc.bid,
+    buy: +btcturk.find(x => x.pair === 'LTCTRY').ask,
+    result: (+btcturk.find(x => x.pair === 'LTCTRY').ask * (1 + commission)) / +cbLtc.bid,
+  });
+  pairs.push({
+    title: 'XLM - BTCTURK',
+    commission,
+    sell: +cbXlm.bid,
+    buy: +btcturk.find(x => x.pair === 'XLMTRY').ask,
+    result: (+btcturk.find(x => x.pair === 'XLMTRY').ask * (1 + commission)) / +cbXlm.bid,
+  });
+  pairs.push({
+    title: 'USDT* - BTCTURK',
+    commission: commissionWithBinanceUSDT,
+    sell: 1 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice,
+    buy: +btcturk.find(x => x.pair === 'USDTTRY').ask,
+    result:
+      (+btcturk.find(x => x.pair === 'USDTTRY').ask * (1 + commissionWithBinanceUSDT)) /
+      (1 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });
 
   pairs.push({
     title: 'BTC - KOINEKS',
