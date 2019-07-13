@@ -66,7 +66,7 @@ var p = new Push({
 });
 
 let profitMargin = 0.1;
-let profitMarginReverse = 0.03;
+let profitMarginReverse = 0;
 let text = '';
 setInterval(() => {
   if (kur === 0) return;
