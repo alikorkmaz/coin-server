@@ -346,7 +346,7 @@ app.get("/kraken", async (req, res) => {
     sell: +koineks.DASH.bid,
     result: (+koineks.DASH.bid * (1 - commission)) / kraken.result.DASHEUR.a[0]
   });
-  if (koineks.ZEC && koineks.ZEC.bid)
+  if (koineks.ZEC && koineks.ZEC.bid && kraken.result.XZECEUR)
     pairs.push({
       title: "ZEC - KOINEKS",
       commission,
@@ -660,7 +660,7 @@ app.get("/coinbase", async (req, res) => {
     sell: +koineks.EOS.bid,
     result: (+koineks.EOS.bid * (1 - commission)) / +cbEos.ask
   });
-  if (koineks.ZEC && koineks.ZEC.bid)
+  if (koineks.ZEC && koineks.ZEC.bid && cbZec && cbZec.ask)
     pairs.push({
       title: "ZEC - KOINEKS",
       commission,
@@ -1292,7 +1292,7 @@ app.get("/coinbasereverse", async (req, res) => {
     buy: +koineks.EOS.ask,
     result: (+koineks.EOS.ask * (1 + commission)) / +cbEos.bid
   });
-  if (koineks.ZEC && koineks.ZEC.ask)
+  if (koineks.ZEC && koineks.ZEC.ask && cbZec && cbZec.bid)
     pairs.push({
       title: "ZEC - KOINEKS",
       commission,
