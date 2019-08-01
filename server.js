@@ -354,7 +354,10 @@ app.get("/kraken", async (req, res) => {
       sell: +koineks.ZEC.bid,
       result: (+koineks.ZEC.bid * (1 - commission)) / kraken.result.XZECEUR.a[0]
     });
-
+  pairs.filter(
+    pair =>
+      pair.title && pair.commission && pair.sell && pair.buy && pair.result
+  );
   res.send(pairs.sort((a, b) => b.result - a.result));
 });
 
@@ -833,7 +836,10 @@ app.get("/coinbase", async (req, res) => {
   //     (+binance.find(x => x.symbol === 'TUSDUSDT').askPrice /
   //       +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
   // });
-
+  pairs.filter(
+    pair =>
+      pair.title && pair.commission && pair.sell && pair.buy && pair.result
+  );
   res.send(pairs.sort((a, b) => b.result - a.result));
 });
 
@@ -1366,7 +1372,10 @@ app.get("/coinbasereverse", async (req, res) => {
       (+koineks.USDT.ask * (1 + commissionWithBinanceUSDT)) /
       (1 / +binance.find(x => x.symbol === "USDCUSDT").askPrice)
   });
-
+  pairs.filter(
+    pair =>
+      pair.title && pair.commission && pair.sell && pair.buy && pair.result
+  );
   res.send(pairs.sort((a, b) => a.result - b.result));
 });
 
@@ -1466,7 +1475,10 @@ app.get("/kraken2coinbase", async (req, res) => {
     buy: +kraken.result.XZECZEUR.a[0],
     result: 1 / ((+kraken.result.XZECZEUR.a[0] * (1 + commission)) / +cbZec.bid)
   });
-
+  pairs.filter(
+    pair =>
+      pair.title && pair.commission && pair.sell && pair.buy && pair.result
+  );
   res.send(pairs.sort((a, b) => b.result - a.result));
 });
 
