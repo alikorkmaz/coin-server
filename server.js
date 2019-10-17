@@ -171,7 +171,7 @@ app.get("/kraken", async (req, res) => {
   let commission = 0.005;
 
   let kraken = await fetch(
-    "https://api.kraken.com/0/public/Ticker?pair=xbteur,etheur,xrpeur,ltceur,xlmeur,adaeur,eoseur,dasheur,zeceur"
+    "https://api.kraken.com/0/public/Ticker?pair=xbteur,etheur,xrpeur,ltceur,xlmeur,adaeur,eoseur,dasheur,zeceur,waveseur"
   ).then(r => r.json());
 
   let paribu = await fetch("https://paribu.com/ticker").then(r => r.json());
@@ -242,6 +242,16 @@ app.get("/kraken", async (req, res) => {
     sell: +paribu.EOS_TL.highestBid,
     result:
       (+paribu.EOS_TL.highestBid * (1 - commission)) / kraken.result.EOSEUR.a[0]
+  });
+
+  if(kraken.result.WAVESEUR &&paribu.WAVES_TL)
+  pairs.push({
+    title: "WAVES - PARIBU",
+    commission,
+    buy: +kraken.result.WAVESEUR.a[0],
+    sell: +paribu.WAVES_TL.highestBid,
+    result:
+      (+paribu.WAVES_TL.highestBid * (1 - commission)) / kraken.result.WAVESEUR.a[0]
   });
 
   pairs.push({
@@ -550,6 +560,17 @@ app.get("/coinbase", async (req, res) => {
       result:
         (+paribu.DOGE_TL.highestBid * (1 - commissionWithBinance)) /
         (+binance.find(x => x.symbol === "DOGEUSDT").askPrice /
+          +binance.find(x => x.symbol === "USDCUSDT").bidPrice)
+    });
+  if (binance.some(x => x.symbol === "WAVESUSDT"))
+    pairs.push({
+      title: "WAVES* - PARIBU",
+      commission: commissionWithBinance,
+      buy: +binance.find(x => x.symbol === "WAVESUSDT").askPrice,
+      sell: +paribu.WAVES_TL.highestBid,
+      result:
+        (+paribu.WAVES_TL.highestBid * (1 - commissionWithBinance)) /
+        (+binance.find(x => x.symbol === "WAVESUSDT").askPrice /
           +binance.find(x => x.symbol === "USDCUSDT").bidPrice)
     });
   pairs.push({
@@ -1181,6 +1202,18 @@ app.get("/coinbasereverse", async (req, res) => {
       result:
         (+paribu.RVN_TL.lowestAsk * (1 + commissionWithBinance)) /
         ((binance.find(x => x.symbol === "RVNBTC").bidPrice *
+          binance.find(x => x.symbol === "BTCUSDT").bidPrice) /
+          +binance.find(x => x.symbol === "USDCUSDT").askPrice)
+    });
+  if (paribu.WAVES_TL)
+    pairs.push({
+      title: "WAVES* - PARIBU",
+      commission: commissionWithBinance,
+      sell: +binance.find(x => x.symbol === "WAVESBTC").bidPrice,
+      buy: +paribu.WAVES_TL.lowestAsk,
+      result:
+        (+paribu.WAVES_TL.lowestAsk * (1 + commissionWithBinance)) /
+        ((binance.find(x => x.symbol === "WAVESBTC").bidPrice *
           binance.find(x => x.symbol === "BTCUSDT").bidPrice) /
           +binance.find(x => x.symbol === "USDCUSDT").askPrice)
     });
