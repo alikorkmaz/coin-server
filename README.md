@@ -1,1 +1,1 @@
-# personal trash
+# trash can
