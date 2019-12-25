@@ -176,9 +176,9 @@ app.get("/kraken", async (req, res) => {
 
   let paribu = await fetch("https://paribu.com/ticker").then(r => r.json());
 
-  // let btcturk = await fetch("https://www.btcturk.com/api/ticker").then(r =>
-  //   r.json()
-  // );
+  let btcturk = await fetch("https://www.btcturk.com/api/ticker").then(r =>
+    r.json()
+  );
 
   let koineks = await fetch("https://koineks.com/ticker").then(r => r.json());
 
@@ -254,51 +254,51 @@ app.get("/kraken", async (req, res) => {
       (+paribu.WAVES_TL.highestBid * (1 - commission)) / kraken.result.WAVESEUR.a[0]
   });
 
-  // pairs.push({
-  //   title: "BTC - BTCTURK",
-  //   commission,
-  //   buy: +kraken.result.XXBTZEUR.a[0],
-  //   sell: +btcturk.find(x => x.pair === "BTCTRY").bid,
-  //   result:
-  //     (+btcturk.find(x => x.pair === "BTCTRY").bid * (1 - commission)) /
-  //     kraken.result.XXBTZEUR.a[0]
-  // });
-  // pairs.push({
-  //   title: "ETH - BTCTURK",
-  //   commission,
-  //   buy: +kraken.result.XETHZEUR.a[0],
-  //   sell: +btcturk.find(x => x.pair === "ETHTRY").bid,
-  //   result:
-  //     (+btcturk.find(x => x.pair === "ETHTRY").bid * (1 - commission)) /
-  //     kraken.result.XETHZEUR.a[0]
-  // });
-  // pairs.push({
-  //   title: "XRP - BTCTURK",
-  //   commission,
-  //   buy: +kraken.result.XXRPZEUR.a[0],
-  //   sell: +btcturk.find(x => x.pair === "XRPTRY").bid,
-  //   result:
-  //     (+btcturk.find(x => x.pair === "XRPTRY").bid * (1 - commission)) /
-  //     kraken.result.XXRPZEUR.a[0]
-  // });
-  // pairs.push({
-  //   title: "LTC - BTCTURK",
-  //   commission,
-  //   buy: +kraken.result.XLTCZEUR.a[0],
-  //   sell: +btcturk.find(x => x.pair === "LTCTRY").bid,
-  //   result:
-  //     (+btcturk.find(x => x.pair === "LTCTRY").bid * (1 - commission)) /
-  //     kraken.result.XLTCZEUR.a[0]
-  // });
-  // pairs.push({
-  //   title: "XLM - BTCTURK",
-  //   commission,
-  //   buy: +kraken.result.XXLMZEUR.a[0],
-  //   sell: +btcturk.find(x => x.pair === "XLMTRY").bid,
-  //   result:
-  //     (+btcturk.find(x => x.pair === "XLMTRY").bid * (1 - commission)) /
-  //     kraken.result.XXLMZEUR.a[0]
-  // });
+  pairs.push({
+    title: "BTC - BTCTURK",
+    commission,
+    buy: +kraken.result.XXBTZEUR.a[0],
+    sell: +btcturk.find(x => x.pair === "BTCTRY").bid,
+    result:
+      (+btcturk.find(x => x.pair === "BTCTRY").bid * (1 - commission)) /
+      kraken.result.XXBTZEUR.a[0]
+  });
+  pairs.push({
+    title: "ETH - BTCTURK",
+    commission,
+    buy: +kraken.result.XETHZEUR.a[0],
+    sell: +btcturk.find(x => x.pair === "ETHTRY").bid,
+    result:
+      (+btcturk.find(x => x.pair === "ETHTRY").bid * (1 - commission)) /
+      kraken.result.XETHZEUR.a[0]
+  });
+  pairs.push({
+    title: "XRP - BTCTURK",
+    commission,
+    buy: +kraken.result.XXRPZEUR.a[0],
+    sell: +btcturk.find(x => x.pair === "XRPTRY").bid,
+    result:
+      (+btcturk.find(x => x.pair === "XRPTRY").bid * (1 - commission)) /
+      kraken.result.XXRPZEUR.a[0]
+  });
+  pairs.push({
+    title: "LTC - BTCTURK",
+    commission,
+    buy: +kraken.result.XLTCZEUR.a[0],
+    sell: +btcturk.find(x => x.pair === "LTCTRY").bid,
+    result:
+      (+btcturk.find(x => x.pair === "LTCTRY").bid * (1 - commission)) /
+      kraken.result.XLTCZEUR.a[0]
+  });
+  pairs.push({
+    title: "XLM - BTCTURK",
+    commission,
+    buy: +kraken.result.XXLMZEUR.a[0],
+    sell: +btcturk.find(x => x.pair === "XLMTRY").bid,
+    result:
+      (+btcturk.find(x => x.pair === "XLMTRY").bid * (1 - commission)) /
+      kraken.result.XXLMZEUR.a[0]
+  });
 
   pairs.push({
     title: "BTC - KOINEKS",
