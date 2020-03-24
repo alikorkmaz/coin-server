@@ -171,7 +171,7 @@ app.get('/kraken', async (req, res) => {
 
   let btcturk = await fetch('https://api-dev.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data);
 
-  let koineks = await fetch('https://koineks.com/ticker').then(r => r.json());
+  // let koineks = await fetch('https://koineks.com/ticker').then(r => r.json());
 
   pairs.push({
     title: 'BTC - PARIBU',
@@ -278,70 +278,70 @@ app.get('/kraken', async (req, res) => {
       kraken.result.XXLMZEUR.a[0],
   });
 
-  pairs.push({
-    title: 'BTC - KOINEKS',
-    commission,
-    buy: +kraken.result.XXBTZEUR.a[0],
-    sell: +koineks.BTC.bid,
-    result: (+koineks.BTC.bid * (1 - commission)) / kraken.result.XXBTZEUR.a[0],
-  });
-  pairs.push({
-    title: 'ETH - KOINEKS',
-    commission,
-    buy: +kraken.result.XETHZEUR.a[0],
-    sell: +koineks.ETH.bid,
-    result: (+koineks.ETH.bid * (1 - commission)) / kraken.result.XETHZEUR.a[0],
-  });
-  pairs.push({
-    title: 'XRP - KOINEKS',
-    commission,
-    buy: +kraken.result.XXRPZEUR.a[0],
-    sell: +koineks.XRP.bid,
-    result: (+koineks.XRP.bid * (1 - commission)) / kraken.result.XXRPZEUR.a[0],
-  });
-  pairs.push({
-    title: 'LTC - KOINEKS',
-    commission,
-    buy: +kraken.result.XLTCZEUR.a[0],
-    sell: +koineks.LTC.bid,
-    result: (+koineks.LTC.bid * (1 - commission)) / kraken.result.XLTCZEUR.a[0],
-  });
-  pairs.push({
-    title: 'XLM - KOINEKS',
-    commission,
-    buy: +kraken.result.XXLMZEUR.a[0],
-    sell: +koineks.XLM.bid,
-    result: (+koineks.XLM.bid * (1 - commission)) / kraken.result.XXLMZEUR.a[0],
-  });
-  pairs.push({
-    title: 'ADA - KOINEKS',
-    commission,
-    buy: +kraken.result.ADAEUR.a[0],
-    sell: +koineks.ADA.bid,
-    result: (+koineks.ADA.bid * (1 - commission)) / kraken.result.ADAEUR.a[0],
-  });
-  pairs.push({
-    title: 'EOS - KOINEKS',
-    commission,
-    buy: +kraken.result.EOSEUR.a[0],
-    sell: +koineks.EOS.bid,
-    result: (+koineks.EOS.bid * (1 - commission)) / kraken.result.EOSEUR.a[0],
-  });
-  pairs.push({
-    title: 'DASH - KOINEKS',
-    commission,
-    buy: +kraken.result.DASHEUR.a[0],
-    sell: +koineks.DASH.bid,
-    result: (+koineks.DASH.bid * (1 - commission)) / kraken.result.DASHEUR.a[0],
-  });
-  if (koineks.ZEC && koineks.ZEC.bid && kraken.result.XZECEUR)
-    pairs.push({
-      title: 'ZEC - KOINEKS',
-      commission,
-      buy: +kraken.result.XZECEUR.a[0],
-      sell: +koineks.ZEC.bid,
-      result: (+koineks.ZEC.bid * (1 - commission)) / kraken.result.XZECEUR.a[0],
-    });
+  // pairs.push({
+  //   title: 'BTC - KOINEKS',
+  //   commission,
+  //   buy: +kraken.result.XXBTZEUR.a[0],
+  //   sell: +koineks.BTC.bid,
+  //   result: (+koineks.BTC.bid * (1 - commission)) / kraken.result.XXBTZEUR.a[0],
+  // });
+  // pairs.push({
+  //   title: 'ETH - KOINEKS',
+  //   commission,
+  //   buy: +kraken.result.XETHZEUR.a[0],
+  //   sell: +koineks.ETH.bid,
+  //   result: (+koineks.ETH.bid * (1 - commission)) / kraken.result.XETHZEUR.a[0],
+  // });
+  // pairs.push({
+  //   title: 'XRP - KOINEKS',
+  //   commission,
+  //   buy: +kraken.result.XXRPZEUR.a[0],
+  //   sell: +koineks.XRP.bid,
+  //   result: (+koineks.XRP.bid * (1 - commission)) / kraken.result.XXRPZEUR.a[0],
+  // });
+  // pairs.push({
+  //   title: 'LTC - KOINEKS',
+  //   commission,
+  //   buy: +kraken.result.XLTCZEUR.a[0],
+  //   sell: +koineks.LTC.bid,
+  //   result: (+koineks.LTC.bid * (1 - commission)) / kraken.result.XLTCZEUR.a[0],
+  // });
+  // pairs.push({
+  //   title: 'XLM - KOINEKS',
+  //   commission,
+  //   buy: +kraken.result.XXLMZEUR.a[0],
+  //   sell: +koineks.XLM.bid,
+  //   result: (+koineks.XLM.bid * (1 - commission)) / kraken.result.XXLMZEUR.a[0],
+  // });
+  // pairs.push({
+  //   title: 'ADA - KOINEKS',
+  //   commission,
+  //   buy: +kraken.result.ADAEUR.a[0],
+  //   sell: +koineks.ADA.bid,
+  //   result: (+koineks.ADA.bid * (1 - commission)) / kraken.result.ADAEUR.a[0],
+  // });
+  // pairs.push({
+  //   title: 'EOS - KOINEKS',
+  //   commission,
+  //   buy: +kraken.result.EOSEUR.a[0],
+  //   sell: +koineks.EOS.bid,
+  //   result: (+koineks.EOS.bid * (1 - commission)) / kraken.result.EOSEUR.a[0],
+  // });
+  // pairs.push({
+  //   title: 'DASH - KOINEKS',
+  //   commission,
+  //   buy: +kraken.result.DASHEUR.a[0],
+  //   sell: +koineks.DASH.bid,
+  //   result: (+koineks.DASH.bid * (1 - commission)) / kraken.result.DASHEUR.a[0],
+  // });
+  // if (koineks.ZEC && koineks.ZEC.bid && kraken.result.XZECEUR)
+  //   pairs.push({
+  //     title: 'ZEC - KOINEKS',
+  //     commission,
+  //     buy: +kraken.result.XZECEUR.a[0],
+  //     sell: +koineks.ZEC.bid,
+  //     result: (+koineks.ZEC.bid * (1 - commission)) / kraken.result.XZECEUR.a[0],
+  //   });
   res.send(
     pairs
       .sort((a, b) => b.result - a.result)
