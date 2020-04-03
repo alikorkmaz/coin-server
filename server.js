@@ -169,7 +169,7 @@ app.get('/kraken', async (req, res) => {
 
   let paribu = await fetch('https://paribu.com/ticker').then(r => r.json());
 
-  // let btcturk = await fetch('https://api-dev.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data);
+  let btcturk = await fetch('https://api-dev.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data);
 
   // let koineks = await fetch('https://koineks.com/ticker').then(r => r.json());
 
@@ -232,51 +232,51 @@ app.get('/kraken', async (req, res) => {
       result: (+paribu.WAVES_TL.highestBid * (1 - commission)) / kraken.result.WAVESEUR.a[0],
     });
 
-  // pairs.push({
-  //   title: 'BTC - BTCTURK',
-  //   commission,
-  //   buy: +kraken.result.XXBTZEUR.a[0],
-  //   sell: +btcturk.find(x => x.pair === 'BTCTRY').bid,
-  //   result:
-  //     (+btcturk.find(x => x.pair === 'BTCTRY').bid * (1 - commission)) /
-  //     kraken.result.XXBTZEUR.a[0],
-  // });
-  // pairs.push({
-  //   title: 'ETH - BTCTURK',
-  //   commission,
-  //   buy: +kraken.result.XETHZEUR.a[0],
-  //   sell: +btcturk.find(x => x.pair === 'ETHTRY').bid,
-  //   result:
-  //     (+btcturk.find(x => x.pair === 'ETHTRY').bid * (1 - commission)) /
-  //     kraken.result.XETHZEUR.a[0],
-  // });
-  // pairs.push({
-  //   title: 'XRP - BTCTURK',
-  //   commission,
-  //   buy: +kraken.result.XXRPZEUR.a[0],
-  //   sell: +btcturk.find(x => x.pair === 'XRPTRY').bid,
-  //   result:
-  //     (+btcturk.find(x => x.pair === 'XRPTRY').bid * (1 - commission)) /
-  //     kraken.result.XXRPZEUR.a[0],
-  // });
-  // pairs.push({
-  //   title: 'LTC - BTCTURK',
-  //   commission,
-  //   buy: +kraken.result.XLTCZEUR.a[0],
-  //   sell: +btcturk.find(x => x.pair === 'LTCTRY').bid,
-  //   result:
-  //     (+btcturk.find(x => x.pair === 'LTCTRY').bid * (1 - commission)) /
-  //     kraken.result.XLTCZEUR.a[0],
-  // });
-  // pairs.push({
-  //   title: 'XLM - BTCTURK',
-  //   commission,
-  //   buy: +kraken.result.XXLMZEUR.a[0],
-  //   sell: +btcturk.find(x => x.pair === 'XLMTRY').bid,
-  //   result:
-  //     (+btcturk.find(x => x.pair === 'XLMTRY').bid * (1 - commission)) /
-  //     kraken.result.XXLMZEUR.a[0],
-  // });
+  pairs.push({
+    title: 'BTC - BTCTURK',
+    commission,
+    buy: +kraken.result.XXBTZEUR.a[0],
+    sell: +btcturk.find(x => x.pair === 'BTCTRY').bid,
+    result:
+      (+btcturk.find(x => x.pair === 'BTCTRY').bid * (1 - commission)) /
+      kraken.result.XXBTZEUR.a[0],
+  });
+  pairs.push({
+    title: 'ETH - BTCTURK',
+    commission,
+    buy: +kraken.result.XETHZEUR.a[0],
+    sell: +btcturk.find(x => x.pair === 'ETHTRY').bid,
+    result:
+      (+btcturk.find(x => x.pair === 'ETHTRY').bid * (1 - commission)) /
+      kraken.result.XETHZEUR.a[0],
+  });
+  pairs.push({
+    title: 'XRP - BTCTURK',
+    commission,
+    buy: +kraken.result.XXRPZEUR.a[0],
+    sell: +btcturk.find(x => x.pair === 'XRPTRY').bid,
+    result:
+      (+btcturk.find(x => x.pair === 'XRPTRY').bid * (1 - commission)) /
+      kraken.result.XXRPZEUR.a[0],
+  });
+  pairs.push({
+    title: 'LTC - BTCTURK',
+    commission,
+    buy: +kraken.result.XLTCZEUR.a[0],
+    sell: +btcturk.find(x => x.pair === 'LTCTRY').bid,
+    result:
+      (+btcturk.find(x => x.pair === 'LTCTRY').bid * (1 - commission)) /
+      kraken.result.XLTCZEUR.a[0],
+  });
+  pairs.push({
+    title: 'XLM - BTCTURK',
+    commission,
+    buy: +kraken.result.XXLMZEUR.a[0],
+    sell: +btcturk.find(x => x.pair === 'XLMTRY').bid,
+    result:
+      (+btcturk.find(x => x.pair === 'XLMTRY').bid * (1 - commission)) /
+      kraken.result.XXLMZEUR.a[0],
+  });
 
   // pairs.push({
   //   title: 'BTC - KOINEKS',
@@ -395,7 +395,7 @@ app.get('/coinbase', async (req, res) => {
 
   let paribu = await fetch('https://paribu.com/ticker').then(r => r.json());
   let btcturk = await fetch('https://api-dev.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data);
-  let koineks = await fetch('https://koineks.com/ticker').then(r => r.json());
+  // let koineks = await fetch('https://koineks.com/ticker').then(r => r.json());
 
   // let vebitcoin = await fetch(
   //   'https://us-central1-vebitcoin-market.cloudfunctions.net/app/api/ticker',
@@ -610,127 +610,127 @@ app.get('/coinbase', async (req, res) => {
       (1 / +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
   });
 
-  pairs.push({
-    title: 'BTC - KOINEKS',
-    commission,
-    buy: +cbBtc.ask,
-    sell: +koineks.BTC.bid,
-    result: (+koineks.BTC.bid * (1 - commission)) / +cbBtc.ask,
-  });
-  pairs.push({
-    title: 'ETH - KOINEKS',
-    commission,
-    buy: +cbEth.ask,
-    sell: +koineks.ETH.bid,
-    result: (+koineks.ETH.bid * (1 - commission)) / +cbEth.ask,
-  });
-  pairs.push({
-    title: 'XRP - KOINEKS',
-    commission,
-    buy: +cbXrp.ask,
-    sell: +koineks.XRP.bid,
-    result: (+koineks.XRP.bid * (1 - commission)) / +cbXrp.ask,
-  });
-  pairs.push({
-    title: 'LTC - KOINEKS',
-    commission,
-    buy: +cbLtc.ask,
-    sell: +koineks.LTC.bid,
-    result: (+koineks.LTC.bid * (1 - commission)) / +cbLtc.ask,
-  });
-  pairs.push({
-    title: 'XLM - KOINEKS',
-    commission,
-    buy: +cbXlm.ask,
-    sell: +koineks.XLM.bid,
-    result: (+koineks.XLM.bid * (1 - commission)) / +cbXlm.ask,
-  });
-  pairs.push({
-    title: 'EOS - KOINEKS',
-    commission,
-    buy: +cbEos.ask,
-    sell: +koineks.EOS.bid,
-    result: (+koineks.EOS.bid * (1 - commission)) / +cbEos.ask,
-  });
-  if (koineks.ZEC && koineks.ZEC.bid && cbZec && cbZec.ask)
-    pairs.push({
-      title: 'ZEC - KOINEKS',
-      commission,
-      buy: +cbZec.ask,
-      sell: +koineks.ZEC.bid,
-      result: (+koineks.ZEC.bid * (1 - commission)) / +cbZec.ask,
-    });
-  pairs.push({
-    title: 'BTT* - KOINEKS',
-    commission: commissionWithBinance,
-    buy: +binance.find(x => x.symbol === 'BTTUSDT').askPrice,
-    sell: +koineks.BTT.bid,
-    result:
-      (+koineks.BTT.bid * (1 - commissionWithBinance)) /
-      (+binance.find(x => x.symbol === 'BTTUSDT').askPrice /
-        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
-  });
-  pairs.push({
-    title: 'TRX* - KOINEKS',
-    commission: commissionWithBinance,
-    buy: +binance.find(x => x.symbol === 'TRXUSDT').askPrice,
-    sell: +koineks.TRX.bid,
-    result:
-      (+koineks.TRX.bid * (1 - commissionWithBinance)) /
-      (+binance.find(x => x.symbol === 'TRXUSDT').askPrice /
-        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
-  });
-  pairs.push({
-    title: 'ADA* - KOINEKS',
-    commission: commissionWithBinance,
-    buy: +binance.find(x => x.symbol === 'ADAUSDT').askPrice,
-    sell: +koineks.ADA.bid,
-    result:
-      (+koineks.ADA.bid * (1 - commissionWithBinance)) /
-      (+binance.find(x => x.symbol === 'ADAUSDT').askPrice /
-        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
-  });
-  pairs.push({
-    title: 'DASH* - KOINEKS',
-    commission: commissionWithBinance,
-    buy: +binance.find(x => x.symbol === 'DASHUSDT').askPrice,
-    sell: +koineks.DASH.bid,
-    result:
-      (+koineks.DASH.bid * (1 - commissionWithBinance)) /
-      (+binance.find(x => x.symbol === 'DASHUSDT').askPrice /
-        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
-  });
-  if (koineks.XMR)
-    pairs.push({
-      title: 'XMR* - KOINEKS',
-      commission: commissionWithBinance,
-      buy: +binance.find(x => x.symbol === 'XMRUSDT').askPrice,
-      sell: +koineks.XMR.bid,
-      result:
-        (+koineks.XMR.bid * (1 - commissionWithBinance)) /
-        (+binance.find(x => x.symbol === 'XMRUSDT').askPrice /
-          +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
-    });
-  if (binance.some(x => x.symbol === 'DOGEUSDT'))
-    pairs.push({
-      title: 'DOGE* - KOINEKS',
-      commission: commissionWithBinance,
-      buy: +binance.find(x => x.symbol === 'DOGEUSDT').askPrice,
-      sell: +koineks.DOGE.bid,
-      result:
-        (+koineks.DOGE.bid * (1 - commissionWithBinance)) /
-        (+binance.find(x => x.symbol === 'DOGEUSDT').askPrice /
-          +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
-    });
-  pairs.push({
-    title: 'USDT* - KOINEKS',
-    commission: commissionWithBinanceUSDT,
-    buy: 1 / +binance.find(x => x.symbol === 'USDCUSDT').bidPrice,
-    sell: +koineks.USDT.bid,
-    result:
-      (+koineks.USDT.bid * (1 - commissionWithBinanceUSDT)) /
-      (1 / +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
-  });
+  // pairs.push({
+  //   title: 'BTC - KOINEKS',
+  //   commission,
+  //   buy: +cbBtc.ask,
+  //   sell: +koineks.BTC.bid,
+  //   result: (+koineks.BTC.bid * (1 - commission)) / +cbBtc.ask,
+  // });
+  // pairs.push({
+  //   title: 'ETH - KOINEKS',
+  //   commission,
+  //   buy: +cbEth.ask,
+  //   sell: +koineks.ETH.bid,
+  //   result: (+koineks.ETH.bid * (1 - commission)) / +cbEth.ask,
+  // });
+  // pairs.push({
+  //   title: 'XRP - KOINEKS',
+  //   commission,
+  //   buy: +cbXrp.ask,
+  //   sell: +koineks.XRP.bid,
+  //   result: (+koineks.XRP.bid * (1 - commission)) / +cbXrp.ask,
+  // });
+  // pairs.push({
+  //   title: 'LTC - KOINEKS',
+  //   commission,
+  //   buy: +cbLtc.ask,
+  //   sell: +koineks.LTC.bid,
+  //   result: (+koineks.LTC.bid * (1 - commission)) / +cbLtc.ask,
+  // });
+  // pairs.push({
+  //   title: 'XLM - KOINEKS',
+  //   commission,
+  //   buy: +cbXlm.ask,
+  //   sell: +koineks.XLM.bid,
+  //   result: (+koineks.XLM.bid * (1 - commission)) / +cbXlm.ask,
+  // });
+  // pairs.push({
+  //   title: 'EOS - KOINEKS',
+  //   commission,
+  //   buy: +cbEos.ask,
+  //   sell: +koineks.EOS.bid,
+  //   result: (+koineks.EOS.bid * (1 - commission)) / +cbEos.ask,
+  // });
+  // if (koineks.ZEC && koineks.ZEC.bid && cbZec && cbZec.ask)
+  //   pairs.push({
+  //     title: 'ZEC - KOINEKS',
+  //     commission,
+  //     buy: +cbZec.ask,
+  //     sell: +koineks.ZEC.bid,
+  //     result: (+koineks.ZEC.bid * (1 - commission)) / +cbZec.ask,
+  //   });
+  // pairs.push({
+  //   title: 'BTT* - KOINEKS',
+  //   commission: commissionWithBinance,
+  //   buy: +binance.find(x => x.symbol === 'BTTUSDT').askPrice,
+  //   sell: +koineks.BTT.bid,
+  //   result:
+  //     (+koineks.BTT.bid * (1 - commissionWithBinance)) /
+  //     (+binance.find(x => x.symbol === 'BTTUSDT').askPrice /
+  //       +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  // });
+  // pairs.push({
+  //   title: 'TRX* - KOINEKS',
+  //   commission: commissionWithBinance,
+  //   buy: +binance.find(x => x.symbol === 'TRXUSDT').askPrice,
+  //   sell: +koineks.TRX.bid,
+  //   result:
+  //     (+koineks.TRX.bid * (1 - commissionWithBinance)) /
+  //     (+binance.find(x => x.symbol === 'TRXUSDT').askPrice /
+  //       +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  // });
+  // pairs.push({
+  //   title: 'ADA* - KOINEKS',
+  //   commission: commissionWithBinance,
+  //   buy: +binance.find(x => x.symbol === 'ADAUSDT').askPrice,
+  //   sell: +koineks.ADA.bid,
+  //   result:
+  //     (+koineks.ADA.bid * (1 - commissionWithBinance)) /
+  //     (+binance.find(x => x.symbol === 'ADAUSDT').askPrice /
+  //       +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  // });
+  // pairs.push({
+  //   title: 'DASH* - KOINEKS',
+  //   commission: commissionWithBinance,
+  //   buy: +binance.find(x => x.symbol === 'DASHUSDT').askPrice,
+  //   sell: +koineks.DASH.bid,
+  //   result:
+  //     (+koineks.DASH.bid * (1 - commissionWithBinance)) /
+  //     (+binance.find(x => x.symbol === 'DASHUSDT').askPrice /
+  //       +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  // });
+  // if (koineks.XMR)
+  //   pairs.push({
+  //     title: 'XMR* - KOINEKS',
+  //     commission: commissionWithBinance,
+  //     buy: +binance.find(x => x.symbol === 'XMRUSDT').askPrice,
+  //     sell: +koineks.XMR.bid,
+  //     result:
+  //       (+koineks.XMR.bid * (1 - commissionWithBinance)) /
+  //       (+binance.find(x => x.symbol === 'XMRUSDT').askPrice /
+  //         +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  //   });
+  // if (binance.some(x => x.symbol === 'DOGEUSDT'))
+  //   pairs.push({
+  //     title: 'DOGE* - KOINEKS',
+  //     commission: commissionWithBinance,
+  //     buy: +binance.find(x => x.symbol === 'DOGEUSDT').askPrice,
+  //     sell: +koineks.DOGE.bid,
+  //     result:
+  //       (+koineks.DOGE.bid * (1 - commissionWithBinance)) /
+  //       (+binance.find(x => x.symbol === 'DOGEUSDT').askPrice /
+  //         +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  //   });
+  // pairs.push({
+  //   title: 'USDT* - KOINEKS',
+  //   commission: commissionWithBinanceUSDT,
+  //   buy: 1 / +binance.find(x => x.symbol === 'USDCUSDT').bidPrice,
+  //   sell: +koineks.USDT.bid,
+  //   result:
+  //     (+koineks.USDT.bid * (1 - commissionWithBinanceUSDT)) /
+  //     (1 / +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  // });
 
   // pairs.push({
   //   title: 'BTC - VEBITCOIN',
@@ -1036,7 +1036,7 @@ app.get('/coinbasereverse', async (req, res) => {
 
   let btcturk = await fetch('https://api-dev.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data);
 
-  let koineks = await fetch('https://koineks.com/ticker').then(r => r.json());
+  // let koineks = await fetch('https://koineks.com/ticker').then(r => r.json());
 
   pairs.push({
     title: 'BTC - PARIBU',
@@ -1247,128 +1247,128 @@ app.get('/coinbasereverse', async (req, res) => {
       (1 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
 
-  pairs.push({
-    title: 'BTC - KOINEKS',
-    commission,
-    sell: +cbBtc.bid,
-    buy: +koineks.BTC.ask,
-    result: (+koineks.BTC.ask * (1 + commission)) / +cbBtc.bid,
-  });
-  pairs.push({
-    title: 'ETH - KOINEKS',
-    commission,
-    sell: +cbEth.bid,
-    buy: +koineks.ETH.ask,
-    result: (+koineks.ETH.ask * (1 + commission)) / +cbEth.bid,
-  });
-  pairs.push({
-    title: 'XRP - KOINEKS',
-    commission,
-    sell: +cbXrp.bid,
-    buy: +koineks.XRP.ask,
-    result: (+koineks.XRP.ask * (1 + commission)) / +cbXrp.bid,
-  });
-  pairs.push({
-    title: 'LTC - KOINEKS',
-    commission,
-    sell: +cbLtc.bid,
-    buy: +koineks.LTC.ask,
-    result: (+koineks.LTC.ask * (1 + commission)) / +cbLtc.bid,
-  });
-  pairs.push({
-    title: 'XLM - KOINEKS',
-    commission,
-    sell: +cbXlm.bid,
-    buy: +koineks.XLM.ask,
-    result: (+koineks.XLM.ask * (1 + commission)) / +cbXlm.bid,
-  });
-  pairs.push({
-    title: 'EOS - KOINEKS',
-    commission,
-    sell: +cbEos.bid,
-    buy: +koineks.EOS.ask,
-    result: (+koineks.EOS.ask * (1 + commission)) / +cbEos.bid,
-  });
-  if (koineks.ZEC && koineks.ZEC.ask && cbZec && cbZec.bid)
-    pairs.push({
-      title: 'ZEC - KOINEKS',
-      commission,
-      sell: +cbZec.bid,
-      buy: +koineks.ZEC.ask,
-      result: (+koineks.ZEC.ask * (1 + commission)) / +cbZec.bid,
-    });
-  pairs.push({
-    title: 'BTT* - KOINEKS',
-    commission: commissionWithBinance,
-    sell: +binance.find(x => x.symbol === 'BTTUSDT').bidPrice,
-    buy: +koineks.BTT.ask,
-    result:
-      (+koineks.BTT.ask * (1 + commissionWithBinance)) /
-      (+binance.find(x => x.symbol === 'BTTUSDT').bidPrice /
-        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
-  });
-  pairs.push({
-    title: 'TRX* - KOINEKS',
-    commission: commissionWithBinance,
-    sell: +binance.find(x => x.symbol === 'TRXUSDT').bidPrice,
-    buy: +koineks.TRX.ask,
-    result:
-      (+koineks.TRX.ask * (1 + commissionWithBinance)) /
-      (+binance.find(x => x.symbol === 'TRXUSDT').bidPrice /
-        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
-  });
-  pairs.push({
-    title: 'ADA* - KOINEKS',
-    commission: commissionWithBinance,
-    sell: +binance.find(x => x.symbol === 'ADAUSDT').bidPrice,
-    buy: +koineks.ADA.ask,
-    result:
-      (+koineks.ADA.ask * (1 + commissionWithBinance)) /
-      (+binance.find(x => x.symbol === 'ADAUSDT').bidPrice /
-        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
-  });
-  pairs.push({
-    title: 'DASH* - KOINEKS',
-    commission: commissionWithBinance,
-    sell: +binance.find(x => x.symbol === 'DASHUSDT').bidPrice,
-    buy: +koineks.DASH.ask,
-    result:
-      (+koineks.DASH.ask * (1 + commissionWithBinance)) /
-      (+binance.find(x => x.symbol === 'DASHUSDT').bidPrice /
-        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
-  });
-  if (koineks.XMR)
-    pairs.push({
-      title: 'XMR* - KOINEKS',
-      commission: commissionWithBinance,
-      sell: +binance.find(x => x.symbol === 'XMRUSDT').bidPrice,
-      buy: +koineks.XMR.ask,
-      result:
-        (+koineks.XMR.ask * (1 + commissionWithBinance)) /
-        (+binance.find(x => x.symbol === 'XMRUSDT').bidPrice /
-          +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
-    });
-  if (binance.some(x => x.symbol === 'DOGEUSDT'))
-    pairs.push({
-      title: 'DOGE* - KOINEKS',
-      commission: commissionWithBinance,
-      sell: +binance.find(x => x.symbol === 'DOGEUSDT').bidPrice,
-      buy: +koineks.DOGE.ask,
-      result:
-        (+koineks.DOGE.ask * (1 + commissionWithBinance)) /
-        (+binance.find(x => x.symbol === 'DOGEUSDT').bidPrice /
-          +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
-    });
+  // pairs.push({
+  //   title: 'BTC - KOINEKS',
+  //   commission,
+  //   sell: +cbBtc.bid,
+  //   buy: +koineks.BTC.ask,
+  //   result: (+koineks.BTC.ask * (1 + commission)) / +cbBtc.bid,
+  // });
+  // pairs.push({
+  //   title: 'ETH - KOINEKS',
+  //   commission,
+  //   sell: +cbEth.bid,
+  //   buy: +koineks.ETH.ask,
+  //   result: (+koineks.ETH.ask * (1 + commission)) / +cbEth.bid,
+  // });
+  // pairs.push({
+  //   title: 'XRP - KOINEKS',
+  //   commission,
+  //   sell: +cbXrp.bid,
+  //   buy: +koineks.XRP.ask,
+  //   result: (+koineks.XRP.ask * (1 + commission)) / +cbXrp.bid,
+  // });
+  // pairs.push({
+  //   title: 'LTC - KOINEKS',
+  //   commission,
+  //   sell: +cbLtc.bid,
+  //   buy: +koineks.LTC.ask,
+  //   result: (+koineks.LTC.ask * (1 + commission)) / +cbLtc.bid,
+  // });
+  // pairs.push({
+  //   title: 'XLM - KOINEKS',
+  //   commission,
+  //   sell: +cbXlm.bid,
+  //   buy: +koineks.XLM.ask,
+  //   result: (+koineks.XLM.ask * (1 + commission)) / +cbXlm.bid,
+  // });
+  // pairs.push({
+  //   title: 'EOS - KOINEKS',
+  //   commission,
+  //   sell: +cbEos.bid,
+  //   buy: +koineks.EOS.ask,
+  //   result: (+koineks.EOS.ask * (1 + commission)) / +cbEos.bid,
+  // });
+  // if (koineks.ZEC && koineks.ZEC.ask && cbZec && cbZec.bid)
+  //   pairs.push({
+  //     title: 'ZEC - KOINEKS',
+  //     commission,
+  //     sell: +cbZec.bid,
+  //     buy: +koineks.ZEC.ask,
+  //     result: (+koineks.ZEC.ask * (1 + commission)) / +cbZec.bid,
+  //   });
+  // pairs.push({
+  //   title: 'BTT* - KOINEKS',
+  //   commission: commissionWithBinance,
+  //   sell: +binance.find(x => x.symbol === 'BTTUSDT').bidPrice,
+  //   buy: +koineks.BTT.ask,
+  //   result:
+  //     (+koineks.BTT.ask * (1 + commissionWithBinance)) /
+  //     (+binance.find(x => x.symbol === 'BTTUSDT').bidPrice /
+  //       +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  // });
+  // pairs.push({
+  //   title: 'TRX* - KOINEKS',
+  //   commission: commissionWithBinance,
+  //   sell: +binance.find(x => x.symbol === 'TRXUSDT').bidPrice,
+  //   buy: +koineks.TRX.ask,
+  //   result:
+  //     (+koineks.TRX.ask * (1 + commissionWithBinance)) /
+  //     (+binance.find(x => x.symbol === 'TRXUSDT').bidPrice /
+  //       +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  // });
+  // pairs.push({
+  //   title: 'ADA* - KOINEKS',
+  //   commission: commissionWithBinance,
+  //   sell: +binance.find(x => x.symbol === 'ADAUSDT').bidPrice,
+  //   buy: +koineks.ADA.ask,
+  //   result:
+  //     (+koineks.ADA.ask * (1 + commissionWithBinance)) /
+  //     (+binance.find(x => x.symbol === 'ADAUSDT').bidPrice /
+  //       +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  // });
+  // pairs.push({
+  //   title: 'DASH* - KOINEKS',
+  //   commission: commissionWithBinance,
+  //   sell: +binance.find(x => x.symbol === 'DASHUSDT').bidPrice,
+  //   buy: +koineks.DASH.ask,
+  //   result:
+  //     (+koineks.DASH.ask * (1 + commissionWithBinance)) /
+  //     (+binance.find(x => x.symbol === 'DASHUSDT').bidPrice /
+  //       +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  // });
+  // if (koineks.XMR)
+  //   pairs.push({
+  //     title: 'XMR* - KOINEKS',
+  //     commission: commissionWithBinance,
+  //     sell: +binance.find(x => x.symbol === 'XMRUSDT').bidPrice,
+  //     buy: +koineks.XMR.ask,
+  //     result:
+  //       (+koineks.XMR.ask * (1 + commissionWithBinance)) /
+  //       (+binance.find(x => x.symbol === 'XMRUSDT').bidPrice /
+  //         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  //   });
+  // if (binance.some(x => x.symbol === 'DOGEUSDT'))
+  //   pairs.push({
+  //     title: 'DOGE* - KOINEKS',
+  //     commission: commissionWithBinance,
+  //     sell: +binance.find(x => x.symbol === 'DOGEUSDT').bidPrice,
+  //     buy: +koineks.DOGE.ask,
+  //     result:
+  //       (+koineks.DOGE.ask * (1 + commissionWithBinance)) /
+  //       (+binance.find(x => x.symbol === 'DOGEUSDT').bidPrice /
+  //         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  //   });
 
-  pairs.push({
-    title: 'USDT* - KOINEKS',
-    commission: commissionWithBinanceUSDT,
-    sell: 1 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice,
-    buy: +koineks.USDT.ask,
-    result:
-      (+koineks.USDT.ask * (1 + commissionWithBinanceUSDT)) /
-      (1 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
-  });
+  // pairs.push({
+  //   title: 'USDT* - KOINEKS',
+  //   commission: commissionWithBinanceUSDT,
+  //   sell: 1 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice,
+  //   buy: +koineks.USDT.ask,
+  //   result:
+  //     (+koineks.USDT.ask * (1 + commissionWithBinanceUSDT)) /
+  //     (1 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  // });
   res.send(
     pairs
       .sort((a, b) => a.result - b.result)
