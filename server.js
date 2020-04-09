@@ -153,7 +153,7 @@ app.get('/paribu', (req, res) => {
 });
 
 app.get('/btcturk', (req, res) => {
-  fetch('https://api-dev.btcturk.com/api/v2/ticker')
+  fetch('https://api.btcturk.com/api/v2/ticker')
     .then(response => response.json())
     .then(json => res.send(json))
     .catch(e => console.log(e));
@@ -169,7 +169,7 @@ app.get('/kraken', async (req, res) => {
 
   let paribu = await fetch('https://paribu.com/ticker').then(r => r.json());
 
-  let btcturk = await fetch('https://api-dev.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data);
+  let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data);
 
   // let koineks = await fetch('https://koineks.com/ticker').then(r => r.json());
 
@@ -394,7 +394,7 @@ app.get('/coinbase', async (req, res) => {
   let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json());
 
   let paribu = await fetch('https://paribu.com/ticker').then(r => r.json());
-  let btcturk = await fetch('https://api-dev.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data);
+  let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data);
   // let koineks = await fetch('https://koineks.com/ticker').then(r => r.json());
 
   // let vebitcoin = await fetch(
@@ -865,7 +865,7 @@ app.get('/coinbasecross', async (req, res) => {
 
   let paribu = await fetch('https://paribu.com/ticker').then(r => r.json());
 
-  let btcturk = await fetch('https://api-dev.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data);
+  let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data);
 
   let koineks = await fetch('https://koineks.com/ticker').then(r => r.json());
 
@@ -1034,7 +1034,7 @@ app.get('/coinbasereverse', async (req, res) => {
 
   let paribu = await fetch('https://paribu.com/ticker').then(r => r.json());
 
-  let btcturk = await fetch('https://api-dev.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data);
+  let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data);
 
   // let koineks = await fetch('https://koineks.com/ticker').then(r => r.json());
 
