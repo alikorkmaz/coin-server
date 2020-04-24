@@ -164,7 +164,7 @@ app.get('/kraken', async (req, res) => {
   let commission = 0.005;
 
   let kraken = await fetch(
-    'https://api.kraken.com/0/public/Ticker?pair=xbteur,etheur,xrpeur,ltceur,xlmeur,adaeur,eoseur,dasheur,zeceur,waveseur',
+    'https://api.kraken.com/0/public/Ticker?pair=xbteur,etheur,xrpeur,ltceur,xlmeur,adaeur,eoseur,dasheur,zeceur,waveseur,xtzeur',
   ).then(r => r.json());
 
   let paribu = await fetch('https://paribu.com/ticker').then(r => r.json());
@@ -231,6 +231,15 @@ app.get('/kraken', async (req, res) => {
       sell: +paribu.WAVES_TL.highestBid,
       result: (+paribu.WAVES_TL.highestBid * (1 - commission)) / kraken.result.WAVESEUR.a[0],
     });
+
+  if (kraken.result.XTZEUR && paribu.XTZ_TL)
+  pairs.push({
+    title: 'XTZ - PARIBU',
+    commission,
+    buy: +kraken.result.XTZEUR.a[0],
+    sell: +paribu.XTZ_TL.highestBid,
+    result: (+paribu.XTZ_TL.highestBid * (1 - commission)) / kraken.result.XTZEUR.a[0],
+  });
 
   pairs.push({
     title: 'BTC - BTCTURK',
