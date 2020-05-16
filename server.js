@@ -363,7 +363,7 @@ app.get('/kraken', async (req, res) => {
   });
 
   pairs.push({
-    title: 'BTC - KOINEKS',
+    title: 'BTC - THODEX',
     commission,
     buy: +kraken.result.XXBTZEUR.a[0],
     sell: koineksData.BTC.bid,
@@ -372,56 +372,56 @@ app.get('/kraken', async (req, res) => {
 
   
   pairs.push({
-    title: 'ETH - KOINEKS',
+    title: 'ETH - THODEX',
     commission,
     buy: +kraken.result.XETHZEUR.a[0],
     sell: koineksData.ETH.bid,
     result: (koineksData.ETH.bid * (1 - commission)) / kraken.result.XETHZEUR.a[0],
   });
   pairs.push({
-    title: 'XRP - KOINEKS',
+    title: 'XRP - THODEX',
     commission,
     buy: +kraken.result.XXRPZEUR.a[0],
     sell: koineksData.XRP.bid,
     result: (koineksData.XRP.bid * (1 - commission)) / kraken.result.XXRPZEUR.a[0],
   });
   pairs.push({
-    title: 'LTC - KOINEKS',
+    title: 'LTC - THODEX',
     commission,
     buy: +kraken.result.XLTCZEUR.a[0],
     sell: koineksData.LTC.bid,
     result: (koineksData.LTC.bid * (1 - commission)) / kraken.result.XLTCZEUR.a[0],
   });
   pairs.push({
-    title: 'XLM - KOINEKS',
+    title: 'XLM - THODEX',
     commission,
     buy: +kraken.result.XXLMZEUR.a[0],
     sell: koineksData.XLM.bid,
     result: (koineksData.XLM.bid * (1 - commission)) / kraken.result.XXLMZEUR.a[0],
   });
   pairs.push({
-    title: 'ADA - KOINEKS',
+    title: 'ADA - THODEX',
     commission,
     buy: +kraken.result.ADAEUR.a[0],
     sell: koineksData.ADA.bid,
     result: (koineksData.ADA.bid * (1 - commission)) / kraken.result.ADAEUR.a[0],
   });
   pairs.push({
-    title: 'EOS - KOINEKS',
+    title: 'EOS - THODEX',
     commission,
     buy: +kraken.result.EOSEUR.a[0],
     sell: koineksData.EOS.bid,
     result: (koineksData.EOS.bid * (1 - commission)) / kraken.result.EOSEUR.a[0],
   });
   pairs.push({
-    title: 'DASH - KOINEKS',
+    title: 'DASH - THODEX',
     commission,
     buy: +kraken.result.DASHEUR.a[0],
     sell: koineksData.DASH.bid,
     result: (koineksData.DASH.bid * (1 - commission)) / kraken.result.DASHEUR.a[0],
   });
   pairs.push({
-    title: 'ZEC - KOINEKS',
+    title: 'ZEC - THODEX',
     commission,
     buy: +kraken.result.XZECZEUR.a[0],
     sell: koineksData.ZEC.bid,
@@ -694,56 +694,56 @@ app.get('/coinbase', async (req, res) => {
   });
 
   pairs.push({
-    title: 'BTC - KOINEKS',
+    title: 'BTC - THODEX',
     commission,
     buy: +cbBtc.ask,
     sell: koineksData.BTC.bid,
     result: (koineksData.BTC.bid * (1 - commission)) / +cbBtc.ask,
   });
   pairs.push({
-    title: 'ETH - KOINEKS',
+    title: 'ETH - THODEX',
     commission,
     buy: +cbEth.ask,
     sell: koineksData.ETH.bid,
     result: (koineksData.ETH.bid * (1 - commission)) / +cbEth.ask,
   });
   pairs.push({
-    title: 'XRP - KOINEKS',
+    title: 'XRP - THODEX',
     commission,
     buy: +cbXrp.ask,
     sell: koineksData.XRP.bid,
     result: (koineksData.XRP.bid * (1 - commission)) / +cbXrp.ask,
   });
   pairs.push({
-    title: 'LTC - KOINEKS',
+    title: 'LTC - THODEX',
     commission,
     buy: +cbLtc.ask,
     sell: koineksData.LTC.bid,
     result: (koineksData.LTC.bid * (1 - commission)) / +cbLtc.ask,
   });
   pairs.push({
-    title: 'XLM - KOINEKS',
+    title: 'XLM - THODEX',
     commission,
     buy: +cbXlm.ask,
     sell: koineksData.XLM.bid,
     result: (koineksData.XLM.bid * (1 - commission)) / +cbXlm.ask,
   });
   pairs.push({
-    title: 'EOS - KOINEKS',
+    title: 'EOS - THODEX',
     commission,
     buy: +cbEos.ask,
     sell: koineksData.EOS.bid,
     result: (koineksData.EOS.bid * (1 - commission)) / +cbEos.ask,
   });
   pairs.push({
-    title: 'ZEC - KOINEKS',
+    title: 'ZEC - THODEX',
     commission,
     buy: +cbZec.ask,
     sell: koineksData.ZEC.bid,
     result: (koineksData.ZEC.bid * (1 - commission)) / +cbZec.ask,
   });
   pairs.push({
-    title: 'BTT* - KOINEKS',
+    title: 'BTT* - THODEX',
     commission: commissionWithBinance,
     buy: +binance.find(x => x.symbol === 'BTTUSDT').askPrice,
     sell: koineksData.BTT.bid,
@@ -753,7 +753,7 @@ app.get('/coinbase', async (req, res) => {
         +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
   });
   pairs.push({
-    title: 'TRX* - KOINEKS',
+    title: 'TRX* - THODEX',
     commission: commissionWithBinance,
     buy: +binance.find(x => x.symbol === 'TRXUSDT').askPrice,
     sell: koineksData.TRX.bid,
@@ -763,7 +763,7 @@ app.get('/coinbase', async (req, res) => {
         +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
   });
   pairs.push({
-    title: 'ADA* - KOINEKS',
+    title: 'ADA* - THODEX',
     commission: commissionWithBinance,
     buy: +binance.find(x => x.symbol === 'ADAUSDT').askPrice,
     sell: koineksData.ADA.bid,
@@ -773,7 +773,7 @@ app.get('/coinbase', async (req, res) => {
         +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
   });
   pairs.push({
-    title: 'DASH* - KOINEKS',
+    title: 'DASH* - THODEX',
     commission: commissionWithBinance,
     buy: +binance.find(x => x.symbol === 'DASHUSDT').askPrice,
     sell: koineksData.DASH.bid,
@@ -784,7 +784,7 @@ app.get('/coinbase', async (req, res) => {
   });
   
   pairs.push({
-    title: 'XMR* - KOINEKS',
+    title: 'XMR* - THODEX',
     commission: commissionWithBinance,
     buy: +binance.find(x => x.symbol === 'XMRUSDT').askPrice,
     sell: koineksData.XMR.bid,
@@ -795,7 +795,7 @@ app.get('/coinbase', async (req, res) => {
   });
   if (binance.some(x => x.symbol === 'DOGEUSDT'))
     pairs.push({
-      title: 'DOGE* - KOINEKS',
+      title: 'DOGE* - THODEX',
       commission: commissionWithBinance,
       buy: +binance.find(x => x.symbol === 'DOGEUSDT').askPrice,
       sell: koineksData.DOGE.bid,
@@ -805,7 +805,7 @@ app.get('/coinbase', async (req, res) => {
           +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
     });
   pairs.push({
-    title: 'USDT* - KOINEKS',
+    title: 'USDT* - THODEX',
     commission: commissionWithBinanceUSDT,
     buy: 1 / +binance.find(x => x.symbol === 'USDCUSDT').bidPrice,
     sell: koineksData.USDT.bid,
@@ -924,39 +924,39 @@ app.get('/coinbasecross', async (req, res) => {
   });
 
   pairs.push({
-    title: 'BTC - KOINEKS',
+    title: 'BTC - THODEX',
     group: 3,
     cb2p: koineksData.BTC.bid / +cbBtc.ask,
     p2cb: +cbBtc.bid / koineksData.BTC.ask,
   });
   pairs.push({
-    title: 'ETH - KOINEKS',
+    title: 'ETH - THODEX',
     group: 3,
     cb2p: koineksData.ETH.bid / +cbEth.ask,
     p2cb: +cbEth.bid / koineksData.ETH.ask,
   });
   pairs.push({
-    title: 'XRP - KOINEKS',
+    title: 'XRP - THODEX',
     group: 3,
     cb2p: koineksData.XRP.bid / +cbXrp.ask,
     p2cb: +cbXrp.bid / koineksData.XRP.ask,
   });
   pairs.push({
-    title: 'LTC - KOINEKS',
+    title: 'LTC - THODEX',
     group: 3,
     cb2p: koineksData.LTC.bid / +cbLtc.ask,
     p2cb: +cbLtc.bid / koineksData.LTC.ask,
   });
 
   pairs.push({
-    title: 'XLM - KOINEKS',
+    title: 'XLM - THODEX',
     group: 3,
     cb2p: koineksData.XLM.bid / +cbXlm.ask,
     p2cb: +cbXlm.bid / koineksData.XLM.ask,
   });
 
   pairs.push({
-    title: 'EOS - KOINEKS',
+    title: 'EOS - THODEX',
     group: 3,
     cb2p: koineksData.EOS.bid / +cbEos.ask,
     p2cb: +cbEos.bid / koineksData.EOS.ask,
@@ -1234,56 +1234,56 @@ app.get('/coinbasereverse', async (req, res) => {
   });
 
   pairs.push({
-    title: 'BTC - KOINEKS',
+    title: 'BTC - THODEX',
     commission,
     sell: +cbBtc.bid,
     buy: koineksData.BTC.ask,
     result: (koineksData.BTC.ask * (1 + commission)) / +cbBtc.bid,
   });
   pairs.push({
-    title: 'ETH - KOINEKS',
+    title: 'ETH - THODEX',
     commission,
     sell: +cbEth.bid,
     buy: koineksData.ETH.ask,
     result: (koineksData.ETH.ask * (1 + commission)) / +cbEth.bid,
   });
   pairs.push({
-    title: 'XRP - KOINEKS',
+    title: 'XRP - THODEX',
     commission,
     sell: +cbXrp.bid,
     buy: koineksData.XRP.ask,
     result: (koineksData.XRP.ask * (1 + commission)) / +cbXrp.bid,
   });
   pairs.push({
-    title: 'LTC - KOINEKS',
+    title: 'LTC - THODEX',
     commission,
     sell: +cbLtc.bid,
     buy: koineksData.LTC.ask,
     result: (koineksData.LTC.ask * (1 + commission)) / +cbLtc.bid,
   });
   pairs.push({
-    title: 'XLM - KOINEKS',
+    title: 'XLM - THODEX',
     commission,
     sell: +cbXlm.bid,
     buy: koineksData.XLM.ask,
     result: (koineksData.XLM.ask * (1 + commission)) / +cbXlm.bid,
   });
   pairs.push({
-    title: 'EOS - KOINEKS',
+    title: 'EOS - THODEX',
     commission,
     sell: +cbEos.bid,
     buy: koineksData.EOS.ask,
     result: (koineksData.EOS.ask * (1 + commission)) / +cbEos.bid,
   });
     pairs.push({
-      title: 'ZEC - KOINEKS',
+      title: 'ZEC - THODEX',
       commission,
       sell: +cbZec.bid,
       buy: koineksData.ZEC.ask,
       result: (koineksData.ZEC.ask * (1 + commission)) / +cbZec.bid,
     });
   pairs.push({
-    title: 'BTT* - KOINEKS',
+    title: 'BTT* - THODEX',
     commission: commissionWithBinance,
     sell: +binance.find(x => x.symbol === 'BTTUSDT').bidPrice,
     buy: koineksData.BTT.ask,
@@ -1293,7 +1293,7 @@ app.get('/coinbasereverse', async (req, res) => {
         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
   pairs.push({
-    title: 'TRX* - KOINEKS',
+    title: 'TRX* - THODEX',
     commission: commissionWithBinance,
     sell: +binance.find(x => x.symbol === 'TRXUSDT').bidPrice,
     buy: koineksData.TRX.ask,
@@ -1303,7 +1303,7 @@ app.get('/coinbasereverse', async (req, res) => {
         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
   pairs.push({
-    title: 'ADA* - KOINEKS',
+    title: 'ADA* - THODEX',
     commission: commissionWithBinance,
     sell: +binance.find(x => x.symbol === 'ADAUSDT').bidPrice,
     buy: koineksData.ADA.ask,
@@ -1313,7 +1313,7 @@ app.get('/coinbasereverse', async (req, res) => {
         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
   pairs.push({
-    title: 'DASH* - KOINEKS',
+    title: 'DASH* - THODEX',
     commission: commissionWithBinance,
     sell: +binance.find(x => x.symbol === 'DASHUSDT').bidPrice,
     buy: koineksData.DASH.ask,
@@ -1323,7 +1323,7 @@ app.get('/coinbasereverse', async (req, res) => {
         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
     pairs.push({
-      title: 'XMR* - KOINEKS',
+      title: 'XMR* - THODEX',
       commission: commissionWithBinance,
       sell: +binance.find(x => x.symbol === 'XMRUSDT').bidPrice,
       buy: koineksData.XMR.ask,
@@ -1334,7 +1334,7 @@ app.get('/coinbasereverse', async (req, res) => {
     });
   if (binance.some(x => x.symbol === 'DOGEUSDT'))
     pairs.push({
-      title: 'DOGE* - KOINEKS',
+      title: 'DOGE* - THODEX',
       commission: commissionWithBinance,
       sell: +binance.find(x => x.symbol === 'DOGEUSDT').bidPrice,
       buy: koineksData.DOGE.ask,
@@ -1345,7 +1345,7 @@ app.get('/coinbasereverse', async (req, res) => {
     });
 
   pairs.push({
-    title: 'USDT* - KOINEKS',
+    title: 'USDT* - THODEX',
     commission: commissionWithBinanceUSDT,
     sell: 1 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice,
     buy: koineksData.USDT.ask,
