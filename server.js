@@ -190,46 +190,46 @@ async function getKoineksData() {
   let data = await Promise.all(promisesList);
   return {
     BTC:{
-      bid: data[0].result.bids[0][0], ask: data[0].result.asks[0][0]
+      bid: +data[0].result.bids[0][0], ask: +data[0].result.asks[0][0]
     },
     ETH:{
-      bid: data[1].result.bids[0][0], ask: data[1].result.asks[0][0]
+      bid: +data[1].result.bids[0][0], ask: +data[1].result.asks[0][0]
     },
     XRP:{
-      bid: data[2].result.bids[0][0], ask: data[2].result.asks[0][0]
+      bid: +data[2].result.bids[0][0], ask: +data[2].result.asks[0][0]
     },
     LTC:{
-      bid: data[3].result.bids[0][0], ask: data[3].result.asks[0][0]
+      bid: +data[3].result.bids[0][0], ask: +data[3].result.asks[0][0]
     },
     XLM:{
-      bid: data[4].result.bids[0][0], ask: data[4].result.asks[0][0]
+      bid: +data[4].result.bids[0][0], ask: +data[4].result.asks[0][0]
     },
     EOS:{
-      bid: data[5].result.bids[0][0], ask: data[5].result.asks[0][0]
+      bid: +data[5].result.bids[0][0], ask: +data[5].result.asks[0][0]
     },
     ZEC:{
-      bid: data[6].result.bids[0][0], ask: data[6].result.asks[0][0]
+      bid: +data[6].result.bids[0][0], ask: +data[6].result.asks[0][0]
     },
     BTT:{
-      bid: data[7].result.bids[0][0], ask: data[7].result.asks[0][0]
+      bid: +data[7].result.bids[0][0], ask: +data[7].result.asks[0][0]
     },
     TRX:{
-      bid: data[8].result.bids[0][0], ask: data[8].result.asks[0][0]
+      bid: +data[8].result.bids[0][0], ask: +data[8].result.asks[0][0]
     },
     ADA:{
-      bid: data[9].result.bids[0][0], ask: data[9].result.asks[0][0]
+      bid: +data[9].result.bids[0][0], ask: +data[9].result.asks[0][0]
     },
     DASH:{
-      bid: data[10].result.bids[0][0], ask: data[10].result.asks[0][0]
+      bid: +data[10].result.bids[0][0], ask: +data[10].result.asks[0][0]
     },
     XMR:{
-      bid: data[11].result.bids[0][0], ask: data[11].result.asks[0][0]
+      bid: +data[11].result.bids[0][0], ask: +data[11].result.asks[0][0]
     },
     DOGE:{
-      bid: data[12].result.bids[0][0], ask: data[12].result.asks[0][0]
+      bid: +data[12].result.bids[0][0], ask: +data[12].result.asks[0][0]
     },
     USDT:{
-      bid: data[13].result.bids[0][0], ask: data[13].result.asks[0][0]
+      bid: +data[13].result.bids[0][0], ask: +data[13].result.asks[0][0]
     }
   }
 }
