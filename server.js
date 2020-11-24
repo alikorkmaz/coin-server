@@ -187,7 +187,7 @@ async function getKoineksData() {
     getKoineks("DOGE"),
     getKoineks("USDT")
   ];
-  let data = await Promise.all(promisesList);
+  let data = await Promise.all(promisesList).catch(x => console.log(x));
   return {
     BTC:{
       bid: +data[0].result.bids[0][0], ask: +data[0].result.asks[0][0]
@@ -240,11 +240,11 @@ app.get('/kraken', async (req, res) => {
 
   let kraken = await fetch(
     'https://api.kraken.com/0/public/Ticker?pair=xbteur,etheur,xrpeur,ltceur,xlmeur,adaeur,eoseur,dasheur,zeceur,waveseur,xtzeur',
-  ).then(r => r.json());
+  ).then(r => r.json()).catch(x => console.log(x));
 
-  let paribu = await fetch('https://paribu.com/ticker').then(r => r.json());
+  let paribu = await fetch('https://paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
 
-  let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data);
+  let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data).catch(x => console.log(x));
 
   let koineksData = await getKoineksData();
 
@@ -478,8 +478,8 @@ app.get('/coinbase', async (req, res) => {
 
   let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json());
 
-  let paribu = await fetch('https://paribu.com/ticker').then(r => r.json());
-  let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data);
+  let paribu = await fetch('https://paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
+  let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data).catch(x => console.log(x));
 
 
   let koineksData = await getKoineksData();
@@ -849,9 +849,9 @@ app.get('/coinbasecross', async (req, res) => {
     r.json(),
   );
 
-  let paribu = await fetch('https://paribu.com/ticker').then(r => r.json());
+  let paribu = await fetch('https://paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
 
-  let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data);
+  let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data).catch(x => console.log(x));
 
   let koineksData = await getKoineksData();
 
@@ -1018,9 +1018,9 @@ app.get('/coinbasereverse', async (req, res) => {
 
   let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json());
 
-  let paribu = await fetch('https://paribu.com/ticker').then(r => r.json());
+  let paribu = await fetch('https://paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
 
-  let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data);
+  let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data).catch(x => console.log(x));
 
   let koineksData = await getKoineksData();
 
