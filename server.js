@@ -188,6 +188,52 @@ async function getKoineksData() {
     getKoineks("USDT")
   ];
   let data = await Promise.all(promisesList).catch(x => console.log(x));
+  if(!data.result){
+    return {
+      BTC:{
+        bid:0 , ask:0
+      },
+      ETH:{
+        bid:0 , ask:0
+      },
+      XRP:{
+        bid:0 , ask:0
+      },
+      LTC:{
+        bid:0 , ask:0
+      },
+      XLM:{
+        bid:0 , ask:0
+      },
+      EOS:{
+        bid:0 , ask:0
+      },
+      ZEC:{
+        bid:0 , ask:0
+      },
+      BTT:{
+        bid:0 , ask:0
+      },
+      TRX:{
+        bid:0 , ask:0
+      },
+      ADA:{
+        bid:0 , ask:0
+      },
+      DASH:{
+        bid:0 , ask:0
+      },
+      XMR:{
+        bid:0 , ask:0
+      },
+      DOGE:{
+        bid:0 , ask:0
+      },
+      USDT:{
+        bid:0 , ask:0
+      }
+    }
+  }
   return {
     BTC:{
       bid: +data[0].result.bids[0][0], ask: +data[0].result.asks[0][0]
