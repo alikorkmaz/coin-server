@@ -285,7 +285,7 @@ app.get('/kraken', async (req, res) => {
   let commission = 0.005;
 
   let kraken = await fetch(
-    'https://api.kraken.com/0/public/Ticker?pair=xbteur,etheur,xrpeur,ltceur,xlmeur,adaeur,eoseur,dasheur,zeceur,waveseur,xtzeur',
+    'https://api.kraken.com/0/public/Ticker?pair=xbteur,etheur,xrpeur,ltceur,xlmeur,adaeur,eoseur,dasheur,zeceur,waveseur,xtzeur,usdteur',
   ).then(r => r.json()).catch(x => console.log(x));
 
   let paribu = await fetch('https://paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
@@ -353,6 +353,16 @@ app.get('/kraken', async (req, res) => {
       result: (+paribu.WAVES_TL.highestBid * (1 - commission)) / kraken.result.WAVESEUR.a[0],
     });
 
+
+  if (kraken.result.USDTEUR && paribu.USDT_TL)
+    pairs.push({
+      title: 'USDT - PARIBU',
+      commission,
+      buy: +kraken.result.USDTEUR.a[0],
+      sell: +paribu.USDT_TL.highestBid,
+      result: (+paribu.USDT_TL.highestBid * (1 - commission)) / kraken.result.USDTEUR.a[0],
+    });
+
   if (kraken.result.XTZEUR && paribu.XTZ_TL)
   pairs.push({
     title: 'XTZ - PARIBU',
@@ -371,6 +381,8 @@ app.get('/kraken', async (req, res) => {
       (+btcturk.find(x => x.pair === 'BTCTRY').bid * (1 - commission)) /
       kraken.result.XXBTZEUR.a[0],
   });
+
+
   pairs.push({
     title: 'ETH - BTCTURK',
     commission,
@@ -406,6 +418,16 @@ app.get('/kraken', async (req, res) => {
     result:
       (+btcturk.find(x => x.pair === 'XLMTRY').bid * (1 - commission)) /
       kraken.result.XXLMZEUR.a[0],
+  });
+
+    pairs.push({
+    title: 'USDT - BTCTURK',
+    commission,
+    buy: +kraken.result.USDTEUR.a[0],
+    sell: +btcturk.find(x => x.pair === 'USDTTRY').bid,
+    result:
+      (+btcturk.find(x => x.pair === 'USDTTRY').bid * (1 - commission)) /
+      kraken.result.USDTEUR.a[0],
   });
 
   pairs.push({
