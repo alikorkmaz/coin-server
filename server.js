@@ -740,11 +740,15 @@ title: 'EOS* - PARIBU',
   });
 
   pairs.push({
-    title: 'BTC - BTCTURK',
-    commission,
-    buy: +cbBtc.ask,
+
+    title: 'BTC* - BTCTURK',
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === 'BTCUSDT').askPrice,
     sell: +btcturk.find(x => x.pair === 'BTCTRY').bid,
-    result: (+btcturk.find(x => x.pair === 'BTCTRY').bid * (1 - commission)) / +cbBtc.ask,
+    result:
+        (+btcturk.find(x => x.pair === 'BTCTRY').bid * (1 - commissionWithBinance)) /
+        (+binance.find(x => x.symbol === 'BTCUSDT').askPrice /
+          +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
   });
   pairs.push({
     title: 'ETH - BTCTURK',
@@ -773,6 +777,7 @@ title: 'EOS* - PARIBU',
     buy: +cbXlm.ask,
     sell: +btcturk.find(x => x.pair === 'XLMTRY').bid,
     result: (+btcturk.find(x => x.pair === 'XLMTRY').bid * (1 - commission)) / +cbXlm.ask,
+
   });
   pairs.push({
     title: 'USDT* - BTCTURK',
