@@ -749,17 +749,17 @@ title: 'EOS* - PARIBU',
         (+binance.find(x => x.symbol === 'BTCUSDT').askPrice /
           +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
   });
-  // pairs.push({
+  pairs.push({
 
-  //       title: 'ETH* - ETHTURK',
-  //   commission: commissionWithBinance,
-  //   buy: +binance.find(x => x.symbol === 'ETHUSDT').askPrice,
-  //   sell: +ETHturk.find(x => x.pair === 'ETHTRY').bid,
-  //   result:
-  //       (+ETHturk.find(x => x.pair === 'ETHTRY').bid * (1 - commissionWithBinance)) /
-  //       (+binance.find(x => x.symbol === 'ETHUSDT').askPrice /
-  //         +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
-  // });
+        title: 'ETH* - ETHTURK',
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === 'ETHUSDT').askPrice,
+    sell: +ETHturk.find(x => x.pair === 'ETHTRY').bid,
+    result:
+        (+ETHturk.find(x => x.pair === 'ETHTRY').bid * (1 - commissionWithBinance)) /
+        (+binance.find(x => x.symbol === 'ETHUSDT').askPrice /
+          +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  });
   // pairs.push({
   //   title: 'XRP* - XRPTURK',
   //   commission: commissionWithBinance,
