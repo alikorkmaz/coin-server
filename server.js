@@ -293,99 +293,99 @@ app.get('/kraken', async (req, res) => {
     'https://api.kraken.com/0/public/Ticker?pair=xbteur,etheur,xrpeur,ltceur,xlmeur,adaeur,eoseur,dasheur,zeceur,waveseur,xtzeur,usdteur',
   ).then(r => r.json()).catch(x => console.log(x));
 
-  let paribu = await fetch('https://paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
+  // let paribu = await fetch('https://paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
 
   let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data).catch(x => console.log(x));
 
   let koineksData = await getKoineksData();
 
-  pairs.push({
-    title: 'BTC - PARIBU',
-    commission,
-    buy: +kraken.result.XXBTZEUR.a[0],
-    sell: +paribu.BTC_TL.highestBid,
-    result: (+paribu.BTC_TL.highestBid * (1 - commission)) / kraken.result.XXBTZEUR.a[0],
-  });
-  pairs.push({
-    title: 'ETH - PARIBU',
-    commission,
-    buy: +kraken.result.XETHZEUR.a[0],
-    sell: +paribu.ETH_TL.highestBid,
-    result: (+paribu.ETH_TL.highestBid * (1 - commission)) / kraken.result.XETHZEUR.a[0],
-  });
-  pairs.push({
-    title: 'XRP - PARIBU',
-    commission,
-    buy: +kraken.result.XXRPZEUR.a[0],
-    sell: +paribu.XRP_TL.highestBid,
-    result: (+paribu.XRP_TL.highestBid * (1 - commission)) / kraken.result.XXRPZEUR.a[0],
-  });
-  pairs.push({
-    title: 'LTC - PARIBU',
-    commission,
-    buy: +kraken.result.XLTCZEUR.a[0],
-    sell: +paribu.LTC_TL.highestBid,
-    result: (+paribu.LTC_TL.highestBid * (1 - commission)) / kraken.result.XLTCZEUR.a[0],
-  });
-  pairs.push({
-    title: 'XLM - PARIBU',
-    commission,
-    buy: +kraken.result.XXLMZEUR.a[0],
-    sell: +paribu.XLM_TL.highestBid,
-    result: (+paribu.XLM_TL.highestBid * (1 - commission)) / kraken.result.XXLMZEUR.a[0],
-  });
-  pairs.push({
-    title: 'ADA - PARIBU',
-    commission,
-    buy: +kraken.result.ADAEUR.a[0],
-    sell: +paribu.ADA_TL.highestBid,
-    result: (+paribu.ADA_TL.highestBid * (1 - commission)) / kraken.result.ADAEUR.a[0],
-  });
-  pairs.push({
-    title: 'EOS - PARIBU',
-    commission,
-    buy: +kraken.result.EOSEUR.a[0],
-    sell: +paribu.EOS_TL.highestBid,
-    result: (+paribu.EOS_TL.highestBid * (1 - commission)) / kraken.result.EOSEUR.a[0],
-  });
+  // pairs.push({
+  //   title: 'BTC - PARIBU',
+  //   commission,
+  //   buy: +kraken.result.XXBTZEUR.a[0],
+  //   sell: +paribu.BTC_TL.highestBid,
+  //   result: (+paribu.BTC_TL.highestBid * (1 - commission)) / kraken.result.XXBTZEUR.a[0],
+  // });
+  // pairs.push({
+  //   title: 'ETH - PARIBU',
+  //   commission,
+  //   buy: +kraken.result.XETHZEUR.a[0],
+  //   sell: +paribu.ETH_TL.highestBid,
+  //   result: (+paribu.ETH_TL.highestBid * (1 - commission)) / kraken.result.XETHZEUR.a[0],
+  // });
+  // pairs.push({
+  //   title: 'XRP - PARIBU',
+  //   commission,
+  //   buy: +kraken.result.XXRPZEUR.a[0],
+  //   sell: +paribu.XRP_TL.highestBid,
+  //   result: (+paribu.XRP_TL.highestBid * (1 - commission)) / kraken.result.XXRPZEUR.a[0],
+  // });
+  // pairs.push({
+  //   title: 'LTC - PARIBU',
+  //   commission,
+  //   buy: +kraken.result.XLTCZEUR.a[0],
+  //   sell: +paribu.LTC_TL.highestBid,
+  //   result: (+paribu.LTC_TL.highestBid * (1 - commission)) / kraken.result.XLTCZEUR.a[0],
+  // });
+  // pairs.push({
+  //   title: 'XLM - PARIBU',
+  //   commission,
+  //   buy: +kraken.result.XXLMZEUR.a[0],
+  //   sell: +paribu.XLM_TL.highestBid,
+  //   result: (+paribu.XLM_TL.highestBid * (1 - commission)) / kraken.result.XXLMZEUR.a[0],
+  // });
+  // pairs.push({
+  //   title: 'ADA - PARIBU',
+  //   commission,
+  //   buy: +kraken.result.ADAEUR.a[0],
+  //   sell: +paribu.ADA_TL.highestBid,
+  //   result: (+paribu.ADA_TL.highestBid * (1 - commission)) / kraken.result.ADAEUR.a[0],
+  // });
+  // pairs.push({
+  //   title: 'EOS - PARIBU',
+  //   commission,
+  //   buy: +kraken.result.EOSEUR.a[0],
+  //   sell: +paribu.EOS_TL.highestBid,
+  //   result: (+paribu.EOS_TL.highestBid * (1 - commission)) / kraken.result.EOSEUR.a[0],
+  // });
 
-  if (kraken.result.WAVESEUR && paribu.WAVES_TL)
-    pairs.push({
-      title: 'WAVES - PARIBU',
-      commission,
-      buy: +kraken.result.WAVESEUR.a[0],
-      sell: +paribu.WAVES_TL.highestBid,
-      result: (+paribu.WAVES_TL.highestBid * (1 - commission)) / kraken.result.WAVESEUR.a[0],
-    });
+  // if (kraken.result.WAVESEUR && paribu.WAVES_TL)
+  //   pairs.push({
+  //     title: 'WAVES - PARIBU',
+  //     commission,
+  //     buy: +kraken.result.WAVESEUR.a[0],
+  //     sell: +paribu.WAVES_TL.highestBid,
+  //     result: (+paribu.WAVES_TL.highestBid * (1 - commission)) / kraken.result.WAVESEUR.a[0],
+  //   });
 
 
-  if (kraken.result.USDTEUR && paribu.USDT_TL)
-    pairs.push({
-      title: 'USDT - PARIBU',
-      commission,
-      buy: +kraken.result.USDTEUR.a[0],
-      sell: +paribu.USDT_TL.highestBid,
-      result: (+paribu.USDT_TL.highestBid * (1 - commission)) / kraken.result.USDTEUR.a[0],
-    });
+  // if (kraken.result.USDTEUR && paribu.USDT_TL)
+  //   pairs.push({
+  //     title: 'USDT - PARIBU',
+  //     commission,
+  //     buy: +kraken.result.USDTEUR.a[0],
+  //     sell: +paribu.USDT_TL.highestBid,
+  //     result: (+paribu.USDT_TL.highestBid * (1 - commission)) / kraken.result.USDTEUR.a[0],
+  //   });
 
-  if (kraken.result.XTZEUR && paribu.XTZ_TL)
-  pairs.push({
-    title: 'XTZ - PARIBU',
-    commission,
-    buy: +kraken.result.XTZEUR.a[0],
-    sell: +paribu.XTZ_TL.highestBid,
-    result: (+paribu.XTZ_TL.highestBid * (1 - commission)) / kraken.result.XTZEUR.a[0],
-  });
+  // if (kraken.result.XTZEUR && paribu.XTZ_TL)
+  // pairs.push({
+  //   title: 'XTZ - PARIBU',
+  //   commission,
+  //   buy: +kraken.result.XTZEUR.a[0],
+  //   sell: +paribu.XTZ_TL.highestBid,
+  //   result: (+paribu.XTZ_TL.highestBid * (1 - commission)) / kraken.result.XTZEUR.a[0],
+  // });
 
-  pairs.push({
-    title: 'BTC - BTCTURK',
-    commission,
-    buy: +kraken.result.XXBTZEUR.a[0],
-    sell: +btcturk.find(x => x.pair === 'BTCTRY').bid,
-    result:
-      (+btcturk.find(x => x.pair === 'BTCTRY').bid * (1 - commission)) /
-      kraken.result.XXBTZEUR.a[0],
-  });
+  // pairs.push({
+  //   title: 'BTC - BTCTURK',
+  //   commission,
+  //   buy: +kraken.result.XXBTZEUR.a[0],
+  //   sell: +btcturk.find(x => x.pair === 'BTCTRY').bid,
+  //   result:
+  //     (+btcturk.find(x => x.pair === 'BTCTRY').bid * (1 - commission)) /
+  //     kraken.result.XXBTZEUR.a[0],
+  // });
 
 
   pairs.push({
