@@ -148,7 +148,9 @@ app.get('/koineks', (req, res) => {
 
 app.get('/paribu', (req, res) => {
   fetch('https://paribu.com/ticker')
-    .then(response => response.json())
+    .then(response => {
+      console.log(response, response.json()); return response.json();
+    })
     .then(json => res.send(json));
 });
 
