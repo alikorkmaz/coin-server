@@ -151,7 +151,10 @@ app.get('/paribu', (req, res) => {
     .then(response => {
       console.log(response, response.json()); return response.json();
     })
-    .then(json => res.send(json));
+    .then(json => res.send(json))
+    .catch((error) => {
+  console.error(error);
+});
 });
 
 app.get('/btcturk', (req, res) => {
