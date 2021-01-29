@@ -290,7 +290,7 @@ app.get('/kraken', async (req, res) => {
   let commission = 0.005;
 
   let kraken = await fetch(
-    'https://api.kraken.com/0/public/Ticker?pair=xbteur,etheur,xrpeur,ltceur,xlmeur,adaeur,eoseur,dasheur,zeceur,waveseur,xtzeur,usdteur,xdgeur',
+    'https://api.kraken.com/0/public/Ticker?pair=xbteur,etheur,xrpeur,ltceur,xlmeur,adaeur,eoseur,dasheur,zeceur,waveseur,xtzeur,usdteur,xdgeur,trxeur,linkeur',
   ).then(r => r.json()).catch(x => console.log(x));
 
   let paribu = await fetch('https://paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
@@ -355,6 +355,25 @@ app.get('/kraken', async (req, res) => {
     buy: +kraken.result.XDGEUR.a[0],
     sell: +paribu.DOGE_TL.highestBid,
     result: (+paribu.DOGE_TL.highestBid * (1 - commission)) / kraken.result.XDGEUR.a[0],
+  });
+
+
+  pairs.push({
+    title: 'TRX - PARIBU',
+    commission,
+    buy: +kraken.result.TRXEUR.a[0],
+    sell: +paribu.TRX_TL.highestBid,
+    result: (+paribu.TRX_TL.highestBid * (1 - commission)) / kraken.result.TRXEUR.a[0],
+  });
+
+
+
+  pairs.push({
+    title: 'LINK - PARIBU',
+    commission,
+    buy: +kraken.result.LINKEUR.a[0],
+    sell: +paribu.LINK_TL.highestBid,
+    result: (+paribu.LINK_TL.highestBid * (1 - commission)) / kraken.result.LINKEUR.a[0],
   });
 
   if (kraken.result.WAVESEUR && paribu.WAVES_TL)
