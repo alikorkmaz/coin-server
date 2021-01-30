@@ -299,6 +299,7 @@ app.get('/kraken', async (req, res) => {
 
   let koineksData = await getKoineksData();
 
+if(paribu){
   pairs.push({
     title: 'BTC - PARIBU',
     commission,
@@ -413,6 +414,7 @@ app.get('/kraken', async (req, res) => {
     sell: +paribu.XTZ_TL.highestBid,
     result: (+paribu.XTZ_TL.highestBid * (1 - commission)) / kraken.result.XTZEUR.a[0],
   });
+}
 
   pairs.push({
     title: 'BTC - BTCTURK',
