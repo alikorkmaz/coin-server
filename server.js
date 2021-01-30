@@ -1263,54 +1263,75 @@ app.get('/coinbasereverse', async (req, res) => {
 
   let koineksData = await getKoineksData();
 if(paribu){
-  pairs.push({
-    title: 'BTC - PARIBU',
-    commission,
-    sell: +cbBtc.bid,
+	  pairs.push({
+    title: 'BTC* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'BTCUSDT').bidPrice,
     buy: +paribu.BTC_TL.lowestAsk,
-    result: (+paribu.BTC_TL.lowestAsk * (1 + commission)) / +cbBtc.bid,
+    result:
+      (+paribu.BTC_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'BTCUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
   pairs.push({
-    title: 'ETH - PARIBU',
-    commission,
-    sell: +cbEth.bid,
+    title: 'ETH* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'ETHUSDT').bidPrice,
     buy: +paribu.ETH_TL.lowestAsk,
-    result: (+paribu.ETH_TL.lowestAsk * (1 + commission)) / +cbEth.bid,
+    result:
+      (+paribu.ETH_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'ETHUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
   pairs.push({
-    title: 'XRP - PARIBU',
-    commission,
-    sell: +cbXrp.bid,
+    title: 'XRP* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'XRPUSDT').bidPrice,
     buy: +paribu.XRP_TL.lowestAsk,
-    result: (+paribu.XRP_TL.lowestAsk * (1 + commission)) / +cbXrp.bid,
+    result:
+      (+paribu.XRP_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'XRPUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
   pairs.push({
-    title: 'LTC - PARIBU',
-    commission,
-    sell: +cbLtc.bid,
+    title: 'LTC* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'LTCUSDT').bidPrice,
     buy: +paribu.LTC_TL.lowestAsk,
-    result: (+paribu.LTC_TL.lowestAsk * (1 + commission)) / +cbLtc.bid,
+    result:
+      (+paribu.LTC_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'LTCUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
-  pairs.push({
-    title: 'XLM - PARIBU',
-    commission,
-    sell: +cbXlm.bid,
+pairs.push({
+    title: 'XLM* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'XLMUSDT').bidPrice,
     buy: +paribu.XLM_TL.lowestAsk,
-    result: (+paribu.XLM_TL.lowestAsk * (1 + commission)) / +cbXlm.bid,
+    result:
+      (+paribu.XLM_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'XLMUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
-  pairs.push({
-    title: 'EOS - PARIBU',
-    commission,
-    sell: +cbEos.bid,
+pairs.push({
+    title: 'EOS* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'EOSUSDT').bidPrice,
     buy: +paribu.EOS_TL.lowestAsk,
-    result: (+paribu.EOS_TL.lowestAsk * (1 + commission)) / +cbEos.bid,
+    result:
+      (+paribu.EOS_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'EOSUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
-  pairs.push({
-    title: 'BAT - PARIBU',
-    commission,
-    sell: +cbBat.bid,
+pairs.push({
+    title: 'BAT* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'BATUSDT').bidPrice,
     buy: +paribu.BAT_TL.lowestAsk,
-    result: (+paribu.BAT_TL.lowestAsk * (1 + commission)) / +cbBat.bid,
+    result:
+      (+paribu.BAT_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'BATUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
   pairs.push({
     title: 'BTT* - PARIBU',
