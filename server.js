@@ -685,7 +685,7 @@ app.get('/coinbase', async (req, res) => {
 
 
   let koineksData = await getKoineksData();
-
+if(paribu){
   pairs.push({
     title: 'BTC* - PARIBU',
     commission: commissionWithBinance,
@@ -872,7 +872,7 @@ title: 'EOS* - PARIBU',
       (+paribu.USDT_TL.highestBid * (1 - commissionWithBinanceUSDT)) /
       (1 / +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
   });
-
+}
   pairs.push({
     title: 'BTC* - BTCTURK',
     commission: commissionWithBinance,
@@ -1262,7 +1262,7 @@ app.get('/coinbasereverse', async (req, res) => {
   let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data).catch(x => console.log(x));
 
   let koineksData = await getKoineksData();
-
+if(paribu){
   pairs.push({
     title: 'BTC - PARIBU',
     commission,
@@ -1426,6 +1426,8 @@ app.get('/coinbasereverse', async (req, res) => {
       (+paribu.USDT_TL.lowestAsk * (1 + commissionWithBinanceUSDT)) /
       (1 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
+
+}
 
   pairs.push({
     title: 'BTC - BTCTURK',
