@@ -12,7 +12,7 @@ app.use(express.static('public'));
 
 app.use(express.json());
 
-let alert = [];
+let alert = [];   
 let alertReverse = [];
 
 app.post('/alert', (req, res) => {
@@ -47,7 +47,7 @@ app.get('/alert-reverse', (req, res) => {
 
 let kur = 0;
 setInterval(() => {
-  fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
+  fetch('https://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
     .then(response => response.json())
     .then(data => {
       kur = data.rates.TRY / data.rates.USD;
@@ -71,7 +71,7 @@ let text = '';
 setInterval(() => {
   if (kur === 0) return;
   text = '';
-  fetch('http://coin-serv.herokuapp.com/coinbase')
+  fetch('https://coin-serv.herokuapp.com/coinbase')
     .then(response => response.json())
     .then(data => {
       data.forEach(pair => {
@@ -95,7 +95,7 @@ setInterval(() => {
         }
       });
     });
-  fetch('http://coin-serv.herokuapp.com/coinbasereverse')
+  fetch('https://coin-serv.herokuapp.com/coinbasereverse')
     .then(response => response.json())
     .then(data => {
       data.forEach(pair => {
@@ -121,7 +121,7 @@ setInterval(() => {
 }, 300000);
 
 setTimeout(() => {
-  fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
+  fetch('https://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
     .then(response => response.json())
     .then(data => {
       kur = data.rates.TRY / data.rates.USD;
@@ -293,7 +293,7 @@ app.get('/kraken', async (req, res) => {
     'https://api.kraken.com/0/public/Ticker?pair=xbteur,etheur,xrpeur,ltceur,xlmeur,adaeur,eoseur,dasheur,zeceur,waveseur,xtzeur,usdteur,xdgeur,trxeur,linkeur,doteur,usdceur',
   ).then(r => r.json()).catch(x => console.log(x));
 
-  let paribu = await fetch('https://paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
+  let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
 
   let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data).catch(x => console.log(x));
 
@@ -680,7 +680,7 @@ app.get('/coinbase', async (req, res) => {
 
   let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json());
 
-  let paribu = await fetch('https://paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
+  let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
   let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data).catch(x => console.log(x));
 
 
@@ -1088,7 +1088,7 @@ app.get('/coinbasecross', async (req, res) => {
     r.json(),
   );
 
-  let paribu = await fetch('https://paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
+  let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
 
   let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data).catch(x => console.log(x));
 
@@ -1257,7 +1257,7 @@ app.get('/coinbasereverse', async (req, res) => {
 
   let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json());
 
-  let paribu = await fetch('https://paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
+  let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
 
   let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data).catch(x => console.log(x));
 
