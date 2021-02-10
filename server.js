@@ -47,7 +47,7 @@ app.get('/alert-reverse', (req, res) => {
 
 let kur = 0;
 setInterval(() => {
-  fetch('https://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
+  fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
     .then(response => response.json())
     .then(data => {
       kur = data.rates.TRY / data.rates.USD;
@@ -121,7 +121,7 @@ setInterval(() => {
 }, 300000);
 
 setTimeout(() => {
-  fetch('https://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
+  fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
     .then(response => response.json())
     .then(data => {
       kur = data.rates.TRY / data.rates.USD;
@@ -686,6 +686,20 @@ app.get('/coinbase', async (req, res) => {
 
   let koineksData = await getKoineksData();
 if(paribu){
+
+    pairs.push({
+    title: 'UNI* - PARIBU',
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === 'UNIUSDT').askPrice,
+    sell: +paribu.UNI_TL.highestBid,
+    result:
+      (+paribu.UNI_TL.highestBid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'UNIUSDT').askPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  });
+
+
+
   pairs.push({
     title: 'BTC* - PARIBU',
     commission: commissionWithBinance,
@@ -1263,6 +1277,21 @@ app.get('/coinbasereverse', async (req, res) => {
 
   let koineksData = await getKoineksData();
 if(paribu){
+
+
+      pairs.push({
+    title: 'UNI* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'UNIUSDT').bidPrice,
+    buy: +paribu.UNI_TL.lowestAsk,
+    result:
+      (+paribu.UNI_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'UNIUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });
+
+
+
 	  pairs.push({
     title: 'BTC* - PARIBU',
     commission: commissionWithBinance,
