@@ -687,6 +687,8 @@ app.get('/coinbase', async (req, res) => {
   let koineksData = await getKoineksData();
 if(paribu){
 
+
+  if (paribu.UNI_TL)
     pairs.push({
     title: 'UNI* - PARIBU',
     commission: commissionWithBinance,
@@ -695,6 +697,19 @@ if(paribu){
     result:
       (+paribu.UNI_TL.highestBid * (1 - commissionWithBinance)) /
       (+binance.find(x => x.symbol === 'UNIUSDT').askPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  });
+
+
+    if (paribu.AAVE_TL)
+    pairs.push({
+    title: 'AAVE* - PARIBU',
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === 'AAVEUSDT').askPrice,
+    sell: +paribu.AAVE_TL.highestBid,
+    result:
+      (+paribu.AAVE_TL.highestBid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'AAVEUSDT').askPrice /
         +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
   });
 
@@ -1279,6 +1294,7 @@ app.get('/coinbasereverse', async (req, res) => {
 if(paribu){
 
 
+  if (paribu.UNI_TL)
       pairs.push({
     title: 'UNI* - PARIBU',
     commission: commissionWithBinance,
@@ -1287,6 +1303,18 @@ if(paribu){
     result:
       (+paribu.UNI_TL.lowestAsk * (1 + commissionWithBinance)) /
       (+binance.find(x => x.symbol === 'UNIUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });
+
+      if (paribu.AAVE_TL)
+      pairs.push({
+    title: 'AAVE* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'AAVEUSDT').bidPrice,
+    buy: +paribu.AAVE_TL.lowestAsk,
+    result:
+      (+paribu.AAVE_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'AAVEUSDT').bidPrice /
         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
 
