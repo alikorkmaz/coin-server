@@ -744,6 +744,21 @@ if(paribu){
 
 
 
+      if (paribu.ATOM_TL)
+    pairs.push({
+    title: 'ATOM* - PARIBU',
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === 'ATOMUSDT').askPrice,
+    sell: +paribu.ATOM_TL.highestBid,
+    result:
+      (+paribu.ATOM_TL.highestBid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'ATOMUSDT').askPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  });
+
+
+
+
 
     if (paribu.ONT_TL)
     pairs.push({
@@ -1400,6 +1415,21 @@ if(paribu){
     result:
       (+paribu.OMG_TL.lowestAsk * (1 + commissionWithBinance)) /
       (+binance.find(x => x.symbol === 'OMGUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });
+
+
+
+
+              if (paribu.ATOM_TL)
+      pairs.push({
+    title: 'ATOM* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'ATOMUSDT').bidPrice,
+    buy: +paribu.ATOM_TL.lowestAsk,
+    result:
+      (+paribu.ATOM_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'ATOMUSDT').bidPrice /
         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
 
