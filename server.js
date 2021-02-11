@@ -744,6 +744,21 @@ if(paribu){
 
 
 
+
+    if (paribu.ONT_TL)
+    pairs.push({
+    title: 'ONT* - PARIBU',
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === 'ONTUSDT').askPrice,
+    sell: +paribu.ONT_TL.highestBid,
+    result:
+      (+paribu.ONT_TL.highestBid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'ONTUSDT').askPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  });
+
+
+
     if (paribu.DOT_TL)
     pairs.push({
     title: 'DOT* - PARIBU',
@@ -1400,6 +1415,21 @@ if(paribu){
       (+binance.find(x => x.symbol === 'DOTUSDT').bidPrice /
         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
+
+
+
+          if (paribu.ONT_TL)
+      pairs.push({
+    title: 'ONT* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'ONTUSDT').bidPrice,
+    buy: +paribu.ONT_TL.lowestAsk,
+    result:
+      (+paribu.ONT_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'ONTUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });
+
 
 
 
