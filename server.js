@@ -744,6 +744,20 @@ if(paribu){
 
 
 
+    if (paribu.DOT_TL)
+    pairs.push({
+    title: 'DOT* - PARIBU',
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === 'DOTUSDT').askPrice,
+    sell: +paribu.DOT_TL.highestBid,
+    result:
+      (+paribu.DOT_TL.highestBid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'DOTUSDT').askPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  });
+
+
+
   pairs.push({
     title: 'BTC* - PARIBU',
     commission: commissionWithBinance,
@@ -1371,6 +1385,19 @@ if(paribu){
     result:
       (+paribu.OMG_TL.lowestAsk * (1 + commissionWithBinance)) /
       (+binance.find(x => x.symbol === 'OMGUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });
+
+
+          if (paribu.DOT_TL)
+      pairs.push({
+    title: 'DOT* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'DOTUSDT').bidPrice,
+    buy: +paribu.DOT_TL.lowestAsk,
+    result:
+      (+paribu.DOT_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'DOTUSDT').bidPrice /
         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
 
