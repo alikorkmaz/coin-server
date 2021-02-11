@@ -729,6 +729,21 @@ if(paribu){
 
 
 
+
+    if (paribu.OMG_TL)
+    pairs.push({
+    title: 'OMG* - PARIBU',
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === 'OMGUSDT').askPrice,
+    sell: +paribu.OMG_TL.highestBid,
+    result:
+      (+paribu.OMG_TL.highestBid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'OMGUSDT').askPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  });
+
+
+
   pairs.push({
     title: 'BTC* - PARIBU',
     commission: commissionWithBinance,
@@ -1343,6 +1358,19 @@ if(paribu){
     result:
       (+paribu.AVAX_TL.lowestAsk * (1 + commissionWithBinance)) /
       (+binance.find(x => x.symbol === 'AVAXUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });
+
+
+          if (paribu.OMG_TL)
+      pairs.push({
+    title: 'OMG* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'OMGUSDT').bidPrice,
+    buy: +paribu.OMG_TL.lowestAsk,
+    result:
+      (+paribu.OMG_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'OMGUSDT').bidPrice /
         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
 
