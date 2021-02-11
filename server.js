@@ -715,6 +715,20 @@ if(paribu){
 
 
 
+    if (paribu.AVAX_TL)
+    pairs.push({
+    title: 'AVAX* - PARIBU',
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === 'AVAXUSDT').askPrice,
+    sell: +paribu.AVAX_TL.highestBid,
+    result:
+      (+paribu.AVAX_TL.highestBid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'AVAXUSDT').askPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  });
+
+
+
   pairs.push({
     title: 'BTC* - PARIBU',
     commission: commissionWithBinance,
@@ -1315,6 +1329,20 @@ if(paribu){
     result:
       (+paribu.AAVE_TL.lowestAsk * (1 + commissionWithBinance)) /
       (+binance.find(x => x.symbol === 'AAVEUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });
+
+
+
+      if (paribu.AVAX_TL)
+      pairs.push({
+    title: 'AVAX* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'AVAXUSDT').bidPrice,
+    buy: +paribu.AVAX_TL.lowestAsk,
+    result:
+      (+paribu.AVAX_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'AVAXUSDT').bidPrice /
         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
 
