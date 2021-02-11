@@ -744,6 +744,23 @@ if(paribu){
 
 
 
+
+
+    if (paribu.XTZ_TL)
+    pairs.push({
+    title: 'XTZ* - PARIBU',
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === 'XTZUSDT').askPrice,
+    sell: +paribu.XTZ_TL.highestBid,
+    result:
+      (+paribu.XTZ_TL.highestBid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'XTZUSDT').askPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  });
+
+
+
+
     if (paribu.MKR_TL)
     pairs.push({
     title: 'MKR* - PARIBU',
@@ -1431,6 +1448,22 @@ if(paribu){
       (+binance.find(x => x.symbol === 'OMGUSDT').bidPrice /
         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
+
+
+
+
+          if (paribu.XTZ_TL)
+      pairs.push({
+    title: 'XTZ* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'XTZUSDT').bidPrice,
+    buy: +paribu.XTZ_TL.lowestAsk,
+    result:
+      (+paribu.XTZ_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'XTZUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });
+
 
 
 
