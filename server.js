@@ -1711,6 +1711,138 @@ pairs.push({
 
 }
 
+
+
+if(btcturk.some(x => x.pair === 'ADATRY'))
+  pairs.push({
+    title: 'ADA* - BTCTURK',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'ADAUSDT').bidPrice,
+    buy: +btcturk.find(x => x.pair === 'ADATRY').ask,
+    result:
+      (+btcturk.find(x => x.pair === 'ADATRY').ask * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'ADAUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });  
+
+
+if(btcturk.some(x => x.pair === 'ATOMTRY'))
+    pairs.push({
+    title: 'ATOM* - BTCTURK',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'ATOMUSDT').bidPrice,
+    buy: +btcturk.find(x => x.pair === 'ATOMTRY').ask,
+    result:
+      (+btcturk.find(x => x.pair === 'ATOMTRY').ask * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'ATOMUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  }); 
+
+
+if(btcturk.some(x => x.pair === 'DASHTRY'))
+      pairs.push({
+    title: 'DASH* - BTCTURK',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'DASHUSDT').bidPrice,
+    buy: +btcturk.find(x => x.pair === 'DASHTRY').ask,
+    result:
+      (+btcturk.find(x => x.pair === 'DASHTRY').ask * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'DASHUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });   
+
+
+
+
+if(btcturk.some(x => x.pair === 'DOTTRY'))
+      pairs.push({
+    title: 'DOT* - BTCTURK',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'DOTUSDT').bidPrice,
+    buy: +btcturk.find(x => x.pair === 'DOTTRY').ask,
+    result:
+      (+btcturk.find(x => x.pair === 'DOTTRY').ask * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'DOTUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });   
+
+
+    if(btcturk.some(x => x.pair === 'EOSTRY'))
+      pairs.push({
+    title: 'EOS* - BTCTURK',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'EOSUSDT').bidPrice,
+    buy: +btcturk.find(x => x.pair === 'EOSTRY').ask,
+    result:
+      (+btcturk.find(x => x.pair === 'EOSTRY').ask * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'EOSUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });   
+
+
+
+
+    if(btcturk.some(x => x.pair === 'LINKTRY'))
+      pairs.push({
+    title: 'LINK* - BTCTURK',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'LINKUSDT').bidPrice,
+    buy: +btcturk.find(x => x.pair === 'LINKTRY').ask,
+    result:
+      (+btcturk.find(x => x.pair === 'LINKTRY').ask * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'LINKUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });   
+
+
+    if(btcturk.some(x => x.pair === 'NEOTRY'))
+      pairs.push({
+    title: 'NEO* - BTCTURK',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'NEOUSDT').bidPrice,
+    buy: +btcturk.find(x => x.pair === 'NEOTRY').ask,
+    result:
+      (+btcturk.find(x => x.pair === 'NEOTRY').ask * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'NEOUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });   
+
+
+
+
+
+    if(btcturk.some(x => x.pair === 'TRXTRY'))
+      pairs.push({
+    title: 'TRX* - BTCTURK',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'TRXUSDT').bidPrice,
+    buy: +btcturk.find(x => x.pair === 'TRXTRY').ask,
+    result:
+      (+btcturk.find(x => x.pair === 'TRXTRY').ask * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'TRXUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });   
+
+
+    if(btcturk.some(x => x.pair === 'XTZTRY'))
+      pairs.push({
+    title: 'XTZ* - BTCTURK',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'XTZUSDT').bidPrice,
+    buy: +btcturk.find(x => x.pair === 'XTZTRY').ask,
+    result:
+      (+btcturk.find(x => x.pair === 'XTZTRY').ask * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'XTZUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });   
+
+
+
+
+
+
+
+
   pairs.push({
     title: 'BTC* - BTCTURK',
     commission: commissionWithBinance,
