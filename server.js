@@ -61,7 +61,7 @@ setInterval(() => {
 var Push = require('pushover-notifications');
 
 var p = new Push({
-  user: 'uvk1kkq9mi7zkrhs65wq1bj117s68m',
+  user: 'g6qgivbzbg1nrakurqaaecmwrmcaxj',
   token: 'a26qjmrach23epfar8zatfh7apcyfd',
 });
 
