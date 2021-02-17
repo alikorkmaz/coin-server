@@ -701,6 +701,19 @@ if(paribu){
   });
 
 
+  if (paribu.BAL_TL)
+    pairs.push({
+    title: 'BAL* - PARIBU',
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === 'BALUSDT').askPrice,
+    sell: +paribu.BAL_TL.highestBid,
+    result:
+      (+paribu.BAL_TL.highestBid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'BALUSDT').askPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  });
+
+
     if (paribu.AAVE_TL)
     pairs.push({
     title: 'AAVE* - PARIBU',
