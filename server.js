@@ -1551,6 +1551,20 @@ app.get('/coinbasereverse', async (req, res) => {
 if(paribu){
 
 
+
+  if (paribu.BAL_TL)
+      pairs.push({
+    title: 'BAL* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'BALUSDT').bidPrice,
+    buy: +paribu.BAL_TL.lowestAsk,
+    result:
+      (+paribu.BAL_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'BALUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });
+
+
   if (paribu.UNI_TL)
       pairs.push({
     title: 'UNI* - PARIBU',
