@@ -714,6 +714,40 @@ if(paribu){
   });
 
 
+
+
+  if (paribu.ATM_TL)
+    pairs.push({
+    title: 'ATM* - PARIBU',
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === 'ATMUSDT').askPrice,
+    sell: +paribu.ATM_TL.highestBid,
+    result:
+      (+paribu.ATM_TL.highestBid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'ATMUSDT').askPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  });
+
+
+
+
+
+
+  if (paribu.ASR_TL)
+    pairs.push({
+    title: 'ASR* - PARIBU',
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === 'ASRUSDT').askPrice,
+    sell: +paribu.ASR_TL.highestBid,
+    result:
+      (+paribu.ASR_TL.highestBid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'ASRUSDT').askPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  });
+
+
+
+
     if (paribu.AAVE_TL)
     pairs.push({
     title: 'AAVE* - PARIBU',
@@ -1561,6 +1595,38 @@ if(paribu){
     result:
       (+paribu.BAL_TL.lowestAsk * (1 + commissionWithBinance)) /
       (+binance.find(x => x.symbol === 'BALUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });
+
+
+
+
+
+  if (paribu.ATM_TL)
+      pairs.push({
+    title: 'ATM* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'ATMUSDT').bidPrice,
+    buy: +paribu.ATM_TL.lowestAsk,
+    result:
+      (+paribu.ATM_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'ATMUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });
+
+
+
+
+
+  if (paribu.ASR_TL)
+      pairs.push({
+    title: 'ASR* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'ASRUSDT').bidPrice,
+    buy: +paribu.ASR_TL.lowestAsk,
+    result:
+      (+paribu.ASR_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'ASRUSDT').bidPrice /
         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
 
