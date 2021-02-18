@@ -290,7 +290,7 @@ app.get('/kraken', async (req, res) => {
   let commission = 0.005;
 
   let kraken = await fetch(
-    'https://api.kraken.com/0/public/Ticker?pair=xbteur,etheur,xrpeur,ltceur,xlmeur,adaeur,eoseur,dasheur,zeceur,waveseur,xtzeur,usdteur,xdgeur,trxeur,linkeur,doteur,usdceur',
+    'https://api.kraken.com/0/public/Ticker?pair=xbteur,etheur,xrpeur,ltceur,xlmeur,adaeur,eoseur,dasheur,zeceur,waveseur,xtzeur,usdteur,xdgeur,trxeur,linkeur,doteur,usdceur,atomeur',
   ).then(r => r.json()).catch(x => console.log(x));
 
   let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
@@ -366,6 +366,17 @@ if(paribu){
     sell: +paribu.TRX_TL.highestBid,
     result: (+paribu.TRX_TL.highestBid * (1 - commission)) / kraken.result.TRXEUR.a[0],
   });
+
+
+if (paribu.ATOM_TL)
+  pairs.push({
+    title: 'ATOM - PARIBU',
+    commission,
+    buy: +kraken.result.ATOMEUR.a[0],
+    sell: +paribu.ATOM_TL.highestBid,
+    result: (+paribu.ATOM_TL.highestBid * (1 - commission)) / kraken.result.ATOMEUR.a[0],
+  });
+
 
 
 
@@ -484,6 +495,19 @@ if(paribu){
       (+btcturk.find(x => x.pair === 'LINKTRY').bid * (1 - commission)) /
       kraken.result.LINKEUR.a[0],
   });
+
+
+if(btcturk.some(x => x.pair === 'ATOMTRY'))
+        pairs.push({
+    title: 'ATOM - BTCTURK',
+    commission,
+    buy: +kraken.result.ATOMEUR.a[0],
+    sell: +btcturk.find(x => x.pair === 'ATOMTRY').bid,
+    result:
+      (+btcturk.find(x => x.pair === 'ATOMTRY').bid * (1 - commission)) /
+      kraken.result.ATOMEUR.a[0],
+  });
+
 
 
 
