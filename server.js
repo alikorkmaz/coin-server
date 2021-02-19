@@ -817,6 +817,22 @@ if(paribu){
 
 
 
+    if (paribu.RVN_TL)
+    pairs.push({
+    title: 'RVN* - PARIBU',
+    commission: commissionWithBinance,
+    buy: +binance.find(x => x.symbol === 'RVNUSDT').askPrice,
+    sell: +paribu.RVN_TL.highestBid,
+    result:
+      (+paribu.RVN_TL.highestBid * (1 - commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'RVNUSDT').askPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  });
+
+
+
+
+
     if (paribu.XTZ_TL)
     pairs.push({
     title: 'XTZ* - PARIBU',
@@ -1033,18 +1049,18 @@ title: 'EOS* - PARIBU',
         (+binance.find(x => x.symbol === 'LINKUSDT').askPrice /
           +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
     });
-  if (paribu.RVN_TL)
-    pairs.push({
-      title: 'RVN* - PARIBU',
-      commission: commissionWithBinance,
-      buy: +binance.find(x => x.symbol === 'RVNBTC').askPrice,
-      sell: +paribu.RVN_TL.highestBid,
-      result:
-        (+paribu.RVN_TL.highestBid * (1 - commissionWithBinance)) /
-        ((binance.find(x => x.symbol === 'RVNBTC').askPrice *
-          binance.find(x => x.symbol === 'BTCUSDT').askPrice) /
-          +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
-    });
+  // if (paribu.RVN_TL)
+  //   pairs.push({
+  //     title: 'RVN* - PARIBU',
+  //     commission: commissionWithBinance,
+  //     buy: +binance.find(x => x.symbol === 'RVNBTC').askPrice,
+  //     sell: +paribu.RVN_TL.highestBid,
+  //     result:
+  //       (+paribu.RVN_TL.highestBid * (1 - commissionWithBinance)) /
+  //       ((binance.find(x => x.symbol === 'RVNBTC').askPrice *
+  //         binance.find(x => x.symbol === 'BTCUSDT').askPrice) /
+  //         +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+  //   });
   if (binance.some(x => x.symbol === 'DOGEUSDT'))
     pairs.push({
       title: 'DOGE* - PARIBU',
@@ -1738,6 +1754,20 @@ if(paribu){
 
 
 
+          if (paribu.RVN_TL)
+      pairs.push({
+    title: 'RVN* - PARIBU',
+    commission: commissionWithBinance,
+    sell: +binance.find(x => x.symbol === 'RVNUSDT').bidPrice,
+    buy: +paribu.RVN_TL.lowestAsk,
+    result:
+      (+paribu.RVN_TL.lowestAsk * (1 + commissionWithBinance)) /
+      (+binance.find(x => x.symbol === 'RVNUSDT').bidPrice /
+        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  });
+
+
+
 
               if (paribu.ATOM_TL)
       pairs.push({
@@ -1932,18 +1962,18 @@ pairs.push({
         (+binance.find(x => x.symbol === 'DOGEUSDT').bidPrice /
           +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
     });
-  if (paribu.RVN_TL)
-    pairs.push({
-      title: 'RVN* - PARIBU',
-      commission: commissionWithBinance,
-      sell: +binance.find(x => x.symbol === 'RVNBTC').bidPrice,
-      buy: +paribu.RVN_TL.lowestAsk,
-      result:
-        (+paribu.RVN_TL.lowestAsk * (1 + commissionWithBinance)) /
-        ((binance.find(x => x.symbol === 'RVNBTC').bidPrice *
-          binance.find(x => x.symbol === 'BTCUSDT').bidPrice) /
-          +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
-    });
+  // if (paribu.RVN_TL)
+  //   pairs.push({
+  //     title: 'RVN* - PARIBU',
+  //     commission: commissionWithBinance,
+  //     sell: +binance.find(x => x.symbol === 'RVNBTC').bidPrice,
+  //     buy: +paribu.RVN_TL.lowestAsk,
+  //     result:
+  //       (+paribu.RVN_TL.lowestAsk * (1 + commissionWithBinance)) /
+  //       ((binance.find(x => x.symbol === 'RVNBTC').bidPrice *
+  //         binance.find(x => x.symbol === 'BTCUSDT').bidPrice) /
+  //         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+  //   });
   if (paribu.WAVES_TL)
     pairs.push({
       title: 'WAVES* - PARIBU',
