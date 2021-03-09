@@ -130,7 +130,7 @@ setTimeout(() => {
     .catch(x => {
       console.log(x);
     });
-}, 10000);
+}, 20000);
 
 app.get('/', (req, res) => {
   res.send({});
