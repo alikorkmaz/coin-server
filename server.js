@@ -65,7 +65,7 @@ var p = new Push({
   token: 'a26qjmrach23epfar8zatfh7apcyfd',
 });
 
-let profitMargin = 0.02;
+let profitMargin = 0.05;
 let profitMarginReverse = 0;
 let text = '';
 setInterval(() => {
@@ -80,7 +80,7 @@ setInterval(() => {
           text === '' &&
           alert.some(title => title === pair.title)
         ) {
-          text = pair.title;
+          text = pair.title + ": " + pair.result;
 
           p.send(
             {
@@ -104,7 +104,7 @@ setInterval(() => {
           text === '' &&
           alertReverse.some(title => title === pair.title)
         ) {
-          text = pair.title;
+          text = pair.title + ": " + pair.result;
           p.send(
             {
               message: text,
