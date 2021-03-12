@@ -134,7 +134,7 @@ setTimeout(() => {
 
 app.get('/', (req, res) => {
   if(req.query.profit){
-    profitMargin = req.query.profit
+    profitMargin = +req.query.profit
   }
   res.send({profitMargin:profitMargin, currentAlert:+profitMargin+kur});
 });
