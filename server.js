@@ -133,6 +133,9 @@ setTimeout(() => {
 }, 20000);
 
 app.get('/', (req, res) => {
+  if(req.query.profit){
+    profitMargin = req.query.profit
+  }
   res.send({});
 });
 
