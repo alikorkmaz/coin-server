@@ -80,7 +80,7 @@ setInterval(() => {
           text === '' &&
           alert.some(title => title === pair.title)
         ) {
-          text = pair.title + ": " + pair.result;
+          text = pair.title + ": " + pair.result.toString().substring(0, 5);
 
           p.send(
             {
@@ -104,7 +104,7 @@ setInterval(() => {
           text === '' &&
           alertReverse.some(title => title === pair.title)
         ) {
-          text = pair.title + ": " + pair.result;
+          text = pair.title + ": " + pair.result.toString().substring(0, 5);
           p.send(
             {
               message: text,
@@ -136,7 +136,7 @@ app.get('/', (req, res) => {
   if(req.query.profit){
     profitMargin = req.query.profit
   }
-  res.send({profitMargin:profitMargin});
+  res.send({profitMargin:profitMargin, currentAlert:profitMargin+kur});
 });
 
 app.get('/kur', (req, res) => {
