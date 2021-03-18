@@ -150,14 +150,15 @@ app.get('/koineks', (req, res) => {
 });
 
 app.get('/paribu', (req, res) => {
-  fetch('https://8080-fe8ca129-39a3-4154-be62-c24bdfd0c004.europe-west4.cloudshell.dev/paribu')
+  fetch('https://www.paribu.com/ticker')
     .then(response => {
       console.log(response, response.json()); return response.json();
     })
     .then(json => res.send(json))
     .catch((error) => {
-  console.error(error);
-});
+      console.error(error);
+      res.send({error:error});
+    });
 });
 
 app.get('/btcturk', (req, res) => {
