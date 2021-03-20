@@ -35,7 +35,7 @@ app.post('/alert-reverse', (req, res) => {
         alertReverse.push(item);
     });
     alertReverse = [...new Set(alertReverse)];
-});
+});  
 app.post('/alert-reverse-delete', (req, res) => {
     req.body.forEach(item => {
         alertReverse = alertReverse.filter(itemInAlert => itemInAlert !== item);
