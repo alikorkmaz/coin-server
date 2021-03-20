@@ -66,35 +66,16 @@ var p = new Push({
 });
 
 let profitMargin = 0.1;
+let tetherBuy = -1;
 let profitMarginReverse = 0;
 let text = '';
 setInterval(() => {
   if (kur === 0) return;
   text = '';
-  fetch('https://coin-serv.herokuapp.com/coinbase')
-    .then(response => response.json())
-    .then(data => {
-      data.forEach(pair => {
-        if (
-          pair.result > kur + profitMargin &&
-          text === '' &&
-          alert.some(title => title === pair.title)
-        ) {
-          text = pair.title + ": " + pair.result.toString().substring(0, 5);
 
-          p.send(
-            {
-              message: text,
-            },
-            function(err, result) {
-              console.log(result);
-            },
-          );
 
-          return;
-        }
-      });
-    });
+
+
   fetch('https://coin-serv.herokuapp.com/coinbasereverse')
     .then(response => response.json())
     .then(data => {
@@ -118,6 +99,57 @@ setInterval(() => {
         }
       });
     });
+
+
+
+
+  fetch('https://coin-serv.herokuapp.com/coinbase')
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(pair => {
+        if (
+          pair.result > kur + profitMargin &&
+          text === '' &&
+          alert.some(title => title === pair.title)
+        ) {
+          text = pair.title + ": " + pair.result.toString().substring(0, 5);
+
+
+          if(profitMargin == -1){
+
+            if(pair.result > tetherBuy){
+              p.send(
+              {
+                message: text,
+              },
+              function(err, result) {
+                console.log(result);
+                },
+              );  
+
+            }
+
+          } else {
+
+            p.send(
+            {
+              message: text,
+            },
+            function(err, result) {
+              console.log(result);
+              },
+            );  
+
+          }
+          
+
+          return;
+        }
+      });
+    });
+
+
+
 }, 60000);
 
 setTimeout(() => {
@@ -136,7 +168,13 @@ app.get('/', (req, res) => {
   if(req.query.profit){
     profitMargin = +req.query.profit
   }
-  res.send({profitMargin:profitMargin, currentAlert:+profitMargin+kur});
+  if(profitMargin == -1){
+            res.send({profitMargin:profitMargin,tetherBuyAlertActive:tetherBuy, currentAlert:+profitMargin+kur});
+
+  }
+    else{
+        res.send({profitMargin:profitMargin, currentAlert:+profitMargin+kur});
+    }
 });
 
 app.get('/kur', (req, res) => {
