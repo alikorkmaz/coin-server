@@ -62,7 +62,7 @@ var Push = require('pushover-notifications');
 
 var p = new Push({
     user: 'g6qgivbzbg1nrakurqaaecmwrmcaxj',
-    token: 'a26qjmrach23epfar8zatfh7apcyfd',
+    token: 'aimiivzn6eh82mih6n21vu347aneum',
 });
 
 let profitMargin = 0.1;
