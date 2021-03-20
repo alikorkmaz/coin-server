@@ -753,6 +753,8 @@ app.get('/coinbase', async (req, res) => {
   let koineksData = await getKoineksData();
 if(paribu){
 
+  tetherBuy = +paribu.USDT_TL.lowestAsk
+
 
   if (paribu.UNI_TL)
     pairs.push({
@@ -2037,7 +2039,6 @@ pairs.push({
       (+paribu.USDT_TL.lowestAsk * (1 + commissionWithBinanceUSDT)) /
       (1 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
   });
-
 }
 
 
