@@ -777,7 +777,7 @@ app.get('/coinbase', async (req, res) => {
     let koineksData = await getKoineksData();
     if (paribu) {
 
-        tetherBuy = +paribu.USDT_TL.lowestAsk + 0.05;
+        tetherBuy = +paribu.USDT_TL.lowestAsk;
 
 
         if (paribu.UNI_TL)
