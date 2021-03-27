@@ -147,7 +147,7 @@ setInterval(() => {
 
 
 
-}, 60000);
+}, 30000);
 
 setTimeout(() => {
     fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
