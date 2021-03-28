@@ -147,7 +147,7 @@ setInterval(() => {
 
 
 
-}, 30000);
+}, 60000);
 
 setTimeout(() => {
     fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
@@ -777,7 +777,7 @@ app.get('/coinbase', async (req, res) => {
     let koineksData = await getKoineksData();
     if (paribu) {
 
-        tetherBuy = +paribu.USDT_TL.lowestAsk + 0.015;
+        tetherBuy = +paribu.USDT_TL.lowestAsk + 0.045;
 
 
         if (paribu.UNI_TL)
