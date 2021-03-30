@@ -62,7 +62,7 @@ var Push = require('pushover-notifications');
 
 var p = new Push({
     user: 'g6qgivbzbg1nrakurqaaecmwrmcaxj',
-    token: 'aimiivzn6eh82mih6n21vu347aneum',
+    token: 'aqoyrmbrtmau2q7jfjobgo6p7sa4om',
 });
 
 let profitMargin = 0.1;
@@ -777,7 +777,7 @@ app.get('/coinbase', async (req, res) => {
     let koineksData = await getKoineksData();
     if (paribu) {
 
-        tetherBuy = +paribu.USDT_TL.lowestAsk + 0.04;
+        tetherBuy = +paribu.USDT_TL.lowestAsk + 0.025;
 
 
         if (paribu.UNI_TL)
