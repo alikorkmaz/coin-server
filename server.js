@@ -67,6 +67,7 @@ var p = new Push({
 
 let profitMargin = 0.1;
 let tetherBuy = -1;
+let tetherMargin = 0;
 let profitMarginReverse = 0;
 let text = '';
 setInterval(() => {
@@ -165,11 +166,15 @@ app.get('/', (req, res) => {
     if (req.query.profit) {
         profitMargin = +req.query.profit
     }
+    if (req.query.tetherMargin) {
+        tetherMargin = +req.query.tetherMargin
+    }
     if (profitMargin == -1) {
         res.send({
             profitMargin: profitMargin,
             tetherBuyAlertActive: tetherBuy,
-            currentAlert: +profitMargin + kur
+            currentAlert: +profitMargin + kur,
+            tetherMargin: tetherMargin
         });
 
     } else {
@@ -777,7 +782,7 @@ app.get('/coinbase', async (req, res) => {
     let koineksData = await getKoineksData();
     if (paribu) {
 
-        tetherBuy = +paribu.USDT_TL.lowestAsk + 0;
+        tetherBuy = +paribu.USDT_TL.lowestAsk + tetherMargin;
 
 
         if (paribu.UNI_TL)
