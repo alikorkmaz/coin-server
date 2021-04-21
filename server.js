@@ -837,6 +837,17 @@ app.get('/coinbase', async (req, res) => {
             });
 
 
+        if (paribu.BAR_TL && binance.find(x => x.symbol === 'BARUSDT'))
+            pairs.push({
+                title: 'BAR* - PARIBU',
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === 'BARUSDT').askPrice,
+                sell: +paribu.BAR_TL.highestBid,
+                result: (+paribu.BAR_TL.highestBid * (1 - commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'BARUSDT').askPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+            });
+
 
 
         if (paribu.AAVE_TL)
@@ -1669,6 +1680,20 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.ASR_TL.lowestAsk,
                 result: (+paribu.ASR_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'ASRUSDT').bidPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+            });
+
+
+
+
+        if (paribu.BAR_TL && binance.find(x => x.symbol === 'BARUSDT'))
+            pairs.push({
+                title: 'BAR* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'BARUSDT').bidPrice,
+                buy: +paribu.BAR_TL.lowestAsk,
+                result: (+paribu.BAR_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'BARUSDT').bidPrice /
                         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
             });
 
