@@ -62,7 +62,7 @@ var Push = require('pushover-notifications');
 
 var p = new Push({
     user: 'g6qgivbzbg1nrakurqaaecmwrmcaxj',
-    token: 'a6bb3vhq67aewvaego3nyguc2f9q9z',
+    token: 'acch1inzyi21vzny7ow1io4fx6rc6u',
 });
 
 let profitMargin = 0.1;
@@ -148,7 +148,7 @@ setInterval(() => {
 
 
 
-}, 60000);
+}, 30000);
 
 setTimeout(() => {
     fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
