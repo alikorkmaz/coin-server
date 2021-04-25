@@ -126,7 +126,7 @@ setInterval(() => {
                     text === '' &&
                     alert.some(title => title === pair.title)
                 ) {
-                    text = pair.result.toString().substring(0, 5) + " " + pair.title + " sell:" + pair.sell.toString().substring(0, 6);
+                    text = pair.title + " " + pair.result.toString().substring(0, 5) + " (sell:" + pair.sell.toString().substring(0, 6) + ")";
                     if (profitMargin == -1) {
 
                         if (pair.result > tetherBuy) {
