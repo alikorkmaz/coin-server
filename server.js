@@ -126,7 +126,7 @@ setInterval(() => {
                     text === '' &&
                     alert.some(title => title === pair.title)
                 ) {
-                    text = pair.title + " " + pair.result.toString().substring(0, 5) + " (sell:" + pair.sell.toString().substring(0, 6) + ")";
+                    text = pair.title + ": " + pair.result.toString().substring(0, 5) + " (sell:" + pair.sell.toString().substring(0, 6) + ")";
                     if (profitMargin == -1) {
 
                         if (pair.result > tetherBuy) {
@@ -181,7 +181,6 @@ app.get('/', (req, res) => {
     }
     if (req.query.tetherMargin) {
         tetherMargin = +req.query.tetherMargin
-        myAlarm = 1;
     }
     if (profitMargin == -1) {
         res.send({
