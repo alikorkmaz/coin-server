@@ -117,8 +117,6 @@ setInterval(() => {
         });
 
 
-
-
     fetch('https://coin-serv.herokuapp.com/coinbase')
         .then(response => response.json())
         .then(data => {
