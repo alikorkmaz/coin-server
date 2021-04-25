@@ -70,7 +70,23 @@ let tetherBuy = -1;
 let tetherMargin = 0;
 let profitMarginReverse = 0;
 let text = '';
+let myAlarm = 0;
 setInterval(() => {
+
+
+    if(myAlarm === 0){
+        p.send({
+                message: "ALARM BOZULDU",
+            },
+            function(err, result) {
+                console.log(result);
+            },
+        );
+    }
+
+
+
+
     if (kur === 0) return;
     text = '';
 
@@ -112,9 +128,7 @@ setInterval(() => {
                     text === '' &&
                     alert.some(title => title === pair.title)
                 ) {
-                    text = pair.title + ": " + pair.result.toString().substring(0, 5);
-
-
+                    text = pair.title + ": " + pair.result.toString().substring(0, 5) + ": " + pair.sell.toString().substring(0, 6);
                     if (profitMargin == -1) {
 
                         if (pair.result > tetherBuy) {
@@ -148,7 +162,7 @@ setInterval(() => {
 
 
 
-}, 60000);
+}, 30000);
 
 setTimeout(() => {
     fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
@@ -165,9 +179,11 @@ setTimeout(() => {
 app.get('/', (req, res) => {
     if (req.query.profit) {
         profitMargin = +req.query.profit
+        myAlarm = 1;
     }
     if (req.query.tetherMargin) {
         tetherMargin = +req.query.tetherMargin
+        myAlarm = 1;
     }
     if (profitMargin == -1) {
         res.send({
