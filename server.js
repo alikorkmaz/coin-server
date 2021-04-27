@@ -528,41 +528,6 @@ app.get('/coinbase', async (req, res) => {
     let commissionWithBinance = 0.0065;
     let commissionWithBinanceUSDT = 0.0055;
 
-    let cbBtc = await fetch('https://api.pro.coinbase.com/products/btc-usd/ticker').then(r =>
-        r.json(),
-    );
-
-    let cbEth = await fetch('https://api.pro.coinbase.com/products/eth-usd/ticker').then(r =>
-        r.json(),
-    );
-
-    let cbXrp = await fetch('https://api.pro.coinbase.com/products/xrp-usd/ticker').then(r =>
-        r.json(),
-    );
-
-    let cbLtc = await fetch('https://api.pro.coinbase.com/products/ltc-usd/ticker').then(r =>
-        r.json(),
-    );
-
-    let cbXlm = await fetch('https://api.pro.coinbase.com/products/xlm-usd/ticker').then(r =>
-        r.json(),
-    );
-
-    let cbEos = await fetch('https://api.pro.coinbase.com/products/eos-usd/ticker').then(r =>
-        r.json(),
-    );
-
-    let cbBat = await fetch('https://api.pro.coinbase.com/products/bat-usdc/ticker').then(r =>
-        r.json(),
-    );
-
-    let cbZec = await fetch('https://api.pro.coinbase.com/products/zec-usdc/ticker').then(r =>
-        r.json(),
-    );
-
-    let cbZrx = await fetch('https://api.pro.coinbase.com/products/zrx-usd/ticker').then(r =>
-        r.json(),
-    );
 
     let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json());
 
