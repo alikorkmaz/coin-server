@@ -593,6 +593,19 @@ app.get('/coinbase', async (req, res) => {
             });
 
 
+        if (paribu.REEF_TL)
+            pairs.push({
+                title: 'REEF* - PARIBU',
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === 'REEFUSDT').askPrice,
+                sell: +paribu.REEF_TL.highestBid,
+                result: (+paribu.REEF_TL.highestBid * (1 - commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'REEFUSDT').askPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+            });
+
+
+
         if (paribu.BAR_TL && binance.find(x => x.symbol === 'BARUSDT'))
             pairs.push({
                 title: 'BAR* - PARIBU',
@@ -1136,6 +1149,18 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.ASR_TL.lowestAsk,
                 result: (+paribu.ASR_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'ASRUSDT').bidPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+            });
+
+
+        if (paribu.REEF_TL)
+            pairs.push({
+                title: 'REEF* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'REEFUSDT').bidPrice,
+                buy: +paribu.REEF_TL.lowestAsk,
+                result: (+paribu.REEF_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'REEFUSDT').bidPrice /
                         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
             });
 
