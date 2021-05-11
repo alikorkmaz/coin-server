@@ -606,6 +606,19 @@ app.get('/coinbase', async (req, res) => {
 
 
 
+        if (paribu.LRC_TL)
+            pairs.push({
+                title: 'LRC* - PARIBU',
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === 'LRCUSDT').askPrice,
+                sell: +paribu.LRC_TL.highestBid,
+                result: (+paribu.LRC_TL.highestBid * (1 - commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'LRCUSDT').askPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+            });
+
+
+
         if (paribu.BAR_TL && binance.find(x => x.symbol === 'BARUSDT'))
             pairs.push({
                 title: 'BAR* - PARIBU',
@@ -1177,6 +1190,19 @@ app.get('/coinbasereverse', async (req, res) => {
                     (+binance.find(x => x.symbol === 'REEFUSDT').bidPrice /
                         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
             });
+
+
+        if (paribu.LRC_TL)
+            pairs.push({
+                title: 'LRC* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'LRCUSDT').bidPrice,
+                buy: +paribu.LRC_TL.lowestAsk,
+                result: (+paribu.LRC_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'LRCUSDT').bidPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+            });
+
 
 
 
