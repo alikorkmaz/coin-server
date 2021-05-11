@@ -928,6 +928,20 @@ app.get('/coinbase', async (req, res) => {
 
 
 
+
+    if (btcturk.some(x => x.pair === 'AVAXTRY'))
+        pairs.push({
+            title: 'AVAX* - BTCTURK',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'AVAXUSDT').askPrice,
+            sell: +btcturk.find(x => x.pair === 'AVAXTRY').bid,
+            result: (+btcturk.find(x => x.pair === 'AVAXTRY').bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'AVAXUSDT').askPrice /
+                    +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+        });
+
+
+
     if (btcturk.some(x => x.pair === 'EOSTRY'))
         pairs.push({
             title: 'EOS* - BTCTURK',
@@ -1528,6 +1542,19 @@ app.get('/coinbasereverse', async (req, res) => {
                 (+binance.find(x => x.symbol === 'DOTUSDT').bidPrice /
                     +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
         });
+
+
+        if (btcturk.some(x => x.pair === 'AVAXTRY'))
+        pairs.push({
+            title: 'AVAX* - BTCTURK',
+            commission: commissionWithBinance,
+            sell: +binance.find(x => x.symbol === 'AVAXUSDT').bidPrice,
+            buy: +btcturk.find(x => x.pair === 'AVAXTRY').ask,
+            result: (+btcturk.find(x => x.pair === 'AVAXTRY').ask * (1 + commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'AVAXUSDT').bidPrice /
+                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+        });
+
 
 
     if (btcturk.some(x => x.pair === 'EOSTRY'))
