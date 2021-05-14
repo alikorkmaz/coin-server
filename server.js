@@ -200,9 +200,17 @@ app.get('/', (req, res) => {
 });
 
 app.get('/kur', (req, res) => {
-    res.send({
-        kur: kur.toFixed(4)
-    });
+
+    if(profitMargin === -1){
+        let l = tetherBuy - tetherMargin;
+        res.send({
+            kur: l.toFixed(4)
+        });
+    } else {
+        res.send({
+            kur: kur.toFixed(4)
+        });
+    }
 });
 
 
