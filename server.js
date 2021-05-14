@@ -213,6 +213,13 @@ app.get('/kur', (req, res) => {
     }
 });
 
+app.get('/reelkur', (req, res) => {
+
+        res.send({
+            kur: kur.toFixed(4)
+        });
+});
+
 
 app.get('/paribu', (req, res) => {
     fetch('https://www.paribu.com/ticker')
