@@ -213,6 +213,24 @@ app.get('/kur', (req, res) => {
     }
 });
 
+
+app.get('/caldir', (req, res) => {
+
+        p.send({
+            message: "ALARM TEST",
+        },
+        function(err, result) {
+            console.log(result);
+        },
+        );
+
+        res.send({
+            kur: kur.toFixed(4)
+        });
+
+});
+
+
 app.get('/reelkur', (req, res) => {
 
         res.send({
