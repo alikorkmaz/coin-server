@@ -46,9 +46,12 @@ app.get('/alert-reverse', (req, res) => {
     res.send(alertReverse);
 });
 
+//a5ff7dc6e98f9c42ef347e296beaa237
+//547f1508205c1568706666c56bc02f4e
+
 let kur = 0;
 setInterval(() => {
-    fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
+    fetch('http://data.fixer.io/api/latest?access_key=a5ff7dc6e98f9c42ef347e296beaa237')
         .then(response => response.json())
         .then(data => {
             kur = data.rates.TRY / data.rates.USD;
