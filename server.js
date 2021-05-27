@@ -49,7 +49,7 @@ app.get('/alert-reverse', (req, res) => {
 //a5ff7dc6e98f9c42ef347e296beaa237
 //547f1508205c1568706666c56bc02f4e
 
-let kur = 0;
+let kur = 8.5;
 setInterval(() => {
     fetch('http://data.fixer.io/api/latest?access_key=a5ff7dc6e98f9c42ef347e296beaa237')
         .then(response => response.json())
@@ -91,7 +91,7 @@ setInterval(() => {
 
 
 
-    if (kur === 0) return;
+    if (kur === 0 && currentAlert !== -1) return;
     text = '';
 
 
