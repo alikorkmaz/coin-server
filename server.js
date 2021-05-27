@@ -1004,6 +1004,34 @@ app.get('/coinbase', async (req, res) => {
 
 
 
+    if (btcturk.some(x => x.pair === 'MATICTRY'))
+        pairs.push({
+            title: 'MATIC* - BTCTURK',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'MATICUSDT').askPrice,
+            sell: +btcturk.find(x => x.pair === 'MATICTRY').bid,
+            result: (+btcturk.find(x => x.pair === 'MATICTRY').bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'MATICUSDT').askPrice /
+                    +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+        });
+
+
+
+
+    if (btcturk.some(x => x.pair === 'ENJTRY'))
+        pairs.push({
+            title: 'ENJ* - BTCTURK',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'ENJUSDT').askPrice,
+            sell: +btcturk.find(x => x.pair === 'ENJTRY').bid,
+            result: (+btcturk.find(x => x.pair === 'ENJTRY').bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'ENJUSDT').askPrice /
+                    +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+        });
+
+
+
+
     if (btcturk.some(x => x.pair === 'LINKTRY'))
         pairs.push({
             title: 'LINK* - BTCTURK',
