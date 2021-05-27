@@ -80,7 +80,7 @@ let alarmCaldiMi = 0;
 
 setInterval(function(){
     alarmCaldiMi = 0;
-}, 120000);
+}, 600000);
 
 
 setInterval(() => {
