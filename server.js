@@ -76,6 +76,13 @@ let profitMarginReverse = 0;
 let text = '';
 let myAlarm = 0;
 let alarmCaldiMi = 0;
+
+
+setInterval(function(){
+    alarmCaldiMi = 0;
+}, 120000);
+
+
 setInterval(() => {
 
 
