@@ -150,8 +150,11 @@ setInterval(() => {
                 ) {
                     text = pair.title + ": " + pair.result.toString().substring(0, 5) + " (sell:" + pair.sell.toString().substring(0, 6) + ")";
                     if (profitMargin == -1) {
-
                         if (pair.result > tetherBuy) {
+                            alarmCaldiMi = 1;
+                            setTimeout(function(){
+                                alarmCaldiMi = 0;
+                            }, 30000);
                             p.send({
                                     message: text,
                                 },
@@ -161,10 +164,6 @@ setInterval(() => {
                             );
 
                         }
-                        alarmCaldiMi = 1;
-                        setTimeout(function(){
-                            alarmCaldiMi = 0;
-                        }, 30000);
                         return;
                     } else {
 
