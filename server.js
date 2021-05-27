@@ -75,8 +75,11 @@ let tetherMargin = 0;
 let profitMarginReverse = 0;
 let text = '';
 let myAlarm = 0;
+let alarmCaldiMi = 0;
 setInterval(() => {
 
+
+    if (alarmCaldiMi === 1) return;
 
     if(myAlarm === 0){
         p.send({
@@ -86,6 +89,11 @@ setInterval(() => {
                 console.log(result);
             },
         );
+        alarmCaldiMi = 1;
+        setTimeout(function(){
+            alarmCaldiMi = 0;
+        }, 30000);
+        return;
     }
 
 
@@ -114,7 +122,10 @@ setInterval(() => {
                             console.log(result);
                         },
                     );
-
+                    alarmCaldiMi = 1;
+                    setTimeout(function(){
+                        alarmCaldiMi = 0;
+                    }, 30000);
                     return;
                 }
             });
@@ -143,6 +154,10 @@ setInterval(() => {
                             );
 
                         }
+                        alarmCaldiMi = 1;
+                        setTimeout(function(){
+                            alarmCaldiMi = 0;
+                        }, 30000);
                         return;
                     } else {
 
@@ -153,6 +168,10 @@ setInterval(() => {
                                 console.log(result);
                             },
                         );
+                        alarmCaldiMi = 1;
+                        setTimeout(function(){
+                            alarmCaldiMi = 0;
+                        }, 30000);
                         return;
                     }
 
@@ -164,7 +183,7 @@ setInterval(() => {
 
 
 
-}, 30000);
+}, 10000);
 
 setTimeout(() => {
     fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
