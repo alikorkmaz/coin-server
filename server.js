@@ -162,9 +162,9 @@ setInterval(() => {
                                     console.log(result);
                                 },
                             );
-
+                            return;
                         }
-                        return;
+                        
                     } else {
 
                         p.send({
