@@ -16,6 +16,7 @@ let alert = [];
 let alertReverse = [];
 
 
+
 app.post('/alert', (req, res) => {
     req.body.forEach(item => {
         alert.push(item);
