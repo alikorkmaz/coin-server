@@ -269,18 +269,10 @@ app.get('/reelkur', (req, res) => {
 
 
 app.get('/paribu', (req, res) => {
-    fetch('https://www.paribu.com/ticker')
-        .then(response => {
-            console.log(response, response.json());
-            return response.json();
-        })
+        fetch('https://www.paribu.com/ticker')
+        .then(response => response.json())
         .then(json => res.send(json))
-        .catch((error) => {
-            console.error(error);
-            res.send({
-                error: error
-            });
-        });
+        .catch(e => console.log(e));
 });
 
 app.get('/btcturk', (req, res) => {
