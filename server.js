@@ -612,6 +612,8 @@ async function getWithSymbol(binance, symbol, pairs){
                     +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
         });
     } catch {
+      if(symbol === 'ZIL') return;
+
         p.send({
                 message: "HATA ALDIK:" + symbol,
             },
@@ -662,7 +664,8 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'NEO', pairs),
             getWithSymbol(binance, 'LINK', pairs),
             getWithSymbol(binance, 'DOGE', pairs),
-            getWithSymbol(binance, 'WAVES', pairs)
+            getWithSymbol(binance, 'WAVES', pairs),
+            getWithSymbol(binance, 'ZIL', pairs)
         ]);
     res.send(
         pairs
@@ -1316,6 +1319,19 @@ app.get('/coinbasereverse', async (req, res) => {
 
     if (paribu) {
 
+
+
+
+        if (paribu.ZIL_TL)
+            pairs.push({
+                title: 'ZIL* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'ZILUSDT').bidPrice,
+                buy: +paribu.ZIL_TL.lowestAsk,
+                result: (+paribu.ZIL_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'ZILUSDT').bidPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+            });
 
 
         if (paribu.BAL_TL)
