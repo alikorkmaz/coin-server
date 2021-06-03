@@ -606,6 +606,7 @@ async function getWithSymbol(binance, symbol, pairs){
                 console.log(result);
             },
         );
+        alarmCaldiMi = 1;
     }
 }
 
