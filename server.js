@@ -613,18 +613,20 @@ async function getWithSymbol(binance, symbol, pairs){
                     +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
         });
     } catch {
+        if (symbol === "DOGE") {
         if (alarmCaldiMi === 1) return;
-        alarmCaldiMi = 1;
-        setTimeout(function(){
-            alarmCaldiMi = 0;
-        }, 30000);
-        p.send({
-                message: "HATA ALDIK:" + symbol + JSON.stringify(paribu),
-            },
-            function(err, result) {
-                console.log(result);
-            },
-        );
+            alarmCaldiMi = 1;
+            setTimeout(function(){
+                alarmCaldiMi = 0;
+            }, 30000);
+            p.send({
+                    message: "HATA ALDIK:" + symbol + JSON.stringify(paribu),
+                },
+                function(err, result) {
+                    console.log(result);
+                },
+            );
+        }
     }
 }
 
