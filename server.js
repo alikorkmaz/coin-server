@@ -113,7 +113,7 @@ setInterval(() => {
 
 
 
-    fetch('https://coin-serv.herokuapp.com/coinbasereverse')
+    fetch('https://coin-serv2.herokuapp.com/coinbasereverse')
         .then(response => response.json())
         .then(data => {
             data.forEach(pair => {
@@ -140,7 +140,7 @@ setInterval(() => {
         });
 
 
-    fetch('https://coin-serv.herokuapp.com/v2/coinbase')
+    fetch('https://coin-serv2.herokuapp.com/v2/coinbase')
         .then(response => response.json())
         .then(data => {
             data.forEach(pair => {
@@ -586,20 +586,8 @@ async function getWithSymbol(binance, symbol, pairs){
         let commissionWithBinanceUSDT = 0.0055;
 
         let paribu = await fetch('https://v3.paribu.com/app/markets/'+symbol.toLowerCase()+'-tl?interval=1000').then(r => r.json()).catch(x => console.log(x));
-        console.log(paribu);
-            console.log(paribu.data.orderBook.buy);
 
         let pariBuyPrice = Object.keys(paribu.data.orderBook.buy)[0];
-        console.log(pariBuyPrice);
-            console.log("---------");
-                console.log(symbol + '* - PARIBU');
-
-        console.log(+binance.find(x => x.symbol === symbol+'USDT').askPrice);
-
-        console.log((pariBuyPrice * (1 - commissionWithBinance)) /
-                (+binance.find(x => x.symbol === symbol+'USDT').askPrice /
-                    +binance.find(x => x.symbol === 'USDCUSDT').bidPrice));
-
 
         pairs.push({
             title: symbol + '* - PARIBU',
