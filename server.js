@@ -607,6 +607,19 @@ app.get('/coinbase', async (req, res) => {
             });
 
 
+
+        if (paribu.ZIL_TL)
+            pairs.push({
+                title: 'ZIL* - PARIBU',
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === 'ZILUSDT').askPrice,
+                sell: +paribu.ZIL_TL.highestBid,
+                result: (+paribu.ZIL_TL.highestBid * (1 - commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'ZILUSDT').askPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+            });
+
+
         if (paribu.BAL_TL)
             pairs.push({
                 title: 'BAL* - PARIBU',
@@ -1232,6 +1245,18 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.BAL_TL.lowestAsk,
                 result: (+paribu.BAL_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'BALUSDT').bidPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+            });
+
+
+        if (paribu.ZIL_TL)
+            pairs.push({
+                title: 'ZIL* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'ZILUSDT').bidPrice,
+                buy: +paribu.ZIL_TL.lowestAsk,
+                result: (+paribu.ZIL_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'ZILUSDT').bidPrice /
                         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
             });
 
