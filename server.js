@@ -140,7 +140,7 @@ setInterval(() => {
         });
 
 
-    fetch('https://coin-serv.herokuapp.com/coinbase')
+    fetch('https://coin-serv.herokuapp.com/v2/coinbase')
         .then(response => response.json())
         .then(data => {
             data.forEach(pair => {
@@ -570,6 +570,62 @@ app.get('/kraken', async (req, res) => {
             kraken.result.USDTEUR.a[0],
     });
 
+    res.send(
+        pairs
+        .sort((a, b) => b.result - a.result)
+        .filter(pair => pair.title && pair.commission && pair.sell && pair.buy && pair.result),
+    );
+});
+
+
+
+async function getWithSymbol(binance, symbol, pairs){
+    try{
+        let commission = 0.0065;
+        let commissionWithBinance = 0.0065;
+        let commissionWithBinanceUSDT = 0.0055;
+
+        let paribu = await fetch('https://v3.paribu.com/app/markets/'+symbol.toLowerCase()+'-tl?interval=1000').then(r => r.json()).catch(x => console.log(x));
+        console.log(paribu);
+            console.log(paribu.data.orderBook.buy);
+
+        let pariBuyPrice = Object.keys(paribu.data.orderBook.buy)[0];
+        console.log(pariBuyPrice);
+            console.log("---------");
+                console.log(symbol + '* - PARIBU');
+
+        console.log(+binance.find(x => x.symbol === symbol+'USDT').askPrice);
+
+        console.log((pariBuyPrice * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === symbol+'USDT').askPrice /
+                    +binance.find(x => x.symbol === 'USDCUSDT').bidPrice));
+
+
+        pairs.push({
+            title: symbol + '* - PARIBU',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === symbol+'USDT').askPrice,
+            sell: +pariBuyPrice,
+            result: (pariBuyPrice * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === symbol+'USDT').askPrice /
+                    +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+        });
+    } catch {}
+}
+
+app.get('/v2/coinbase', async (req, res) => {
+    let pairs = [];
+
+    let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json());
+
+
+    await Promise.all([
+            getWithSymbol(binance, 'DOGE', pairs),
+            getWithSymbol(binance, 'BTT', pairs),
+            getWithSymbol(binance, 'CHZ', pairs),
+            getWithSymbol(binance, 'HOT', pairs),
+            getWithSymbol(binance, 'REEF', pairs)
+        ]);
     res.send(
         pairs
         .sort((a, b) => b.result - a.result)
