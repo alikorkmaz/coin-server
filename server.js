@@ -593,12 +593,13 @@ app.get('/kraken', async (req, res) => {
 
 
 async function getWithSymbol(binance, symbol, pairs){
+    let paribu;
     try{
         let commission = 0.0065;
         let commissionWithBinance = 0.0065;
         let commissionWithBinanceUSDT = 0.0055;
 
-        let paribu = await fetch('https://v3.paribu.com/app/markets/'+symbol.toLowerCase()+'-tl?interval=1000').then(r => r.json()).catch(x => console.log(x));
+        paribu = await fetch('https://v3.paribu.com/app/markets/'+symbol.toLowerCase()+'-tl?interval=1000').then(r => r.json()).catch(x => console.log(x));
 
         let pariBuyPrice = Object.keys(paribu.data.orderBook.buy)[0];
 
@@ -613,15 +614,14 @@ async function getWithSymbol(binance, symbol, pairs){
         });
     } catch {
       if(symbol === 'ZIL') return;
-
+        alarmCaldiMi = 1;
         p.send({
-                message: "HATA ALDIK:" + symbol,
+                message: "HATA ALDIK:" + symbol + JSON.stringify(paribu),
             },
             function(err, result) {
                 console.log(result);
             },
         );
-        alarmCaldiMi = 1;
     }
 }
 
