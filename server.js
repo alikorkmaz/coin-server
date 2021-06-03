@@ -12,6 +12,19 @@ app.use(express.static('public'));
 
 app.use(express.json());
 
+app.get('/tetherTask', async (req, res) => {
+    let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
+    tetherBuy = +paribu.USDT_TL.lowestAsk + tetherMargin;
+    res.send(
+        {}
+    );
+});
+
+setInterval(() => {
+    fetch('https://coin-serv2.herokuapp.com/tetherTask')
+        .then(response => response.json());
+}, 30000);
+
 let alert = [];
 let alertReverse = [];
 
