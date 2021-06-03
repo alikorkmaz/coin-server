@@ -620,11 +620,39 @@ app.get('/v2/coinbase', async (req, res) => {
 
 
     await Promise.all([
-            getWithSymbol(binance, 'DOGE', pairs),
+            getWithSymbol(binance, 'UNI', pairs),
+            getWithSymbol(binance, 'BAL', pairs),
+            getWithSymbol(binance, 'ATM', pairs),
+            getWithSymbol(binance, 'ASR', pairs),
+            getWithSymbol(binance, 'REEF', pairs),
+            getWithSymbol(binance, 'BAND', pairs),
+            getWithSymbol(binance, 'LRC', pairs),
+            getWithSymbol(binance, 'BAR', pairs),
+            getWithSymbol(binance, 'AAVE', pairs),
+            getWithSymbol(binance, 'AVAX', pairs),
+            getWithSymbol(binance, 'OMG', pairs),
+            getWithSymbol(binance, 'RVN', pairs),
+            getWithSymbol(binance, 'XTZ', pairs),
+            getWithSymbol(binance, 'MKR', pairs),
+            getWithSymbol(binance, 'ATOM', pairs),
+            getWithSymbol(binance, 'ONT', pairs),
+            getWithSymbol(binance, 'DOT', pairs),
+            getWithSymbol(binance, 'BTC', pairs),
+            getWithSymbol(binance, 'ETH', pairs),
+            getWithSymbol(binance, 'XRP', pairs),
+            getWithSymbol(binance, 'LTC', pairs),
+            getWithSymbol(binance, 'XLM', pairs),
+            getWithSymbol(binance, 'EOS', pairs),
+            getWithSymbol(binance, 'BAT', pairs),
             getWithSymbol(binance, 'BTT', pairs),
-            getWithSymbol(binance, 'CHZ', pairs),
+            getWithSymbol(binance, 'TRX', pairs),
             getWithSymbol(binance, 'HOT', pairs),
-            getWithSymbol(binance, 'REEF', pairs)
+            getWithSymbol(binance, 'CHZ', pairs),
+            getWithSymbol(binance, 'ADA', pairs),
+            getWithSymbol(binance, 'NEO', pairs),
+            getWithSymbol(binance, 'LINK', pairs),
+            getWithSymbol(binance, 'DOGE', pairs),
+            getWithSymbol(binance, 'WAVES', pairs)
         ]);
     res.send(
         pairs
