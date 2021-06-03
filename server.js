@@ -598,7 +598,15 @@ async function getWithSymbol(binance, symbol, pairs){
                 (+binance.find(x => x.symbol === symbol+'USDT').askPrice /
                     +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
         });
-    } catch {}
+    } catch {
+        p.send({
+                message: "HATA ALDIK:" + symbol,
+            },
+            function(err, result) {
+                console.log(result);
+            },
+        );
+    }
 }
 
 app.get('/v2/coinbase', async (req, res) => {
