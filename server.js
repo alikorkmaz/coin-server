@@ -634,6 +634,19 @@ app.get('/coinbase', async (req, res) => {
 
 
 
+        if (paribu.ALGO_TL)
+            pairs.push({
+                title: 'ALGO* - PARIBU',
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === 'ALGOUSDT').askPrice,
+                sell: +paribu.ALGO_TL.highestBid,
+                result: (+paribu.ALGO_TL.highestBid * (1 - commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'ALGOUSDT').askPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+            });
+
+
+
         if (paribu.ATM_TL)
             pairs.push({
                 title: 'ATM* - PARIBU',
@@ -1323,6 +1336,20 @@ app.get('/coinbasereverse', async (req, res) => {
                     (+binance.find(x => x.symbol === 'LRCUSDT').bidPrice /
                         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
             });
+
+
+
+        if (paribu.ALGO_TL)
+            pairs.push({
+                title: 'ALGO* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'ALGOUSDT').bidPrice,
+                buy: +paribu.ALGO_TL.lowestAsk,
+                result: (+paribu.ALGO_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'ALGOUSDT').bidPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+            });
+
 
 
 
