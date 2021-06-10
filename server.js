@@ -90,6 +90,7 @@ let profitMarginReverse = 0;
 let text = '';
 let myAlarm = 0;
 let alarmCaldiMi = 0;
+let hataAlarmiSustur = 1;
 
 
 setInterval(function(){
@@ -612,7 +613,9 @@ async function getWithSymbol(binance, symbol, pairs){
                 (+binance.find(x => x.symbol === symbol+'USDT').askPrice /
                     +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
         });
-    } catch {
+
+
+
         if (symbol === "DOGE") {
         if (alarmCaldiMi === 1) return;
             alarmCaldiMi = 1;
@@ -627,6 +630,32 @@ async function getWithSymbol(binance, symbol, pairs){
                 },
             );
         }
+
+
+
+
+
+
+        
+    } catch {
+
+
+        // if (symbol === "DOGE") {
+        // if (alarmCaldiMi === 1) return;
+        //     alarmCaldiMi = 1;
+        //     setTimeout(function(){
+        //         alarmCaldiMi = 0;
+        //     }, 30000);
+        //     p.send({
+        //             message: "HATA ALDIK:" + symbol + JSON.stringify(paribu),
+        //         },
+        //         function(err, result) {
+        //             console.log(result);
+        //         },
+        //     );
+        // }
+
+
     }
 }
 
