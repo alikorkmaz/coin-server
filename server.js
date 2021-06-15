@@ -681,6 +681,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'DOGE', pairs),
             getWithSymbol(binance, 'WAVES', pairs),
             getWithSymbol(binance, 'ZIL', pairs),
+            getWithSymbol(binance, 'ENJ', pairs),
             getWithSymbol(binance, 'ALGO', pairs)
         ]);
     res.send(
@@ -730,6 +731,22 @@ app.get('/coinbase', async (req, res) => {
                     (+binance.find(x => x.symbol === 'BALUSDT').askPrice /
                         +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
             });
+
+
+
+
+        if (paribu.ENJ_TL)
+            pairs.push({
+                title: 'ENJ* - PARIBU',
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === 'ENJUSDT').askPrice,
+                sell: +paribu.ENJ_TL.highestBid,
+                result: (+paribu.ENJ_TL.highestBid * (1 - commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'ENJUSDT').askPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+            });
+
+
 
 
 
@@ -1358,6 +1375,18 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.BAL_TL.lowestAsk,
                 result: (+paribu.BAL_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'BALUSDT').bidPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+            });
+
+
+        if (paribu.ENJ_TL)
+            pairs.push({
+                title: 'ENJ* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'ENJUSDT').bidPrice,
+                buy: +paribu.ENJ_TL.lowestAsk,
+                result: (+paribu.ENJ_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'ENJUSDT').bidPrice /
                         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
             });
 
