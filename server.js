@@ -62,10 +62,11 @@ app.get('/alert-reverse', (req, res) => {
 
 //a5ff7dc6e98f9c42ef347e296beaa237
 //547f1508205c1568706666c56bc02f4e
+//dbd68dd34460118330481bafbcc9740d
 
 let kur = 8.5;
 setInterval(() => {
-    fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
+    fetch('http://data.fixer.io/api/latest?access_key=dbd68dd34460118330481bafbcc9740d')
         .then(response => response.json())
         .then(data => {
             kur = data.rates.TRY / data.rates.USD;
@@ -80,7 +81,7 @@ var Push = require('pushover-notifications');
 
 var p = new Push({
     user: 'g6qgivbzbg1nrakurqaaecmwrmcaxj',
-    token: 'aqoyrmbrtmau2q7jfjobgo6p7sa4om',
+    token: 'aimiivzn6eh82mih6n21vu347aneum',
 });
 
 let profitMargin = 0.1;
@@ -613,29 +614,7 @@ async function getWithSymbol(binance, symbol, pairs){
                 (+binance.find(x => x.symbol === symbol+'USDT').askPrice /
                     +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
         });
-
-
-
-
-
     } catch {
-
-
-        if (symbol === "DOGE") {
-        if (alarmCaldiMi === 1) return;
-            alarmCaldiMi = 1;
-            setTimeout(function(){
-                alarmCaldiMi = 0;
-            }, 30000);
-            p.send({
-                    message: "HATA ALDIK:" + symbol + JSON.stringify(paribu),
-                },
-                function(err, result) {
-                    console.log(result);
-                },
-            );
-        }
-
 
     }
 }
@@ -684,6 +663,26 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'ENJ', pairs),
             getWithSymbol(binance, 'ALGO', pairs)
         ]);
+
+
+
+        if (pairs.length < 3) {
+        if (alarmCaldiMi === 1) return;
+            alarmCaldiMi = 1;
+            setTimeout(function(){
+                alarmCaldiMi = 0;
+            }, 30000);
+            p.send({
+                    message: "HATA ALDIK:" + pairs.length,
+                },
+                function(err, result) {
+                    console.log(result);
+                },
+            );
+        }
+
+
+
     res.send(
         pairs
         .sort((a, b) => b.result - a.result)
