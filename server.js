@@ -661,6 +661,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'WAVES', pairs),
             getWithSymbol(binance, 'ZIL', pairs),
             getWithSymbol(binance, 'ENJ', pairs),
+            getWithSymbol(binance, 'THETA', pairs),
             getWithSymbol(binance, 'ALGO', pairs)
         ]);
 
@@ -1350,6 +1351,18 @@ app.get('/coinbasereverse', async (req, res) => {
 
 
     if (paribu) {
+
+
+        if (paribu.THETA_TL)
+            pairs.push({
+                title: 'THETA* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'THETAUSDT').bidPrice,
+                buy: +paribu.THETA_TL.lowestAsk,
+                result: (+paribu.THETA_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'THETAUSDT').bidPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+            });
 
 
 
