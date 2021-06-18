@@ -608,6 +608,19 @@ app.get('/coinbase', async (req, res) => {
 
 
 
+        if (paribu.THETA_TL)
+            pairs.push({
+                title: 'THETA* - PARIBU',
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === 'THETAUSDT').askPrice,
+                sell: +paribu.THETA_TL.highestBid,
+                result: (+paribu.THETA_TL.highestBid * (1 - commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'THETAUSDT').askPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+            });
+
+
+
         if (paribu.ZIL_TL)
             pairs.push({
                 title: 'ZIL* - PARIBU',
@@ -1258,6 +1271,19 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.BAL_TL.lowestAsk,
                 result: (+paribu.BAL_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'BALUSDT').bidPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+            });
+
+
+
+        if (paribu.THETA_TL)
+            pairs.push({
+                title: 'THETA* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'THETAUSDT').bidPrice,
+                buy: +paribu.THETA_TL.lowestAsk,
+                result: (+paribu.THETA_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'THETAUSDT').bidPrice /
                         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
             });
 
