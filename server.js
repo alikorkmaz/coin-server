@@ -607,6 +607,21 @@ app.get('/coinbase', async (req, res) => {
             });
 
 
+                if (paribu.OGN_TL)
+            pairs.push({
+                title: 'OGN* - PARIBU',
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === 'OGNUSDT').askPrice,
+                sell: +paribu.OGN_TL.highestBid,
+                result: (+paribu.OGN_TL.highestBid * (1 - commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'OGNUSDT').askPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+            });
+
+
+
+
+
 
         if (paribu.THETA_TL)
             pairs.push({
@@ -1324,6 +1339,19 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.ASR_TL.lowestAsk,
                 result: (+paribu.ASR_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'ASRUSDT').bidPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+            });
+
+
+
+        if (paribu.OGN_TL)
+            pairs.push({
+                title: 'OGN* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'OGNUSDT').bidPrice,
+                buy: +paribu.OGN_TL.lowestAsk,
+                result: (+paribu.OGN_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'OGNUSDT').bidPrice /
                         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
             });
 
