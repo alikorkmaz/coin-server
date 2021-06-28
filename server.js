@@ -92,6 +92,7 @@ let text = '';
 let myAlarm = 0;
 let alarmCaldiMi = 0;
 let hataAlarmiSustur = 1;
+let ticksizAlarm= 0.30;
 
 
 setInterval(function(){
@@ -151,6 +152,26 @@ setInterval(() => {
                     }, 30000);
                     return;
                 }
+
+                if (
+                    pair.result < kur - ticksizAlarm &&
+                    text === '' &&
+                    alertReverse.some(title => title === pair.title)
+                ) {
+                    text = "ticksizTersAlarm: " + pair.title + ": " + pair.result.toString().substring(0, 5);
+                    p.send({
+                            message: text,
+                        },
+                        function(err, result) {
+                            console.log(result);
+                        },
+                    );
+                    alarmCaldiMi = 1;
+                    setTimeout(function(){
+                        alarmCaldiMi = 0;
+                    }, 30000);
+                    return;
+                }
             }); 
         });
 
@@ -196,10 +217,29 @@ setInterval(() => {
                         }, 30000);
                         return;
                     }
-
-
-
                 }
+
+                if (
+                    pair.result > kur + ticksizAlarm &&
+                    text === '' &&
+                    !alert.some(title => title === pair.title)
+                ) {
+                    text = "ticksizAlarm: " + pair.title + ": " + pair.result.toString().substring(0, 5) + " (sell:" + pair.sell.toString().substring(0, 6) + ")";
+                    p.send({
+                            message: text,
+                        },
+                        function(err, result) {
+                            console.log(result);
+                        },
+                    );
+                    alarmCaldiMi = 1;
+                    setTimeout(function(){
+                        alarmCaldiMi = 0;
+                    }, 30000);
+                    return;
+                }
+
+
             });
         });
 
@@ -224,6 +264,9 @@ app.get('/', (req, res) => {
         profitMargin = +req.query.profit
         myAlarm = 1;
     }
+    if (req.query.ticksizAlarm) {
+        ticksizAlarm = +req.query.ticksizAlarm
+    }
     if (req.query.tetherMargin) {
         tetherMargin = +req.query.tetherMargin
     }
@@ -232,13 +275,15 @@ app.get('/', (req, res) => {
             profitMargin: profitMargin,
             tetherBuyAlertActive: tetherBuy,
             currentAlert: +profitMargin + kur,
-            tetherMargin: tetherMargin
+            tetherMargin: tetherMargin,
+            ticksizAlarm: ticksizAlarm
         });
 
     } else {
         res.send({
             profitMargin: profitMargin,
-            currentAlert: +profitMargin + kur
+            currentAlert: +profitMargin + kur,
+            ticksizAlarm: ticksizAlarm
         });
     }
 });
