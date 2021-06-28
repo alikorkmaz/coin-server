@@ -156,7 +156,7 @@ setInterval(() => {
                 if (
                     pair.result < tetherBuy - ticksizAlarm &&
                     text === '' &&
-                    alertReverse.some(title => title === pair.title)
+                    !alertReverse.some(title => title === pair.title)
                 ) {
                     text = "ticksizTersAlarm: " + pair.title + ": " + pair.result.toString().substring(0, 5);
                     p.send({
