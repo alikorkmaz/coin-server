@@ -134,7 +134,7 @@ setInterval(() => {
         .then(data => {
             data.forEach(pair => {
                 if (
-                    pair.result < kur - profitMarginReverse &&
+                    pair.result < tetherBuy - profitMarginReverse &&
                     text === '' &&
                     alertReverse.some(title => title === pair.title)
                 ) {
@@ -154,7 +154,7 @@ setInterval(() => {
                 }
 
                 if (
-                    pair.result < kur - ticksizAlarm &&
+                    pair.result < tetherBuy - ticksizAlarm &&
                     text === '' &&
                     alertReverse.some(title => title === pair.title)
                 ) {
@@ -220,7 +220,7 @@ setInterval(() => {
                 }
 
                 if (
-                    pair.result > kur + ticksizAlarm &&
+                    pair.result > tetherBuy + ticksizAlarm &&
                     text === '' &&
                     !alert.some(title => title === pair.title)
                 ) {
