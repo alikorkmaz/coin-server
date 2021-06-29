@@ -673,12 +673,9 @@ app.get('/v2/coinbase', async (req, res) => {
     await Promise.all([
             getWithSymbol(binance, 'UNI', pairs),
             getWithSymbol(binance, 'BAL', pairs),
-            getWithSymbol(binance, 'ATM', pairs),
-            getWithSymbol(binance, 'ASR', pairs),
             getWithSymbol(binance, 'REEF', pairs),
             getWithSymbol(binance, 'BAND', pairs),
             getWithSymbol(binance, 'LRC', pairs),
-            getWithSymbol(binance, 'BAR', pairs),
             getWithSymbol(binance, 'AAVE', pairs),
             getWithSymbol(binance, 'AVAX', pairs),
             getWithSymbol(binance, 'OMG', pairs),
@@ -708,7 +705,8 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'ENJ', pairs),
             getWithSymbol(binance, 'THETA', pairs),
             getWithSymbol(binance, 'OGN', pairs),
-            getWithSymbol(binance, 'ALGO', pairs)
+            getWithSymbol(binance, 'ALGO', pairs),
+            getWithSymbol(binance, 'GRT', pairs),
         ]);
 
 
@@ -1399,6 +1397,19 @@ app.get('/coinbasereverse', async (req, res) => {
     if (paribu) {
 
 
+
+        if (paribu.GRT_TL)
+            pairs.push({
+                title: 'GRT* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'GRTUSDT').bidPrice,
+                buy: +paribu.GRT_TL.lowestAsk,
+                result: (+paribu.GRT_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'GRTUSDT').bidPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+            });
+
+
         if (paribu.THETA_TL)
             pairs.push({
                 title: 'THETA* - PARIBU',
@@ -1473,33 +1484,6 @@ app.get('/coinbasereverse', async (req, res) => {
 
 
 
-
-        if (paribu.ATM_TL)
-            pairs.push({
-                title: 'ATM* - PARIBU',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'ATMUSDT').bidPrice,
-                buy: +paribu.ATM_TL.lowestAsk,
-                result: (+paribu.ATM_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ATMUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
-            });
-
-
-
-
-        if (paribu.ASR_TL)
-            pairs.push({
-                title: 'ASR* - PARIBU',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'ASRUSDT').bidPrice,
-                buy: +paribu.ASR_TL.lowestAsk,
-                result: (+paribu.ASR_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ASRUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
-            });
-
-
         if (paribu.REEF_TL)
             pairs.push({
                 title: 'REEF* - PARIBU',
@@ -1532,21 +1516,6 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.LRC_TL.lowestAsk,
                 result: (+paribu.LRC_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'LRCUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
-            });
-
-
-
-
-
-        if (paribu.BAR_TL && binance.find(x => x.symbol === 'BARUSDT'))
-            pairs.push({
-                title: 'BAR* - PARIBU',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'BARUSDT').bidPrice,
-                buy: +paribu.BAR_TL.lowestAsk,
-                result: (+paribu.BAR_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'BARUSDT').bidPrice /
                         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
             });
 
@@ -1638,8 +1607,6 @@ app.get('/coinbasereverse', async (req, res) => {
                     (+binance.find(x => x.symbol === 'RVNUSDT').bidPrice /
                         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
             });
-
-
 
 
         if (paribu.ATOM_TL)
@@ -1830,15 +1797,6 @@ app.get('/coinbasereverse', async (req, res) => {
                             binance.find(x => x.symbol === 'BTCUSDT').bidPrice) /
                         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
             });
-        
-        pairs.push({
-            title: 'USDT* - PARIBU',
-            commission: commissionWithBinanceUSDT,
-            sell: 1 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice,
-            buy: +paribu.USDT_TL.lowestAsk,
-            result: (+paribu.USDT_TL.lowestAsk * (1 + commissionWithBinanceUSDT)) /
-                (1 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
-        });
     }
 
 
