@@ -264,8 +264,11 @@ setInterval(() => {
                 }
 
                 else {
-
-
+                    if (alarmCaldiMi === 1) return;
+                    alarmCaldiMi = 1;
+                    setTimeout(function(){
+                        alarmCaldiMi = 0;
+                    }, 30000);
                     p.send({
                             message: "bi bokluk var",
                         },
@@ -273,10 +276,7 @@ setInterval(() => {
                             console.log(result);
                         },
                     );
-                    alarmCaldiMi = 1;
-                    setTimeout(function(){
-                        alarmCaldiMi = 0;
-                    }, 30000);
+                    
                     return;
 
 
