@@ -200,7 +200,7 @@ setInterval(() => {
                 if(tetherBuy > 0 && pair.book && pair.book != {}){
                     let sellAt = (tetherBuy * pair.sell) / pair.result;
                     let bookSum = getBookSum(sellAt, pair.book);
-                    if(bookSum > 10000){
+                    if(bookSum > 20000){
                         
 
 
