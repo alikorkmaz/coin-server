@@ -267,6 +267,7 @@ setInterval(() => {
 
 function getBookSum(sellAt, book) {
     const sum = Object.keys(book).reduce((sum, key) => {
+                  if(sellAt < Number(key)) return 0;
                   return sum + book[key] * Number(key);
                 }, 0);
     return sum;
