@@ -199,7 +199,7 @@ setInterval(() => {
                                 text === '' &&
                                 alert.some(title => title === pair.title)
                             ) {
-                                text = pair.title + ": " + pair.result.toString().substring(0, 5) + " (sell:" + pair.sell.toString().substring(0, 6) + ")";
+                                text = pair.title + ": " + pair.result.toString().substring(0, 5) + " (sell:" + sellAt.toString().substring(0, 6) + ") Total: " + bookSum;
                                 if (profitMargin == -1) {
                                     if (pair.result > tetherBuy) {
                                         alarmCaldiMi = 1;
@@ -261,6 +261,26 @@ setInterval(() => {
 
 
                     }
+                }
+
+                else {
+
+
+                    p.send({
+                            message: "bi bokluk var",
+                        },
+                        function(err, result) {
+                            console.log(result);
+                        },
+                    );
+                    alarmCaldiMi = 1;
+                    setTimeout(function(){
+                        alarmCaldiMi = 0;
+                    }, 30000);
+                    return;
+
+
+
                 }
 
 
