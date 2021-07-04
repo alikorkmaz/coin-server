@@ -188,70 +188,83 @@ setInterval(() => {
                 if(tetherBuy > 0 && pair.book && pair.book != {}){
                     let sellAt = (tetherBuy * pair.sell) / pair.result;
                     let bookSum = getBookSum(sellAt, pair.book);
-                    if(bookSum < 10000){
-                        return;
-                    }
-                }
-
-
-                if (
-                    pair.result > kur + profitMargin &&
-                    text === '' &&
-                    alert.some(title => title === pair.title)
-                ) {
-                    text = pair.title + ": " + pair.result.toString().substring(0, 5) + " (sell:" + pair.sell.toString().substring(0, 6) + ")";
-                    if (profitMargin == -1) {
-                        if (pair.result > tetherBuy) {
-                            alarmCaldiMi = 1;
-                            setTimeout(function(){
-                                alarmCaldiMi = 0;
-                            }, 30000);
-                            p.send({
-                                    message: text,
-                                },
-                                function(err, result) {
-                                    console.log(result);
-                                },
-                            );
-                            return;
-                        }
+                    if(bookSum > 10000){
                         
-                    } else {
 
-                        p.send({
-                                message: text,
-                            },
-                            function(err, result) {
-                                console.log(result);
-                            },
-                        );
-                        alarmCaldiMi = 1;
-                        setTimeout(function(){
-                            alarmCaldiMi = 0;
-                        }, 30000);
-                        return;
+
+
+
+                        if (
+                                pair.result > kur + profitMargin &&
+                                text === '' &&
+                                alert.some(title => title === pair.title)
+                            ) {
+                                text = pair.title + ": " + pair.result.toString().substring(0, 5) + " (sell:" + pair.sell.toString().substring(0, 6) + ")";
+                                if (profitMargin == -1) {
+                                    if (pair.result > tetherBuy) {
+                                        alarmCaldiMi = 1;
+                                        setTimeout(function(){
+                                            alarmCaldiMi = 0;
+                                        }, 30000);
+                                        p.send({
+                                                message: text,
+                                            },
+                                            function(err, result) {
+                                                console.log(result);
+                                            },
+                                        );
+                                        return;
+                                    }
+                                    
+                                } else {
+
+                                    p.send({
+                                            message: text,
+                                        },
+                                        function(err, result) {
+                                            console.log(result);
+                                        },
+                                    );
+                                    alarmCaldiMi = 1;
+                                    setTimeout(function(){
+                                        alarmCaldiMi = 0;
+                                    }, 30000);
+                                    return;
+                                }
+                            }
+
+                            if (
+                                pair.result > tetherBuy + ticksizAlarm &&
+                                text === '' &&
+                                !alert.some(title => title === pair.title)
+                            ) {
+                                text = "ticksizAlarm: " + pair.title + ": " + pair.result.toString().substring(0, 5) + " (sell:" + pair.sell.toString().substring(0, 6) + ")";
+                                p.send({
+                                        message: text,
+                                    },
+                                    function(err, result) {
+                                        console.log(result);
+                                    },
+                                );
+                                alarmCaldiMi = 1;
+                                setTimeout(function(){
+                                    alarmCaldiMi = 0;
+                                }, 30000);
+                                return;
+                            }
+
+
+
+
+
+
+
+
                     }
                 }
 
-                if (
-                    pair.result > tetherBuy + ticksizAlarm &&
-                    text === '' &&
-                    !alert.some(title => title === pair.title)
-                ) {
-                    text = "ticksizAlarm: " + pair.title + ": " + pair.result.toString().substring(0, 5) + " (sell:" + pair.sell.toString().substring(0, 6) + ")";
-                    p.send({
-                            message: text,
-                        },
-                        function(err, result) {
-                            console.log(result);
-                        },
-                    );
-                    alarmCaldiMi = 1;
-                    setTimeout(function(){
-                        alarmCaldiMi = 0;
-                    }, 30000);
-                    return;
-                }
+
+                
 
 
             });
@@ -267,7 +280,7 @@ setInterval(() => {
 
 function getBookSum(sellAt, book) {
     const sum = Object.keys(book).reduce((sum, key) => {
-                  if(sellAt < Number(key)) return 0;
+                  if(sellAt > Number(key)) return 0;
                   return sum + book[key] * Number(key);
                 }, 0);
     return sum;
