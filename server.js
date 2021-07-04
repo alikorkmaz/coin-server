@@ -90,6 +90,12 @@ var pp = new Push({
     token: 'acch1inzyi21vzny7ow1io4fx6rc6u',
 });
 
+var cc = new Push({
+    user: 'g7dfgagzdk8ngeknnbxz1trgwjzk79',
+    token: 'aqoyrmbrtmau2q7jfjobgo6p7sa4om',
+});
+
+
 let profitMargin = 0.1;
 let tetherBuy = -1;
 let tetherMargin = 0;
@@ -213,15 +219,8 @@ setInterval(() => {
                                             alarmCaldiMi = 0;
                                         }, 30000);
 
-                                        pp.send({
-                                                message: text,
-                                            },
-                                            function(err, result) {
-                                                console.log(result);
-                                            },
-                                        );
                                         setTimeout(function(){
-                                                p.send({
+                                                cc.send({
                                                     message: text,
                                                 },
                                                 function(err, result) {
@@ -230,9 +229,13 @@ setInterval(() => {
                                             );
                                         }, 3000);
 
-                                        
-
-
+                                        pp.send({
+                                                message: text,
+                                            },
+                                            function(err, result) {
+                                                console.log(result);
+                                            },
+                                        );
 
 
                                         return;
