@@ -154,7 +154,7 @@ setInterval(() => {
                 }
 
                 if (
-                    pair.result < tetherBuy - ticksizAlarm &&
+                    pair.result < tetherBuy - (ticksizAlarm*1.5) &&
                     text === '' &&
                     !alertReverse.some(title => title === pair.title)
                 ) {
@@ -179,7 +179,21 @@ setInterval(() => {
     fetch('https://coin-serv2.herokuapp.com/v2/coinbase')
         .then(response => response.json())
         .then(data => {
+
+
             data.forEach(pair => {
+
+
+
+                if(tetherBuy > 0 && pair.book && pair.book != {}){
+                    let sellAt = (tetherBuy * pair.sell) / pair.result;
+                    let bookSum = getBookSum(sellAt, pair.book);
+                    if(bookSum < 10000){
+                        return;
+                    }
+                }
+
+
                 if (
                     pair.result > kur + profitMargin &&
                     text === '' &&
@@ -246,6 +260,26 @@ setInterval(() => {
 
 
 }, 5000);
+
+
+
+
+
+function getBookSum(sellAt, book) {
+    const sum = Object.keys(book).reduce((sum, key) => {
+                  return sum + book[key] * Number(key);
+                }, 0);
+    return sum;
+}
+
+
+
+
+
+
+
+
+
 
 setTimeout(() => {
     fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
@@ -649,6 +683,8 @@ async function getWithSymbol(binance, symbol, pairs){
         paribu = await fetch('https://v3.paribu.com/app/markets/'+symbol.toLowerCase()+'-tl?interval=1000').then(r => r.json()).catch(x => console.log(x));
 
         let pariBuyPrice = Object.keys(paribu.data.orderBook.buy)[0];
+        let orderBook = paribu.data.orderBook.buy || {};
+
 
         pairs.push({
             title: symbol + '* - PARIBU',
@@ -656,8 +692,8 @@ async function getWithSymbol(binance, symbol, pairs){
             buy: +binance.find(x => x.symbol === symbol+'USDT').askPrice,
             sell: +pariBuyPrice,
             result: (pariBuyPrice * (1 - commissionWithBinance)) /
-                (+binance.find(x => x.symbol === symbol+'USDT').askPrice /
-                    +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+                +binance.find(x => x.symbol === symbol+'USDT').askPrice,
+            book: orderBook
         });
     } catch {
 
