@@ -607,6 +607,18 @@ app.get('/coinbase', async (req, res) => {
             });
 
 
+                if (paribu.MATIC_TL)
+            pairs.push({
+                title: 'MATIC* - PARIBU',
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === 'MATICUSDT').askPrice,
+                sell: +paribu.MATIC_TL.highestBid,
+                result: (+paribu.MATIC_TL.highestBid * (1 - commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'MATICUSDT').askPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+            });
+
+
                 if (paribu.OGN_TL)
             pairs.push({
                 title: 'OGN* - PARIBU',
@@ -1479,6 +1491,18 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.AVAX_TL.lowestAsk,
                 result: (+paribu.AVAX_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'AVAXUSDT').bidPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+            });
+
+
+                if (paribu.MATIC_TL)
+            pairs.push({
+                title: 'MATIC* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'MATICUSDT').bidPrice,
+                buy: +paribu.MATIC_TL.lowestAsk,
+                result: (+paribu.MATIC_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'MATICUSDT').bidPrice /
                         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
             });
 
