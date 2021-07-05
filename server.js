@@ -802,6 +802,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'OGN', pairs),
             getWithSymbol(binance, 'ALGO', pairs),
             getWithSymbol(binance, 'GRT', pairs),
+            getWithSymbol(binance, 'MATIC', pairs),
         ]);
 
 
@@ -1500,8 +1501,18 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'GRTUSDT').bidPrice,
                 buy: +paribu.GRT_TL.lowestAsk,
                 result: (+paribu.GRT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'GRTUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'GRTUSDT').bidPrice )
+            });
+
+
+        if (paribu.MATIC_TL)
+            pairs.push({
+                title: 'MATIC* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'MATICUSDT').bidPrice,
+                buy: +paribu.MATIC_TL.lowestAsk,
+                result: (+paribu.MATIC_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'MATICUSDT').bidPrice )
             });
 
 
@@ -1512,8 +1523,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'THETAUSDT').bidPrice,
                 buy: +paribu.THETA_TL.lowestAsk,
                 result: (+paribu.THETA_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'THETAUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'THETAUSDT').bidPrice )
             });
 
         if (paribu.OGN_TL)
@@ -1523,8 +1533,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'OGNUSDT').bidPrice,
                 buy: +paribu.OGN_TL.lowestAsk,
                 result: (+paribu.OGN_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'OGNUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'OGNUSDT').bidPrice )
             });
 
 
@@ -1537,8 +1546,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'ZILUSDT').bidPrice,
                 buy: +paribu.ZIL_TL.lowestAsk,
                 result: (+paribu.ZIL_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ZILUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'ZILUSDT').bidPrice )
             });
 
 
@@ -1549,8 +1557,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'BALUSDT').bidPrice,
                 buy: +paribu.BAL_TL.lowestAsk,
                 result: (+paribu.BAL_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'BALUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'BALUSDT').bidPrice )
             });
 
 
@@ -1561,8 +1568,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'ENJUSDT').bidPrice,
                 buy: +paribu.ENJ_TL.lowestAsk,
                 result: (+paribu.ENJ_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ENJUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'ENJUSDT').bidPrice )
             });
 
 
@@ -1573,8 +1579,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'ALGOUSDT').bidPrice,
                 buy: +paribu.ALGO_TL.lowestAsk,
                 result: (+paribu.ALGO_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ALGOUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'ALGOUSDT').bidPrice )
             });
 
 
@@ -1586,8 +1591,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'REEFUSDT').bidPrice,
                 buy: +paribu.REEF_TL.lowestAsk,
                 result: (+paribu.REEF_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'REEFUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'REEFUSDT').bidPrice )
             });
 
         if (paribu.BAND_TL)
@@ -1597,8 +1601,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'BANDUSDT').bidPrice,
                 buy: +paribu.BAND_TL.lowestAsk,
                 result: (+paribu.BAND_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'BANDUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'BANDUSDT').bidPrice )
             });
 
 
@@ -1610,8 +1613,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'LRCUSDT').bidPrice,
                 buy: +paribu.LRC_TL.lowestAsk,
                 result: (+paribu.LRC_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'LRCUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'LRCUSDT').bidPrice )
             });
 
 
@@ -1622,8 +1624,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'UNIUSDT').bidPrice,
                 buy: +paribu.UNI_TL.lowestAsk,
                 result: (+paribu.UNI_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'UNIUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'UNIUSDT').bidPrice )
             });
 
         if (paribu.AAVE_TL)
@@ -1633,8 +1634,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'AAVEUSDT').bidPrice,
                 buy: +paribu.AAVE_TL.lowestAsk,
                 result: (+paribu.AAVE_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'AAVEUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'AAVEUSDT').bidPrice )
             });
 
 
@@ -1646,8 +1646,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'AVAXUSDT').bidPrice,
                 buy: +paribu.AVAX_TL.lowestAsk,
                 result: (+paribu.AVAX_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'AVAXUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'AVAXUSDT').bidPrice )
             });
 
 
@@ -1658,8 +1657,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'OMGUSDT').bidPrice,
                 buy: +paribu.OMG_TL.lowestAsk,
                 result: (+paribu.OMG_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'OMGUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'OMGUSDT').bidPrice )
             });
 
 
@@ -1672,8 +1670,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'XTZUSDT').bidPrice,
                 buy: +paribu.XTZ_TL.lowestAsk,
                 result: (+paribu.XTZ_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'XTZUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'XTZUSDT').bidPrice )
             });
 
 
@@ -1686,8 +1683,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'MKRUSDT').bidPrice,
                 buy: +paribu.MKR_TL.lowestAsk,
                 result: (+paribu.MKR_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'MKRUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'MKRUSDT').bidPrice )
             });
 
 
@@ -1699,8 +1695,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'RVNUSDT').bidPrice,
                 buy: +paribu.RVN_TL.lowestAsk,
                 result: (+paribu.RVN_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'RVNUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'RVNUSDT').bidPrice )
             });
 
 
@@ -1711,8 +1706,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'ATOMUSDT').bidPrice,
                 buy: +paribu.ATOM_TL.lowestAsk,
                 result: (+paribu.ATOM_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ATOMUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'ATOMUSDT').bidPrice )
             });
 
 
@@ -1723,8 +1717,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'DOTUSDT').bidPrice,
                 buy: +paribu.DOT_TL.lowestAsk,
                 result: (+paribu.DOT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'DOTUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'DOTUSDT').bidPrice )
             });
 
 
@@ -1736,8 +1729,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'ONTUSDT').bidPrice,
                 buy: +paribu.ONT_TL.lowestAsk,
                 result: (+paribu.ONT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ONTUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'ONTUSDT').bidPrice )
             });
 
 
@@ -1749,8 +1741,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'BTCUSDT').bidPrice,
             buy: +paribu.BTC_TL.lowestAsk,
             result: (+paribu.BTC_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'BTCUSDT').bidPrice /
-                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                (+binance.find(x => x.symbol === 'BTCUSDT').bidPrice )
         });
         pairs.push({
             title: 'ETH* - PARIBU',
@@ -1758,8 +1749,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'ETHUSDT').bidPrice,
             buy: +paribu.ETH_TL.lowestAsk,
             result: (+paribu.ETH_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'ETHUSDT').bidPrice /
-                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                (+binance.find(x => x.symbol === 'ETHUSDT').bidPrice )
         });
         pairs.push({
             title: 'XRP* - PARIBU',
@@ -1767,8 +1757,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'XRPUSDT').bidPrice,
             buy: +paribu.XRP_TL.lowestAsk,
             result: (+paribu.XRP_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'XRPUSDT').bidPrice /
-                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                (+binance.find(x => x.symbol === 'XRPUSDT').bidPrice )
         });
         pairs.push({
             title: 'LTC* - PARIBU',
@@ -1776,8 +1765,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'LTCUSDT').bidPrice,
             buy: +paribu.LTC_TL.lowestAsk,
             result: (+paribu.LTC_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'LTCUSDT').bidPrice /
-                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                (+binance.find(x => x.symbol === 'LTCUSDT').bidPrice )
         });
         pairs.push({
             title: 'XLM* - PARIBU',
@@ -1785,8 +1773,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'XLMUSDT').bidPrice,
             buy: +paribu.XLM_TL.lowestAsk,
             result: (+paribu.XLM_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'XLMUSDT').bidPrice /
-                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                (+binance.find(x => x.symbol === 'XLMUSDT').bidPrice )
         });
         pairs.push({
             title: 'EOS* - PARIBU',
@@ -1794,8 +1781,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'EOSUSDT').bidPrice,
             buy: +paribu.EOS_TL.lowestAsk,
             result: (+paribu.EOS_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'EOSUSDT').bidPrice /
-                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                (+binance.find(x => x.symbol === 'EOSUSDT').bidPrice )
         });
         pairs.push({
             title: 'BAT* - PARIBU',
@@ -1803,8 +1789,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'BATUSDT').bidPrice,
             buy: +paribu.BAT_TL.lowestAsk,
             result: (+paribu.BAT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'BATUSDT').bidPrice /
-                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                (+binance.find(x => x.symbol === 'BATUSDT').bidPrice )
         });
         pairs.push({
             title: 'BTT* - PARIBU',
@@ -1812,8 +1797,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'BTTUSDT').bidPrice,
             buy: +paribu.BTT_TL.lowestAsk,
             result: (+paribu.BTT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'BTTUSDT').bidPrice /
-                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                (+binance.find(x => x.symbol === 'BTTUSDT').bidPrice )
         });
         pairs.push({
             title: 'TRX* - PARIBU',
@@ -1821,8 +1805,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'TRXUSDT').bidPrice,
             buy: +paribu.TRX_TL.lowestAsk,
             result: (+paribu.TRX_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'TRXUSDT').bidPrice /
-                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                (+binance.find(x => x.symbol === 'TRXUSDT').bidPrice )
         });
         pairs.push({
             title: 'HOT* - PARIBU',
@@ -1830,8 +1813,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'HOTUSDT').bidPrice,
             buy: +paribu.HOT_TL.lowestAsk,
             result: (+paribu.HOT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'HOTUSDT').bidPrice /
-                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                (+binance.find(x => x.symbol === 'HOTUSDT').bidPrice )
         });
         pairs.push({
             title: 'CHZ* - PARIBU',
@@ -1839,8 +1821,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'CHZUSDT').bidPrice,
             buy: +paribu.CHZ_TL.lowestAsk,
             result: (+paribu.CHZ_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'CHZUSDT').bidPrice /
-                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                (+binance.find(x => x.symbol === 'CHZUSDT').bidPrice )
         });
         pairs.push({
             title: 'ADA* - PARIBU',
@@ -1848,8 +1829,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'ADAUSDT').bidPrice,
             buy: +paribu.ADA_TL.lowestAsk,
             result: (+paribu.ADA_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'ADAUSDT').bidPrice /
-                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                (+binance.find(x => x.symbol === 'ADAUSDT').bidPrice )
         });
         pairs.push({
             title: 'NEO* - PARIBU',
@@ -1857,8 +1837,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'NEOUSDT').bidPrice,
             buy: +paribu.NEO_TL.lowestAsk,
             result: (+paribu.NEO_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'NEOUSDT').bidPrice /
-                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                (+binance.find(x => x.symbol === 'NEOUSDT').bidPrice )
         });
         pairs.push({
             title: 'LINK* - PARIBU',
@@ -1866,8 +1845,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'LINKUSDT').bidPrice,
             buy: +paribu.LINK_TL.lowestAsk,
             result: (+paribu.LINK_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'LINKUSDT').bidPrice /
-                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                (+binance.find(x => x.symbol === 'LINKUSDT').bidPrice )
         });
         if (binance.some(x => x.symbol === 'DOGEUSDT'))
             pairs.push({
@@ -1876,8 +1854,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'DOGEUSDT').bidPrice,
                 buy: +paribu.DOGE_TL.lowestAsk,
                 result: (+paribu.DOGE_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'DOGEUSDT').bidPrice /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                    (+binance.find(x => x.symbol === 'DOGEUSDT').bidPrice )
             });
 
 
@@ -1889,8 +1866,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.WAVES_TL.lowestAsk,
                 result: (+paribu.WAVES_TL.lowestAsk * (1 + commissionWithBinance)) /
                     ((binance.find(x => x.symbol === 'WAVESBTC').bidPrice *
-                            binance.find(x => x.symbol === 'BTCUSDT').bidPrice) /
-                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+                            binance.find(x => x.symbol === 'BTCUSDT').bidPrice) )
             });
     }
 
@@ -1903,8 +1879,7 @@ app.get('/coinbasereverse', async (req, res) => {
     //         sell: +binance.find(x => x.symbol === 'ADAUSDT').bidPrice,
     //         buy: +btcturk.find(x => x.pair === 'ADATRY').ask,
     //         result: (+btcturk.find(x => x.pair === 'ADATRY').ask * (1 + commissionWithBinance)) /
-    //             (+binance.find(x => x.symbol === 'ADAUSDT').bidPrice /
-    //                 +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    //             (+binance.find(x => x.symbol === 'ADAUSDT').bidPrice )
     //     });
 
 
@@ -1915,8 +1890,7 @@ app.get('/coinbasereverse', async (req, res) => {
     //         sell: +binance.find(x => x.symbol === 'ATOMUSDT').bidPrice,
     //         buy: +btcturk.find(x => x.pair === 'ATOMTRY').ask,
     //         result: (+btcturk.find(x => x.pair === 'ATOMTRY').ask * (1 + commissionWithBinance)) /
-    //             (+binance.find(x => x.symbol === 'ATOMUSDT').bidPrice /
-    //                 +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    //             (+binance.find(x => x.symbol === 'ATOMUSDT').bidPrice )
     //     });
 
 
@@ -1927,8 +1901,7 @@ app.get('/coinbasereverse', async (req, res) => {
     //         sell: +binance.find(x => x.symbol === 'DASHUSDT').bidPrice,
     //         buy: +btcturk.find(x => x.pair === 'DASHTRY').ask,
     //         result: (+btcturk.find(x => x.pair === 'DASHTRY').ask * (1 + commissionWithBinance)) /
-    //             (+binance.find(x => x.symbol === 'DASHUSDT').bidPrice /
-    //                 +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    //             (+binance.find(x => x.symbol === 'DASHUSDT').bidPrice )
     //     });
 
 
@@ -1941,8 +1914,7 @@ app.get('/coinbasereverse', async (req, res) => {
     //         sell: +binance.find(x => x.symbol === 'DOTUSDT').bidPrice,
     //         buy: +btcturk.find(x => x.pair === 'DOTTRY').ask,
     //         result: (+btcturk.find(x => x.pair === 'DOTTRY').ask * (1 + commissionWithBinance)) /
-    //             (+binance.find(x => x.symbol === 'DOTUSDT').bidPrice /
-    //                 +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    //             (+binance.find(x => x.symbol === 'DOTUSDT').bidPrice )
     //     });
 
 
@@ -1953,8 +1925,7 @@ app.get('/coinbasereverse', async (req, res) => {
     //         sell: +binance.find(x => x.symbol === 'AVAXUSDT').bidPrice,
     //         buy: +btcturk.find(x => x.pair === 'AVAXTRY').ask,
     //         result: (+btcturk.find(x => x.pair === 'AVAXTRY').ask * (1 + commissionWithBinance)) /
-    //             (+binance.find(x => x.symbol === 'AVAXUSDT').bidPrice /
-    //                 +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    //             (+binance.find(x => x.symbol === 'AVAXUSDT').bidPrice )
     //     });
 
 
@@ -1966,8 +1937,7 @@ app.get('/coinbasereverse', async (req, res) => {
     //         sell: +binance.find(x => x.symbol === 'EOSUSDT').bidPrice,
     //         buy: +btcturk.find(x => x.pair === 'EOSTRY').ask,
     //         result: (+btcturk.find(x => x.pair === 'EOSTRY').ask * (1 + commissionWithBinance)) /
-    //             (+binance.find(x => x.symbol === 'EOSUSDT').bidPrice /
-    //                 +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    //             (+binance.find(x => x.symbol === 'EOSUSDT').bidPrice )
     //     });
 
 
@@ -1980,8 +1950,7 @@ app.get('/coinbasereverse', async (req, res) => {
     //         sell: +binance.find(x => x.symbol === 'LINKUSDT').bidPrice,
     //         buy: +btcturk.find(x => x.pair === 'LINKTRY').ask,
     //         result: (+btcturk.find(x => x.pair === 'LINKTRY').ask * (1 + commissionWithBinance)) /
-    //             (+binance.find(x => x.symbol === 'LINKUSDT').bidPrice /
-    //                 +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    //             (+binance.find(x => x.symbol === 'LINKUSDT').bidPrice )
     //     });
 
 
@@ -1992,8 +1961,7 @@ app.get('/coinbasereverse', async (req, res) => {
     //         sell: +binance.find(x => x.symbol === 'NEOUSDT').bidPrice,
     //         buy: +btcturk.find(x => x.pair === 'NEOTRY').ask,
     //         result: (+btcturk.find(x => x.pair === 'NEOTRY').ask * (1 + commissionWithBinance)) /
-    //             (+binance.find(x => x.symbol === 'NEOUSDT').bidPrice /
-    //                 +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    //             (+binance.find(x => x.symbol === 'NEOUSDT').bidPrice )
     //     });
 
 
@@ -2006,8 +1974,7 @@ app.get('/coinbasereverse', async (req, res) => {
     //         sell: +binance.find(x => x.symbol === 'TRXUSDT').bidPrice,
     //         buy: +btcturk.find(x => x.pair === 'TRXTRY').ask,
     //         result: (+btcturk.find(x => x.pair === 'TRXTRY').ask * (1 + commissionWithBinance)) /
-    //             (+binance.find(x => x.symbol === 'TRXUSDT').bidPrice /
-    //                 +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    //             (+binance.find(x => x.symbol === 'TRXUSDT').bidPrice )
     //     });
 
 
@@ -2018,8 +1985,7 @@ app.get('/coinbasereverse', async (req, res) => {
     //         sell: +binance.find(x => x.symbol === 'XTZUSDT').bidPrice,
     //         buy: +btcturk.find(x => x.pair === 'XTZTRY').ask,
     //         result: (+btcturk.find(x => x.pair === 'XTZTRY').ask * (1 + commissionWithBinance)) /
-    //             (+binance.find(x => x.symbol === 'XTZUSDT').bidPrice /
-    //                 +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    //             (+binance.find(x => x.symbol === 'XTZUSDT').bidPrice )
     //     });
 
 
@@ -2031,8 +1997,7 @@ app.get('/coinbasereverse', async (req, res) => {
     //     sell: +binance.find(x => x.symbol === 'BTCUSDT').bidPrice,
     //     buy: +btcturk.find(x => x.pair === 'BTCTRY').ask,
     //     result: (+btcturk.find(x => x.pair === 'BTCTRY').ask * (1 + commissionWithBinance)) /
-    //         (+binance.find(x => x.symbol === 'BTCUSDT').bidPrice /
-    //             +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    //         (+binance.find(x => x.symbol === 'BTCUSDT').bidPrice )
     // });
 
     // pairs.push({
@@ -2041,8 +2006,7 @@ app.get('/coinbasereverse', async (req, res) => {
     //     sell: +binance.find(x => x.symbol === 'ETHUSDT').bidPrice,
     //     buy: +btcturk.find(x => x.pair === 'ETHTRY').ask,
     //     result: (+btcturk.find(x => x.pair === 'ETHTRY').ask * (1 + commissionWithBinance)) /
-    //         (+binance.find(x => x.symbol === 'ETHUSDT').bidPrice /
-    //             +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    //         (+binance.find(x => x.symbol === 'ETHUSDT').bidPrice )
     // });
 
 
@@ -2053,8 +2017,7 @@ app.get('/coinbasereverse', async (req, res) => {
     //     sell: +binance.find(x => x.symbol === 'LTCUSDT').bidPrice,
     //     buy: +btcturk.find(x => x.pair === 'LTCTRY').ask,
     //     result: (+btcturk.find(x => x.pair === 'LTCTRY').ask * (1 + commissionWithBinance)) /
-    //         (+binance.find(x => x.symbol === 'LTCUSDT').bidPrice /
-    //             +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    //         (+binance.find(x => x.symbol === 'LTCUSDT').bidPrice )
     // });
 
 
@@ -2064,8 +2027,7 @@ app.get('/coinbasereverse', async (req, res) => {
     //     sell: +binance.find(x => x.symbol === 'XLMUSDT').bidPrice,
     //     buy: +btcturk.find(x => x.pair === 'XLMTRY').ask,
     //     result: (+btcturk.find(x => x.pair === 'XLMTRY').ask * (1 + commissionWithBinance)) /
-    //         (+binance.find(x => x.symbol === 'XLMUSDT').bidPrice /
-    //             +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    //         (+binance.find(x => x.symbol === 'XLMUSDT').bidPrice )
     // });
 
 
@@ -2075,8 +2037,7 @@ app.get('/coinbasereverse', async (req, res) => {
     //     sell: +binance.find(x => x.symbol === 'XRPUSDT').bidPrice,
     //     buy: +btcturk.find(x => x.pair === 'XRPTRY').ask,
     //     result: (+btcturk.find(x => x.pair === 'XRPTRY').ask * (1 + commissionWithBinance)) /
-    //         (+binance.find(x => x.symbol === 'XRPUSDT').bidPrice /
-    //             +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    //         (+binance.find(x => x.symbol === 'XRPUSDT').bidPrice )
     // });
 
 
@@ -2085,8 +2046,7 @@ app.get('/coinbasereverse', async (req, res) => {
     //     commission: commissionWithBinanceUSDT,
     //     sell: 1 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice,
     //     buy: +btcturk.find(x => x.pair === 'USDTTRY').ask,
-    //     result: (+btcturk.find(x => x.pair === 'USDTTRY').ask * (1 + commissionWithBinanceUSDT)) /
-    //         (1 / +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+    //     result: (+btcturk.find(x => x.pair === 'USDTTRY').ask * (1 + commissionWithBinanceUSDT)) )
     // });
 
     res.send(
