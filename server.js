@@ -1088,6 +1088,32 @@ app.get('/coinbase', async (req, res) => {
 
 
 
+        if (btcturk.some(x => x.pair === 'SNXTRY'))
+        pairs.push({
+            title: 'SNX* - BTCTURK',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'SNXUSDT').askPrice,
+            sell: +btcturk.find(x => x.pair === 'SNXTRY').bid,
+            result: (+btcturk.find(x => x.pair === 'SNXTRY').bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'SNXUSDT').askPrice /
+                    +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+        });
+
+
+
+        if (btcturk.some(x => x.pair === 'COMPTRY'))
+        pairs.push({
+            title: 'COMP* - BTCTURK',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'COMPUSDT').askPrice,
+            sell: +btcturk.find(x => x.pair === 'COMPTRY').bid,
+            result: (+btcturk.find(x => x.pair === 'COMPTRY').bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'COMPUSDT').askPrice /
+                    +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+        });
+
+
+
 
 
     if (btcturk.some(x => x.pair === 'AVAXTRY'))
@@ -1786,6 +1812,30 @@ app.get('/coinbasereverse', async (req, res) => {
                 (+binance.find(x => x.symbol === 'CHZUSDT').bidPrice /
                     +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
         });
+
+            if (btcturk.some(x => x.pair === 'SNXTRY'))
+        pairs.push({
+            title: 'SNX* - BTCTURK',
+            commission: commissionWithBinance,
+            sell: +binance.find(x => x.symbol === 'SNXUSDT').bidPrice,
+            buy: +btcturk.find(x => x.pair === 'SNXTRY').ask,
+            result: (+btcturk.find(x => x.pair === 'SNXTRY').ask * (1 + commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'SNXUSDT').bidPrice /
+                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+        });
+
+
+        if (btcturk.some(x => x.pair === 'COMPTRY'))
+        pairs.push({
+            title: 'COMP* - BTCTURK',
+            commission: commissionWithBinance,
+            sell: +binance.find(x => x.symbol === 'COMPUSDT').bidPrice,
+            buy: +btcturk.find(x => x.pair === 'COMPTRY').ask,
+            result: (+btcturk.find(x => x.pair === 'COMPTRY').ask * (1 + commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'COMPUSDT').bidPrice /
+                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+        });
+
 
 
 
