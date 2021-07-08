@@ -105,6 +105,7 @@ let myAlarm = 0;
 let alarmCaldiMi = 0;
 let hataAlarmiSustur = 1;
 let ticksizAlarm= 0.30;
+let toplamEmirTl= 20000;
 
 
 setInterval(function(){
@@ -200,7 +201,7 @@ setInterval(() => {
                 if(tetherBuy > 0 && pair.book && pair.book != {}){
                     let sellAt = (tetherBuy * pair.sell) / pair.result;
                     let bookSum = getBookSum(sellAt, pair.book);
-                    if(bookSum > 20000){
+                    if(bookSum > toplamEmirTl){
                         
 
 
@@ -352,7 +353,10 @@ setTimeout(() => {
         });
 }, 20000);
 
-app.get('/', (req, res) => {
+app.get('/', (req, res) => {    
+    if (req.query.toplamEmirTl) {
+        toplamEmirTl = +req.query.toplamEmirTl
+    }
     if (req.query.profit) {
         profitMargin = +req.query.profit
         myAlarm = 1;
@@ -369,14 +373,16 @@ app.get('/', (req, res) => {
             tetherBuyAlertActive: tetherBuy,
             currentAlert: +profitMargin + kur,
             tetherMargin: tetherMargin,
-            ticksizAlarm: ticksizAlarm
+            ticksizAlarm: ticksizAlarm,
+            toplamEmirTl: toplamEmirTl
         });
 
     } else {
         res.send({
             profitMargin: profitMargin,
             currentAlert: +profitMargin + kur,
-            ticksizAlarm: ticksizAlarm
+            ticksizAlarm: ticksizAlarm,
+            toplamEmirTl: toplamEmirTl
         });
     }
 });
