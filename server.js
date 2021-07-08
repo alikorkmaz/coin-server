@@ -167,7 +167,7 @@ setInterval(() => {
                 }
 
                 if (
-                    pair.result < tetherBuy - (ticksizAlarm*1.5) &&
+                    pair.result < tetherBuy - (ticksizAlarm*2) &&
                     text === '' &&
                     !alertReverse.some(title => title === pair.title)
                 ) {
@@ -809,6 +809,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'ALGO', pairs),
             getWithSymbol(binance, 'GRT', pairs),
             getWithSymbol(binance, 'MATIC', pairs),
+            getWithSymbol(binance, 'OXT', pairs),
         ]);
 
 
@@ -1508,6 +1509,17 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.GRT_TL.lowestAsk,
                 result: (+paribu.GRT_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'GRTUSDT').bidPrice )
+            });
+
+
+                if (paribu.OXT_TL)
+            pairs.push({
+                title: 'OXT* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'OXTUSDT').bidPrice,
+                buy: +paribu.OXT_TL.lowestAsk,
+                result: (+paribu.OXT_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'OXTUSDT').bidPrice )
             });
 
 
