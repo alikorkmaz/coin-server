@@ -607,6 +607,20 @@ app.get('/coinbase', async (req, res) => {
             });
 
 
+
+
+        if (paribu.OXT_TL)
+            pairs.push({
+                title: 'OXT* - PARIBU',
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === 'OXTUSDT').askPrice,
+                sell: +paribu.OXT_TL.highestBid,
+                result: (+paribu.OXT_TL.highestBid * (1 - commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'OXTUSDT').askPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+            });
+
+
                 if (paribu.MATIC_TL)
             pairs.push({
                 title: 'MATIC* - PARIBU',
@@ -1353,6 +1367,18 @@ app.get('/coinbasereverse', async (req, res) => {
                         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
             });
 
+
+
+        if (paribu.BAL_TL)
+            pairs.push({
+                title: 'OXT* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'OXTUSDT').bidPrice,
+                buy: +paribu.OXT_TL.lowestAsk,
+                result: (+paribu.OXT_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'OXTUSDT').bidPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+            });
 
 
         if (paribu.THETA_TL)
