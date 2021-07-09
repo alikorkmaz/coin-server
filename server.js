@@ -21,24 +21,21 @@ app.get('/tetherTask', async (req, res) => {
 });
 
 app.get('/alarm', async (req, res) => {
-        fetch('https://coin-serv2.herokuapp.com/v2/coinbase')
+
+
+    if (kur === 0 && currentAlert !== -1) return;
+    text = '';
+
+
+
+    fetch('https://coin-serv2.herokuapp.com/v2/coinbase')
         .then(response => response.json())
         .then(data => {
-
-
             data.forEach(pair => {
-
-
-
                 if(tetherBuy > 0 && pair.book && pair.book != {}){
                     let sellAt = (tetherBuy * pair.sell) / pair.result;
                     let bookSum = getBookSum(sellAt, pair.book);
                     if(bookSum > toplamEmirTl){
-                        
-
-
-
-
                         if (
                                 pair.result > kur + profitMargin &&
                                 text === '' &&
@@ -48,11 +45,6 @@ app.get('/alarm', async (req, res) => {
                                 text = pair.title + ": " + sellAt.toString().substring(0, 6) + " <----" + bookSum.toString().split(".")[0] + "," + pair.result.toString().substring(0, 5);
                                 if (profitMargin == -1) {
                                     if (pair.result > tetherBuy) {
-                                        alarmCaldiMi = 1;
-                                        setTimeout(function(){
-                                            alarmCaldiMi = 0;
-                                        }, 30000);
-
                                         setTimeout(function(){
                                                 cc.send({
                                                     message: text,
@@ -62,6 +54,7 @@ app.get('/alarm', async (req, res) => {
                                                 },
                                             );
                                         }, 3000);
+                                        console.log(text);
 
                                         pp.send({
                                                 message: text,
@@ -75,79 +68,13 @@ app.get('/alarm', async (req, res) => {
                                         return;
                                     }
                                     
-                                } else {
-
-                                    p.send({
-                                            message: text,
-                                        },
-                                        function(err, result) {
-                                            console.log(result);
-                                        },
-                                    );
-                                    alarmCaldiMi = 1;
-                                    setTimeout(function(){
-                                        alarmCaldiMi = 0;
-                                    }, 30000);
-                                    return;
                                 }
                             }
-
-                            if (
-                                pair.result > tetherBuy + ticksizAlarm &&
-                                text === '' &&
-                                !alert.some(title => title === pair.title)
-                            ) {
-                                text = "ticksizAlarm: " + pair.title + ": " + pair.result.toString().substring(0, 5) + " (sell:" + pair.sell.toString().substring(0, 6) + ")";
-                                p.send({
-                                        message: text,
-                                    },
-                                    function(err, result) {
-                                        console.log(result);
-                                    },
-                                );
-                                alarmCaldiMi = 1;
-                                setTimeout(function(){
-                                    alarmCaldiMi = 0;
-                                }, 30000);
-                                return;
-                            }
-
-
-
-
-
-
-
-
                     }
                 }
-
-                else {
-                    if (alarmCaldiMi === 1) return;
-                    alarmCaldiMi = 1;
-                    setTimeout(function(){
-                        alarmCaldiMi = 0;
-                    }, 30000);
-                    p.send({
-                            message: "bi bokluk var",
-                        },
-                        function(err, result) {
-                            console.log(result);
-                        },
-                    );
-                    
-                    return;
-
-
-
-                }
-
-
-                
-
-
             });
         });
+
     res.send(
         {}
     );
