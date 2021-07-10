@@ -45,15 +45,15 @@ app.get('/alarm', async (req, res) => {
                                 text = pair.title + ": " + sellAt.toString().substring(0, 6) + " <----" + bookSum.toString().split(".")[0] + "," + pair.result.toString().substring(0, 5);
                                 if (profitMargin == -1) {
                                     if (pair.result > tetherBuy) {
-                                        setTimeout(function(){
-                                                cc.send({
-                                                    message: text,
-                                                },
-                                                function(err, result) {
-                                                    console.log(result);
-                                                },
-                                            );
-                                        }, 3000);
+                                        // setTimeout(function(){
+                                        //         cc.send({
+                                        //             message: text,
+                                        //         },
+                                        //         function(err, result) {
+                                        //             console.log(result);
+                                        //         },
+                                        //     );
+                                        // }, 3000);
                                         console.log(text);
 
                                         pp.send({
