@@ -166,7 +166,7 @@ let text = '';
 let myAlarm = 0;
 let alarmCaldiMi = 0;
 let hataAlarmiSustur = 1;
-let ticksizAlarm= 0.30;
+let ticksizAlarm= 0.10;
 let toplamEmirTl= 30000;
 
 cron.schedule('0 5 * * *', () => { tetherMargin = 0; });
@@ -382,7 +382,7 @@ setInterval(() => {
 
 
 
-}, 2000);
+}, 5000);
 
 
 
