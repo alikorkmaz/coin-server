@@ -14,17 +14,6 @@ app.use(express.static('public'));
 
 app.use(express.json());
 
-cron.schedule('0 * * * *', () => {
-                        p.send({
-                            message: "saat: " + new Date(),
-                        },
-                        function(err, result) {
-                            console.log(result);
-                        },
-                    );
-                    });
-
-
 app.get('/tetherTask', async (req, res) => {
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
     tetherBuy = +paribu.USDT_TL.lowestAsk + tetherMargin;
@@ -178,8 +167,9 @@ let myAlarm = 0;
 let alarmCaldiMi = 0;
 let hataAlarmiSustur = 1;
 let ticksizAlarm= 0.30;
-let toplamEmirTl= 20000;
+let toplamEmirTl= 30000;
 
+cron.schedule('0 5 * * *', () => { tetherMargin = 0; });
 
 setInterval(function(){
     alarmCaldiMi = 0;
@@ -392,7 +382,7 @@ setInterval(() => {
 
 
 
-}, 5000);
+}, 2000);
 
 
 
