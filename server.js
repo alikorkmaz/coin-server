@@ -712,6 +712,43 @@ app.get('/coinbase', async (req, res) => {
                         +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
             });
 
+                if (paribu.JUV_TL)
+            pairs.push({
+                title: 'JUV* - PARIBU',
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === 'JUVUSDT').askPrice,
+                sell: +paribu.JUV_TL.highestBid,
+                result: (+paribu.JUV_TL.highestBid * (1 - commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'JUVUSDT').askPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+            });
+
+
+
+
+        if (paribu.ACM_TL)
+            pairs.push({
+                title: 'ACM* - PARIBU',
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === 'ACMUSDT').askPrice,
+                sell: +paribu.ACM_TL.highestBid,
+                result: (+paribu.ACM_TL.highestBid * (1 - commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'ACMUSDT').askPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+            });
+
+
+        if (paribu.PSG_TL)
+            pairs.push({
+                title: 'PSG* - PARIBU',
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === 'PSGUSDT').askPrice,
+                sell: +paribu.PSG_TL.highestBid,
+                result: (+paribu.PSG_TL.highestBid * (1 - commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'PSGUSDT').askPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+            });
+
 
 
 
@@ -1415,6 +1452,45 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.ATM_TL.lowestAsk,
                 result: (+paribu.ATM_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'ATMUSDT').bidPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+            });
+
+
+
+        if (paribu.JUV_TL)
+            pairs.push({
+                title: 'JUV* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'JUVUSDT').bidPrice,
+                buy: +paribu.JUV_TL.lowestAsk,
+                result: (+paribu.JUV_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'JUVUSDT').bidPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+            });
+
+
+
+        if (paribu.ACM_TL)
+            pairs.push({
+                title: 'ACM* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'ACMUSDT').bidPrice,
+                buy: +paribu.ACM_TL.lowestAsk,
+                result: (+paribu.ACM_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'ACMUSDT').bidPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+            });
+
+
+
+        if (paribu.PSG_TL)
+            pairs.push({
+                title: 'PSG* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'PSGUSDT').bidPrice,
+                buy: +paribu.PSG_TL.lowestAsk,
+                result: (+paribu.PSG_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'PSGUSDT').bidPrice /
                         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
             });
 
