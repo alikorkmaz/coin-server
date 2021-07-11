@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const fetch = require('node-fetch');
+const cron = require('node-cron');
+
 
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -11,6 +13,17 @@ app.use(function(req, res, next) {
 app.use(express.static('public'));
 
 app.use(express.json());
+
+cron.schedule('0 * * * *', () => {
+                        p.send({
+                            message: "saat: " + new Date(),
+                        },
+                        function(err, result) {
+                            console.log(result);
+                        },
+                    );
+                    });
+
 
 app.get('/tetherTask', async (req, res) => {
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
