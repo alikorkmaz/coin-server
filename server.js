@@ -65,7 +65,7 @@ app.get('/alarm', async (req, res) => {
 
 
             if(firsat.message){
-                    pp.send({
+                    ee.send({
                         message: firsat.message,
                     },
                     function(err, result) {
@@ -157,6 +157,11 @@ var pp = new Push({
 var cc = new Push({
     user: 'g7dfgagzdk8ngeknnbxz1trgwjzk79',
     token: 'aqoyrmbrtmau2q7jfjobgo6p7sa4om',
+});
+
+var ee = new Push({
+    user: 'gejk4fxmy5295mfw9bff3efvej9f7r',
+    token: 'a6bb3vhq67aewvaego3nyguc2f9q9z',
 });
 
 
