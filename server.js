@@ -26,13 +26,18 @@ app.get('/alarm', async (req, res) => {
 
 
     if (kur === 0 && currentAlert !== -1) return;
-    text = '';
-
 
 
     fetch('https://coin-serv2.herokuapp.com/v2/coinbase')
         .then(response => response.json())
         .then(data => {
+
+            let firsat = {
+                message: null,
+                bookSum: -1,
+            };
+
+
             data.forEach(pair => {
                 if(tetherBuy > 0 && pair.book && pair.book != {}){
                     let sellAt = (tetherBuy * pair.sell) / pair.result;
@@ -40,34 +45,16 @@ app.get('/alarm', async (req, res) => {
                     if(bookSum > toplamEmirTl){
                         if (
                                 pair.result > kur + profitMargin &&
-                                text === '' &&
                                 alert.some(title => title === pair.title)
                             ) {
-                                // text = pair.title + ": " +  + " (sell:" + sellAt.toString().substring(0, 6) + ") Total: " + bookSum.toString().split(".")[0];
-                                text = pair.title + ": " + sellAt.toString().substring(0, 6) + " <--- " + bookSum.toString().split(".")[0] + " << " + pair.result.toString().substring(0, 5);
                                 if (profitMargin == -1) {
                                     if (pair.result > tetherBuy) {
-                                        // setTimeout(function(){
-                                        //         cc.send({
-                                        //             message: text,
-                                        //         },
-                                        //         function(err, result) {
-                                        //             console.log(result);
-                                        //         },
-                                        //     );
-                                        // }, 3000);
-                                        console.log(text);
 
-                                        pp.send({
-                                                message: text,
-                                            },
-                                            function(err, result) {
-                                                console.log(result);
-                                            },
-                                        );
+                                        if(bookSum > firsat.bookSum){
+                                            firsat.bookSum = bookSum;
+                                            firsat.message = pair.title + ": " + sellAt.toString().substring(0, 6) + " <--- " + bookSum.toString().split(".")[0] + " << " + pair.result.toString().substring(0, 5);
+                                        }
 
-
-                                        return;
                                     }
                                     
                                 }
@@ -75,6 +62,21 @@ app.get('/alarm', async (req, res) => {
                     }
                 }
             });
+
+
+            if(firsat.message){
+                    pp.send({
+                        message: firsat.message,
+                    },
+                    function(err, result) {
+                        console.log(result);
+                    },
+                );
+
+            }
+
+
+
         });
 
     res.send(
