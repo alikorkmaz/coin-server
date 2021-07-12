@@ -873,6 +873,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'ALGO', pairs),
             getWithSymbol(binance, 'GRT', pairs),
             getWithSymbol(binance, 'MATIC', pairs),
+            getWithSymbol(binance, 'OXT', pairs),
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
             // getWithSymbol(binance, 'ASR', pairs),
