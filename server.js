@@ -17,9 +17,7 @@ app.use(express.json());
 app.get('/tetherTask', async (req, res) => {
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
     tetherBuy = +paribu.USDT_TL.lowestAsk + tetherMargin;
-    res.send(
-        {}
-    );
+    res.send({});
 });
 
 app.get('/alarm', async (req, res) => {
@@ -28,7 +26,7 @@ app.get('/alarm', async (req, res) => {
     if (kur === 0 && currentAlert !== -1) return;
 
 
-    fetch('https://coin-serv2.herokuapp.com/v2/coinbase')
+    fetch('https://18.118.129.114:3000/v2/coinbase')
         .then(response => response.json())
         .then(data => {
 
@@ -39,35 +37,35 @@ app.get('/alarm', async (req, res) => {
 
 
             data.forEach(pair => {
-                if(tetherBuy > 0 && pair.book && pair.book != {}){
+                if (tetherBuy > 0 && pair.book && pair.book != {}) {
                     let sellAt = (tetherBuy * pair.sell) / pair.result;
                     let bookSum = getBookSum(sellAt, pair.book);
-                    if(bookSum > toplamEmirTl){
+                    if (bookSum > toplamEmirTl) {
                         if (
-                                pair.result > kur + profitMargin &&
-                                alert.some(title => title === pair.title)
-                            ) {
-                                if (profitMargin == -1) {
-                                    if (pair.result > tetherBuy) {
+                            pair.result > kur + profitMargin &&
+                            alert.some(title => title === pair.title)
+                        ) {
+                            if (profitMargin == -1) {
+                                if (pair.result > tetherBuy) {
 
-                                        if(bookSum > firsat.bookSum){
-                                            firsat.bookSum = bookSum;
-                                            firsat.message = pair.title + ": " + sellAt.toString().substring(0, 6) + " <--- " + bookSum.toString().split(".")[0] + " << " + pair.result.toString().substring(0, 5);
-                                        }
-
+                                    if (bookSum > firsat.bookSum) {
+                                        firsat.bookSum = bookSum;
+                                        firsat.message = pair.title + ": " + sellAt.toString().substring(0, 6) + " <--- " + bookSum.toString().split(".")[0] + " << " + pair.result.toString().substring(0, 5);
                                     }
-                                    
+
                                 }
+
                             }
+                        }
                     }
                 }
             });
 
 
-            if(firsat.message){
-                    ee.send({
+            if (firsat.message) {
+                ee.send({
                         message: firsat.message,
-                        sound: 'cashregister',//'none'
+                        sound: 'cashregister', //'none'
                     },
                     function(err, result) {
                         console.log(result);
@@ -80,13 +78,11 @@ app.get('/alarm', async (req, res) => {
 
         });
 
-    res.send(
-        {}
-    );
+    res.send({});
 });
 
 setInterval(() => {
-    fetch('https://coin-serv2.herokuapp.com/tetherTask')
+    fetch('https://18.118.129.114:3000/tetherTask')
         .then(response => response.json());
 }, 30000);
 
@@ -115,7 +111,7 @@ app.post('/alert-reverse', (req, res) => {
         alertReverse.push(item);
     });
     alertReverse = [...new Set(alertReverse)];
-});  
+});
 app.post('/alert-reverse-delete', (req, res) => {
     req.body.forEach(item => {
         alertReverse = alertReverse.filter(itemInAlert => itemInAlert !== item);
@@ -174,12 +170,14 @@ let text = '';
 let myAlarm = 0;
 let alarmCaldiMi = 0;
 let hataAlarmiSustur = 1;
-let ticksizAlarm= 0.10;
-let toplamEmirTl= 30000;
+let ticksizAlarm = 0.10;
+let toplamEmirTl = 30000;
 
-cron.schedule('0 5 * * *', () => { tetherMargin = 0; });
+cron.schedule('0 5 * * *', () => {
+    tetherMargin = 0;
+});
 
-setInterval(function(){
+setInterval(function() {
     alarmCaldiMi = 0;
 }, 600000);
 
@@ -189,7 +187,7 @@ setInterval(() => {
 
     if (alarmCaldiMi === 1) return;
 
-    if(myAlarm === 0){
+    if (myAlarm === 0) {
         p.send({
                 message: "ALARM BOZULDU",
             },
@@ -198,7 +196,7 @@ setInterval(() => {
             },
         );
         alarmCaldiMi = 1;
-        setTimeout(function(){
+        setTimeout(function() {
             alarmCaldiMi = 0;
         }, 30000);
         return;
@@ -213,7 +211,7 @@ setInterval(() => {
 
 
 
-    fetch('https://coin-serv2.herokuapp.com/coinbasereverse')
+    fetch('https://18.118.129.114:3000/coinbasereverse')
         .then(response => response.json())
         .then(data => {
             data.forEach(pair => {
@@ -231,14 +229,14 @@ setInterval(() => {
                         },
                     );
                     alarmCaldiMi = 1;
-                    setTimeout(function(){
+                    setTimeout(function() {
                         alarmCaldiMi = 0;
                     }, 30000);
                     return;
                 }
 
                 if (
-                    pair.result < tetherBuy - (ticksizAlarm*2) &&
+                    pair.result < tetherBuy - (ticksizAlarm * 2) &&
                     text === '' &&
                     !alertReverse.some(title => title === pair.title)
                 ) {
@@ -251,16 +249,16 @@ setInterval(() => {
                         },
                     );
                     alarmCaldiMi = 1;
-                    setTimeout(function(){
+                    setTimeout(function() {
                         alarmCaldiMi = 0;
                     }, 30000);
                     return;
                 }
-            }); 
+            });
         });
 
 
-    fetch('https://coin-serv2.herokuapp.com/v2/coinbase')
+    fetch('https://18.118.129.114:3000/v2/coinbase')
         .then(response => response.json())
         .then(data => {
 
@@ -269,74 +267,52 @@ setInterval(() => {
 
 
 
-                if(tetherBuy > 0 && pair.book && pair.book != {}){
+                if (tetherBuy > 0 && pair.book && pair.book != {}) {
                     let sellAt = (tetherBuy * pair.sell) / pair.result;
                     let bookSum = getBookSum(sellAt, pair.book);
-                    if(bookSum > toplamEmirTl){
-                        
+                    if (bookSum > toplamEmirTl) {
 
 
 
 
                         if (
-                                pair.result > kur + profitMargin &&
-                                text === '' &&
-                                alert.some(title => title === pair.title)
-                            ) {
-                                // text = pair.title + ": " +  + " (sell:" + sellAt.toString().substring(0, 6) + ") Total: " + bookSum.toString().split(".")[0];
-                                text = pair.title + ": " + sellAt.toString().substring(0, 6) + " <--- " + bookSum.toString().split(".")[0] + " << " + pair.result.toString().substring(0, 5);
-                                if (profitMargin == -1) {
-                                    if (pair.result > tetherBuy) {
-                                        alarmCaldiMi = 1;
-                                        setTimeout(function(){
-                                            alarmCaldiMi = 0;
-                                        }, 30000);
+                            pair.result > kur + profitMargin &&
+                            text === '' &&
+                            alert.some(title => title === pair.title)
+                        ) {
+                            // text = pair.title + ": " +  + " (sell:" + sellAt.toString().substring(0, 6) + ") Total: " + bookSum.toString().split(".")[0];
+                            text = pair.title + ": " + sellAt.toString().substring(0, 6) + " <--- " + bookSum.toString().split(".")[0] + " << " + pair.result.toString().substring(0, 5);
+                            if (profitMargin == -1) {
+                                if (pair.result > tetherBuy) {
+                                    alarmCaldiMi = 1;
+                                    setTimeout(function() {
+                                        alarmCaldiMi = 0;
+                                    }, 30000);
 
-                                        setTimeout(function(){
-                                                cc.send({
-                                                    message: text,
-                                                },
-                                                function(err, result) {
-                                                    console.log(result);
-                                                },
-                                            );
-                                        }, 3000);
-
-                                        pp.send({
+                                    setTimeout(function() {
+                                        cc.send({
                                                 message: text,
                                             },
                                             function(err, result) {
                                                 console.log(result);
                                             },
                                         );
+                                    }, 3000);
 
-
-                                        return;
-                                    }
-                                    
-                                } else {
-
-                                    p.send({
+                                    pp.send({
                                             message: text,
                                         },
                                         function(err, result) {
                                             console.log(result);
                                         },
                                     );
-                                    alarmCaldiMi = 1;
-                                    setTimeout(function(){
-                                        alarmCaldiMi = 0;
-                                    }, 30000);
+
+
                                     return;
                                 }
-                            }
 
-                            if (
-                                pair.result > tetherBuy + ticksizAlarm &&
-                                text === '' &&
-                                !alert.some(title => title === pair.title)
-                            ) {
-                                text = "ticksizAlarm: " + pair.title + ": " + pair.result.toString().substring(0, 5) + " (sell:" + pair.sell.toString().substring(0, 6) + ")";
+                            } else {
+
                                 p.send({
                                         message: text,
                                     },
@@ -345,26 +321,41 @@ setInterval(() => {
                                     },
                                 );
                                 alarmCaldiMi = 1;
-                                setTimeout(function(){
+                                setTimeout(function() {
                                     alarmCaldiMi = 0;
                                 }, 30000);
                                 return;
                             }
+                        }
 
-
-
-
+                        if (
+                            pair.result > tetherBuy + ticksizAlarm &&
+                            text === '' &&
+                            !alert.some(title => title === pair.title)
+                        ) {
+                            text = "ticksizAlarm: " + pair.title + ": " + pair.result.toString().substring(0, 5) + " (sell:" + pair.sell.toString().substring(0, 6) + ")";
+                            p.send({
+                                    message: text,
+                                },
+                                function(err, result) {
+                                    console.log(result);
+                                },
+                            );
+                            alarmCaldiMi = 1;
+                            setTimeout(function() {
+                                alarmCaldiMi = 0;
+                            }, 30000);
+                            return;
+                        }
 
 
 
 
                     }
-                }
-
-                else {
+                } else {
                     if (alarmCaldiMi === 1) return;
                     alarmCaldiMi = 1;
-                    setTimeout(function(){
+                    setTimeout(function() {
                         alarmCaldiMi = 0;
                     }, 30000);
                     p.send({
@@ -374,7 +365,7 @@ setInterval(() => {
                             console.log(result);
                         },
                     );
-                    
+
                     return;
 
 
@@ -382,7 +373,6 @@ setInterval(() => {
                 }
 
 
-                
 
 
             });
@@ -395,20 +385,13 @@ setInterval(() => {
 
 
 
-
 function getBookSum(sellAt, book) {
     const sum = Object.keys(book).reduce((sum, key) => {
-                  if(sellAt > Number(key)) return sum;
-                  return sum + book[key] * Number(key);
-                }, 0);
+        if (sellAt > Number(key)) return sum;
+        return sum + book[key] * Number(key);
+    }, 0);
     return sum;
 }
-
-
-
-
-
-
 
 
 
@@ -425,7 +408,7 @@ setTimeout(() => {
         });
 }, 20000);
 
-app.get('/', (req, res) => {    
+app.get('/', (req, res) => {
     if (req.query.toplamEmirTl) {
         toplamEmirTl = +req.query.toplamEmirTl
     }
@@ -461,7 +444,7 @@ app.get('/', (req, res) => {
 
 app.get('/kur', (req, res) => {
 
-    if(profitMargin === -1){
+    if (profitMargin === -1) {
         let l = tetherBuy - tetherMargin;
         res.send({
             kur: l.toFixed(4)
@@ -476,31 +459,31 @@ app.get('/kur', (req, res) => {
 
 app.get('/caldir', (req, res) => {
 
-        p.send({
+    p.send({
             message: "ALARM TEST",
         },
         function(err, result) {
             console.log(result);
         },
-        );
+    );
 
-        res.send({
-            kur: kur.toFixed(4)
-        });
+    res.send({
+        kur: kur.toFixed(4)
+    });
 
 });
 
 
 app.get('/reelkur', (req, res) => {
 
-        res.send({
-            kur: kur.toFixed(4)
-        });
+    res.send({
+        kur: kur.toFixed(4)
+    });
 });
 
 
 app.get('/paribu', (req, res) => {
-        fetch('https://www.paribu.com/ticker')
+    fetch('https://www.paribu.com/ticker')
         .then(response => response.json())
         .then(json => res.send(json))
         .catch(e => console.log(e));
@@ -514,14 +497,14 @@ app.get('/btcturk', (req, res) => {
 });
 
 
-async function getWithSymbol(binance, symbol, pairs){
+async function getWithSymbol(binance, symbol, pairs) {
     let paribu;
-    try{
+    try {
         let commission = 0.0065;
         let commissionWithBinance = 0.0065;
         let commissionWithBinanceUSDT = 0.0055;
 
-        paribu = await fetch('https://v3.paribu.com/app/markets/'+symbol.toLowerCase()+'-tl?interval=1000').then(r => r.json()).catch(x => console.log(x));
+        paribu = await fetch('https://v3.paribu.com/app/markets/' + symbol.toLowerCase() + '-tl?interval=1000').then(r => r.json()).catch(x => console.log(x));
 
         let pariBuyPrice = Object.keys(paribu.data.orderBook.buy)[0];
         let orderBook = paribu.data.orderBook.buy || {};
@@ -530,10 +513,10 @@ async function getWithSymbol(binance, symbol, pairs){
         pairs.push({
             title: symbol + '* - PARIBU',
             commission: commissionWithBinance,
-            buy: +binance.find(x => x.symbol === symbol+'USDT').askPrice,
+            buy: +binance.find(x => x.symbol === symbol + 'USDT').askPrice,
             sell: +pariBuyPrice,
             result: (pariBuyPrice * (1 - commissionWithBinance)) /
-                +binance.find(x => x.symbol === symbol+'USDT').askPrice,
+                +binance.find(x => x.symbol === symbol + 'USDT').askPrice,
             book: orderBook
         });
     } catch {
@@ -548,67 +531,67 @@ app.get('/v2/coinbase', async (req, res) => {
 
 
     await Promise.all([
-            getWithSymbol(binance, 'UNI', pairs),
-            getWithSymbol(binance, 'BAL', pairs),
-            getWithSymbol(binance, 'REEF', pairs),
-            getWithSymbol(binance, 'BAND', pairs),
-            getWithSymbol(binance, 'LRC', pairs),
-            getWithSymbol(binance, 'AAVE', pairs),
-            getWithSymbol(binance, 'AVAX', pairs),
-            getWithSymbol(binance, 'OMG', pairs),
-            getWithSymbol(binance, 'RVN', pairs),
-            getWithSymbol(binance, 'XTZ', pairs),
-            getWithSymbol(binance, 'MKR', pairs),
-            getWithSymbol(binance, 'ATOM', pairs),
-            getWithSymbol(binance, 'ONT', pairs),
-            getWithSymbol(binance, 'DOT', pairs),
-            getWithSymbol(binance, 'BTC', pairs),
-            getWithSymbol(binance, 'ETH', pairs),
-            getWithSymbol(binance, 'XRP', pairs),
-            getWithSymbol(binance, 'LTC', pairs),
-            getWithSymbol(binance, 'XLM', pairs),
-            getWithSymbol(binance, 'EOS', pairs),
-            getWithSymbol(binance, 'BAT', pairs),
-            getWithSymbol(binance, 'BTT', pairs),
-            getWithSymbol(binance, 'TRX', pairs),
-            getWithSymbol(binance, 'HOT', pairs),
-            getWithSymbol(binance, 'CHZ', pairs),
-            getWithSymbol(binance, 'ADA', pairs),
-            getWithSymbol(binance, 'NEO', pairs),
-            getWithSymbol(binance, 'LINK', pairs),
-            getWithSymbol(binance, 'DOGE', pairs),
-            getWithSymbol(binance, 'WAVES', pairs),
-            getWithSymbol(binance, 'ZIL', pairs),
-            getWithSymbol(binance, 'ENJ', pairs),
-            getWithSymbol(binance, 'THETA', pairs),
-            getWithSymbol(binance, 'OGN', pairs),
-            getWithSymbol(binance, 'ALGO', pairs),
-            getWithSymbol(binance, 'GRT', pairs),
-            getWithSymbol(binance, 'MATIC', pairs),
-            getWithSymbol(binance, 'OXT', pairs),
-            // getWithSymbol(binance, 'JUV', pairs),
-            // getWithSymbol(binance, 'ATM', pairs),
-            // getWithSymbol(binance, 'ASR', pairs),
-            // getWithSymbol(binance, 'BAR', pairs),
-            // getWithSymbol(binance, 'PSG', pairs)        
-        ]);
+        getWithSymbol(binance, 'UNI', pairs),
+        getWithSymbol(binance, 'BAL', pairs),
+        getWithSymbol(binance, 'REEF', pairs),
+        getWithSymbol(binance, 'BAND', pairs),
+        getWithSymbol(binance, 'LRC', pairs),
+        getWithSymbol(binance, 'AAVE', pairs),
+        getWithSymbol(binance, 'AVAX', pairs),
+        getWithSymbol(binance, 'OMG', pairs),
+        getWithSymbol(binance, 'RVN', pairs),
+        getWithSymbol(binance, 'XTZ', pairs),
+        getWithSymbol(binance, 'MKR', pairs),
+        getWithSymbol(binance, 'ATOM', pairs),
+        getWithSymbol(binance, 'ONT', pairs),
+        getWithSymbol(binance, 'DOT', pairs),
+        getWithSymbol(binance, 'BTC', pairs),
+        getWithSymbol(binance, 'ETH', pairs),
+        getWithSymbol(binance, 'XRP', pairs),
+        getWithSymbol(binance, 'LTC', pairs),
+        getWithSymbol(binance, 'XLM', pairs),
+        getWithSymbol(binance, 'EOS', pairs),
+        getWithSymbol(binance, 'BAT', pairs),
+        getWithSymbol(binance, 'BTT', pairs),
+        getWithSymbol(binance, 'TRX', pairs),
+        getWithSymbol(binance, 'HOT', pairs),
+        getWithSymbol(binance, 'CHZ', pairs),
+        getWithSymbol(binance, 'ADA', pairs),
+        getWithSymbol(binance, 'NEO', pairs),
+        getWithSymbol(binance, 'LINK', pairs),
+        getWithSymbol(binance, 'DOGE', pairs),
+        getWithSymbol(binance, 'WAVES', pairs),
+        getWithSymbol(binance, 'ZIL', pairs),
+        getWithSymbol(binance, 'ENJ', pairs),
+        getWithSymbol(binance, 'THETA', pairs),
+        getWithSymbol(binance, 'OGN', pairs),
+        getWithSymbol(binance, 'ALGO', pairs),
+        getWithSymbol(binance, 'GRT', pairs),
+        getWithSymbol(binance, 'MATIC', pairs),
+        getWithSymbol(binance, 'OXT', pairs),
+        // getWithSymbol(binance, 'JUV', pairs),
+        // getWithSymbol(binance, 'ATM', pairs),
+        // getWithSymbol(binance, 'ASR', pairs),
+        // getWithSymbol(binance, 'BAR', pairs),
+        // getWithSymbol(binance, 'PSG', pairs)        
+    ]);
 
 
 
-        if (pairs.length < 3) {
+    if (pairs.length < 3) {
         if (alarmCaldiMi === 1) return;
-            alarmCaldiMi = 1;
-            setTimeout(function(){
-                alarmCaldiMi = 0;
-            }, 30000);
-            p.send({
-                    message: "HATA ALDIK:" + pairs.length,
-                },
-                function(err, result) {
-                    console.log(result);
-                },
-            );
-        }
+        alarmCaldiMi = 1;
+        setTimeout(function() {
+            alarmCaldiMi = 0;
+        }, 30000);
+        p.send({
+                message: "HATA ALDIK:" + pairs.length,
+            },
+            function(err, result) {
+                console.log(result);
+            },
+        );
+    }
 
 
 
@@ -673,8 +656,6 @@ app.get('/coinbase', async (req, res) => {
                     (+binance.find(x => x.symbol === 'ENJUSDT').askPrice /
                         +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
             });
-
-
 
 
 
@@ -1052,7 +1033,7 @@ app.get('/coinbasereverse', async (req, res) => {
     let commissionWithBinance = 0.004;
     let commissionWithBinanceUSDT = 0.003;
 
-   
+
     let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json());
 
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
@@ -1062,8 +1043,7 @@ app.get('/coinbasereverse', async (req, res) => {
 
 
 
-
-// if (paribu.ATM_TL)
+        // if (paribu.ATM_TL)
         //     pairs.push({
         //         title: 'ATM* - PARIBU',
         //         commission: commissionWithBinance,
@@ -1130,10 +1110,6 @@ app.get('/coinbasereverse', async (req, res) => {
 
 
 
-
-
-
-
         if (paribu.GRT_TL)
             pairs.push({
                 title: 'GRT* - PARIBU',
@@ -1141,18 +1117,18 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'GRTUSDT').bidPrice,
                 buy: +paribu.GRT_TL.lowestAsk,
                 result: (+paribu.GRT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'GRTUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'GRTUSDT').bidPrice)
             });
 
 
-                if (paribu.OXT_TL)
+        if (paribu.OXT_TL)
             pairs.push({
                 title: 'OXT* - PARIBU',
                 commission: commissionWithBinance,
                 sell: +binance.find(x => x.symbol === 'OXTUSDT').bidPrice,
                 buy: +paribu.OXT_TL.lowestAsk,
                 result: (+paribu.OXT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'OXTUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'OXTUSDT').bidPrice)
             });
 
 
@@ -1163,7 +1139,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'MATICUSDT').bidPrice,
                 buy: +paribu.MATIC_TL.lowestAsk,
                 result: (+paribu.MATIC_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'MATICUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'MATICUSDT').bidPrice)
             });
 
 
@@ -1174,7 +1150,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'THETAUSDT').bidPrice,
                 buy: +paribu.THETA_TL.lowestAsk,
                 result: (+paribu.THETA_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'THETAUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'THETAUSDT').bidPrice)
             });
 
         if (paribu.OGN_TL)
@@ -1184,7 +1160,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'OGNUSDT').bidPrice,
                 buy: +paribu.OGN_TL.lowestAsk,
                 result: (+paribu.OGN_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'OGNUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'OGNUSDT').bidPrice)
             });
 
 
@@ -1197,7 +1173,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'ZILUSDT').bidPrice,
                 buy: +paribu.ZIL_TL.lowestAsk,
                 result: (+paribu.ZIL_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ZILUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'ZILUSDT').bidPrice)
             });
 
 
@@ -1208,7 +1184,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'BALUSDT').bidPrice,
                 buy: +paribu.BAL_TL.lowestAsk,
                 result: (+paribu.BAL_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'BALUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'BALUSDT').bidPrice)
             });
 
 
@@ -1219,7 +1195,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'ENJUSDT').bidPrice,
                 buy: +paribu.ENJ_TL.lowestAsk,
                 result: (+paribu.ENJ_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ENJUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'ENJUSDT').bidPrice)
             });
 
 
@@ -1230,7 +1206,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'ALGOUSDT').bidPrice,
                 buy: +paribu.ALGO_TL.lowestAsk,
                 result: (+paribu.ALGO_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ALGOUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'ALGOUSDT').bidPrice)
             });
 
 
@@ -1242,7 +1218,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'REEFUSDT').bidPrice,
                 buy: +paribu.REEF_TL.lowestAsk,
                 result: (+paribu.REEF_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'REEFUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'REEFUSDT').bidPrice)
             });
 
         if (paribu.BAND_TL)
@@ -1252,7 +1228,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'BANDUSDT').bidPrice,
                 buy: +paribu.BAND_TL.lowestAsk,
                 result: (+paribu.BAND_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'BANDUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'BANDUSDT').bidPrice)
             });
 
 
@@ -1264,7 +1240,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'LRCUSDT').bidPrice,
                 buy: +paribu.LRC_TL.lowestAsk,
                 result: (+paribu.LRC_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'LRCUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'LRCUSDT').bidPrice)
             });
 
 
@@ -1275,7 +1251,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'UNIUSDT').bidPrice,
                 buy: +paribu.UNI_TL.lowestAsk,
                 result: (+paribu.UNI_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'UNIUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'UNIUSDT').bidPrice)
             });
 
         if (paribu.AAVE_TL)
@@ -1285,7 +1261,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'AAVEUSDT').bidPrice,
                 buy: +paribu.AAVE_TL.lowestAsk,
                 result: (+paribu.AAVE_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'AAVEUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'AAVEUSDT').bidPrice)
             });
 
 
@@ -1297,7 +1273,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'AVAXUSDT').bidPrice,
                 buy: +paribu.AVAX_TL.lowestAsk,
                 result: (+paribu.AVAX_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'AVAXUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'AVAXUSDT').bidPrice)
             });
 
 
@@ -1308,7 +1284,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'OMGUSDT').bidPrice,
                 buy: +paribu.OMG_TL.lowestAsk,
                 result: (+paribu.OMG_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'OMGUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'OMGUSDT').bidPrice)
             });
 
 
@@ -1321,7 +1297,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'XTZUSDT').bidPrice,
                 buy: +paribu.XTZ_TL.lowestAsk,
                 result: (+paribu.XTZ_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'XTZUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'XTZUSDT').bidPrice)
             });
 
 
@@ -1334,7 +1310,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'MKRUSDT').bidPrice,
                 buy: +paribu.MKR_TL.lowestAsk,
                 result: (+paribu.MKR_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'MKRUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'MKRUSDT').bidPrice)
             });
 
 
@@ -1346,7 +1322,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'RVNUSDT').bidPrice,
                 buy: +paribu.RVN_TL.lowestAsk,
                 result: (+paribu.RVN_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'RVNUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'RVNUSDT').bidPrice)
             });
 
 
@@ -1357,7 +1333,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'ATOMUSDT').bidPrice,
                 buy: +paribu.ATOM_TL.lowestAsk,
                 result: (+paribu.ATOM_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ATOMUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'ATOMUSDT').bidPrice)
             });
 
 
@@ -1368,7 +1344,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'DOTUSDT').bidPrice,
                 buy: +paribu.DOT_TL.lowestAsk,
                 result: (+paribu.DOT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'DOTUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'DOTUSDT').bidPrice)
             });
 
 
@@ -1380,7 +1356,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'ONTUSDT').bidPrice,
                 buy: +paribu.ONT_TL.lowestAsk,
                 result: (+paribu.ONT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ONTUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'ONTUSDT').bidPrice)
             });
 
 
@@ -1392,7 +1368,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'BTCUSDT').bidPrice,
             buy: +paribu.BTC_TL.lowestAsk,
             result: (+paribu.BTC_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'BTCUSDT').bidPrice )
+                (+binance.find(x => x.symbol === 'BTCUSDT').bidPrice)
         });
         pairs.push({
             title: 'ETH* - PARIBU',
@@ -1400,7 +1376,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'ETHUSDT').bidPrice,
             buy: +paribu.ETH_TL.lowestAsk,
             result: (+paribu.ETH_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'ETHUSDT').bidPrice )
+                (+binance.find(x => x.symbol === 'ETHUSDT').bidPrice)
         });
         pairs.push({
             title: 'XRP* - PARIBU',
@@ -1408,7 +1384,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'XRPUSDT').bidPrice,
             buy: +paribu.XRP_TL.lowestAsk,
             result: (+paribu.XRP_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'XRPUSDT').bidPrice )
+                (+binance.find(x => x.symbol === 'XRPUSDT').bidPrice)
         });
         pairs.push({
             title: 'LTC* - PARIBU',
@@ -1416,7 +1392,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'LTCUSDT').bidPrice,
             buy: +paribu.LTC_TL.lowestAsk,
             result: (+paribu.LTC_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'LTCUSDT').bidPrice )
+                (+binance.find(x => x.symbol === 'LTCUSDT').bidPrice)
         });
         pairs.push({
             title: 'XLM* - PARIBU',
@@ -1424,7 +1400,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'XLMUSDT').bidPrice,
             buy: +paribu.XLM_TL.lowestAsk,
             result: (+paribu.XLM_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'XLMUSDT').bidPrice )
+                (+binance.find(x => x.symbol === 'XLMUSDT').bidPrice)
         });
         pairs.push({
             title: 'EOS* - PARIBU',
@@ -1432,7 +1408,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'EOSUSDT').bidPrice,
             buy: +paribu.EOS_TL.lowestAsk,
             result: (+paribu.EOS_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'EOSUSDT').bidPrice )
+                (+binance.find(x => x.symbol === 'EOSUSDT').bidPrice)
         });
         pairs.push({
             title: 'BAT* - PARIBU',
@@ -1440,7 +1416,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'BATUSDT').bidPrice,
             buy: +paribu.BAT_TL.lowestAsk,
             result: (+paribu.BAT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'BATUSDT').bidPrice )
+                (+binance.find(x => x.symbol === 'BATUSDT').bidPrice)
         });
         pairs.push({
             title: 'BTT* - PARIBU',
@@ -1448,7 +1424,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'BTTUSDT').bidPrice,
             buy: +paribu.BTT_TL.lowestAsk,
             result: (+paribu.BTT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'BTTUSDT').bidPrice )
+                (+binance.find(x => x.symbol === 'BTTUSDT').bidPrice)
         });
         pairs.push({
             title: 'TRX* - PARIBU',
@@ -1456,7 +1432,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'TRXUSDT').bidPrice,
             buy: +paribu.TRX_TL.lowestAsk,
             result: (+paribu.TRX_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'TRXUSDT').bidPrice )
+                (+binance.find(x => x.symbol === 'TRXUSDT').bidPrice)
         });
         pairs.push({
             title: 'HOT* - PARIBU',
@@ -1464,7 +1440,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'HOTUSDT').bidPrice,
             buy: +paribu.HOT_TL.lowestAsk,
             result: (+paribu.HOT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'HOTUSDT').bidPrice )
+                (+binance.find(x => x.symbol === 'HOTUSDT').bidPrice)
         });
         pairs.push({
             title: 'CHZ* - PARIBU',
@@ -1472,7 +1448,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'CHZUSDT').bidPrice,
             buy: +paribu.CHZ_TL.lowestAsk,
             result: (+paribu.CHZ_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'CHZUSDT').bidPrice )
+                (+binance.find(x => x.symbol === 'CHZUSDT').bidPrice)
         });
         pairs.push({
             title: 'ADA* - PARIBU',
@@ -1480,7 +1456,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'ADAUSDT').bidPrice,
             buy: +paribu.ADA_TL.lowestAsk,
             result: (+paribu.ADA_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'ADAUSDT').bidPrice )
+                (+binance.find(x => x.symbol === 'ADAUSDT').bidPrice)
         });
         pairs.push({
             title: 'NEO* - PARIBU',
@@ -1488,7 +1464,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'NEOUSDT').bidPrice,
             buy: +paribu.NEO_TL.lowestAsk,
             result: (+paribu.NEO_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'NEOUSDT').bidPrice )
+                (+binance.find(x => x.symbol === 'NEOUSDT').bidPrice)
         });
         pairs.push({
             title: 'LINK* - PARIBU',
@@ -1496,7 +1472,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'LINKUSDT').bidPrice,
             buy: +paribu.LINK_TL.lowestAsk,
             result: (+paribu.LINK_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'LINKUSDT').bidPrice )
+                (+binance.find(x => x.symbol === 'LINKUSDT').bidPrice)
         });
         if (binance.some(x => x.symbol === 'DOGEUSDT'))
             pairs.push({
@@ -1505,7 +1481,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 sell: +binance.find(x => x.symbol === 'DOGEUSDT').bidPrice,
                 buy: +paribu.DOGE_TL.lowestAsk,
                 result: (+paribu.DOGE_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'DOGEUSDT').bidPrice )
+                    (+binance.find(x => x.symbol === 'DOGEUSDT').bidPrice)
             });
 
 
@@ -1517,7 +1493,7 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.WAVES_TL.lowestAsk,
                 result: (+paribu.WAVES_TL.lowestAsk * (1 + commissionWithBinance)) /
                     ((binance.find(x => x.symbol === 'WAVESBTC').bidPrice *
-                            binance.find(x => x.symbol === 'BTCUSDT').bidPrice) )
+                        binance.find(x => x.symbol === 'BTCUSDT').bidPrice))
             });
     }
 
@@ -1707,7 +1683,7 @@ app.get('/coinbasereverse', async (req, res) => {
     );
 });
 
-app.listen(process.env.PORT || 3001, () => console.log('listening..'));
+app.listen(3000, () => console.log('listening..'));
 
 process.on('uncaughtException', function(err) {
     p.send({
@@ -1715,4 +1691,7 @@ process.on('uncaughtException', function(err) {
         },
         function(err, result) {},
     );
-});
+}); {
+    "mode": "full",
+    "isActive": false
+}
