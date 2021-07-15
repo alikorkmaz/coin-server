@@ -28,7 +28,7 @@ app.get('/alarm', async (req, res) => {
     if (kur === 0 && currentAlert !== -1) return;
 
 
-    fetch('https://coin-serv2.herokuapp.com/v2/coinbase')
+    fetch('http://localhost:3001/v2/coinbase')
         .then(response => response.json())
         .then(data => {
 
@@ -86,7 +86,7 @@ app.get('/alarm', async (req, res) => {
 });
 
 setInterval(() => {
-    fetch('https://coin-serv2.herokuapp.com/tetherTask')
+    fetch('http://localhost:3001/tetherTask')
         .then(response => response.json());
 }, 30000);
 
@@ -213,7 +213,7 @@ setInterval(() => {
 
 
 
-    fetch('https://coin-serv2.herokuapp.com/coinbasereverse')
+    fetch('http://localhost:3001/coinbasereverse')
         .then(response => response.json())
         .then(data => {
             data.forEach(pair => {
@@ -260,7 +260,7 @@ setInterval(() => {
         });
 
 
-    fetch('https://coin-serv2.herokuapp.com/v2/coinbase')
+    fetch('http://localhost:3001/v2/coinbase')
         .then(response => response.json())
         .then(data => {
 
@@ -390,7 +390,7 @@ setInterval(() => {
 
 
 
-}, 15000);
+}, 3000);
 
 
 
