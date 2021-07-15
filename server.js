@@ -605,6 +605,18 @@ app.get('/coinbase', async (req, res) => {
                     (+binance.find(x => x.symbol === 'UNIUSDT').askPrice /
                         +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
             });
+        
+        
+                if (paribu.ENJ_TL)
+            pairs.push({
+                title: 'ENJ* - PARIBU',
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === 'ENJUSDT').askPrice,
+                sell: +paribu.ENJ_TL.highestBid,
+                result: (+paribu.ENJ_TL.highestBid * (1 - commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'ENJUSDT').askPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+            });
 
 
 
