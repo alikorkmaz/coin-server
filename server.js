@@ -1691,7 +1691,4 @@ process.on('uncaughtException', function(err) {
         },
         function(err, result) {},
     );
-}); {
-    "mode": "full",
-    "isActive": false
-}
+});
