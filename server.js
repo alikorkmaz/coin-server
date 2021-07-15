@@ -595,20 +595,20 @@ app.get('/v2/coinbase', async (req, res) => {
 
 
 
-        if (pairs.length < 3) {
-        if (alarmCaldiMi === 1) return;
-            alarmCaldiMi = 1;
-            setTimeout(function(){
-                alarmCaldiMi = 0;
-            }, 30000);
-            p.send({
-                    message: "HATA ALDIK:" + pairs.length,
-                },
-                function(err, result) {
-                    console.log(result);
-                },
-            );
-        }
+//         if (pairs.length < 3) {
+//         if (alarmCaldiMi === 1) return;
+//             alarmCaldiMi = 1;
+//             setTimeout(function(){
+//                 alarmCaldiMi = 0;
+//             }, 30000);
+//             p.send({
+//                     message: "HATA ALDIK:" + pairs.length,
+//                 },
+//                 function(err, result) {
+//                     console.log(result);
+//                 },
+//             );
+//         }
 
 
 
