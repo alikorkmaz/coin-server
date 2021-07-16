@@ -1136,6 +1136,18 @@ app.get('/coinbase', async (req, res) => {
         });
 
 
+            if (btcturk.some(x => x.pair === 'SOLTRY'))
+        pairs.push({
+            title: 'SOL* - BTCTURK',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'SOLUSDT').askPrice,
+            sell: +btcturk.find(x => x.pair === 'SOLTRY').bid,
+            result: (+btcturk.find(x => x.pair === 'SOLTRY').bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'SOLUSDT').askPrice /
+                    +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+        });
+
+
 
 
         if (btcturk.some(x => x.pair === 'CHZTRY'))
@@ -1914,6 +1926,17 @@ app.get('/coinbasereverse', async (req, res) => {
                     +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
         });
 
+    
+            if (btcturk.some(x => x.pair === 'SOLTRY'))
+        pairs.push({
+            title: 'SOL* - BTCTURK',
+            commission: commissionWithBinance,
+            sell: +binance.find(x => x.symbol === 'SOLUSDT').bidPrice,
+            buy: +btcturk.find(x => x.pair === 'SOLTRY').ask,
+            result: (+btcturk.find(x => x.pair === 'SOLTRY').ask * (1 + commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'SOLUSDT').bidPrice /
+                    +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+        });
 
 
         if (btcturk.some(x => x.pair === 'CHZTRY'))
