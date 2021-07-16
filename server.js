@@ -52,7 +52,7 @@ app.get('/alarm', async (req, res) => {
 
                                         if(bookSum > firsat.bookSum){
                                             firsat.bookSum = bookSum;
-                                            firsat.message = pair.title + ": " + sellAt.toString().substring(0, 6) + " <--- " + bookSum.toString().split(".")[0] + " << " + pair.result.toString().substring(0, 5);
+                                            firsat.message = pair.title + ": " + sellAt.toString().substring(0, 7) + " <--- " + bookSum.toString().split(".")[0] + " << " + pair.result.toString().substring(0, 5);
                                         }
 
                                     }
