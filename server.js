@@ -220,51 +220,11 @@ setInterval(() => {
 
 
 
-    fetch('http://localhost:3001/coinbasereverse')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(pair => {
-                if (
-                    pair.result < tetherBuy - profitMarginReverse &&
-                    text === '' &&
-                    alertReverse.some(title => title === pair.title)
-                ) {
-                    text = pair.title + ": " + pair.result.toString().substring(0, 5);
-                    p.send({
-                            message: text,
-                        },
-                        function(err, result) {
-                            console.log(result);
-                        },
-                    );
-                    alarmCaldiMi = 1;
-                    setTimeout(function(){
-                        alarmCaldiMi = 0;
-                    }, 30000);
-                    return;
-                }
 
-                if (
-                    pair.result < tetherBuy - (ticksizAlarm*2) &&
-                    text === '' &&
-                    !alertReverse.some(title => title === pair.title)
-                ) {
-                    text = "ticksizTersAlarm: " + pair.title + ": " + pair.result.toString().substring(0, 5);
-                    p.send({
-                            message: text,
-                        },
-                        function(err, result) {
-                            console.log(result);
-                        },
-                    );
-                    alarmCaldiMi = 1;
-                    setTimeout(function(){
-                        alarmCaldiMi = 0;
-                    }, 30000);
-                    return;
-                }
-            }); 
-        });
+
+
+
+
 
 
     fetch('http://localhost:3001/v2/coinbase')
@@ -397,6 +357,66 @@ setInterval(() => {
 
             });
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+    fetch('http://localhost:3001/coinbasereverse')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(pair => {
+                if (
+                    pair.result < tetherBuy - profitMarginReverse &&
+                    text === '' &&
+                    alertReverse.some(title => title === pair.title)
+                ) {
+                    text = pair.title + ": " + pair.result.toString().substring(0, 5);
+                    p.send({
+                            message: text,
+                        },
+                        function(err, result) {
+                            console.log(result);
+                        },
+                    );
+                    alarmCaldiMi = 1;
+                    setTimeout(function(){
+                        alarmCaldiMi = 0;
+                    }, 30000);
+                    return;
+                }
+
+                if (
+                    pair.result < tetherBuy - (ticksizAlarm*2) &&
+                    text === '' &&
+                    !alertReverse.some(title => title === pair.title)
+                ) {
+                    text = "ticksizTersAlarm: " + pair.title + ": " + pair.result.toString().substring(0, 5);
+                    p.send({
+                            message: text,
+                        },
+                        function(err, result) {
+                            console.log(result);
+                        },
+                    );
+                    alarmCaldiMi = 1;
+                    setTimeout(function(){
+                        alarmCaldiMi = 0;
+                    }, 30000);
+                    return;
+                }
+            }); 
+        });
+
+
 
 
 
