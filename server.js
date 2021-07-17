@@ -256,7 +256,7 @@ setInterval(() => {
                                 alert.some(title => title === pair.title)
                             ) {
                                 // text = pair.title + ": " +  + " (sell:" + sellAt.toString().substring(0, 6) + ") Total: " + bookSum.toString().split(".")[0];
-                                text = pair.title + ": " + sellAt.toString().substring(0, 6) + " <--- " + bookSum.toString().split(".")[0] + " << " + pair.result.toString().substring(0, 5);
+                                text = pair.title + ": " + sellAt.toString().substring(0, 7) + " <--- " + bookSum.toString().split(".")[0] + " << " + pair.result.toString().substring(0, 5);
                                 if (profitMargin == -1) {
                                     if (pair.result > currentTetherBuy) {
                                         alarmCaldiMi = 1;
