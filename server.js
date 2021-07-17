@@ -43,7 +43,7 @@ app.get('/alarm', async (req, res) => {
 
 
                     let currentTetherBuy = tetherBuy;
-                    if(pair.title.includes("DOGE") || pair.title.includes("CHZ") || pair.title.includes("WAVES")) currentTetherBuy = currentTetherBuy - 0.01;
+                    if(pair.title.includes("DOGE") || pair.title.includes("CHZ") || pair.title.includes("WAVES") || pair.title.includes("BTT")) currentTetherBuy = currentTetherBuy - 0.01;
 
                 
 
@@ -239,7 +239,7 @@ setInterval(() => {
                 if(tetherBuy > 0 && pair.book && pair.book != {}){
 
                     let currentTetherBuy = tetherBuy;
-                    if(pair.title.includes("DOGE") || pair.title.includes("CHZ") || pair.title.includes("WAVES")) currentTetherBuy = currentTetherBuy - 0.01;
+                    if(pair.title.includes("DOGE") || pair.title.includes("CHZ") || pair.title.includes("WAVES") || pair.title.includes("BTT")) currentTetherBuy = currentTetherBuy - 0.01;
 
                     let sellAt = (currentTetherBuy * pair.sell) / pair.result;
                     let bookSum = getBookSum(sellAt, pair.book);
