@@ -40,7 +40,14 @@ app.get('/alarm', async (req, res) => {
 
             data.forEach(pair => {
                 if(tetherBuy > 0 && pair.book && pair.book != {}){
-                    let sellAt = (tetherBuy * pair.sell) / pair.result;
+
+
+                    let currentTetherBuy = tetherBuy;
+                    if(pair.title.includes("DOGE") || pair.title.includes("CHZ") || pair.title.includes("WAVES")) currentTetherBuy = currentTetherBuy - 0.01;
+
+                
+
+                    let sellAt = (currentTetherBuy * pair.sell) / pair.result;
                     let bookSum = getBookSum(sellAt, pair.book);
                     if(bookSum > toplamEmirTl){
                         if (
@@ -48,7 +55,7 @@ app.get('/alarm', async (req, res) => {
                                 alert.some(title => title === pair.title)
                             ) {
                                 if (profitMargin == -1) {
-                                    if (pair.result > tetherBuy) {
+                                    if (pair.result > currentTetherBuy) {
 
                                         if(bookSum > firsat.bookSum){
                                             firsat.bookSum = bookSum;
@@ -270,11 +277,14 @@ setInterval(() => {
 
 
                 if(tetherBuy > 0 && pair.book && pair.book != {}){
-                    let sellAt = (tetherBuy * pair.sell) / pair.result;
+
+                    let currentTetherBuy = tetherBuy;
+                    if(pair.title.includes("DOGE") || pair.title.includes("CHZ") || pair.title.includes("WAVES")) currentTetherBuy = currentTetherBuy - 0.01;
+
+                    let sellAt = (currentTetherBuy * pair.sell) / pair.result;
                     let bookSum = getBookSum(sellAt, pair.book);
                     if(bookSum > toplamEmirTl){
                         
-
 
 
 
@@ -286,7 +296,7 @@ setInterval(() => {
                                 // text = pair.title + ": " +  + " (sell:" + sellAt.toString().substring(0, 6) + ") Total: " + bookSum.toString().split(".")[0];
                                 text = pair.title + ": " + sellAt.toString().substring(0, 6) + " <--- " + bookSum.toString().split(".")[0] + " << " + pair.result.toString().substring(0, 5);
                                 if (profitMargin == -1) {
-                                    if (pair.result > tetherBuy) {
+                                    if (pair.result > currentTetherBuy) {
                                         alarmCaldiMi = 1;
                                         setTimeout(function(){
                                             alarmCaldiMi = 0;
@@ -332,7 +342,7 @@ setInterval(() => {
                             }
 
                             if (
-                                pair.result > tetherBuy + ticksizAlarm &&
+                                pair.result > currentTetherBuy + ticksizAlarm &&
                                 text === '' &&
                                 !alert.some(title => title === pair.title)
                             ) {
