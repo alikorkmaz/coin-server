@@ -184,9 +184,9 @@ let hataAlarmiSustur = 1;
 let ticksizAlarm= 0.10;
 let toplamEmirTl= 30000;
 
-cron.schedule('0 5 * * *', () => { tetherMargin = 0; toplamEmirTl = 50000; });
+cron.schedule('0 8 * * *', () => { tetherMargin = 0; toplamEmirTl = 50000; });
 
-cron.schedule('0 4 * * *', () => { toplamEmirTl = 60000; });
+cron.schedule('0 7 * * *', () => { toplamEmirTl = 60000; });
 
 setInterval(function(){
     alarmCaldiMi = 0;
