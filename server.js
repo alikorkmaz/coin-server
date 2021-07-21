@@ -600,6 +600,125 @@ app.get('/coinbase', async (req, res) => {
                 (+binance.find(x => x.symbol === 'DOGEUSDT').askPrice)
         });
 
+
+        pairs.push({
+            title: 'AAVE* - BITEXEN',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'AAVEUSDT').askPrice,
+            sell: +bitexen.ticker.AAVETRY.bid,
+            result: (+bitexen.ticker.AAVETRY.bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'AAVEUSDT').askPrice)
+        });
+
+        pairs.push({
+            title: 'ADA* - BITEXEN',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'ADAUSDT').askPrice,
+            sell: +bitexen.ticker.ADATRY.bid,
+            result: (+bitexen.ticker.ADATRY.bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'ADAUSDT').askPrice)
+        });
+
+        pairs.push({
+            title: 'BTC* - BITEXEN',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'BTCUSDT').askPrice,
+            sell: +bitexen.ticker.BTCTRY.bid,
+            result: (+bitexen.ticker.BTCTRY.bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'BTCUSDT').askPrice)
+        });
+
+        pairs.push({
+            title: 'BTT* - BITEXEN',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'BTTUSDT').askPrice,
+            sell: +bitexen.ticker.BTTTRY.bid,
+            result: (+bitexen.ticker.BTTTRY.bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'BTTUSDT').askPrice)
+        });
+
+        pairs.push({
+            title: 'DOT* - BITEXEN',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'DOTUSDT').askPrice,
+            sell: +bitexen.ticker.DOTTRY.bid,
+            result: (+bitexen.ticker.DOTTRY.bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'DOTUSDT').askPrice)
+        });
+
+        pairs.push({
+            title: 'ETH* - BITEXEN',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'ETHUSDT').askPrice,
+            sell: +bitexen.ticker.ETHTRY.bid,
+            result: (+bitexen.ticker.ETHTRY.bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'ETHUSDT').askPrice)
+        });
+
+        pairs.push({
+            title: 'HOT* - BITEXEN',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'HOTUSDT').askPrice,
+            sell: +bitexen.ticker.HOTTRY.bid,
+            result: (+bitexen.ticker.HOTTRY.bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'HOTUSDT').askPrice)
+        });
+
+        pairs.push({
+            title: 'LINK* - BITEXEN',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'LINKUSDT').askPrice,
+            sell: +bitexen.ticker.LINKTRY.bid,
+            result: (+bitexen.ticker.LINKTRY.bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'LINKUSDT').askPrice)
+        });
+
+        pairs.push({
+            title: 'LTC* - BITEXEN',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'LTCUSDT').askPrice,
+            sell: +bitexen.ticker.LTCTRY.bid,
+            result: (+bitexen.ticker.LTCTRY.bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'LTCUSDT').askPrice)
+        });
+
+        pairs.push({
+            title: 'NEO* - BITEXEN',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'NEOUSDT').askPrice,
+            sell: +bitexen.ticker.NEOTRY.bid,
+            result: (+bitexen.ticker.NEOTRY.bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'NEOUSDT').askPrice)
+        });
+
+        pairs.push({
+            title: 'SOL* - BITEXEN',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'SOLUSDT').askPrice,
+            sell: +bitexen.ticker.SOLTRY.bid,
+            result: (+bitexen.ticker.SOLTRY.bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'SOLUSDT').askPrice)
+        });
+
+        pairs.push({
+            title: 'XLM* - BITEXEN',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'XLMUSDT').askPrice,
+            sell: +bitexen.ticker.XLMTRY.bid,
+            result: (+bitexen.ticker.XLMTRY.bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'XLMUSDT').askPrice)
+        });
+
+        pairs.push({
+            title: 'XRP* - BITEXEN',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'XRPUSDT').askPrice,
+            sell: +bitexen.ticker.XRPTRY.bid,
+            result: (+bitexen.ticker.XRPTRY.bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'XRPUSDT').askPrice)
+        });
+
+
     }
 
 
