@@ -657,6 +657,20 @@ app.get('/coinbase', async (req, res) => {
             });
 
 
+                        if (paribu.GRT_TL)
+            pairs.push({
+                title: 'GRT* - PARIBU',
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === 'GRTUSDT').askPrice,
+                sell: +paribu.GRT_TL.highestBid,
+                result: (+paribu.GRT_TL.highestBid * (1 - commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'GRTUSDT').askPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
+            });
+
+
+
+
 
 
 
@@ -1544,6 +1558,19 @@ app.get('/coinbasereverse', async (req, res) => {
                     (+binance.find(x => x.symbol === 'OGNUSDT').bidPrice /
                         +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
             });
+
+
+        if (paribu.GRT_TL)
+            pairs.push({
+                title: 'GRT* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'GRTUSDT').bidPrice,
+                buy: +paribu.GRT_TL.lowestAsk,
+                result: (+paribu.GRT_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'GRTUSDT').bidPrice /
+                        +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
+            });
+
 
 
         if (paribu.REEF_TL)
