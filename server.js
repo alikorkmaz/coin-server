@@ -588,6 +588,19 @@ app.get('/coinbase', async (req, res) => {
 
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => console.log(x));
     let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data).catch(x => console.log(x));
+    let bitexen = await fetch('https://www.bitexen.com/api/v1/ticker/').then(r => r.json()).then(j => j.data).catch(x => console.log(x));
+
+    if(bitexen) {
+        pairs.push({
+            title: 'DOGE* - BITEXEN',
+            commission: commissionWithBinance,
+            buy: +binance.find(x => x.symbol === 'DOGEUSDT').askPrice,
+            sell: +bitexen.ticker.DOGETRY.bid,
+            result: (+bitexen.ticker.DOGETRY.bid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'DOGEUSDT').askPrice)
+        });
+
+    }
 
 
     if (paribu) {
