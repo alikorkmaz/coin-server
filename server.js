@@ -90,18 +90,19 @@ setInterval(() => {
     if (alarmCaldiMi === 1) return;
 
     if(myAlarm === 0){
-        p.send({
-                message: "ALARM BOZULDU",
-            },
-            function(err, result) {
-                console.log(result);
-            },
-        );
-        alarmCaldiMi = 1;
-        setTimeout(function(){
-            alarmCaldiMi = 0;
-        }, 30000);
         return;
+//         p.send({
+//                 message: "ALARM BOZULDU",
+//             },
+//             function(err, result) {
+//                 console.log(result);
+//             },
+//         );
+//         alarmCaldiMi = 1;
+//         setTimeout(function(){
+//             alarmCaldiMi = 0;
+//         }, 30000);
+//         return;
     }
 
 
