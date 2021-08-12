@@ -245,13 +245,17 @@ app.get('/kur', (req, res) => {
 
 app.get('/caldir', (req, res) => {
 
-        p.send({
-            message: "ALARM TEST",
-        },
-        function(err, result) {
-            console.log(result);
-        },
-        );
+        setTimeout(function(){
+            
+            p.send({
+                message: "ALARM TEST",
+            },
+            function(err, result) {
+                console.log(result);
+            },
+            );
+        }, 1000);
+
 
         res.send({
             kur: kur.toFixed(4)
