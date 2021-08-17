@@ -70,7 +70,7 @@ var p = new Push({
     token: 'a26qjmrach23epfar8zatfh7apcyfd',
 });
 
-let profitMargin = 0.1;
+let profitMargin = -1;
 let tetherBuy = -1;
 let tetherMargin = 0;
 let profitMarginReverse = 0;
