@@ -801,7 +801,15 @@ app.get('/coinbase', async (req, res) => {
 
 
 
-
+                        if (paribu.CRV_TL)
+            pairs.push({
+                title: 'CRV* - PARIBU',
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === 'CRVUSDT').askPrice,
+                sell: +paribu.CRV_TL.highestBid,
+                result: (+paribu.CRV_TL.highestBid * (1 - commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'CRVUSDT').askPrice ),
+            });
 
 
 
@@ -1511,6 +1519,18 @@ app.get('/coinbasereverse', async (req, res) => {
                 result: (+paribu.BAL_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'BALUSDT').bidPrice),
             });
+
+        
+        if (paribu.CRV_TL)
+            pairs.push({
+                title: 'CRV* - PARIBU',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'CRVUSDT').bidPrice,
+                buy: +paribu.CRV_TL.lowestAsk,
+                result: (+paribu.CRV_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'CRVUSDT').bidPrice),
+            });
+
 
 
 
