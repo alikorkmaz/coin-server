@@ -276,6 +276,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'MATIC', pairs),
             getWithSymbol(binance, 'OXT', pairs),
             getWithSymbol(binance, 'BCH', pairs),
+            getWithSymbol(binance, 'CRV', pairs),
 
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
@@ -803,6 +804,16 @@ app.get('/coinbasereverse', async (req, res) => {
         //     });
 
 
+
+        if (paribu.CRV_TL)
+            pairs.push({
+                title: 'CRV',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'CRVUSDT').bidPrice,
+                buy: +paribu.CRV_TL.lowestAsk,
+                result: (+paribu.CRV_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'CRVUSDT').bidPrice )
+            });
 
 
         if (paribu.BCH_TL)
