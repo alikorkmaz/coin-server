@@ -277,6 +277,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'OXT', pairs),
             getWithSymbol(binance, 'BCH', pairs),
             getWithSymbol(binance, 'CRV', pairs),
+            getWithSymbol(binance, 'MANA', pairs),
 
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
@@ -803,6 +804,15 @@ app.get('/coinbasereverse', async (req, res) => {
         //                 +binance.find(x => x.symbol === 'USDCUSDT').askPrice),
         //     });
 
+                if (paribu.MANA_TL)
+            pairs.push({
+                title: 'MANA',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'MANAUSDT').bidPrice,
+                buy: +paribu.MANA_TL.lowestAsk,
+                result: (+paribu.MANA_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'MANAUSDT').bidPrice )
+            });
 
 
         if (paribu.CRV_TL)
