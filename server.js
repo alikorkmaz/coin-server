@@ -118,8 +118,36 @@ let artibirkr = ["OXT", "LINK", "AAVE", "UNI", "BAL", "MKR"];
 let eksibirkr = ["DOGE", "WAVES", "BTT"]
 
 setInterval(function(){
-    alarmCaldiMi = 0;
-}, 600000);
+    
+    let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
+    let tetheriniz = +paribu.USDT_TL.lowestAsk + 0.1;
+
+    fetch('http://ec2-18-222-16-156.us-east-2.compute.amazonaws.com:3000/v2/coinbase')
+    .then(response => response.json())
+    .then(data => {
+
+
+        data.filter(pair => pair.title.includes("BTCTURK")
+            .forEach(pair => {
+
+                
+                if(tetheriniz < pair.result){
+                            p.send({
+                                    message: "btcturke bi bak",
+                                },
+                                function(err, result) {
+                                    {};
+                                },
+                            );
+                            alarmCaldiMi = 1;
+                            setTimeout(function(){
+                                alarmCaldiMi = 0;
+                            }, 600000);
+                }
+            
+            
+            });
+}, 30000);
 
 setTimeout(() => {
     fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
