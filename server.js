@@ -117,7 +117,7 @@ let toplamEmirTl= 30000;
 let artibirkr = ["OXT", "LINK", "AAVE", "UNI", "BAL", "MKR"];
 let eksibirkr = ["DOGE", "WAVES", "BTT"]
 
-setInterval(function(){
+setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
     let tetheriniz = +paribu.USDT_TL.lowestAsk + 0.1;
