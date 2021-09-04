@@ -119,6 +119,8 @@ let eksibirkr = ["DOGE", "WAVES", "BTT"]
 
 setInterval(async function(){
     
+    if(alarmCaldiMi === 1) return;
+    
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
     let tetheriniz = +paribu.USDT_TL.lowestAsk + 0.1;
 
@@ -142,7 +144,7 @@ setInterval(async function(){
                             alarmCaldiMi = 1;
                             setTimeout(function(){
                                 alarmCaldiMi = 0;
-                            }, 600000);
+                            }, 300000);
                 }
             
             
