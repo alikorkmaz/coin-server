@@ -127,10 +127,10 @@ setInterval(function(){
     .then(data => {
 
 
-        data.filter(pair => pair.title.includes("BTCTURK")
+        data.filter(pair => pair.title.includes("BTCTURK"))
             .forEach(pair => {
 
-                
+
                 if(tetheriniz < pair.result){
                             p.send({
                                     message: "btcturke bi bak",
@@ -147,7 +147,11 @@ setInterval(function(){
             
             
             });
-}, 30000);
+
+        });
+
+
+}, 60000);
 
 setTimeout(() => {
     fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
