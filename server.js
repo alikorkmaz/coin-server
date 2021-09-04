@@ -230,6 +230,50 @@ async function getWithSymbol(binance, symbol, pairs){
     }
 }
 
+
+async function getBtcturk(binance, pairs){
+    let btcturk;
+    try{
+
+
+
+        let commission = 0.0065;
+        let commissionWithBinance = 0.0065;
+        let commissionWithBinanceUSDT = 0.0055;
+
+        btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data).catch(x => console.log(x));
+        
+        btcturk.forEach(item => {
+
+
+
+            try {
+            
+            let mySymbol = item.pairNormalized.split("_")[0];
+            if(item.pairNormalized.split("_")[1] != "TRY") return;
+            
+            if (binance.find(x => x.symbol === mySymbol + 'USDT'))
+                pairs.push({
+                    title: mySymbol + ' - BTCTURK',
+                    commission: commissionWithBinance,
+                    buy: +binance.find(x => x.symbol === mySymbol + 'USDT').askPrice,
+                    sell: +btcturk.find(x => x.pair === mySymbol + 'TRY').bid,
+                    result: (+btcturk.find(x => x.pair === mySymbol + 'TRY').bid * (1 - commissionWithBinance)) /
+                        (+binance.find(x => x.symbol === mySymbol + 'USDT').askPrice ),
+                });
+
+            }
+            catch{}
+
+
+
+        });
+
+    } catch {
+
+    }
+}
+
 app.get('/v2/coinbase', async (req, res) => {
     let pairs = [];
 
@@ -278,7 +322,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'BCH', pairs),
             getWithSymbol(binance, 'CRV', pairs),
             getWithSymbol(binance, 'MANA', pairs),
-
+            getBtcturk(binance, pairs)
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
             // getWithSymbol(binance, 'ASR', pairs),
