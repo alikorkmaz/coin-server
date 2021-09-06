@@ -244,7 +244,13 @@ async function getWithSymbol(binance, symbol, pairs){
         let commissionWithBinance = 0.0065;
         let commissionWithBinanceUSDT = 0.0055;
 
-        paribu = await fetch('https://v3.paribu.com/app/markets/'+symbol.toLowerCase()+'-tl?interval=1000').then(r => r.json()).catch(x => {});
+                if(symbol === "IOTA"){
+                    paribu = await fetch('https://v3.paribu.com/app/markets/miota-tl?interval=1000').then(r => r.json()).catch(x => {});
+
+                }else{
+        paribu = await fetch('https://v3.paribu.com/app/markets/'+symbol.toLowerCase()+'-tl?interval=1000').then(r => r.json()).catch(x => {});            
+                }
+
 
         let pariBuyPrice = Object.keys(paribu.data.orderBook.buy)[0];
         let orderBook = paribu.data.orderBook.buy || {};
@@ -904,15 +910,17 @@ app.get('/coinbasereverse', async (req, res) => {
                     (+binance.find(x => x.symbol === 'CRVUSDT').bidPrice )
             });
         
-                if (paribu.IOTA_TL)
+
+                if (paribu.MIOTA_TL)
             pairs.push({
                 title: 'IOTA',
                 commission: commissionWithBinance,
                 sell: +binance.find(x => x.symbol === 'IOTAUSDT').bidPrice,
-                buy: +paribu.IOTA_TL.lowestAsk,
-                result: (+paribu.IOTA_TL.lowestAsk * (1 + commissionWithBinance)) /
+                buy: +paribu.MIOTA_TL.lowestAsk,
+                result: (+paribu.MIOTA_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'IOTAUSDT').bidPrice )
             });
+
 
 
         if (paribu.BCH_TL)
