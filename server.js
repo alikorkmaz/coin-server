@@ -362,6 +362,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'BCH', pairs),
             getWithSymbol(binance, 'CRV', pairs),
             getWithSymbol(binance, 'MANA', pairs),
+            getWithSymbol(binance, 'MINA', pairs),
             getWithSymbol(binance, 'IOTA', pairs),
             getBtcturk(binance, pairs)
             // getWithSymbol(binance, 'JUV', pairs),
@@ -908,6 +909,16 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.CRV_TL.lowestAsk,
                 result: (+paribu.CRV_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'CRVUSDT').bidPrice )
+            });
+        
+                        if (paribu.MINA_TL)
+            pairs.push({
+                title: 'MINA',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'MINAUSDT').bidPrice,
+                buy: +paribu.MINA_TL.lowestAsk,
+                result: (+paribu.MINA_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'MINAUSDT').bidPrice )
             });
         
 
