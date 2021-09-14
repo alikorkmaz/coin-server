@@ -129,7 +129,7 @@ setInterval(async function(){
     .then(data => {
 
 
-        data.filter(pair => (pair.title.includes("BTCTURK") && !pair.title.includes("ADA") && !pair.title.includes("ANAN")))
+        data.filter(pair => (pair.title.includes("BTCTURK") && !pair.title.includes("ADA") && !pair.title.includes("SOL")))
             .forEach(pair => {
 
 
