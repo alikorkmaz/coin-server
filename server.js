@@ -365,6 +365,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'MINA', pairs),
             getWithSymbol(binance, 'IOTA', pairs),
             getWithSymbol(binance, 'SOL', pairs),
+            getWithSymbol(binance, 'KEEP', pairs),
             getBtcturk(binance, pairs)
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
@@ -899,6 +900,18 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.MANA_TL.lowestAsk,
                 result: (+paribu.MANA_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'MANAUSDT').bidPrice )
+            });
+
+        
+        
+                if (paribu.KEEP_TL)
+            pairs.push({
+                title: 'KEEP',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'KEEPUSDT').bidPrice,
+                buy: +paribu.KEEP_TL.lowestAsk,
+                result: (+paribu.KEEP_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'KEEPUSDT').bidPrice )
             });
 
 
