@@ -171,10 +171,10 @@ setInterval(async function(){
                                     {};
                                 },
                             );
-                            alarmCaldiMi = 1;
+
                             setTimeout(function(){
-                                alarmCaldiMi = 0;
-                            }, 300000);
+                                pair_sayisi = 67;
+                            }, 60000);
                 }
             
 
