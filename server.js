@@ -155,7 +155,7 @@ setInterval(async function(){
 
 }, 60000);
 
-
+let pair_sayisi = 65;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -163,9 +163,9 @@ setInterval(async function(){
 
     
 
-                if(Object.keys(paribu).length > 65){
+                if(Object.keys(paribu).length > pair_sayisi){
                             p.send({
-                                    message: "coin geldi " + Object.keys(paribu).length + " " + Object.keys(obj)[66],
+                                    message: "coin geldi " + Object.keys(paribu).length + " " + Object.keys(obj)[pair_sayisi],
                                 },
                                 function(err, result) {
                                     {};
