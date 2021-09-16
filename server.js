@@ -163,9 +163,9 @@ setInterval(async function(){
 
     
 
-                if(Object.keys(paribu).length > 66){
+                if(Object.keys(paribu).length > 65){
                             p.send({
-                                    message: "coin geldi " + Object.keys(paribu).length,
+                                    message: "coin geldi " + Object.keys(paribu).length + " " + Object.keys(obj)[66],
                                 },
                                 function(err, result) {
                                     {};
