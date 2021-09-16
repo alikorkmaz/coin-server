@@ -165,7 +165,7 @@ setInterval(async function(){
 
                 if(Object.keys(paribu).length > pair_sayisi){
                             p.send({
-                                    message: "coin geldi " + Object.keys(paribu).length + " " + Object.keys(obj)[pair_sayisi],
+                                    message: "coin geldi " + Object.keys(paribu).length + " " + Object.keys(paribu)[pair_sayisi],
                                 },
                                 function(err, result) {
                                     {};
