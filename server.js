@@ -155,6 +155,33 @@ setInterval(async function(){
 
 }, 60000);
 
+
+setInterval(async function(){
+    
+    let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
+
+
+    
+
+                if(Object.keys(paribu).length > 65){
+                            p.send({
+                                    message: "coin geldi " + Object.keys(paribu).length,
+                                },
+                                function(err, result) {
+                                    {};
+                                },
+                            );
+                            alarmCaldiMi = 1;
+                            setTimeout(function(){
+                                alarmCaldiMi = 0;
+                            }, 300000);
+                }
+            
+
+
+
+}, 10000);
+
 setTimeout(() => {
     fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
         .then(response => response.json())
