@@ -320,15 +320,44 @@ async function getBtcturk(binance, pairs){
             if(item.pairNormalized.split("_")[1] != "TRY") return;
             
             if (binance.find(x => x.symbol === mySymbol + 'USDT'))
-                pairs.push({
+                
+                if(mySymbol === 'SHIB'){
+                    
+                  pairs.push({
+                    title: mySymbol + ' - BTCTURK',
+                    commission: commissionWithBinance,
+                    buy: +binance.find(x => x.symbol === mySymbol + 'USDT').askPrice * 1000,
+                    sell: +btcturk.find(x => x.pair === mySymbol + 'TRY').bid * 1000,
+                    result: (+btcturk.find(x => x.pair === mySymbol + 'TRY').bid * (1 - commissionWithBinance)) /
+                        (+binance.find(x => x.symbol === mySymbol + 'USDT').askPrice ),
+                 });
+                    
+                
+                
+                
+                } else {
+                    
+                 pairs.push({
                     title: mySymbol + ' - BTCTURK',
                     commission: commissionWithBinance,
                     buy: +binance.find(x => x.symbol === mySymbol + 'USDT').askPrice,
                     sell: +btcturk.find(x => x.pair === mySymbol + 'TRY').bid,
                     result: (+btcturk.find(x => x.pair === mySymbol + 'TRY').bid * (1 - commissionWithBinance)) /
                         (+binance.find(x => x.symbol === mySymbol + 'USDT').askPrice ),
-                });
+                 });
+                    
+                    
+                }
+                
+               
+                
 
+
+            
+            
+            
+            
+            
             }
             catch{}
 
