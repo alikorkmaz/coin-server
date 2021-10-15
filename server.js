@@ -122,7 +122,7 @@ setInterval(async function(){
     if(alarmCaldiMi === 1) return;
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
-    let tetheriniz = +paribu.USDT_TL.lowestAsk + 0.05;
+    let tetheriniz = +paribu.USDT_TL.lowestAsk + 0.15;
 
     fetch('http://ec2-18-222-16-156.us-east-2.compute.amazonaws.com:3000/v2/coinbase')
     .then(response => response.json())
