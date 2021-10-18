@@ -286,7 +286,7 @@ setInterval(() => {
 
             data.forEach(pair => {
 
-
+                if(pair.title.includes("BTCTURK") return;
 
                 if(tetherBuy > 0 && pair.book && pair.book != {}){
 
