@@ -83,6 +83,7 @@ app.get('/alarm', async (req, res) => {
                 );
 
             }else {
+                console.log("olmadi \n");
                 alarmCaldiMi = 0;
             }
 
