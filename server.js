@@ -423,6 +423,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'SOL', pairs),
             getWithSymbol(binance, 'KEEP', pairs),
             getWithSymbol(binance, 'VET', pairs),
+            getWithSymbol(binance, 'ANKR', pairs),
             getBtcturk(binance, pairs)
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
@@ -958,6 +959,28 @@ app.get('/coinbasereverse', async (req, res) => {
                 result: (+paribu.MANA_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'MANAUSDT').bidPrice )
             });
+        
+                    if (paribu.ANKR_TL)
+            pairs.push({
+                title: 'ANKR',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'ANKRUSDT').bidPrice,
+                buy: +paribu.ANKR_TL.lowestAsk,
+                result: (+paribu.ANKR_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'ANKRUSDT').bidPrice )
+            });
+
+        
+                if (paribu.MANA_TL)
+            pairs.push({
+                title: 'MANA',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'MANAUSDT').bidPrice,
+                buy: +paribu.MANA_TL.lowestAsk,
+                result: (+paribu.MANA_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'MANAUSDT').bidPrice )
+            });
+
 
         
         
