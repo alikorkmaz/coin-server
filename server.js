@@ -28,7 +28,7 @@ app.get('/alarm', async (req, res) => {
     if (kur === 0 && currentAlert !== -1) return;
 
 
-    fetch('http://ec2-18-222-16-156.us-east-2.compute.amazonaws.com:3001/v2/coinbase')
+    fetch('http://ec2-18-222-16-156.us-east-2.compute.amazonaws.com:3000/v2/coinbase')
         .then(response => response.json())
         .then(data => {
 
@@ -100,7 +100,7 @@ app.get('/alarm', async (req, res) => {
 });
 
 setInterval(() => {
-    fetch('http://ec2-18-222-16-156.us-east-2.compute.amazonaws.com:3001/tetherTask')
+    fetch('http://ec2-18-222-16-156.us-east-2.compute.amazonaws.com:3000/tetherTask')
         .then(response => response.json());
 }, 30000);
 
@@ -244,7 +244,7 @@ setInterval(() => {
 
 
 
-    fetch('http://ec2-18-222-16-156.us-east-2.compute.amazonaws.com:3001/v2/coinbase')
+    fetch('http://ec2-18-222-16-156.us-east-2.compute.amazonaws.com:3000/v2/coinbase')
         .then(response => response.json())
         .then(data => {
 
@@ -428,7 +428,7 @@ setInterval(() => {
 
 
 
-    fetch('http://ec2-18-222-16-156.us-east-2.compute.amazonaws.com:3001/coinbasereverse')
+    fetch('http://ec2-18-222-16-156.us-east-2.compute.amazonaws.com:3000/coinbasereverse')
         .then(response => response.json())
         .then(data => {
             data.forEach(pair => {
@@ -1943,7 +1943,8 @@ app.get('/coinbasereverse', async (req, res) => {
     );
 });
 
-app.listen(3000, () => console.log('listening..') + "\n");
+app.listen(3000, () => console.log('listening..'));
+
 
 process.on('uncaughtException', function(err) {
     p.send({
