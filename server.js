@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const fetch = require('node-fetch');
 const cron = require('node-cron');
-const sound = require('sound-play')
 
 
 app.use(function(req, res, next) {
@@ -73,7 +72,6 @@ app.get('/alarm', async (req, res) => {
 
 
             if(firsat.message){
-                    sound.play('./short.mp3')
                     console.log("# " + firsat.message + "\n");
                     ee.send({
                         message: firsat.message,
@@ -86,7 +84,6 @@ app.get('/alarm', async (req, res) => {
 
             }else {
                 alarmCaldiMi = 0;
-                sound.play('./muck.mp3')
             }
 
 
@@ -211,7 +208,6 @@ setInterval(() => {
     if (alarmCaldiMi === 1) return;
 
     if(myAlarm === 0){
-        sound.play('./alarm.mp3')
 
         console.log("ALARM BOZULDU" + "\n");
         p.send({
@@ -282,7 +278,6 @@ setInterval(() => {
                                         setTimeout(function(){
                                             alarmCaldiMi = 0;
                                         }, 30000);
-                                        sound.play('./alarm.mp3')
                                         console.log("- " + text + "\n");
                                         setTimeout(function(){
                                                 cc.send({
@@ -338,7 +333,6 @@ setInterval(() => {
                                     }
                                     
                                 } else {
-                                    sound.play('./alarm.mp3')
                                     console.log("- " + text + "\n");
                                     p.send({
                                             message: text,
@@ -361,7 +355,7 @@ setInterval(() => {
                                 !alert.some(title => title === pair.title)
                             ) {
                                 text = "ticksizAlarm: " + pair.title + ": " + pair.result.toString().substring(0, 5) + " (sell:" + pair.sell.toString().substring(0, 6) + ")";
-                                sound.play('./alarm.mp3')
+
                                 console.log("- " + text + "\n");
                                 p.send({
                                         message: text,
@@ -393,7 +387,7 @@ setInterval(() => {
                     setTimeout(function(){
                         alarmCaldiMi = 0;
                     }, 30000);
-                    sound.play('./alarm.mp3')
+
                     console.log("bi bokluk var" + "\n");
                     p.send({
                             message: "bi bokluk var",
@@ -438,7 +432,6 @@ setInterval(() => {
                     alertReverse.some(title => title === pair.title)
                 ) {
                     text = pair.title + ": " + pair.result.toString().substring(0, 5);
-                    sound.play('./alarm.mp3')
                     console.log(text + "\n");
                     p.send({
                             message: text,
@@ -460,7 +453,6 @@ setInterval(() => {
                     !alertReverse.some(title => title === pair.title)
                 ) {
                     text = "ticksizTersAlarm: " + pair.title + ": " + pair.result.toString().substring(0, 5);
-                    sound.play('./alarm.mp3')
                     console.log(text + "\n");
                     p.send({
                             message: text,
@@ -569,7 +561,6 @@ app.get('/kur', (req, res) => {
 
 
 app.get('/caldir', (req, res) => {
-        sound.play('./alarm.mp3')
         console.log("ALARM TEST" + "\n");
         p.send({
             message: "ALARM TEST",
