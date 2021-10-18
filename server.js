@@ -284,9 +284,7 @@ setInterval(() => {
         .then(data => {
 
 
-            data.forEach(pair => {
-
-                if(pair.title.includes("BTCTURK") return;
+            data.filter(pair => !pair.title.includes("BTCTURK")).forEach(pair => {
 
                 if(tetherBuy > 0 && pair.book && pair.book != {}){
 
