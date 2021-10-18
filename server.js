@@ -201,6 +201,45 @@ setInterval(function(){
     alarmCaldiMi = 0;
 }, 600000);
 
+setInterval(async function(){
+    
+    if(alarmCaldiMi === 1) return;
+    
+    let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
+    let tetheriniz = +paribu.USDT_TL.lowestAsk + 0.05;
+
+    fetch('http://ec2-18-222-16-156.us-east-2.compute.amazonaws.com:3000/v2/coinbase')
+    .then(response => response.json())
+    .then(data => {
+
+
+        data.filter(pair => (pair.title.includes("BTCTURK") && !pair.title.includes("anan") && !pair.title.includes("BABA")))
+            .forEach(pair => {
+
+
+                if(tetheriniz < pair.result){
+                            p.send({
+                                    message: "btcturke bi bak",
+                                },
+                                function(err, result) {
+                                    {};
+                                },
+                            );
+                            alarmCaldiMi = 1;
+                            setTimeout(function(){
+                                alarmCaldiMi = 0;
+                            }, 300000);
+                }
+            
+            
+            });
+
+        });
+
+
+}, 60000);
+
+
 
 setInterval(() => {
 
