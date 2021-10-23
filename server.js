@@ -153,7 +153,7 @@ setInterval(async function(){
         });
 
 
-}, 60000);
+}, 10000);
 
 let pair_sayisi = 69;
 setInterval(async function(){
