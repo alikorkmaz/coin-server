@@ -442,6 +442,22 @@ app.get('/v2/coinbase', async (req, res) => {
     );
 });
 
+app.get('/vur', (req, res) => {
+        console.log("ALARM TEST" + "\n");
+        p.send({
+            message: "ALARM TEST",
+        },
+        function(err, result) {
+            {};
+        },
+        );
+
+        res.send({
+            kur: kur.toFixed(4)
+        });
+
+});
+
 app.get('/coinbase', async (req, res) => {
     let pairs = [];
     let commission = 0.0065;
