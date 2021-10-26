@@ -155,7 +155,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 69;
+let pair_sayisi = 70;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -173,7 +173,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 70;
+                                pair_sayisi = 71;
                             }, 60000);
                 }
             
@@ -283,15 +283,30 @@ async function getWithSymbol(binance, symbol, pairs){
         let orderBook = paribu.data.orderBook.buy || {};
 
 
-        pairs.push({
-            title: symbol,
-            commission: commissionWithBinance,
-            buy: +binance.find(x => x.symbol === symbol+'USDT').askPrice,
-            sell: +pariBuyPrice,
-            result: (pariBuyPrice * (1 - commissionWithBinance)) /
-                +binance.find(x => x.symbol === symbol+'USDT').askPrice,
-            book: orderBook
-        });
+        if(symbol === "SHIB"){
+            pairs.push({
+                title: symbol,
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === symbol+'USDT').askPrice * 1000,
+                sell: +pariBuyPrice * 1000,
+                result: (pariBuyPrice * (1 - commissionWithBinance)) /
+                    +binance.find(x => x.symbol === symbol+'USDT').askPrice,
+                book: orderBook
+            });
+        }
+        else {
+
+            pairs.push({
+                title: symbol,
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === symbol+'USDT').askPrice,
+                sell: +pariBuyPrice,
+                result: (pariBuyPrice * (1 - commissionWithBinance)) /
+                    +binance.find(x => x.symbol === symbol+'USDT').askPrice,
+                book: orderBook
+            });
+
+        }
     } catch {
 
     }
@@ -424,6 +439,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'KEEP', pairs),
             getWithSymbol(binance, 'VET', pairs),
             getWithSymbol(binance, 'ANKR', pairs),
+            getWithSymbol(binance, 'SHIB', pairs),
             getBtcturk(binance, pairs)
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
@@ -985,6 +1001,18 @@ app.get('/coinbasereverse', async (req, res) => {
                 result: (+paribu.ANKR_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'ANKRUSDT').bidPrice )
             });
+        
+        
+                            if (paribu.SHIB_TL)
+            pairs.push({
+                title: 'SHIB',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'SHIBUSDT').bidPrice * 1000,
+                buy: +paribu.SHIB_TL.lowestAsk * 1000,
+                result: (+paribu.SHIB_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'SHIBUSDT').bidPrice )
+            });
+
 
         
                 if (paribu.MANA_TL)
