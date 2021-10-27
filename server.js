@@ -129,7 +129,7 @@ setInterval(async function(){
     .then(data => {
 
 
-        data.filter(pair => (pair.title.includes("BTCTURK") && !pair.title.includes("FIL") && !pair.title.includes("BABA")))
+        data.filter(pair => (pair.title.includes("BTCTURK") && !pair.title.includes("XTZ") && !pair.title.includes("BABA")))
             .forEach(pair => {
 
 
@@ -155,7 +155,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 70;
+let pair_sayisi = 71;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -173,7 +173,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 71;
+                                pair_sayisi = 72;
                             }, 60000);
                 }
             
