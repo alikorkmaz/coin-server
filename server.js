@@ -155,7 +155,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 71;
+let pair_sayisi = 72;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -173,7 +173,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 72;
+                                pair_sayisi = 73;
                             }, 60000);
                 }
             
@@ -440,6 +440,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'VET', pairs),
             getWithSymbol(binance, 'ANKR', pairs),
             getWithSymbol(binance, 'SHIB', pairs),
+            getWithSymbol(binance, 'ICP', pairs),
             getBtcturk(binance, pairs)
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
@@ -1058,6 +1059,16 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.CRV_TL.lowestAsk,
                 result: (+paribu.CRV_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'CRVUSDT').bidPrice )
+            });
+       
+        if (paribu.ICP_TL)
+            pairs.push({
+                title: 'ICP',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'ICPUSDT').bidPrice,
+                buy: +paribu.ICP_TL.lowestAsk,
+                result: (+paribu.ICP_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'ICPUSDT').bidPrice )
             });
         
         
