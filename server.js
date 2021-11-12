@@ -155,7 +155,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 72;
+let pair_sayisi = 73;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -173,7 +173,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 73;
+                                pair_sayisi = 74;
                             }, 60000);
                 }
             
@@ -441,6 +441,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'ANKR', pairs),
             getWithSymbol(binance, 'SHIB', pairs),
             getWithSymbol(binance, 'ICP', pairs),
+            getWithSymbol(binance, 'FTM', pairs),
             getBtcturk(binance, pairs)
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
@@ -1071,6 +1072,15 @@ app.get('/coinbasereverse', async (req, res) => {
                     (+binance.find(x => x.symbol === 'ICPUSDT').bidPrice )
             });
         
+                if (paribu.FTM_TL)
+            pairs.push({
+                title: 'FTM',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'FTMUSDT').bidPrice,
+                buy: +paribu.FTM_TL.lowestAsk,
+                result: (+paribu.FTM_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'FTMUSDT').bidPrice )
+            });
         
                 if (paribu.SOL_TL)
             pairs.push({
