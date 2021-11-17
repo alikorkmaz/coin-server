@@ -129,7 +129,7 @@ setInterval(async function(){
     .then(data => {
 
 
-        data.filter(pair => (pair.title.includes("BTCTURK") && !pair.title.includes("OMG") && !pair.title.includes("BABA")))
+        data.filter(pair => (pair.title.includes("BTCTURK") && !pair.title.includes("ONAN") && !pair.title.includes("BABA")))
             .forEach(pair => {
 
 
@@ -155,7 +155,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 75;
+let pair_sayisi = 76;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -173,7 +173,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 76;
+                                pair_sayisi = 77;
                             }, 60000);
                 }
             
@@ -444,6 +444,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'FTM', pairs),
             getWithSymbol(binance, 'INJ', pairs),
             getWithSymbol(binance, 'LPT', pairs),
+            getWithSymbol(binance, 'AXS', pairs),
             getBtcturk(binance, pairs)
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
@@ -1004,6 +1005,16 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.LPT_TL.lowestAsk,
                 result: (+paribu.LPT_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'LPTUSDT').bidPrice )
+            });
+        
+                if (paribu.AXS_TL)
+            pairs.push({
+                title: 'AXS',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'AXSUSDT').bidPrice,
+                buy: +paribu.AXS_TL.lowestAsk,
+                result: (+paribu.AXS_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'AXSUSDT').bidPrice )
             });
 
                 if (paribu.MANA_TL)
