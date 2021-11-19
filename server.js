@@ -155,7 +155,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 76;
+let pair_sayisi = 77;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -173,7 +173,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 77;
+                                pair_sayisi = 78;
                             }, 60000);
                 }
             
@@ -445,6 +445,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'INJ', pairs),
             getWithSymbol(binance, 'LPT', pairs),
             getWithSymbol(binance, 'AXS', pairs),
+            getWithSymbol(binance, 'ENS', pairs),
             getBtcturk(binance, pairs)
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
@@ -1015,6 +1016,16 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.AXS_TL.lowestAsk,
                 result: (+paribu.AXS_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'AXSUSDT').bidPrice )
+            });
+        
+                if (paribu.ENS_TL)
+            pairs.push({
+                title: 'ENS',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'ENSUSDT').bidPrice,
+                buy: +paribu.ENS_TL.lowestAsk,
+                result: (+paribu.ENS_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'ENSUSDT').bidPrice )
             });
 
                 if (paribu.MANA_TL)
