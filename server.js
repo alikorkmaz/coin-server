@@ -155,7 +155,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 78;
+let pair_sayisi = 79;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -173,7 +173,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 79;
+                                pair_sayisi = 80;
                             }, 60000);
                 }
             
@@ -447,6 +447,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'AXS', pairs),
             getWithSymbol(binance, 'ENS', pairs),
             getWithSymbol(binance, 'AUDIO', pairs),
+            getWithSymbol(binance, 'SAND', pairs),
             getBtcturk(binance, pairs)
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
@@ -1018,6 +1019,17 @@ app.get('/coinbasereverse', async (req, res) => {
                 result: (+paribu.AUDIO_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'AUDIOUSDT').bidPrice )
             });
+        
+                if (paribu.SAND_TL)
+            pairs.push({
+                title: 'SAND',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'SANDUSDT').bidPrice,
+                buy: +paribu.SAND_TL.lowestAsk,
+                result: (+paribu.SAND_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'SANDUSDT').bidPrice )
+            });
+        
         
                 if (paribu.AXS_TL)
             pairs.push({
