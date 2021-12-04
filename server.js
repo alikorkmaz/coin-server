@@ -145,6 +145,7 @@ setInterval(async function(){
                             setTimeout(function(){
                                 alarmCaldiMi = 0;
                             }, 300000);
+                    return;
                 }
             
             
