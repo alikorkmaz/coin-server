@@ -15,8 +15,28 @@ app.use(express.static('public'));
 app.use(express.json());
 
 app.get('/tetherTask', async (req, res) => {
-    let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
-    tetherBuy = +paribu.USDT_TL.lowestAsk + tetherMargin;
+    // let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
+    // tetherBuy = +paribu.USDT_TL.lowestAsk + tetherMargin;
+
+
+    paribu = await fetch('https://v3.paribu.com/app/markets/usdt-tl?interval=1000').then(r => r.json()).catch(x => {});            
+    let book = paribu.data.orderBook.sell || {};
+
+    let tetherEnergy = 40000;
+    let tetherResult = -1;
+    Object.keys(book).forEach((key,item) => { 
+        tetherEnergy = tetherEnergy - book[key];
+      if (tetherEnergy < 0 && tetherResult == -1) {
+        tetherResult = Number(key); 
+      }
+    })
+    if(tetherResult === -1) {
+        tetherBuy = 99;
+    } else {
+        tetherBuy = +tetherResult + tetherMargin;    
+    }
+    
+
     res.send(
         {}
     );
@@ -25,7 +45,7 @@ app.get('/tetherTask', async (req, res) => {
 setInterval(() => {
     fetch('http://18.222.16.156:3000/tetherTask')
         .then(response => response.json());
-}, 30000);
+}, 5000);
 
 let alert = [];
 let alertReverse = [];
