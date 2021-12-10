@@ -181,7 +181,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 80;
+let pair_sayisi = 82;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -199,7 +199,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 81;
+                                pair_sayisi = 83;
                             }, 60000);
                 }
             
@@ -475,6 +475,8 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'AUDIO', pairs),
             getWithSymbol(binance, 'SAND', pairs),
             getWithSymbol(binance, 'CLV', pairs),
+            getWithSymbol(binance, 'ALICE', pairs),
+            getWithSymbol(binance, 'TLM', pairs),
             getBtcturk(binance, pairs)
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
@@ -1025,6 +1027,27 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.INJ_TL.lowestAsk,
                 result: (+paribu.INJ_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'INJUSDT').bidPrice )
+            });
+        
+                if (paribu.ALICE_TL)
+            pairs.push({
+                title: 'ALICE',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'ALICEUSDT').bidPrice,
+                buy: +paribu.ALICE_TL.lowestAsk,
+                result: (+paribu.ALICE_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'ALICEUSDT').bidPrice )
+            });
+
+
+                            if (paribu.TLM_TL)
+            pairs.push({
+                title: 'TLM',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'TLMUSDT').bidPrice,
+                buy: +paribu.TLM_TL.lowestAsk,
+                result: (+paribu.TLM_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'TLMUSDT').bidPrice )
             });
         
                 if (paribu.LPT_TL)
