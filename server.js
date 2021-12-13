@@ -478,6 +478,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'ALICE', pairs),
             getWithSymbol(binance, 'TLM', pairs),
             getWithSymbol(binance, 'GALA', pairs),
+            getWithSymbol(binance, 'TVK', pairs),
             getBtcturk(binance, pairs)
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
@@ -1038,6 +1039,16 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.ALICE_TL.lowestAsk,
                 result: (+paribu.ALICE_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'ALICEUSDT').bidPrice )
+            });
+        
+                        if (paribu.TVK_TL)
+            pairs.push({
+                title: 'TVK',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'TVKUSDT').bidPrice,
+                buy: +paribu.TVK_TL.lowestAsk,
+                result: (+paribu.TVK_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'TVKUSDT').bidPrice )
             });
 
                         if (paribu.GALA_TL)
