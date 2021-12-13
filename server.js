@@ -181,7 +181,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 82;
+let pair_sayisi = 84;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -199,7 +199,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 83;
+                                pair_sayisi = 85;
                             }, 60000);
                 }
             
@@ -477,6 +477,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'CLV', pairs),
             getWithSymbol(binance, 'ALICE', pairs),
             getWithSymbol(binance, 'TLM', pairs),
+            getWithSymbol(binance, 'GALA', pairs),
             getBtcturk(binance, pairs)
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
@@ -1039,6 +1040,15 @@ app.get('/coinbasereverse', async (req, res) => {
                     (+binance.find(x => x.symbol === 'ALICEUSDT').bidPrice )
             });
 
+                        if (paribu.GALA_TL)
+            pairs.push({
+                title: 'GALA',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'GALAUSDT').bidPrice,
+                buy: +paribu.GALA_TL.lowestAsk,
+                result: (+paribu.GALA_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'GALAUSDT').bidPrice )
+            });
 
                             if (paribu.TLM_TL)
             pairs.push({
