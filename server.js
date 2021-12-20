@@ -444,7 +444,7 @@ async function binanceTask() {
 }
 
 async function gateTask() {
-    return fetch('https://api.gateio.ws/api/v4/spot/tickers?currency_pair=BTC_USDT').then(r => r.json()).catch(x => console.log('gate failied'));
+    return fetch('https://api.gateio.ws/api/v4/spot/tickers?currency_pair=CEEK_USDT').then(r => r.json()).catch(x => console.log('gate failied'));
     // return {};
 }
 
