@@ -411,10 +411,50 @@ async function getBtcturk(binance, pairs){
     }
 }
 
+async function getBox(gate, symbol, pairs){
+    try{
+    let paribu; 
+    
+        let commission = 0.01;
+
+        paribu = await fetch('https://v3.paribu.com/app/markets/'+symbol.toLowerCase()+'-tl?interval=1000').then(r => r.json()).catch(x => {});            
+
+        let pariBuyPrice = Object.keys(paribu.data.orderBook.buy)[0];
+        let orderBook = paribu.data.orderBook.buy || {};
+
+        item = gate.find(x => x.currency_pair === symbol + "_USDT");
+    
+        pairs.push({
+            title: symbol + ' - GATE',
+            commission: commission,
+            buy: +item.lowest_ask,
+            sell: +pariBuyPrice,
+            result: (pariBuyPrice * (1 - commission)) /
+                +item.lowest_ask,
+            book: orderBook
+        });
+    } catch {
+
+    }
+
+}
+
+async function binanceTask() {
+    return fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json()).catch(x => {console.log("binance get failed\n")})
+}
+
+async function gateTask() {
+    return fetch('https://api.gateio.ws/api/v4/spot/tickers?currency_pair=BTC_USDT').then(r => r.json()).catch(x => console.log('gate failied'));
+    // return {};
+}
+
+
 app.get('/v2/coinbase', async (req, res) => {
     let pairs = [];
 
-    let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json());
+    // let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json()).catch(x => {console.log("binance get failed\n")});
+    // let gate = await fetch('https://api.gateio.ws/api/v4/spot/tickers').then(r => r.json()).catch(x => console.log('gate failied'));
+    const [binance, gate] = await Promise.all([binanceTask(), gateTask()]);
 
 
     await Promise.all([
@@ -479,7 +519,8 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'TLM', pairs),
             getWithSymbol(binance, 'GALA', pairs),
             getWithSymbol(binance, 'TVK', pairs),
-            getBtcturk(binance, pairs)
+            getBtcturk(binance, pairs),
+            getBox(gate, 'CEEK', pairs)
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
             // getWithSymbol(binance, 'ASR', pairs),
