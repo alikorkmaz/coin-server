@@ -181,7 +181,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 85;
+let pair_sayisi = 86;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -199,7 +199,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 86;
+                                pair_sayisi = 87;
                             }, 60000);
                 }
             
