@@ -88,7 +88,7 @@ app.get('/alert-reverse', (req, res) => {
 
 let kur = 8.5;
 setInterval(() => {
-    fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
+    fetch('http://data.fixer.io/api/latest?access_key=4a267b6b3eaa5f8fd0a2e9e08852741b')
         .then(response => response.json())
         .then(data => {
             kur = data.rates.TRY / data.rates.USD;
