@@ -181,7 +181,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 86;
+let pair_sayisi = 87;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -199,7 +199,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 87;
+                                pair_sayisi = 88;
                             }, 60000);
                 }
             
@@ -444,9 +444,15 @@ async function binanceTask() {
 }
 
 async function gateTask() {
-    return fetch('https://api.gateio.ws/api/v4/spot/tickers?currency_pair=CEEK_USDT').then(r => r.json()).catch(x => console.log('gate failied'));
+    return fetch('https://api.gateio.ws/api/v4/spot/tickers?currency_pair=CEEK_USDT').then(r => r.json()).catch(x => console.log('ceek gate failied'));
     // return {};
 }
+
+async function gateTaskRaca() {
+    return fetch('https://api.gateio.ws/api/v4/spot/tickers?currency_pair=RACA_USDT').then(r => r.json()).catch(x => console.log('raca gate failied'));
+    // return {};
+}
+
 
 
 app.get('/v2/coinbase', async (req, res) => {
@@ -454,7 +460,7 @@ app.get('/v2/coinbase', async (req, res) => {
 
     // let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json()).catch(x => {console.log("binance get failed\n")});
     // let gate = await fetch('https://api.gateio.ws/api/v4/spot/tickers').then(r => r.json()).catch(x => console.log('gate failied'));
-    const [binance, gate] = await Promise.all([binanceTask(), gateTask()]);
+    const [binance, gate, gateRaca] = await Promise.all([binanceTask(), gateTask(), gateTaskRaca()]);
 
 
     await Promise.all([
@@ -520,7 +526,8 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'GALA', pairs),
             getWithSymbol(binance, 'TVK', pairs),
             getBtcturk(binance, pairs),
-            getBox(gate, 'CEEK', pairs)
+            getBox(gate, 'CEEK', pairs),
+            getBox(gateRaca, 'RACA', pairs)
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
             // getWithSymbol(binance, 'ASR', pairs),
