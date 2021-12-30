@@ -324,7 +324,7 @@ setInterval(() => {
                                             alarmCaldiMi = 0;
                                         }, 30000);
                                         console.log("- " + text + "\n");
-                                        setTimeout(function(){
+
                                                 cc.send({
                                                     message: text,
                                                 },
@@ -332,37 +332,37 @@ setInterval(() => {
                                                     {};
                                                 },
                                             );
-                                        }, 0);
 
 
 
-                                        if(sessiz === 1){
+
+//                                         if(sessiz === 1){
 
 
 
-                                        pp.send({
-                                                message: text,
-                                                sound: "pushover" 
-                                            },
-                                            function(err, result) {
-                                                {};
-                                            },
-                                        );
+// //                                         pp.send({
+// //                                                 message: text,
+// //                                                 sound: "pushover" 
+// //                                             },
+// //                                             function(err, result) {
+// //                                                 {};
+// //                                             },
+// //                                         );
 
 
 
-                                        }else {
+//                                         }else {
 
-                                        pp.send({
-                                                message: text,
-                                            },
-                                            function(err, result) {
-                                                {};
-                                            },
-                                        );
+//                                         pp.send({
+//                                                 message: text,
+//                                             },
+//                                             function(err, result) {
+//                                                 {};
+//                                             },
+//                                         );
 
 
-                                        }
+//                                         }
 
               
 
