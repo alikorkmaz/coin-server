@@ -424,7 +424,6 @@ setInterval(() => {
 
                     }
                 }
-                else if (pair.title.includes('BTCTURK'){}
                 else {
                     if (alarmCaldiMi === 1) return;
                     alarmCaldiMi = 1;
