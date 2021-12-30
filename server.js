@@ -543,6 +543,155 @@ function getBookSum(sellAt, book) {
 
 
 
+setInterval(async function(){
+    
+    if(alarmCaldiMi === 1) return;
+    
+    let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
+    let tetheriniz = +paribu.USDT_TL.lowestAsk + 0.1;
+
+    fetch('http://ec2-18-222-16-156.us-east-2.compute.amazonaws.com:3000/v2/coinbase')
+    .then(response => response.json())
+    .then(data => {
+
+
+        data.filter(pair => (pair.title.includes("BTCTURK") 
+                             && !pair.title.includes("MATIC") 
+                             && !pair.title.includes("bbbbbb") 
+                             && !pair.title.includes("cccccccc") 
+                             && !pair.title.includes("ddddddddd") 
+                             && !pair.title.includes("ATOM")))
+            .forEach(pair => {
+
+
+                if(tetheriniz < pair.result){
+                            p.send({
+                                    message: "btcturke bi bak",
+                                },
+                                function(err, result) {
+                                    {};
+                                },
+                            );
+                            alarmCaldiMi = 1;
+                            setTimeout(function(){
+                                alarmCaldiMi = 0;
+                            }, 300000);
+                    return;
+                }
+            
+            
+            });
+
+        });
+
+
+}, 10000);
+
+let pair_sayisi = 89;
+setInterval(async function(){
+    
+    let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
+
+
+    
+
+                if(Object.keys(paribu).length > pair_sayisi){
+                            p.send({
+                                    message: "coin geldi " + Object.keys(paribu).length + " " + Object.keys(paribu)[pair_sayisi],
+                                },
+                                function(err, result) {
+                                    {};
+                                },
+                            );
+
+                            setTimeout(function(){
+                                pair_sayisi = 90;
+                            }, 60000);
+                }
+            
+
+
+
+}, 10000);
+
+
+
+async function getBtcturk(binance, pairs){
+    let btcturk;
+    try{
+
+
+
+        let commission = 0.0065;
+        let commissionWithBinance = 0.0065;
+        let commissionWithBinanceUSDT = 0.0055;
+
+        btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data).catch(x => console.log(x));
+        
+        btcturk.forEach(item => {
+
+
+
+            try {
+            
+            let mySymbol = item.pairNormalized.split("_")[0];
+            if(item.pairNormalized.split("_")[1] != "TRY") return;
+            
+            if (binance.find(x => x.symbol === mySymbol + 'USDT'))
+                
+                if(mySymbol === 'SHIB'){
+                    
+                  pairs.push({
+                    title: mySymbol + ' - BTCTURK',
+                    commission: commissionWithBinance,
+                    buy: +binance.find(x => x.symbol === mySymbol + 'USDT').askPrice * 1000,
+                    sell: +btcturk.find(x => x.pair === mySymbol + 'TRY').bid * 1000,
+                    result: (+btcturk.find(x => x.pair === mySymbol + 'TRY').bid * (1 - commissionWithBinance)) /
+                        (+binance.find(x => x.symbol === mySymbol + 'USDT').askPrice ),
+                 });
+                    
+                
+                
+                
+                } else {
+                    
+                 pairs.push({
+                    title: mySymbol + ' - BTCTURK',
+                    commission: commissionWithBinance,
+                    buy: +binance.find(x => x.symbol === mySymbol + 'USDT').askPrice,
+                    sell: +btcturk.find(x => x.pair === mySymbol + 'TRY').bid,
+                    result: (+btcturk.find(x => x.pair === mySymbol + 'TRY').bid * (1 - commissionWithBinance)) /
+                        (+binance.find(x => x.symbol === mySymbol + 'USDT').askPrice ),
+                 });
+                    
+                    
+                }
+                
+               
+                
+
+
+            
+            
+            
+            
+            
+            }
+            catch{}
+
+
+
+        });
+
+    } catch {
+
+    }
+}
+
+
+
+
+
 setTimeout(() => {
     fetch('http://data.fixer.io/api/latest?access_key=547f1508205c1568706666c56bc02f4e')
         .then(response => response.json())
@@ -830,7 +979,8 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'GALA', pairs),
             getWithSymbol(binance, 'TVK', pairs),
             getBox(gate, 'CEEK', pairs),
-            getBox(gateRaca, 'RACA', pairs)
+            getBox(gateRaca, 'RACA', pairs),
+            getBtcturk(binance, pairs),
 
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
