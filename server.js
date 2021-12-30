@@ -284,7 +284,7 @@ setInterval(() => {
                         pair.buy = pair.buy / 1000;
                         pair.sell = pair.sell / 1000;
                     }
-
+        
 
 
                 if(tetherBuy > 0 && pair.book && pair.book != {}){
@@ -424,7 +424,7 @@ setInterval(() => {
 
                     }
                 }
-
+                else if (pair.title.includes('BTCTURK'){}
                 else {
                     if (alarmCaldiMi === 1) return;
                     alarmCaldiMi = 1;
