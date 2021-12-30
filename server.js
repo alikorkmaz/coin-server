@@ -101,11 +101,10 @@ app.get('/alarm', async (req, res) => {
 
 
             if(firsat.message){
-
                     console.log("# " + firsat.message + "\n");
                     ee.send({
                         message: firsat.message,
-                        sound: 'cashregister',//'none'
+                        sound: 'none',//'none' 
                     },
                     function(err, result) {
                         {};
@@ -172,7 +171,8 @@ app.get('/alert-reverse', (req, res) => {
 
 let kur = 8.5;
 setInterval(() => {
-    fetch('http://data.fixer.io/api/latest?access_key=a5ff7dc6e98f9c42ef347e296beaa237')
+    //4a267b6b3eaa5f8fd0a2e9e08852741b
+    fetch('http://data.fixer.io/api/latest?access_key=4a267b6b3eaa5f8fd0a2e9e08852741b')
         .then(response => response.json())
         .then(data => {
             kur = data.rates.TRY / data.rates.USD;
@@ -218,7 +218,7 @@ let alarmCaldiMi = 0;
 let hataAlarmiSustur = 1;
 let ticksizAlarm= 0.50;
 let toplamEmirTl= 80000;
-let arizakr = ["TVK"]
+let arizakr = ["TVK", "CEEK"]
 let artibirkr = ["KEEP", "OXT", "AAVE", "BAL", "MKR", "BAND", "MINA", "INJ", "LPT", "AUDIO", "CLV"];
 let eksibirkr = ["WAVES", "BTT", "ATOM", "ALGO", "SOL", "ADA", "DOT", "THETA", "XTZ", "EOS", "NEO", "ONT", "IOTA", "MIOTA", "XLM", "XRP", "TRX", "VET"]
 let eksiikikr = ["AVAX", "DOGE"]
@@ -227,9 +227,9 @@ let eksiikikr = ["AVAX", "DOGE"]
 
 // cron.schedule('0 7 * * *', () => { tetherMargin = 0.04; toplamEmirTl = 180000; });
 
-cron.schedule('0 5 * * *', () => { tetherMargin = 0.03; toplamEmirTl = 150000; });
+cron.schedule('0 8 * * *', () => { tetherMargin = 0.03; toplamEmirTl = 180000; });
 
-cron.schedule('0 4 * * *', () => { tetherMargin = 0.04; toplamEmirTl = 240000; });
+cron.schedule('0 7 * * *', () => { tetherMargin = 0.04; toplamEmirTl = 240000; });
 
 setInterval(function(){
     alarmCaldiMi = 0;
@@ -332,7 +332,7 @@ setInterval(() => {
                                                     {};
                                                 },
                                             );
-                                        }, 3000);
+                                        }, 0);
 
 
 
@@ -720,7 +720,7 @@ async function getBox(gate, symbol, pairs){
     try{
     let paribu; 
     
-        let commission = 0.01;
+        let commission = 0.02;
 
         paribu = await fetch('https://v3.paribu.com/app/markets/'+symbol.toLowerCase()+'-tl?interval=1000').then(r => r.json()).catch(x => {});            
 
@@ -749,7 +749,12 @@ async function binanceTask() {
 }
 
 async function gateTask() {
-    return fetch('https://api.gateio.ws/api/v4/spot/tickers?currency_pair=BTC_USDT').then(r => r.json()).catch(x => console.log('gate failied'));
+    return fetch('https://api.gateio.ws/api/v4/spot/tickers?currency_pair=CEEK_USDT').then(r => r.json()).catch(x => console.log('ceek gate failied'));
+    // return {};
+}
+
+async function gateTaskRaca() {
+    return fetch('https://api.gateio.ws/api/v4/spot/tickers?currency_pair=RACA_USDT').then(r => r.json()).catch(x => console.log('raca gate failied'));
     // return {};
 }
 
@@ -758,9 +763,9 @@ let lastBinanceBtcPrice;
 app.get('/v2/coinbase', async (req, res) => {
     let pairs = [];
 
-    let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json()).catch(x => {console.log("binance get failed\n")});
+    // let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json()).catch(x => {console.log("binance get failed\n")});
     // let gate = await fetch('https://api.gateio.ws/api/v4/spot/tickers').then(r => r.json()).catch(x => console.log('gate failied'));
-    // const [binance, gate] = await Promise.all([binanceTask(), gateTask()]);
+    const [binance, gate, gateRaca] = await Promise.all([binanceTask(), gateTask(), gateTaskRaca()]);
 
     await Promise.all([
             getWithSymbol(binance, 'UNI', pairs),
@@ -824,7 +829,8 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'ALICE', pairs),
             getWithSymbol(binance, 'GALA', pairs),
             getWithSymbol(binance, 'TVK', pairs),
-            // getBox(gate, 'BTC', pairs)
+            getBox(gate, 'CEEK', pairs),
+            getBox(gateRaca, 'RACA', pairs)
 
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
