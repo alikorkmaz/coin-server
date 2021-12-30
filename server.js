@@ -279,7 +279,7 @@ setInterval(() => {
         .then(data => {
 
 
-            data.filter(pair => !pair.title.includes('BTCTURK)).forEach(pair => {
+            data.filter(pair => !pair.title.includes('BTCTURK')).forEach(pair => {
                 if(pair.title === 'SHIB'){
                         pair.buy = pair.buy / 1000;
                         pair.sell = pair.sell / 1000;
