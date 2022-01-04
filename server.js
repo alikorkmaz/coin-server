@@ -559,7 +559,7 @@ setInterval(async function(){
                              && !pair.title.includes("bbbbbb") 
                              && !pair.title.includes("cccccccc") 
                              && !pair.title.includes("ddddddddd") 
-                             && !pair.title.includes("ATOM")))
+                             && !pair.title.includes("xxxxxxx")))
             .forEach(pair => {
 
 
@@ -586,7 +586,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 89;
+let pair_sayisi = 90;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -604,7 +604,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 90;
+                                pair_sayisi = 91;
                             }, 60000);
                 }
             
