@@ -154,7 +154,7 @@ setInterval(async function(){
                              && !pair.title.includes("bbbbbb") 
                              && !pair.title.includes("cccccccc") 
                              && !pair.title.includes("ddddddddd") 
-                             && !pair.title.includes("SPELL")))
+                             && !pair.title.includes("xxxxxx")))
             .forEach(pair => {
 
 
@@ -181,7 +181,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 89;
+let pair_sayisi = 90;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -199,7 +199,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 90;
+                                pair_sayisi = 91;
                             }, 60000);
                 }
             
@@ -454,13 +454,19 @@ async function gateTaskRaca() {
 }
 
 
+async function gateTaskAtlas() {
+    return fetch('https://api.gateio.ws/api/v4/spot/tickers?currency_pair=ATLAS_USDT').then(r => r.json()).catch(x => console.log('atlas gate failied'));
+    // return {};
+}
+
+
 
 app.get('/v2/coinbase', async (req, res) => {
     let pairs = [];
 
     // let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json()).catch(x => {console.log("binance get failed\n")});
     // let gate = await fetch('https://api.gateio.ws/api/v4/spot/tickers').then(r => r.json()).catch(x => console.log('gate failied'));
-    const [binance, gate, gateRaca] = await Promise.all([binanceTask(), gateTask(), gateTaskRaca()]);
+    const [binance, gate, gateRaca, gateAtlas] = await Promise.all([binanceTask(), gateTask(), gateTaskRaca(), gateTaskAtlas()]);
 
 
     await Promise.all([
@@ -527,7 +533,8 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'TVK', pairs),
             getBtcturk(binance, pairs),
             getBox(gate, 'CEEK', pairs),
-            getBox(gateRaca, 'RACA', pairs)
+            getBox(gateRaca, 'RACA', pairs),
+            getBox(gateAtlas, 'ATLAS', pairs)
             // getWithSymbol(binance, 'JUV', pairs),
             // getWithSymbol(binance, 'ATM', pairs),
             // getWithSymbol(binance, 'ASR', pairs),
