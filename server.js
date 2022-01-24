@@ -554,32 +554,32 @@ setInterval(async function(){
     .then(data => {
 
 
-        data.filter(pair => (pair.title.includes("BTCTURK") 
-                             && !pair.title.includes("SOL") 
-                             && !pair.title.includes("sssttxxxxx") 
-                             && !pair.title.includes("cccccccc") 
-                             && !pair.title.includes("ddddddddd") 
-                             && !pair.title.includes("xxxxxxx")))
-            .forEach(pair => {
+//         data.filter(pair => (pair.title.includes("BTCTURK") 
+//                              && !pair.title.includes("SOL") 
+//                              && !pair.title.includes("sssttxxxxx") 
+//                              && !pair.title.includes("cccccccc") 
+//                              && !pair.title.includes("ddddddddd") 
+//                              && !pair.title.includes("xxxxxxx")))
+//             .forEach(pair => {
 
 
-                if(tetheriniz < pair.result){
-                            p.send({
-                                    message: "btcturke bi bak",
-                                },
-                                function(err, result) {
-                                    {};
-                                },
-                            );
-                            alarmCaldiMi = 1;
-                            setTimeout(function(){
-                                alarmCaldiMi = 0;
-                            }, 300000);
-                    return;
-                }
+//                 if(tetheriniz < pair.result){
+//                             p.send({
+//                                     message: "btcturke bi bak",
+//                                 },
+//                                 function(err, result) {
+//                                     {};
+//                                 },
+//                             );
+//                             alarmCaldiMi = 1;
+//                             setTimeout(function(){
+//                                 alarmCaldiMi = 0;
+//                             }, 300000);
+//                     return;
+//                 }
             
             
-            });
+//             });
 
         });
 
