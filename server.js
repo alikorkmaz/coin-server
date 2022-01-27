@@ -320,6 +320,17 @@ async function getWithSymbol(binance, symbol, pairs){
                 book: orderBook
             });
         }
+        else if(symbol === "BTTC"){
+            pairs.push({
+                title: symbol,
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === symbol+'USDT').askPrice * 10000,
+                sell: +pariBuyPrice * 10000,
+                result: (pariBuyPrice * (1 - commissionWithBinance)) /
+                    +binance.find(x => x.symbol === symbol+'USDT').askPrice,
+                book: orderBook
+            });
+        }
         else {
 
             pairs.push({
@@ -896,8 +907,8 @@ app.get('/coinbase', async (req, res) => {
         pairs.push({
             title: 'BTTC',
             commission: commissionWithBinance,
-            buy: +binance.find(x => x.symbol === 'BTTCUSDT').askPrice,
-            sell: +paribu.BTTC_TL.highestBid,
+            buy: +binance.find(x => x.symbol === 'BTTCUSDT').askPrice * 10000,
+            sell: +paribu.BTTC_TL.highestBid * 10000,
             result: (+paribu.BTTC_TL.highestBid * (1 - commissionWithBinance)) /
                 (+binance.find(x => x.symbol === 'BTTCUSDT').askPrice /
                     +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
@@ -1629,8 +1640,8 @@ app.get('/coinbasereverse', async (req, res) => {
         pairs.push({
             title: 'BTTC',
             commission: commissionWithBinance,
-            sell: +binance.find(x => x.symbol === 'BTTCUSDT').bidPrice,
-            buy: +paribu.BTTC_TL.lowestAsk,
+            sell: +binance.find(x => x.symbol === 'BTTCUSDT').bidPrice * 10000,
+            buy: +paribu.BTTC_TL.lowestAsk * 10000,
             result: (+paribu.BTTC_TL.lowestAsk * (1 + commissionWithBinance)) /
                 (+binance.find(x => x.symbol === 'BTTCUSDT').bidPrice )
         });
