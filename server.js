@@ -135,7 +135,7 @@ let hataAlarmiSustur = 1;
 let ticksizAlarm= 0.10;
 let toplamEmirTl= 30000;
 let artibirkr = ["OXT", "LINK", "AAVE", "UNI", "BAL", "MKR"];
-let eksibirkr = ["DOGE", "WAVES", "BTT"]
+let eksibirkr = ["DOGE", "WAVES", "BTTC"]
 
 setInterval(async function(){
     
@@ -150,7 +150,7 @@ setInterval(async function(){
 
 
         data.filter(pair => (pair.title.includes("BTCTURK") 
-                             && !pair.title.includes("xxxx") 
+                             && !pair.title.includes("SPELL") 
                              && !pair.title.includes("bbbbbb") 
                              && !pair.title.includes("cccccccc") 
                              && !pair.title.includes("ddddddddd") 
@@ -181,7 +181,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 90;
+let pair_sayisi = 91;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -199,7 +199,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 91;
+                                pair_sayisi = 92;
                             }, 60000);
                 }
             
@@ -491,7 +491,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'XLM', pairs),
             getWithSymbol(binance, 'EOS', pairs),
             getWithSymbol(binance, 'BAT', pairs),
-            getWithSymbol(binance, 'BTT', pairs),
+            getWithSymbol(binance, 'BTTC', pairs),
             getWithSymbol(binance, 'TRX', pairs),
             getWithSymbol(binance, 'HOT', pairs),
             getWithSymbol(binance, 'CHZ', pairs),
@@ -894,12 +894,12 @@ app.get('/coinbase', async (req, res) => {
                     +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
         });
         pairs.push({
-            title: 'BTT',
+            title: 'BTTC',
             commission: commissionWithBinance,
-            buy: +binance.find(x => x.symbol === 'BTTUSDT').askPrice,
-            sell: +paribu.BTT_TL.highestBid,
-            result: (+paribu.BTT_TL.highestBid * (1 - commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'BTTUSDT').askPrice /
+            buy: +binance.find(x => x.symbol === 'BTTCUSDT').askPrice,
+            sell: +paribu.BTTC_TL.highestBid,
+            result: (+paribu.BTTC_TL.highestBid * (1 - commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'BTTCUSDT').askPrice /
                     +binance.find(x => x.symbol === 'USDCUSDT').bidPrice),
         });
         pairs.push({
@@ -1627,12 +1627,12 @@ app.get('/coinbasereverse', async (req, res) => {
                 (+binance.find(x => x.symbol === 'BATUSDT').bidPrice )
         });
         pairs.push({
-            title: 'BTT',
+            title: 'BTTC',
             commission: commissionWithBinance,
-            sell: +binance.find(x => x.symbol === 'BTTUSDT').bidPrice,
-            buy: +paribu.BTT_TL.lowestAsk,
-            result: (+paribu.BTT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'BTTUSDT').bidPrice )
+            sell: +binance.find(x => x.symbol === 'BTTCUSDT').bidPrice,
+            buy: +paribu.BTTC_TL.lowestAsk,
+            result: (+paribu.BTTC_TL.lowestAsk * (1 + commissionWithBinance)) /
+                (+binance.find(x => x.symbol === 'BTTCUSDT').bidPrice )
         });
         pairs.push({
             title: 'TRX',
