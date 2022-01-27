@@ -63,6 +63,10 @@ app.get('/alarm', async (req, res) => {
                         pair.buy = pair.buy / 1000;
                         pair.sell = pair.sell / 1000;
                     }
+                    if(pair.title === 'BTTC'){
+                        pair.buy = pair.buy / 10000;
+                        pair.sell = pair.sell / 10000;
+                    }
 
 
                     let currentTetherBuy = tetherBuy;
@@ -84,7 +88,11 @@ app.get('/alarm', async (req, res) => {
                                         if(bookSum > firsat.bookSum){
                                             if(pair.title === 'SHIB'){
                                                 firsat.message = pair.title + ": " + (sellAt * 1000).toString().substring(0, 7) + " <--- " + bookSum.toString().split(".")[0] + " << " + pair.result.toString().substring(0, 5);    
-                                            }else {
+                                            }
+                                            else if (pair.title === 'BTTC'){
+                                                firsat.message = pair.title + ": " + (sellAt * 10000).toString().substring(0, 7) + " <--- " + bookSum.toString().split(".")[0] + " << " + pair.result.toString().substring(0, 5);    
+                                            }
+                                            else {
                                                 firsat.message = pair.title + ": " + sellAt.toString().substring(0, 7) + " <--- " + bookSum.toString().split(".")[0] + " << " + pair.result.toString().substring(0, 5);
                                             }
                                             firsat.bookSum = bookSum;
@@ -284,6 +292,10 @@ setInterval(() => {
                         pair.buy = pair.buy / 1000;
                         pair.sell = pair.sell / 1000;
                     }
+                  if(pair.title === 'BTTC'){
+                        pair.buy = pair.buy / 10000;
+                        pair.sell = pair.sell / 10000;
+                    }
         
 
 
@@ -310,6 +322,9 @@ setInterval(() => {
                                 // text = pair.title + ": " +  + " (sell:" + sellAt.toString().substring(0, 6) + ") Total: " + bookSum.toString().split(".")[0];
                                 if(pair.title === 'SHIB'){
                                     text = pair.title + ": " + (sellAt*1000).toString().substring(0, 7) + " <--- " + bookSum.toString().split(".")[0] + " << " + pair.result.toString().substring(0, 5);
+                                    }
+                                else if(pair.title === 'BTTC'){
+                                    text = pair.title + ": " + (sellAt*10000).toString().substring(0, 7) + " <--- " + bookSum.toString().split(".")[0] + " << " + pair.result.toString().substring(0, 5);
                                     }
                                     else{
                                         text = pair.title + ": " + sellAt.toString().substring(0, 7) + " <--- " + bookSum.toString().split(".")[0] + " << " + pair.result.toString().substring(0, 5);
@@ -841,6 +856,17 @@ async function getWithSymbol(binance, symbol, pairs){
                 commission: commissionWithBinance,
                 buy: +binance.find(x => x.symbol === symbol+'USDT').askPrice * 1000,
                 sell: +pariBuyPrice * 1000,
+                result: (pariBuyPrice * (1 - commissionWithBinance)) /
+                    +binance.find(x => x.symbol === symbol+'USDT').askPrice,
+                book: orderBook
+            });
+        }
+               else if(symbol === "BTTC"){
+            pairs.push({
+                title: symbol,
+                commission: commissionWithBinance,
+                buy: +binance.find(x => x.symbol === symbol+'USDT').askPrice * 10000,
+                sell: +pariBuyPrice * 10000,
                 result: (pariBuyPrice * (1 - commissionWithBinance)) /
                     +binance.find(x => x.symbol === symbol+'USDT').askPrice,
                 book: orderBook
@@ -2105,8 +2131,8 @@ app.get('/coinbasereverse', async (req, res) => {
         pairs.push({
             title: 'BTTC',
             commission: commissionWithBinance,
-            sell: +binance.find(x => x.symbol === 'BTTCUSDT').bidPrice,
-            buy: +paribu.BTTC_TL.lowestAsk,
+            sell: +binance.find(x => x.symbol === 'BTTCUSDT').bidPrice * 10000,
+            buy: +paribu.BTTC_TL.lowestAsk * 10000,
             result: (+paribu.BTTC_TL.lowestAsk * (1 + commissionWithBinance)) /
                 (+binance.find(x => x.symbol === 'BTTUSDT').bidPrice )
         });
