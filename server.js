@@ -2134,7 +2134,7 @@ app.get('/coinbasereverse', async (req, res) => {
             sell: +binance.find(x => x.symbol === 'BTTCUSDT').bidPrice * 10000,
             buy: +paribu.BTTC_TL.lowestAsk * 10000,
             result: (+paribu.BTTC_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'BTTUSDT').bidPrice )
+                (+binance.find(x => x.symbol === 'BTTCUSDT').bidPrice )
         });
         pairs.push({
             title: 'TRX',
