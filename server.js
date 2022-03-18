@@ -1008,6 +1008,8 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'ALICE', pairs),
             getWithSymbol(binance, 'GALA', pairs),
             getWithSymbol(binance, 'TVK', pairs),
+            getWithSymbol(binance, 'APE', pairs),
+            getWithSymbol(binance, 'T', pairs),
             getBox(gate, 'CEEK', pairs),
             getBox(gateRaca, 'RACA', pairs),
             getBox(gateAtlas, 'ATLAS', pairs),
@@ -1582,6 +1584,26 @@ app.get('/coinbasereverse', async (req, res) => {
             });
 
 
+                if (paribu.APE_TL)
+            pairs.push({
+                title: 'APE',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'APEUSDT').bidPrice,
+                buy: +paribu.APE_TL.lowestAsk,
+                result: (+paribu.APE_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'APEUSDT').bidPrice )
+            });
+
+
+                    if (paribu.T_TL)
+            pairs.push({
+                title: 'T',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'TUSDT').bidPrice,
+                buy: +paribu.T_TL.lowestAsk,
+                result: (+paribu.T_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'TUSDT').bidPrice )
+            });
 
 
 
