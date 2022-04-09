@@ -340,6 +340,7 @@ setInterval(() => {
                                         }, 30000);
                                         console.log("- " + text + "\n");
 
+                                        setTimeout(function(){
                                                 cc.send({
                                                     message: text,
                                                 },
@@ -347,6 +348,7 @@ setInterval(() => {
                                                     {};
                                                 },
                                             );
+                                        }, 1500);
 
 
 
