@@ -911,7 +911,7 @@ async function getBox(gate, symbol, pairs){
     try{
     let paribu; 
     
-        let commission = 0.015;
+        let commission = 0.012;
 
         paribu = await fetch('https://v3.paribu.com/app/markets/'+symbol.toLowerCase()+'-tl?interval=1000').then(r => r.json()).catch(x => {});            
 
