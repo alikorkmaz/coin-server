@@ -1073,12 +1073,12 @@ app.get('/v2/coinbase', async (req, res) => {
         // }
         // lastBinanceBtcPrice = currentBinanceBtcPrice;
     
-    if (req.query.localdenAlarm) {
+    if (req.query.localdenTetherBuy) {
         res.send(
             pairs
             .filter(pair => pair.title && pair.commission && pair.sell && pair.buy && pair.result)
             .filter(pair => !pair.title.includes("BTCTURK"))
-            .filter(pair => pair.result > +tetherBuy - 0.02)
+            .filter(pair => pair.result > +req.query.localdenTetherBuy)
             .sort((a, b) => b.result - a.result),
         );
     } else {
