@@ -1072,12 +1072,24 @@ app.get('/v2/coinbase', async (req, res) => {
         //     );
         // }
         // lastBinanceBtcPrice = currentBinanceBtcPrice;
+    
+    if (req.query.localdenAlarm) {
+        res.send(
+            pairs
+            .filter(pair => pair.title && pair.commission && pair.sell && pair.buy && pair.result)
+            .filter(pair => !pair.title.includes("BTCTURK"))
+            .filter(pair => pair.result > +tetherBuy - 0.02)
+            .sort((a, b) => b.result - a.result),
+        );
+    } else {
+        res.send(
+            pairs
+            .sort((a, b) => b.result - a.result)
+            .filter(pair => pair.title && pair.commission && pair.sell && pair.buy && pair.result),
+        );
+    }
 
-    res.send(
-        pairs
-        .sort((a, b) => b.result - a.result)
-        .filter(pair => pair.title && pair.commission && pair.sell && pair.buy && pair.result),
-    );
+
 });
 
 app.get('/coinbase', async (req, res) => {
