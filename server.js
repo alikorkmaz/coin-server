@@ -966,7 +966,7 @@ app.get('/v2/coinbase', async (req, res) => {
 
     // let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json()).catch(x => {console.log("binance get failed\n")});
     // let gate = await fetch('https://api.gateio.ws/api/v4/spot/tickers').then(r => r.json()).catch(x => console.log('gate failied'));
-    const [binance, gate, gateRaca, gateAtlas] = await Promise.all([binanceTask(), gateTask(), gateTaskRaca(), gateTaskAtlas()]);
+//     const [binance, gate, gateRaca, gateAtlas] = await Promise.all([binanceTask(), gateTask(), gateTaskRaca(), gateTaskAtlas()]);
     const [binance, gate, gateRaca, gateAtlas, gateYedek] = await Promise.all([binanceTask(), gateTask(), gateTaskRaca(), gateTaskAtlas(), gateTaskYedek()]);
 
 
