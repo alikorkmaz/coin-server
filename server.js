@@ -954,6 +954,11 @@ async function gateTaskAtlas() {
     // return {};
 }
 
+async function gateTaskYedek() {
+    return fetch('https://api.gateio.ws/api/v4/spot/tickers?currency_pair=APE_USDT').then(r => r.json()).catch(x => console.log('yedek gate failied'));
+    // return {};
+}
+
 let lastBinanceBtcPrice;
 
 app.get('/v2/coinbase', async (req, res) => {
@@ -962,6 +967,8 @@ app.get('/v2/coinbase', async (req, res) => {
     // let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json()).catch(x => {console.log("binance get failed\n")});
     // let gate = await fetch('https://api.gateio.ws/api/v4/spot/tickers').then(r => r.json()).catch(x => console.log('gate failied'));
     const [binance, gate, gateRaca, gateAtlas] = await Promise.all([binanceTask(), gateTask(), gateTaskRaca(), gateTaskAtlas()]);
+    const [binance, gate, gateRaca, gateAtlas, gateYedek] = await Promise.all([binanceTask(), gateTask(), gateTaskRaca(), gateTaskAtlas(), gateTaskYedek()]);
+
 
     await Promise.all([
             getWithSymbol(binance, 'UNI', pairs),
@@ -1030,6 +1037,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getBox(gate, 'CEEK', pairs),
             getBox(gateRaca, 'RACA', pairs),
             getBox(gateAtlas, 'ATLAS', pairs),
+            getBox(gateYedek, 'APE', pairs),
             getBtcturk(binance, pairs),
 
             // getWithSymbol(binance, 'JUV', pairs),
