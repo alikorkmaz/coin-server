@@ -227,7 +227,7 @@ let hataAlarmiSustur = 1;
 let ticksizAlarm= 0.50;
 let toplamEmirTl= 80000;
 let arizakr = ["TVK", "CEEK"]
-let artibirkr = ["KEEP", "OXT", "AAVE", "BAL", "MKR", "BAND", "MINA", "INJ", "LPT", "AUDIO", "CLV"];
+let artibirkr = ["KEEP", "OXT", "AAVE", "BAL", "MKR", "BAND", "MINA", "INJ", "LPT", "AUDIO", "CLV", "UMA"];
 let eksibirkr = ["WAVES", "BTTC", "ATOM", "ALGO", "SOL", "ADA", "DOT", "THETA", "XTZ", "EOS", "NEO", "ONT", "IOTA", "MIOTA", "XLM", "XRP", "TRX", "VET"]
 let eksiikikr = ["AVAX", "DOGE"]
 
@@ -1034,6 +1034,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'TVK', pairs),
             getWithSymbol(binance, 'APE', pairs),
             getWithSymbol(binance, 'T', pairs),
+            getWithSymbol(binance, 'UMA', pairs),
             getBox(gate, 'CEEK', pairs),
             getBox(gateRaca, 'RACA', pairs),
             getBox(gateAtlas, 'ATLAS', pairs),
@@ -1630,7 +1631,16 @@ app.get('/coinbasereverse', async (req, res) => {
                 result: (+paribu.APE_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'APEUSDT').bidPrice )
             });
-
+        
+                if (paribu.UMA_TL)
+            pairs.push({
+                title: 'UMA',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'UMAUSDT').bidPrice,
+                buy: +paribu.UMA_TL.lowestAsk,
+                result: (+paribu.UMA_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'UMAUSDT').bidPrice )
+            });
 
                     if (paribu.T_TL)
             pairs.push({
