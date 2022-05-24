@@ -653,7 +653,7 @@ async function getBtcturk(binance, pairs){
             let mySymbol = item.pairNormalized.split("_")[0];
             if(item.pairNormalized.split("_")[1] != "TRY") return;
             
-            if (binance.find(x => x.symbol === mySymbol + 'USDT') || mySymbol === 'GLM')
+            if (binance.find(x => x.symbol === mySymbol + 'USDT') || mySymbol === 'GLM' || mySymbol === 'LUNA')
                 
                 if(mySymbol === 'SHIB'){
                     
@@ -683,6 +683,22 @@ async function getBtcturk(binance, pairs){
                     
                 
                 }
+                
+                
+                else if(mySymbol === 'LUNA'){
+                
+                 pairs.push({
+                    title: mySymbol + ' - BTCTURK',
+                    commission: commissionWithBinance,
+                    buy: +binance.find(x => x.symbol === mySymbol + 'BUSD').askPrice,
+                    sell: +btcturk.find(x => x.pair === mySymbol + 'TRY').bid,
+                    result: (+btcturk.find(x => x.pair === mySymbol + 'TRY').bid * (1 - commissionWithBinance)) /
+                        (+binance.find(x => x.symbol === mySymbol + 'BUSD').askPrice ),
+                 });
+                    
+                
+                }
+                
                 
                 else {
                     
