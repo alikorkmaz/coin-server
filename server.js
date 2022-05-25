@@ -754,6 +754,9 @@ app.get('/', (req, res) => {
     if (req.query.toplamEmirTl) {
         toplamEmirTl = +req.query.toplamEmirTl
     }
+    if (req.query.alarmKr) {
+        alarmKr = +req.query.alarmKr
+    }
     if (req.query.profit) {
         profitMargin = +req.query.profit
         myAlarm = 1;
@@ -775,17 +778,55 @@ app.get('/', (req, res) => {
             currentAlert: +profitMargin + kur,
             tetherMargin: tetherMargin,
             ticksizAlarm: ticksizAlarm,
-            toplamEmirTl: toplamEmirTl
+            toplamEmirTl: toplamEmirTl,
+            alarmKr: alarmKr
         });
     } else {
         res.send({
             profitMargin: profitMargin,
             currentAlert: +profitMargin + kur,
             ticksizAlarm: ticksizAlarm,
-            toplamEmirTl: toplamEmirTl
+            toplamEmirTl: toplamEmirTl,
+            alarmKr: alarmKr
         });
     }
 });
+
+let alarmKr = 10;
+
+setInterval(async ()=>{
+
+    let btcturk = await fetch('https://api.btcturk.com/api/v2/ticker').then(r => r.json()).then(j => j.data).catch(x => {});
+
+    let tetherPrice = +btcturk.find(x => x.pair === 'USDTTRY').ask;
+
+
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow',
+      headers: {apikey: "Xu4lLs6sBxdWPuuKd63d6XMJvRSag2EE"}
+    };
+
+    fetch("https://api.apilayer.com/fixer/latest?symbols=TRY&base=USD", requestOptions)
+      .then(response => response.json())
+      .then(result => {
+
+        let fark = ((tetherPrice - result.rates.TRY) * 100).toFixed(1);
+            if(fark > alarmKr){
+                p.send({
+                    message: "fark: " + fark + " kr, kur:" + result.rates.TRY + ", tether:" + tetherPrice + ", alarmKr:" + alarmKr,
+                },
+                    function(err, result) {
+                        {};
+                    },
+                );
+
+            }
+
+      })
+      .catch(error => console.log('error', error));
+
+}, 300000);
 
 app.get('/kur', (req, res) => {
 
