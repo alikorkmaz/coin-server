@@ -572,8 +572,8 @@ setInterval(async function(){
 
 
         data.filter(pair => (pair.title.includes("BTCTURK") 
-                             && !pair.title.includes("xxssxx") 
-                             && !pair.title.includes("sdfasd") 
+                             && !pair.title.includes("LUNA") 
+                             && !pair.title.includes("TERRA") 
                              && !pair.title.includes("asdfasd") 
                              && !pair.title.includes("ddddddddd") 
                              && !pair.title.includes("xxxxxxx")))
