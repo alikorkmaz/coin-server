@@ -206,7 +206,7 @@ var pp = new Push({
 
 var cc = new Push({
     user: 'g7dfgagzdk8ngeknnbxz1trgwjzk79',
-    token: 'aqoyrmbrtmau2q7jfjobgo6p7sa4om',
+    token: 'ariy3tcfr165zs3xxjjz1ezyyutqjs',
     //aqoyrmbrtmau2q7jfjobgo6p7sa4om ariy3tcfr165zs3xxjjz1ezyyutqjs
 });
 
