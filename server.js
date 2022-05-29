@@ -653,7 +653,7 @@ async function getBtcturk(binance, pairs){
             let mySymbol = item.pairNormalized.split("_")[0];
             if(item.pairNormalized.split("_")[1] != "TRY") return;
             
-            if (binance.find(x => x.symbol === mySymbol + 'USDT') || mySymbol === 'GLM' || mySymbol === 'LUNA')
+            if (binance.find(x => x.symbol === mySymbol + 'USDT') || mySymbol === 'GLM' || mySymbol === 'LUNC')
                 
                 if(mySymbol === 'SHIB'){
                     
@@ -685,7 +685,7 @@ async function getBtcturk(binance, pairs){
                 }
                 
                 
-                else if(mySymbol === 'LUNA'){
+                else if(mySymbol === 'LUNC'){
                 
                  pairs.push({
                     title: mySymbol + ' - BTCTURK',
