@@ -603,7 +603,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 95;
+let pair_sayisi = 96;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -621,7 +621,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 96;
+                                pair_sayisi = 97;
                             }, 60000);
                 }
             
@@ -1092,6 +1092,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'APE', pairs),
             getWithSymbol(binance, 'T', pairs),
             getWithSymbol(binance, 'UMA', pairs),
+            getWithSymbol(binance, 'STORJ', pairs),
             getBox(gate, 'CEEK', pairs),
             getBox(gateRaca, 'RACA', pairs),
             getBox(gateAtlas, 'ATLAS', pairs),
@@ -1687,6 +1688,16 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.APE_TL.lowestAsk,
                 result: (+paribu.APE_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'APEUSDT').bidPrice )
+            });
+        
+                        if (paribu.STORJ_TL)
+            pairs.push({
+                title: 'STORJ',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'STORJUSDT').bidPrice,
+                buy: +paribu.STORJ_TL.lowestAsk,
+                result: (+paribu.STORJ_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'STORJUSDT').bidPrice )
             });
         
                 if (paribu.UMA_TL)
