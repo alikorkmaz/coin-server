@@ -1093,6 +1093,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'T', pairs),
             getWithSymbol(binance, 'UMA', pairs),
             getWithSymbol(binance, 'STORJ', pairs),
+            getWithSymbol(binance, '1INCH', pairs),
             getBox(gate, 'CEEK', pairs),
             getBox(gateRaca, 'RACA', pairs),
             getBox(gateAtlas, 'ATLAS', pairs),
@@ -1709,6 +1710,18 @@ app.get('/coinbasereverse', async (req, res) => {
                 result: (+paribu.UMA_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'UMAUSDT').bidPrice )
             });
+        
+                        if (paribu['1INCH_TL'])
+            pairs.push({
+                title: '1INCH',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === '1INCHUSDT').bidPrice,
+                buy: +paribu['1INCH_TL'].lowestAsk,
+                result: (+paribu['1INCH_TL'].lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === '1INCHUSDT').bidPrice )
+            });
+
+
 
                     if (paribu.T_TL)
             pairs.push({
