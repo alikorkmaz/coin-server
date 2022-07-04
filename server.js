@@ -572,7 +572,7 @@ setInterval(async function(){
 
 
         data.filter(pair => (pair.title.includes("BTCTURK") 
-                             && !pair.title.includes("MATIC") 
+                             && !pair.title.includes("MAaaaaaaaTIC") 
                              && !pair.title.includes("TERrrrrrrrRA") 
                              && !pair.title.includes("asdfasd") 
                              && !pair.title.includes("ddddddddd") 
@@ -603,7 +603,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 97;
+let pair_sayisi = 98;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -621,7 +621,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 98;
+                                pair_sayisi = 99;
                             }, 60000);
                 }
             
@@ -1092,6 +1092,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'APE', pairs),
             getWithSymbol(binance, 'T', pairs),
             getWithSymbol(binance, 'UMA', pairs),
+            getWithSymbol(binance, 'SNX', pairs),
             getWithSymbol(binance, 'STORJ', pairs),
             getWithSymbol(binance, '1INCH', pairs),
             getBox(gate, 'CEEK', pairs),
@@ -1709,6 +1710,16 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.UMA_TL.lowestAsk,
                 result: (+paribu.UMA_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'UMAUSDT').bidPrice )
+            });
+        
+                if (paribu.SNX_TL)
+            pairs.push({
+                title: 'SNX',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'SNXUSDT').bidPrice,
+                buy: +paribu.SNX_TL.lowestAsk,
+                result: (+paribu.SNX_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'SNXUSDT').bidPrice )
             });
         
                         if (paribu['1INCH_TL'])
