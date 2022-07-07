@@ -603,7 +603,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 98;
+let pair_sayisi = 99;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -621,7 +621,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 99;
+                                pair_sayisi = 100;
                             }, 60000);
                 }
             
@@ -1092,6 +1092,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'APE', pairs),
             getWithSymbol(binance, 'T', pairs),
             getWithSymbol(binance, 'UMA', pairs),
+            getWithSymbol(binance, 'COMP', pairs),
             getWithSymbol(binance, 'SNX', pairs),
             getWithSymbol(binance, 'STORJ', pairs),
             getWithSymbol(binance, '1INCH', pairs),
@@ -1710,6 +1711,16 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.UMA_TL.lowestAsk,
                 result: (+paribu.UMA_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'UMAUSDT').bidPrice )
+            });
+        
+                        if (paribu.COMP_TL)
+            pairs.push({
+                title: 'COMP',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'COMPUSDT').bidPrice,
+                buy: +paribu.COMP_TL.lowestAsk,
+                result: (+paribu.COMP_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'COMPUSDT').bidPrice )
             });
         
                 if (paribu.SNX_TL)
