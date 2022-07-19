@@ -235,9 +235,9 @@ let eksiikikr = ["AVAX", "DOGE"]
 
 // cron.schedule('0 7 * * *', () => { tetherMargin = 0.04; toplamEmirTl = 180000; });
 
-cron.schedule('0 5 * * *', () => { tetherMargin = 0.03; toplamEmirTl = 180000; });
+cron.schedule('0 5 * * *', () => { tetherMargin = 0.03; toplamEmirTl = 60000; });
 
-cron.schedule('0 4 * * *', () => { tetherMargin = 0.04; toplamEmirTl = 240000; });
+cron.schedule('0 4 * * *', () => { tetherMargin = 0.04; toplamEmirTl = 100000; });
 
 setInterval(function(){
     alarmCaldiMi = 0;
