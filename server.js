@@ -603,7 +603,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 99;
+let pair_sayisi = 101;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -621,7 +621,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 100;
+                                pair_sayisi = 102;
                             }, 60000);
                 }
             
@@ -1093,6 +1093,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'T', pairs),
             getWithSymbol(binance, 'UMA', pairs),
             getWithSymbol(binance, 'COMP', pairs),
+            getWithSymbol(binance, 'FET', pairs),
             getWithSymbol(binance, 'SNX', pairs),
             getWithSymbol(binance, 'STORJ', pairs),
             getWithSymbol(binance, '1INCH', pairs),
@@ -1741,6 +1742,17 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu['1INCH_TL'].lowestAsk,
                 result: (+paribu['1INCH_TL'].lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === '1INCHUSDT').bidPrice )
+            });
+        
+                
+                        if (paribu['FET_TL'])
+            pairs.push({
+                title: 'FET',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'FETUSDT').bidPrice,
+                buy: +paribu['FET_TL'].lowestAsk,
+                result: (+paribu['FET_TL'].lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'FETUSDT').bidPrice )
             });
 
 
