@@ -1097,6 +1097,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'SNX', pairs),
             getWithSymbol(binance, 'STORJ', pairs),
             getWithSymbol(binance, '1INCH', pairs),
+            getWithSymbol(binance, 'RAD', pairs),
             getBox(gate, 'CEEK', pairs),
             getBox(gateRaca, 'RACA', pairs),
             getBox(gateAtlas, 'ATLAS', pairs),
@@ -1742,6 +1743,16 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu['1INCH_TL'].lowestAsk,
                 result: (+paribu['1INCH_TL'].lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === '1INCHUSDT').bidPrice )
+            });
+        
+                        if (paribu['RAD_TL'])
+            pairs.push({
+                title: 'RAD',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'RADUSDT').bidPrice,
+                buy: +paribu['RAD_TL'].lowestAsk,
+                result: (+paribu['RAD_TL'].lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'RADUSDT').bidPrice )
             });
         
                 
