@@ -603,7 +603,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 102;
+let pair_sayisi = 103;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -621,7 +621,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 103;
+                                pair_sayisi = 104;
                             }, 60000);
                 }
             
@@ -1098,6 +1098,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'STORJ', pairs),
             getWithSymbol(binance, '1INCH', pairs),
             getWithSymbol(binance, 'RAD', pairs),
+            getWithSymbol(binance, 'SPELL', pairs),
             getBox(gate, 'CEEK', pairs),
             getBox(gateRaca, 'RACA', pairs),
             getBox(gateAtlas, 'ATLAS', pairs),
@@ -1745,6 +1746,16 @@ app.get('/coinbasereverse', async (req, res) => {
                     (+binance.find(x => x.symbol === '1INCHUSDT').bidPrice )
             });
         
+        
+                                if (paribu['SPELL_TL'])
+            pairs.push({
+                title: 'SPELL',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'SPELLUSDT').bidPrice,
+                buy: +paribu['SPELL_TL'].lowestAsk,
+                result: (+paribu['SPELL_TL'].lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'SPELLUSDT').bidPrice )
+            });
                         if (paribu['RAD_TL'])
             pairs.push({
                 title: 'RAD',
