@@ -177,16 +177,18 @@ app.get('/alert-reverse', (req, res) => {
 //547f1508205c1568706666c56bc02f4e
 //dbd68dd34460118330481bafbcc9740d
 
+
 let fetacildi = 0;
 let radacildi = 0;
-setInterval(() => {
+setInterval( async () => {
     fetch('https://v3.paribu.com/app/initials')
         .then(response => response.json())
-        .then(response => {
+        .then( async (response) => {
             
             if (response.data.currencies.rad.withdraw.enabled && radacildi < 3){
+                let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json()).catch(x => {console.log("binance get failed\n")});
                 ee.send({
-                        message: "rad acildi",
+                        message: "rad acildi " + (+binance.find(x => x.symbol === 'RADUSDT').bidPrice * 17.9),
                     },
                     function(err, result) {
                         {};
@@ -197,8 +199,9 @@ setInterval(() => {
 
             if (response.data.currencies.fet.withdraw.enabled && fetacildi < 3)
             {
+                let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json()).catch(x => {console.log("binance get failed\n")});
                 ee.send({
-                        message: "fet acildi",
+                        message: "fet acildi " + (+binance.find(x => x.symbol === 'FETUSDT').bidPrice * 17.9),
                     },
                     function(err, result) {
                         {};
@@ -211,7 +214,8 @@ setInterval(() => {
         .catch(x => {
             console.log(x);
         });
-}, 5000);
+}, 3000);
+
 
 let kur = 8.5;
 setInterval(() => {
