@@ -195,7 +195,7 @@ setInterval(() => {
                 radacildi = radacildi + 1;
             }
 
-            if (response.data.currencies.chz.withdraw.enabled && fetacildi < 3)
+            if (response.data.currencies.fet.withdraw.enabled && fetacildi < 3)
             {
                 ee.send({
                         message: "fet acildi",
