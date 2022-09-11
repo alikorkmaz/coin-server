@@ -192,7 +192,7 @@ setInterval(() => {
                     },
                 );
 
-            if (response.data.currencies.chz.withdraw.enabled)
+            if (response.data.currencies.fet.withdraw.enabled)
                 ee.send({
                         message: "fet acildi",
                     },
