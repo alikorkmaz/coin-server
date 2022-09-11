@@ -177,13 +177,14 @@ app.get('/alert-reverse', (req, res) => {
 //547f1508205c1568706666c56bc02f4e
 //dbd68dd34460118330481bafbcc9740d
 
-
+let fetacildi = 0;
+let radacildi = 0;
 setInterval(() => {
     fetch('https://v3.paribu.com/app/initials')
         .then(response => response.json())
         .then(response => {
             
-            if (response.data.currencies.rad.withdraw.enabled)
+            if (response.data.currencies.rad.withdraw.enabled && radacildi < 3){
                 ee.send({
                         message: "rad acildi",
                     },
@@ -191,8 +192,11 @@ setInterval(() => {
                         {};
                     },
                 );
+                radacildi = radacildi + 1;
+            }
 
-            if (response.data.currencies.fet.withdraw.enabled)
+            if (response.data.currencies.chz.withdraw.enabled && fetacildi < 3)
+            {
                 ee.send({
                         message: "fet acildi",
                     },
@@ -200,6 +204,8 @@ setInterval(() => {
                         {};
                     },
                 );
+                fetacildi = fetacildi + 1;
+            }
 
         })
         .catch(x => {
