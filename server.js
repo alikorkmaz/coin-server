@@ -178,43 +178,43 @@ app.get('/alert-reverse', (req, res) => {
 //dbd68dd34460118330481bafbcc9740d
 
 
-let fetacildi = 0;
-let radacildi = 0;
-setInterval( async () => {
-    fetch('https://v3.paribu.com/app/initials')
-        .then(response => response.json())
-        .then( async (response) => {
+// let fetacildi = 0;
+// let radacildi = 0;
+// setInterval( async () => {
+//     fetch('https://v3.paribu.com/app/initials')
+//         .then(response => response.json())
+//         .then( async (response) => {
             
-            if (response.data.currencies.rad.withdraw.enabled && radacildi < 3){
-                let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json()).catch(x => {console.log("binance get failed\n")});
-                ee.send({
-                        message: "rad acildi " + (+binance.find(x => x.symbol === 'RADUSDT').bidPrice * 17.9),
-                    },
-                    function(err, result) {
-                        {};
-                    },
-                );
-                radacildi = radacildi + 1;
-            }
+//             if (response.data.currencies.rad.withdraw.enabled && radacildi < 3){
+//                 let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json()).catch(x => {console.log("binance get failed\n")});
+//                 ee.send({
+//                         message: "rad acildi " + (+binance.find(x => x.symbol === 'RADUSDT').bidPrice * 17.9),
+//                     },
+//                     function(err, result) {
+//                         {};
+//                     },
+//                 );
+//                 radacildi = radacildi + 1;
+//             }
 
-            if (response.data.currencies.fet.withdraw.enabled && fetacildi < 3)
-            {
-                let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json()).catch(x => {console.log("binance get failed\n")});
-                ee.send({
-                        message: "fet acildi " + (+binance.find(x => x.symbol === 'FETUSDT').bidPrice * 17.9),
-                    },
-                    function(err, result) {
-                        {};
-                    },
-                );
-                fetacildi = fetacildi + 1;
-            }
+//             if (response.data.currencies.fet.withdraw.enabled && fetacildi < 3)
+//             {
+//                 let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json()).catch(x => {console.log("binance get failed\n")});
+//                 ee.send({
+//                         message: "fet acildi " + (+binance.find(x => x.symbol === 'FETUSDT').bidPrice * 17.9),
+//                     },
+//                     function(err, result) {
+//                         {};
+//                     },
+//                 );
+//                 fetacildi = fetacildi + 1;
+//             }
 
-        })
-        .catch(x => {
-            console.log(x);
-        });
-}, 3000);
+//         })
+//         .catch(x => {
+//             console.log(x);
+//         });
+// }, 3000);
 
 
 let kur = 8.5;
