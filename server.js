@@ -732,7 +732,7 @@ async function getBtcturk(binance, pairs){
                     commission: commissionWithBinance,
                     buy: +binance.find(x => x.symbol === mySymbol + 'BUSD').askPrice,
                     sell: +btcturk.find(x => x.pair === mySymbol + 'TRY').bid,
-                    result: (+btcturk.find(x => x.pair === mySymbol + 'TRY').bid * (1 - commissionWithBinance)) /
+                    result: (+btcturk.find(x => x.pair === mySymbol + 'TRY').bid * (1 - (commissionWithBinance + 0.012))) /
                         (+binance.find(x => x.symbol === mySymbol + 'BUSD').askPrice ),
                  });
                     
