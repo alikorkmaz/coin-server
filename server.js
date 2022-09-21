@@ -635,6 +635,25 @@ setInterval(async function(){
                     return;
                 }
             
+            data.filter(pair => (alert.includes(pair + " - BTCTURK") ))
+            .forEach(pair => {
+
+
+                if(tetheriniz < pair.result){
+                            p.send({
+                                    message: "2btcturke bi bak",
+                                },
+                                function(err, result) {
+                                    {};
+                                },
+                            );
+                            alarmCaldiMi = 1;
+                            setTimeout(function(){
+                                alarmCaldiMi = 0;
+                            }, 300000);
+                    return;
+                }
+            
             
             });
 
