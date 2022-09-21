@@ -634,8 +634,20 @@ setInterval(async function(){
                             }, 300000);
                     return;
                 }
+//             
             
-            data.filter(pair => (alert.includes(pair + " - BTCTURK") ))
+            
+            
+            });
+        
+        
+        
+        
+        
+        
+        
+        
+                data.filter(pair => (alert.includes(pair)) ))
             .forEach(pair => {
 
 
@@ -653,6 +665,8 @@ setInterval(async function(){
                             }, 300000);
                     return;
                 }
+
+            
             
             
             });
