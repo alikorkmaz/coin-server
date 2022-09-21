@@ -647,7 +647,7 @@ setInterval(async function(){
         
         
         
-                data.filter(pair => (alert.includes(pair)) ))
+                data.filter(pair => (alert.includes(pair)) )
             .forEach(pair => {
 
 
