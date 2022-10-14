@@ -676,7 +676,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 104;
+let pair_sayisi = 108;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -694,7 +694,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 104;
+                                pair_sayisi = 109;
                             }, 60000);
                 }
             
@@ -1172,6 +1172,8 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, '1INCH', pairs),
             getWithSymbol(binance, 'RAD', pairs),
             getWithSymbol(binance, 'SPELL', pairs),
+            getWithSymbol(binance, 'QNT', pairs),
+            getWithSymbol(binance, 'STG', pairs),
             getBox(gate, 'CEEK', pairs),
             getBox(gateRaca, 'RACA', pairs),
             getBox(gateAtlas, 'ATLAS', pairs),
@@ -1767,6 +1769,30 @@ app.get('/coinbasereverse', async (req, res) => {
                 buy: +paribu.APE_TL.lowestAsk,
                 result: (+paribu.APE_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'APEUSDT').bidPrice )
+            });
+        
+                        if (paribu.QNT_TL)
+            pairs.push({
+                title: 'QNT',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'QNTUSDT').bidPrice,
+                buy: +paribu.QNT_TL.lowestAsk,
+                result: (+paribu.QNT_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'QNTUSDT').bidPrice )
+            });
+
+
+
+
+
+                            if (paribu.STG_TL)
+            pairs.push({
+                title: 'STG',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'STGUSDT').bidPrice,
+                buy: +paribu.STG_TL.lowestAsk,
+                result: (+paribu.STG_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'STGUSDT').bidPrice )
             });
         
                         if (paribu.STORJ_TL)
