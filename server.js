@@ -1174,6 +1174,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'SPELL', pairs),
             getWithSymbol(binance, 'QNT', pairs),
             getWithSymbol(binance, 'STG', pairs),
+                    getWithSymbol(binance, 'APT', pairs),
             getBox(gate, 'CEEK', pairs),
             getBox(gateRaca, 'RACA', pairs),
             getBox(gateAtlas, 'ATLAS', pairs),
@@ -1784,7 +1785,17 @@ app.get('/coinbasereverse', async (req, res) => {
 
 
 
-
+                            if (paribu.APT_TL)
+            pairs.push({
+                title: 'APT',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'APTUSDT').bidPrice,
+                buy: +paribu.APT_TL.lowestAsk,
+                result: (+paribu.APT_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'APTUSDT').bidPrice )
+            });
+        
+        
                             if (paribu.STG_TL)
             pairs.push({
                 title: 'STG',
