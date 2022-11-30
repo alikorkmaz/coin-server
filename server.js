@@ -1751,776 +1751,776 @@ app.get('/coinbasereverse', async (req, res) => {
 
 
 
-                if (paribu.MIOTA_TL)
-            pairs.push({
-                title: 'IOTA',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'IOTAUSDT').bidPrice,
-                buy: +paribu.MIOTA_TL.lowestAsk,
-                result: (+paribu.MIOTA_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'IOTAUSDT').bidPrice )
-            });
+//                 if (paribu.MIOTA_TL)
+//             pairs.push({
+//                 title: 'IOTA',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'IOTAUSDT').bidPrice,
+//                 buy: +paribu.MIOTA_TL.lowestAsk,
+//                 result: (+paribu.MIOTA_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'IOTAUSDT').bidPrice )
+//             });
 
 
-                if (paribu.APE_TL)
-            pairs.push({
-                title: 'APE',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'APEUSDT').bidPrice,
-                buy: +paribu.APE_TL.lowestAsk,
-                result: (+paribu.APE_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'APEUSDT').bidPrice )
-            });
+//                 if (paribu.APE_TL)
+//             pairs.push({
+//                 title: 'APE',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'APEUSDT').bidPrice,
+//                 buy: +paribu.APE_TL.lowestAsk,
+//                 result: (+paribu.APE_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'APEUSDT').bidPrice )
+//             });
         
-                        if (paribu.QNT_TL)
-            pairs.push({
-                title: 'QNT',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'QNTUSDT').bidPrice,
-                buy: +paribu.QNT_TL.lowestAsk,
-                result: (+paribu.QNT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'QNTUSDT').bidPrice )
-            });
+//                         if (paribu.QNT_TL)
+//             pairs.push({
+//                 title: 'QNT',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'QNTUSDT').bidPrice,
+//                 buy: +paribu.QNT_TL.lowestAsk,
+//                 result: (+paribu.QNT_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'QNTUSDT').bidPrice )
+//             });
 
 
 
 
-                            if (paribu.APT_TL)
-            pairs.push({
-                title: 'APT',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'APTUSDT').bidPrice,
-                buy: +paribu.APT_TL.lowestAsk,
-                result: (+paribu.APT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'APTUSDT').bidPrice )
-            });
+//                             if (paribu.APT_TL)
+//             pairs.push({
+//                 title: 'APT',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'APTUSDT').bidPrice,
+//                 buy: +paribu.APT_TL.lowestAsk,
+//                 result: (+paribu.APT_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'APTUSDT').bidPrice )
+//             });
         
         
-                            if (paribu.STG_TL)
-            pairs.push({
-                title: 'STG',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'STGUSDT').bidPrice,
-                buy: +paribu.STG_TL.lowestAsk,
-                result: (+paribu.STG_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'STGUSDT').bidPrice )
-            });
+//                             if (paribu.STG_TL)
+//             pairs.push({
+//                 title: 'STG',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'STGUSDT').bidPrice,
+//                 buy: +paribu.STG_TL.lowestAsk,
+//                 result: (+paribu.STG_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'STGUSDT').bidPrice )
+//             });
         
-                        if (paribu.STORJ_TL)
-            pairs.push({
-                title: 'STORJ',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'STORJUSDT').bidPrice,
-                buy: +paribu.STORJ_TL.lowestAsk,
-                result: (+paribu.STORJ_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'STORJUSDT').bidPrice )
-            });
+//                         if (paribu.STORJ_TL)
+//             pairs.push({
+//                 title: 'STORJ',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'STORJUSDT').bidPrice,
+//                 buy: +paribu.STORJ_TL.lowestAsk,
+//                 result: (+paribu.STORJ_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'STORJUSDT').bidPrice )
+//             });
         
-                if (paribu.UMA_TL)
-            pairs.push({
-                title: 'UMA',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'UMAUSDT').bidPrice,
-                buy: +paribu.UMA_TL.lowestAsk,
-                result: (+paribu.UMA_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'UMAUSDT').bidPrice )
-            });
+//                 if (paribu.UMA_TL)
+//             pairs.push({
+//                 title: 'UMA',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'UMAUSDT').bidPrice,
+//                 buy: +paribu.UMA_TL.lowestAsk,
+//                 result: (+paribu.UMA_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'UMAUSDT').bidPrice )
+//             });
         
-                        if (paribu.COMP_TL)
-            pairs.push({
-                title: 'COMP',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'COMPUSDT').bidPrice,
-                buy: +paribu.COMP_TL.lowestAsk,
-                result: (+paribu.COMP_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'COMPUSDT').bidPrice )
-            });
+//                         if (paribu.COMP_TL)
+//             pairs.push({
+//                 title: 'COMP',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'COMPUSDT').bidPrice,
+//                 buy: +paribu.COMP_TL.lowestAsk,
+//                 result: (+paribu.COMP_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'COMPUSDT').bidPrice )
+//             });
         
-                if (paribu.SNX_TL)
-            pairs.push({
-                title: 'SNX',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'SNXUSDT').bidPrice,
-                buy: +paribu.SNX_TL.lowestAsk,
-                result: (+paribu.SNX_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'SNXUSDT').bidPrice )
-            });
+//                 if (paribu.SNX_TL)
+//             pairs.push({
+//                 title: 'SNX',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'SNXUSDT').bidPrice,
+//                 buy: +paribu.SNX_TL.lowestAsk,
+//                 result: (+paribu.SNX_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'SNXUSDT').bidPrice )
+//             });
         
-                        if (paribu['1INCH_TL'])
-            pairs.push({
-                title: '1INCH',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === '1INCHUSDT').bidPrice,
-                buy: +paribu['1INCH_TL'].lowestAsk,
-                result: (+paribu['1INCH_TL'].lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === '1INCHUSDT').bidPrice )
-            });
+//                         if (paribu['1INCH_TL'])
+//             pairs.push({
+//                 title: '1INCH',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === '1INCHUSDT').bidPrice,
+//                 buy: +paribu['1INCH_TL'].lowestAsk,
+//                 result: (+paribu['1INCH_TL'].lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === '1INCHUSDT').bidPrice )
+//             });
         
         
-                                if (paribu['SPELL_TL'])
-            pairs.push({
-                title: 'SPELL',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'SPELLUSDT').bidPrice,
-                buy: +paribu['SPELL_TL'].lowestAsk,
-                result: (+paribu['SPELL_TL'].lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'SPELLUSDT').bidPrice )
-            });
-                        if (paribu['RAD_TL'])
-            pairs.push({
-                title: 'RAD',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'RADUSDT').bidPrice,
-                buy: +paribu['RAD_TL'].lowestAsk,
-                result: (+paribu['RAD_TL'].lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'RADUSDT').bidPrice )
-            });
+//                                 if (paribu['SPELL_TL'])
+//             pairs.push({
+//                 title: 'SPELL',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'SPELLUSDT').bidPrice,
+//                 buy: +paribu['SPELL_TL'].lowestAsk,
+//                 result: (+paribu['SPELL_TL'].lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'SPELLUSDT').bidPrice )
+//             });
+//                         if (paribu['RAD_TL'])
+//             pairs.push({
+//                 title: 'RAD',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'RADUSDT').bidPrice,
+//                 buy: +paribu['RAD_TL'].lowestAsk,
+//                 result: (+paribu['RAD_TL'].lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'RADUSDT').bidPrice )
+//             });
         
                 
-                        if (paribu['FET_TL'])
-            pairs.push({
-                title: 'FET',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'FETUSDT').bidPrice,
-                buy: +paribu['FET_TL'].lowestAsk,
-                result: (+paribu['FET_TL'].lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'FETUSDT').bidPrice )
-            });
-
-
-
-                    if (paribu.T_TL)
-            pairs.push({
-                title: 'T',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'TUSDT').bidPrice,
-                buy: +paribu.T_TL.lowestAsk,
-                result: (+paribu.T_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'TUSDT').bidPrice )
-            });
-
-
-
-        if (paribu.CRV_TL)
-            pairs.push({
-                title: 'CRV',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'CRVUSDT').bidPrice,
-                buy: +paribu.CRV_TL.lowestAsk,
-                result: (+paribu.CRV_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'CRVUSDT').bidPrice )
-            });
-
-
-
-                if (paribu.GALA_TL)
-            pairs.push({
-                title: 'GALA',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'GALAUSDT').bidPrice,
-                buy: +paribu.GALA_TL.lowestAsk,
-                result: (+paribu.GALA_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'GALAUSDT').bidPrice )
-            });
-
-
-                if (paribu.TVK_TL)
-            pairs.push({
-                title: 'TVK',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'TVKUSDT').bidPrice,
-                buy: +paribu.TVK_TL.lowestAsk,
-                result: (+paribu.TVK_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'TVKUSDT').bidPrice )
-            });
-
-
-        if (paribu.TLM_TL)
-            pairs.push({
-                title: 'TLM',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'TLMUSDT').bidPrice,
-                buy: +paribu.TLM_TL.lowestAsk,
-                result: (+paribu.TLM_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'TLMUSDT').bidPrice )
-            });
-
-
-        if (paribu.ALICE_TL)
-            pairs.push({
-                title: 'ALICE',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'ALICEUSDT').bidPrice,
-                buy: +paribu.ALICE_TL.lowestAsk,
-                result: (+paribu.ALICE_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ALICEUSDT').bidPrice )
-            });
-
-
-        if (paribu.AUDIO_TL)
-            pairs.push({
-                title: 'AUDIO',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'AUDIOUSDT').bidPrice,
-                buy: +paribu.AUDIO_TL.lowestAsk,
-                result: (+paribu.AUDIO_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'AUDIOUSDT').bidPrice )
-            });
-
-
-        if (paribu.CLV_TL)
-            pairs.push({
-                title: 'CLV',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'CLVUSDT').bidPrice,
-                buy: +paribu.CLV_TL.lowestAsk,
-                result: (+paribu.CLV_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'CLVUSDT').bidPrice )
-            });
-
-                if (paribu.ICP_TL)
-            pairs.push({
-                title: 'ICP',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'ICPUSDT').bidPrice,
-                buy: +paribu.ICP_TL.lowestAsk,
-                result: (+paribu.ICP_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ICPUSDT').bidPrice )
-            });
-
-                        if (paribu.INJ_TL)
-            pairs.push({
-                title: 'INJ',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'INJUSDT').bidPrice,
-                buy: +paribu.INJ_TL.lowestAsk,
-                result: (+paribu.INJ_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'INJUSDT').bidPrice )
-            });
-
-                                if (paribu.LPT_TL)
-            pairs.push({
-                title: 'LPT',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'LPTUSDT').bidPrice,
-                buy: +paribu.LPT_TL.lowestAsk,
-                result: (+paribu.LPT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'LPTUSDT').bidPrice )
-            });
-
-                                        if (paribu.SAND_TL)
-            pairs.push({
-                title: 'SAND',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'SANDUSDT').bidPrice,
-                buy: +paribu.SAND_TL.lowestAsk,
-                result: (+paribu.SAND_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'SANDUSDT').bidPrice )
-            });
-
-                                if (paribu.ENS_TL)
-            pairs.push({
-                title: 'ENS',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'ENSUSDT').bidPrice,
-                buy: +paribu.ENS_TL.lowestAsk,
-                result: (+paribu.ENS_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ENSUSDT').bidPrice )
-            });
-
-                            if (paribu.AXS_TL)
-            pairs.push({
-                title: 'AXS',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'AXSUSDT').bidPrice,
-                buy: +paribu.AXS_TL.lowestAsk,
-                result: (+paribu.AXS_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'AXSUSDT').bidPrice )
-            });
-
-                        if (paribu.FTM_TL)
-            pairs.push({
-                title: 'FTM',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'FTMUSDT').bidPrice,
-                buy: +paribu.FTM_TL.lowestAsk,
-                result: (+paribu.FTM_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'FTMUSDT').bidPrice )
-            });
-
-                    if (paribu.ANKR_TL)
-            pairs.push({
-                title: 'ANKR',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'ANKRUSDT').bidPrice,
-                buy: +paribu.ANKR_TL.lowestAsk,
-                result: (+paribu.ANKR_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ANKRUSDT').bidPrice )
-            });
-
-                            if (paribu.SHIB_TL)
-            pairs.push({
-                title: 'SHIB',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'SHIBUSDT').bidPrice * 1000,
-                buy: +paribu.SHIB_TL.lowestAsk * 1000,
-                result: (+paribu.SHIB_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'SHIBUSDT').bidPrice )
-            });
-
-                if (paribu.KEEP_TL)
-            pairs.push({
-                title: 'KEEP',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'KEEPUSDT').bidPrice,
-                buy: +paribu.KEEP_TL.lowestAsk,
-                result: (+paribu.KEEP_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'KEEPUSDT').bidPrice )
-            });
-
-
-                        if (paribu.VET_TL)
-            pairs.push({
-                title: 'VET',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'VETUSDT').bidPrice,
-                buy: +paribu.VET_TL.lowestAsk,
-                result: (+paribu.VET_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'VETUSDT').bidPrice )
-            });
-
-
-        if (paribu.MANA_TL)
-            pairs.push({
-                title: 'MANA',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'MANAUSDT').bidPrice,
-                buy: +paribu.MANA_TL.lowestAsk,
-                result: (+paribu.MANA_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'MANAUSDT').bidPrice )
-            });
-
-
-                if (paribu.SOL_TL)
-            pairs.push({
-                title: 'SOL',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'SOLUSDT').bidPrice,
-                buy: +paribu.SOL_TL.lowestAsk,
-                result: (+paribu.SOL_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'SOLUSDT').bidPrice )
-            });
-
-
-
-                if (paribu.MINA_TL)
-            pairs.push({
-                title: 'MINA',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'MINAUSDT').bidPrice,
-                buy: +paribu.MINA_TL.lowestAsk,
-                result: (+paribu.MINA_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'MINAUSDT').bidPrice )
-            });
-
-
-        if (paribu.BCH_TL)
-            pairs.push({
-                title: 'BCH',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'BCHUSDT').bidPrice,
-                buy: +paribu.BCH_TL.lowestAsk,
-                result: (+paribu.BCH_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'BCHUSDT').bidPrice )
-            });
-
-
-
-        if (paribu.GRT_TL)
-            pairs.push({
-                title: 'GRT',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'GRTUSDT').bidPrice,
-                buy: +paribu.GRT_TL.lowestAsk,
-                result: (+paribu.GRT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'GRTUSDT').bidPrice )
-            });
-
-
-                if (paribu.OXT_TL)
-            pairs.push({
-                title: 'OXT',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'OXTUSDT').bidPrice,
-                buy: +paribu.OXT_TL.lowestAsk,
-                result: (+paribu.OXT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'OXTUSDT').bidPrice )
-            });
-
-
-        if (paribu.MATIC_TL)
-            pairs.push({
-                title: 'MATIC',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'MATICUSDT').bidPrice,
-                buy: +paribu.MATIC_TL.lowestAsk,
-                result: (+paribu.MATIC_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'MATICUSDT').bidPrice )
-            });
-
-
-        if (paribu.THETA_TL)
-            pairs.push({
-                title: 'THETA',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'THETAUSDT').bidPrice,
-                buy: +paribu.THETA_TL.lowestAsk,
-                result: (+paribu.THETA_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'THETAUSDT').bidPrice )
-            });
-
-        if (paribu.OGN_TL)
-            pairs.push({
-                title: 'OGN',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'OGNUSDT').bidPrice,
-                buy: +paribu.OGN_TL.lowestAsk,
-                result: (+paribu.OGN_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'OGNUSDT').bidPrice )
-            });
-
-
-
-
-        if (paribu.ZIL_TL)
-            pairs.push({
-                title: 'ZIL',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'ZILUSDT').bidPrice,
-                buy: +paribu.ZIL_TL.lowestAsk,
-                result: (+paribu.ZIL_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ZILUSDT').bidPrice )
-            });
-
-
-        if (paribu.BAL_TL)
-            pairs.push({
-                title: 'BAL',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'BALUSDT').bidPrice,
-                buy: +paribu.BAL_TL.lowestAsk,
-                result: (+paribu.BAL_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'BALUSDT').bidPrice )
-            });
-
-
-        if (paribu.ENJ_TL)
-            pairs.push({
-                title: 'ENJ',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'ENJUSDT').bidPrice,
-                buy: +paribu.ENJ_TL.lowestAsk,
-                result: (+paribu.ENJ_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ENJUSDT').bidPrice )
-            });
-
-
-        if (paribu.ALGO_TL)
-            pairs.push({
-                title: 'ALGO',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'ALGOUSDT').bidPrice,
-                buy: +paribu.ALGO_TL.lowestAsk,
-                result: (+paribu.ALGO_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ALGOUSDT').bidPrice )
-            });
-
-
-
-        if (paribu.REEF_TL)
-            pairs.push({
-                title: 'REEF',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'REEFUSDT').bidPrice,
-                buy: +paribu.REEF_TL.lowestAsk,
-                result: (+paribu.REEF_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'REEFUSDT').bidPrice )
-            });
-
-        if (paribu.BAND_TL)
-            pairs.push({
-                title: 'BAND',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'BANDUSDT').bidPrice,
-                buy: +paribu.BAND_TL.lowestAsk,
-                result: (+paribu.BAND_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'BANDUSDT').bidPrice )
-            });
-
-
-
-        if (paribu.LRC_TL)
-            pairs.push({
-                title: 'LRC',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'LRCUSDT').bidPrice,
-                buy: +paribu.LRC_TL.lowestAsk,
-                result: (+paribu.LRC_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'LRCUSDT').bidPrice )
-            });
-
-
-        if (paribu.UNI_TL)
-            pairs.push({
-                title: 'UNI',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'UNIUSDT').bidPrice,
-                buy: +paribu.UNI_TL.lowestAsk,
-                result: (+paribu.UNI_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'UNIUSDT').bidPrice )
-            });
-
-        if (paribu.AAVE_TL)
-            pairs.push({
-                title: 'AAVE',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'AAVEUSDT').bidPrice,
-                buy: +paribu.AAVE_TL.lowestAsk,
-                result: (+paribu.AAVE_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'AAVEUSDT').bidPrice )
-            });
-
-
-
-        if (paribu.AVAX_TL)
-            pairs.push({
-                title: 'AVAX',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'AVAXUSDT').bidPrice,
-                buy: +paribu.AVAX_TL.lowestAsk,
-                result: (+paribu.AVAX_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'AVAXUSDT').bidPrice )
-            });
-
-
-        if (paribu.OMG_TL)
-            pairs.push({
-                title: 'OMG',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'OMGUSDT').bidPrice,
-                buy: +paribu.OMG_TL.lowestAsk,
-                result: (+paribu.OMG_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'OMGUSDT').bidPrice )
-            });
-
-
-
-
-        if (paribu.XTZ_TL)
-            pairs.push({
-                title: 'XTZ',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'XTZUSDT').bidPrice,
-                buy: +paribu.XTZ_TL.lowestAsk,
-                result: (+paribu.XTZ_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'XTZUSDT').bidPrice )
-            });
-
-
-
-
-        if (paribu.MKR_TL)
-            pairs.push({
-                title: 'MKR',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'MKRUSDT').bidPrice,
-                buy: +paribu.MKR_TL.lowestAsk,
-                result: (+paribu.MKR_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'MKRUSDT').bidPrice )
-            });
-
-
-
-        if (paribu.RVN_TL)
-            pairs.push({
-                title: 'RVN',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'RVNUSDT').bidPrice,
-                buy: +paribu.RVN_TL.lowestAsk,
-                result: (+paribu.RVN_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'RVNUSDT').bidPrice )
-            });
-
-
-        if (paribu.ATOM_TL)
-            pairs.push({
-                title: 'ATOM',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'ATOMUSDT').bidPrice,
-                buy: +paribu.ATOM_TL.lowestAsk,
-                result: (+paribu.ATOM_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ATOMUSDT').bidPrice )
-            });
-
-
-        if (paribu.DOT_TL)
-            pairs.push({
-                title: 'DOT',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'DOTUSDT').bidPrice,
-                buy: +paribu.DOT_TL.lowestAsk,
-                result: (+paribu.DOT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'DOTUSDT').bidPrice )
-            });
-
-
-
-        if (paribu.ONT_TL)
-            pairs.push({
-                title: 'ONT',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'ONTUSDT').bidPrice,
-                buy: +paribu.ONT_TL.lowestAsk,
-                result: (+paribu.ONT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'ONTUSDT').bidPrice )
-            });
-
-
-
-
-        pairs.push({
-            title: 'BTC',
-            commission: commissionWithBinance,
-            sell: +binance.find(x => x.symbol === 'BTCUSDT').bidPrice,
-            buy: +paribu.BTC_TL.lowestAsk,
-            result: (+paribu.BTC_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'BTCUSDT').bidPrice )
-        });
-        pairs.push({
-            title: 'ETH',
-            commission: commissionWithBinance,
-            sell: +binance.find(x => x.symbol === 'ETHUSDT').bidPrice,
-            buy: +paribu.ETH_TL.lowestAsk,
-            result: (+paribu.ETH_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'ETHUSDT').bidPrice )
-        });
-        pairs.push({
-            title: 'XRP',
-            commission: commissionWithBinance,
-            sell: +binance.find(x => x.symbol === 'XRPUSDT').bidPrice,
-            buy: +paribu.XRP_TL.lowestAsk,
-            result: (+paribu.XRP_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'XRPUSDT').bidPrice )
-        });
-        pairs.push({
-            title: 'LTC',
-            commission: commissionWithBinance,
-            sell: +binance.find(x => x.symbol === 'LTCUSDT').bidPrice,
-            buy: +paribu.LTC_TL.lowestAsk,
-            result: (+paribu.LTC_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'LTCUSDT').bidPrice )
-        });
-        pairs.push({
-            title: 'XLM',
-            commission: commissionWithBinance,
-            sell: +binance.find(x => x.symbol === 'XLMUSDT').bidPrice,
-            buy: +paribu.XLM_TL.lowestAsk,
-            result: (+paribu.XLM_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'XLMUSDT').bidPrice )
-        });
-        pairs.push({
-            title: 'EOS',
-            commission: commissionWithBinance,
-            sell: +binance.find(x => x.symbol === 'EOSUSDT').bidPrice,
-            buy: +paribu.EOS_TL.lowestAsk,
-            result: (+paribu.EOS_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'EOSUSDT').bidPrice )
-        });
-        pairs.push({
-            title: 'BAT',
-            commission: commissionWithBinance,
-            sell: +binance.find(x => x.symbol === 'BATUSDT').bidPrice,
-            buy: +paribu.BAT_TL.lowestAsk,
-            result: (+paribu.BAT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'BATUSDT').bidPrice )
-        });
-        pairs.push({
-            title: 'BTTC',
-            commission: commissionWithBinance,
-            sell: +binance.find(x => x.symbol === 'BTTCUSDT').bidPrice * 10000,
-            buy: +paribu.BTTC_TL.lowestAsk * 10000,
-            result: (+paribu.BTTC_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'BTTCUSDT').bidPrice )
-        });
-        pairs.push({
-            title: 'TRX',
-            commission: commissionWithBinance,
-            sell: +binance.find(x => x.symbol === 'TRXUSDT').bidPrice,
-            buy: +paribu.TRX_TL.lowestAsk,
-            result: (+paribu.TRX_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'TRXUSDT').bidPrice )
-        });
-        pairs.push({
-            title: 'HOT',
-            commission: commissionWithBinance,
-            sell: +binance.find(x => x.symbol === 'HOTUSDT').bidPrice,
-            buy: +paribu.HOT_TL.lowestAsk,
-            result: (+paribu.HOT_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'HOTUSDT').bidPrice )
-        });
-        pairs.push({
-            title: 'CHZ',
-            commission: commissionWithBinance,
-            sell: +binance.find(x => x.symbol === 'CHZUSDT').bidPrice,
-            buy: +paribu.CHZ_TL.lowestAsk,
-            result: (+paribu.CHZ_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'CHZUSDT').bidPrice )
-        });
-        pairs.push({
-            title: 'ADA',
-            commission: commissionWithBinance,
-            sell: +binance.find(x => x.symbol === 'ADAUSDT').bidPrice,
-            buy: +paribu.ADA_TL.lowestAsk,
-            result: (+paribu.ADA_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'ADAUSDT').bidPrice )
-        });
-        pairs.push({
-            title: 'NEO',
-            commission: commissionWithBinance,
-            sell: +binance.find(x => x.symbol === 'NEOUSDT').bidPrice,
-            buy: +paribu.NEO_TL.lowestAsk,
-            result: (+paribu.NEO_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'NEOUSDT').bidPrice )
-        });
-        pairs.push({
-            title: 'LINK',
-            commission: commissionWithBinance,
-            sell: +binance.find(x => x.symbol === 'LINKUSDT').bidPrice,
-            buy: +paribu.LINK_TL.lowestAsk,
-            result: (+paribu.LINK_TL.lowestAsk * (1 + commissionWithBinance)) /
-                (+binance.find(x => x.symbol === 'LINKUSDT').bidPrice )
-        });
-        if (binance.some(x => x.symbol === 'DOGEUSDT'))
-            pairs.push({
-                title: 'DOGE',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'DOGEUSDT').bidPrice,
-                buy: +paribu.DOGE_TL.lowestAsk,
-                result: (+paribu.DOGE_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    (+binance.find(x => x.symbol === 'DOGEUSDT').bidPrice )
-            });
-
-
-        if (paribu.WAVES_TL)
-            pairs.push({
-                title: 'WAVES',
-                commission: commissionWithBinance,
-                sell: +binance.find(x => x.symbol === 'WAVESBTC').bidPrice,
-                buy: +paribu.WAVES_TL.lowestAsk,
-                result: (+paribu.WAVES_TL.lowestAsk * (1 + commissionWithBinance)) /
-                    ((binance.find(x => x.symbol === 'WAVESBTC').bidPrice *
-                            binance.find(x => x.symbol === 'BTCUSDT').bidPrice) )
-            });
+//                         if (paribu['FET_TL'])
+//             pairs.push({
+//                 title: 'FET',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'FETUSDT').bidPrice,
+//                 buy: +paribu['FET_TL'].lowestAsk,
+//                 result: (+paribu['FET_TL'].lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'FETUSDT').bidPrice )
+//             });
+
+
+
+//                     if (paribu.T_TL)
+//             pairs.push({
+//                 title: 'T',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'TUSDT').bidPrice,
+//                 buy: +paribu.T_TL.lowestAsk,
+//                 result: (+paribu.T_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'TUSDT').bidPrice )
+//             });
+
+
+
+//         if (paribu.CRV_TL)
+//             pairs.push({
+//                 title: 'CRV',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'CRVUSDT').bidPrice,
+//                 buy: +paribu.CRV_TL.lowestAsk,
+//                 result: (+paribu.CRV_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'CRVUSDT').bidPrice )
+//             });
+
+
+
+//                 if (paribu.GALA_TL)
+//             pairs.push({
+//                 title: 'GALA',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'GALAUSDT').bidPrice,
+//                 buy: +paribu.GALA_TL.lowestAsk,
+//                 result: (+paribu.GALA_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'GALAUSDT').bidPrice )
+//             });
+
+
+//                 if (paribu.TVK_TL)
+//             pairs.push({
+//                 title: 'TVK',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'TVKUSDT').bidPrice,
+//                 buy: +paribu.TVK_TL.lowestAsk,
+//                 result: (+paribu.TVK_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'TVKUSDT').bidPrice )
+//             });
+
+
+//         if (paribu.TLM_TL)
+//             pairs.push({
+//                 title: 'TLM',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'TLMUSDT').bidPrice,
+//                 buy: +paribu.TLM_TL.lowestAsk,
+//                 result: (+paribu.TLM_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'TLMUSDT').bidPrice )
+//             });
+
+
+//         if (paribu.ALICE_TL)
+//             pairs.push({
+//                 title: 'ALICE',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'ALICEUSDT').bidPrice,
+//                 buy: +paribu.ALICE_TL.lowestAsk,
+//                 result: (+paribu.ALICE_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'ALICEUSDT').bidPrice )
+//             });
+
+
+//         if (paribu.AUDIO_TL)
+//             pairs.push({
+//                 title: 'AUDIO',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'AUDIOUSDT').bidPrice,
+//                 buy: +paribu.AUDIO_TL.lowestAsk,
+//                 result: (+paribu.AUDIO_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'AUDIOUSDT').bidPrice )
+//             });
+
+
+//         if (paribu.CLV_TL)
+//             pairs.push({
+//                 title: 'CLV',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'CLVUSDT').bidPrice,
+//                 buy: +paribu.CLV_TL.lowestAsk,
+//                 result: (+paribu.CLV_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'CLVUSDT').bidPrice )
+//             });
+
+//                 if (paribu.ICP_TL)
+//             pairs.push({
+//                 title: 'ICP',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'ICPUSDT').bidPrice,
+//                 buy: +paribu.ICP_TL.lowestAsk,
+//                 result: (+paribu.ICP_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'ICPUSDT').bidPrice )
+//             });
+
+//                         if (paribu.INJ_TL)
+//             pairs.push({
+//                 title: 'INJ',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'INJUSDT').bidPrice,
+//                 buy: +paribu.INJ_TL.lowestAsk,
+//                 result: (+paribu.INJ_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'INJUSDT').bidPrice )
+//             });
+
+//                                 if (paribu.LPT_TL)
+//             pairs.push({
+//                 title: 'LPT',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'LPTUSDT').bidPrice,
+//                 buy: +paribu.LPT_TL.lowestAsk,
+//                 result: (+paribu.LPT_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'LPTUSDT').bidPrice )
+//             });
+
+//                                         if (paribu.SAND_TL)
+//             pairs.push({
+//                 title: 'SAND',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'SANDUSDT').bidPrice,
+//                 buy: +paribu.SAND_TL.lowestAsk,
+//                 result: (+paribu.SAND_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'SANDUSDT').bidPrice )
+//             });
+
+//                                 if (paribu.ENS_TL)
+//             pairs.push({
+//                 title: 'ENS',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'ENSUSDT').bidPrice,
+//                 buy: +paribu.ENS_TL.lowestAsk,
+//                 result: (+paribu.ENS_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'ENSUSDT').bidPrice )
+//             });
+
+//                             if (paribu.AXS_TL)
+//             pairs.push({
+//                 title: 'AXS',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'AXSUSDT').bidPrice,
+//                 buy: +paribu.AXS_TL.lowestAsk,
+//                 result: (+paribu.AXS_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'AXSUSDT').bidPrice )
+//             });
+
+//                         if (paribu.FTM_TL)
+//             pairs.push({
+//                 title: 'FTM',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'FTMUSDT').bidPrice,
+//                 buy: +paribu.FTM_TL.lowestAsk,
+//                 result: (+paribu.FTM_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'FTMUSDT').bidPrice )
+//             });
+
+//                     if (paribu.ANKR_TL)
+//             pairs.push({
+//                 title: 'ANKR',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'ANKRUSDT').bidPrice,
+//                 buy: +paribu.ANKR_TL.lowestAsk,
+//                 result: (+paribu.ANKR_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'ANKRUSDT').bidPrice )
+//             });
+
+//                             if (paribu.SHIB_TL)
+//             pairs.push({
+//                 title: 'SHIB',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'SHIBUSDT').bidPrice * 1000,
+//                 buy: +paribu.SHIB_TL.lowestAsk * 1000,
+//                 result: (+paribu.SHIB_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'SHIBUSDT').bidPrice )
+//             });
+
+//                 if (paribu.KEEP_TL)
+//             pairs.push({
+//                 title: 'KEEP',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'KEEPUSDT').bidPrice,
+//                 buy: +paribu.KEEP_TL.lowestAsk,
+//                 result: (+paribu.KEEP_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'KEEPUSDT').bidPrice )
+//             });
+
+
+//                         if (paribu.VET_TL)
+//             pairs.push({
+//                 title: 'VET',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'VETUSDT').bidPrice,
+//                 buy: +paribu.VET_TL.lowestAsk,
+//                 result: (+paribu.VET_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'VETUSDT').bidPrice )
+//             });
+
+
+//         if (paribu.MANA_TL)
+//             pairs.push({
+//                 title: 'MANA',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'MANAUSDT').bidPrice,
+//                 buy: +paribu.MANA_TL.lowestAsk,
+//                 result: (+paribu.MANA_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'MANAUSDT').bidPrice )
+//             });
+
+
+//                 if (paribu.SOL_TL)
+//             pairs.push({
+//                 title: 'SOL',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'SOLUSDT').bidPrice,
+//                 buy: +paribu.SOL_TL.lowestAsk,
+//                 result: (+paribu.SOL_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'SOLUSDT').bidPrice )
+//             });
+
+
+
+//                 if (paribu.MINA_TL)
+//             pairs.push({
+//                 title: 'MINA',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'MINAUSDT').bidPrice,
+//                 buy: +paribu.MINA_TL.lowestAsk,
+//                 result: (+paribu.MINA_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'MINAUSDT').bidPrice )
+//             });
+
+
+//         if (paribu.BCH_TL)
+//             pairs.push({
+//                 title: 'BCH',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'BCHUSDT').bidPrice,
+//                 buy: +paribu.BCH_TL.lowestAsk,
+//                 result: (+paribu.BCH_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'BCHUSDT').bidPrice )
+//             });
+
+
+
+//         if (paribu.GRT_TL)
+//             pairs.push({
+//                 title: 'GRT',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'GRTUSDT').bidPrice,
+//                 buy: +paribu.GRT_TL.lowestAsk,
+//                 result: (+paribu.GRT_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'GRTUSDT').bidPrice )
+//             });
+
+
+//                 if (paribu.OXT_TL)
+//             pairs.push({
+//                 title: 'OXT',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'OXTUSDT').bidPrice,
+//                 buy: +paribu.OXT_TL.lowestAsk,
+//                 result: (+paribu.OXT_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'OXTUSDT').bidPrice )
+//             });
+
+
+//         if (paribu.MATIC_TL)
+//             pairs.push({
+//                 title: 'MATIC',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'MATICUSDT').bidPrice,
+//                 buy: +paribu.MATIC_TL.lowestAsk,
+//                 result: (+paribu.MATIC_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'MATICUSDT').bidPrice )
+//             });
+
+
+//         if (paribu.THETA_TL)
+//             pairs.push({
+//                 title: 'THETA',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'THETAUSDT').bidPrice,
+//                 buy: +paribu.THETA_TL.lowestAsk,
+//                 result: (+paribu.THETA_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'THETAUSDT').bidPrice )
+//             });
+
+//         if (paribu.OGN_TL)
+//             pairs.push({
+//                 title: 'OGN',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'OGNUSDT').bidPrice,
+//                 buy: +paribu.OGN_TL.lowestAsk,
+//                 result: (+paribu.OGN_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'OGNUSDT').bidPrice )
+//             });
+
+
+
+
+//         if (paribu.ZIL_TL)
+//             pairs.push({
+//                 title: 'ZIL',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'ZILUSDT').bidPrice,
+//                 buy: +paribu.ZIL_TL.lowestAsk,
+//                 result: (+paribu.ZIL_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'ZILUSDT').bidPrice )
+//             });
+
+
+//         if (paribu.BAL_TL)
+//             pairs.push({
+//                 title: 'BAL',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'BALUSDT').bidPrice,
+//                 buy: +paribu.BAL_TL.lowestAsk,
+//                 result: (+paribu.BAL_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'BALUSDT').bidPrice )
+//             });
+
+
+//         if (paribu.ENJ_TL)
+//             pairs.push({
+//                 title: 'ENJ',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'ENJUSDT').bidPrice,
+//                 buy: +paribu.ENJ_TL.lowestAsk,
+//                 result: (+paribu.ENJ_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'ENJUSDT').bidPrice )
+//             });
+
+
+//         if (paribu.ALGO_TL)
+//             pairs.push({
+//                 title: 'ALGO',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'ALGOUSDT').bidPrice,
+//                 buy: +paribu.ALGO_TL.lowestAsk,
+//                 result: (+paribu.ALGO_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'ALGOUSDT').bidPrice )
+//             });
+
+
+
+//         if (paribu.REEF_TL)
+//             pairs.push({
+//                 title: 'REEF',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'REEFUSDT').bidPrice,
+//                 buy: +paribu.REEF_TL.lowestAsk,
+//                 result: (+paribu.REEF_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'REEFUSDT').bidPrice )
+//             });
+
+//         if (paribu.BAND_TL)
+//             pairs.push({
+//                 title: 'BAND',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'BANDUSDT').bidPrice,
+//                 buy: +paribu.BAND_TL.lowestAsk,
+//                 result: (+paribu.BAND_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'BANDUSDT').bidPrice )
+//             });
+
+
+
+//         if (paribu.LRC_TL)
+//             pairs.push({
+//                 title: 'LRC',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'LRCUSDT').bidPrice,
+//                 buy: +paribu.LRC_TL.lowestAsk,
+//                 result: (+paribu.LRC_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'LRCUSDT').bidPrice )
+//             });
+
+
+//         if (paribu.UNI_TL)
+//             pairs.push({
+//                 title: 'UNI',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'UNIUSDT').bidPrice,
+//                 buy: +paribu.UNI_TL.lowestAsk,
+//                 result: (+paribu.UNI_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'UNIUSDT').bidPrice )
+//             });
+
+//         if (paribu.AAVE_TL)
+//             pairs.push({
+//                 title: 'AAVE',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'AAVEUSDT').bidPrice,
+//                 buy: +paribu.AAVE_TL.lowestAsk,
+//                 result: (+paribu.AAVE_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'AAVEUSDT').bidPrice )
+//             });
+
+
+
+//         if (paribu.AVAX_TL)
+//             pairs.push({
+//                 title: 'AVAX',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'AVAXUSDT').bidPrice,
+//                 buy: +paribu.AVAX_TL.lowestAsk,
+//                 result: (+paribu.AVAX_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'AVAXUSDT').bidPrice )
+//             });
+
+
+//         if (paribu.OMG_TL)
+//             pairs.push({
+//                 title: 'OMG',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'OMGUSDT').bidPrice,
+//                 buy: +paribu.OMG_TL.lowestAsk,
+//                 result: (+paribu.OMG_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'OMGUSDT').bidPrice )
+//             });
+
+
+
+
+//         if (paribu.XTZ_TL)
+//             pairs.push({
+//                 title: 'XTZ',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'XTZUSDT').bidPrice,
+//                 buy: +paribu.XTZ_TL.lowestAsk,
+//                 result: (+paribu.XTZ_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'XTZUSDT').bidPrice )
+//             });
+
+
+
+
+//         if (paribu.MKR_TL)
+//             pairs.push({
+//                 title: 'MKR',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'MKRUSDT').bidPrice,
+//                 buy: +paribu.MKR_TL.lowestAsk,
+//                 result: (+paribu.MKR_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'MKRUSDT').bidPrice )
+//             });
+
+
+
+//         if (paribu.RVN_TL)
+//             pairs.push({
+//                 title: 'RVN',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'RVNUSDT').bidPrice,
+//                 buy: +paribu.RVN_TL.lowestAsk,
+//                 result: (+paribu.RVN_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'RVNUSDT').bidPrice )
+//             });
+
+
+//         if (paribu.ATOM_TL)
+//             pairs.push({
+//                 title: 'ATOM',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'ATOMUSDT').bidPrice,
+//                 buy: +paribu.ATOM_TL.lowestAsk,
+//                 result: (+paribu.ATOM_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'ATOMUSDT').bidPrice )
+//             });
+
+
+//         if (paribu.DOT_TL)
+//             pairs.push({
+//                 title: 'DOT',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'DOTUSDT').bidPrice,
+//                 buy: +paribu.DOT_TL.lowestAsk,
+//                 result: (+paribu.DOT_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'DOTUSDT').bidPrice )
+//             });
+
+
+
+//         if (paribu.ONT_TL)
+//             pairs.push({
+//                 title: 'ONT',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'ONTUSDT').bidPrice,
+//                 buy: +paribu.ONT_TL.lowestAsk,
+//                 result: (+paribu.ONT_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'ONTUSDT').bidPrice )
+//             });
+
+
+
+
+//         pairs.push({
+//             title: 'BTC',
+//             commission: commissionWithBinance,
+//             sell: +binance.find(x => x.symbol === 'BTCUSDT').bidPrice,
+//             buy: +paribu.BTC_TL.lowestAsk,
+//             result: (+paribu.BTC_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                 (+binance.find(x => x.symbol === 'BTCUSDT').bidPrice )
+//         });
+//         pairs.push({
+//             title: 'ETH',
+//             commission: commissionWithBinance,
+//             sell: +binance.find(x => x.symbol === 'ETHUSDT').bidPrice,
+//             buy: +paribu.ETH_TL.lowestAsk,
+//             result: (+paribu.ETH_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                 (+binance.find(x => x.symbol === 'ETHUSDT').bidPrice )
+//         });
+//         pairs.push({
+//             title: 'XRP',
+//             commission: commissionWithBinance,
+//             sell: +binance.find(x => x.symbol === 'XRPUSDT').bidPrice,
+//             buy: +paribu.XRP_TL.lowestAsk,
+//             result: (+paribu.XRP_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                 (+binance.find(x => x.symbol === 'XRPUSDT').bidPrice )
+//         });
+//         pairs.push({
+//             title: 'LTC',
+//             commission: commissionWithBinance,
+//             sell: +binance.find(x => x.symbol === 'LTCUSDT').bidPrice,
+//             buy: +paribu.LTC_TL.lowestAsk,
+//             result: (+paribu.LTC_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                 (+binance.find(x => x.symbol === 'LTCUSDT').bidPrice )
+//         });
+//         pairs.push({
+//             title: 'XLM',
+//             commission: commissionWithBinance,
+//             sell: +binance.find(x => x.symbol === 'XLMUSDT').bidPrice,
+//             buy: +paribu.XLM_TL.lowestAsk,
+//             result: (+paribu.XLM_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                 (+binance.find(x => x.symbol === 'XLMUSDT').bidPrice )
+//         });
+//         pairs.push({
+//             title: 'EOS',
+//             commission: commissionWithBinance,
+//             sell: +binance.find(x => x.symbol === 'EOSUSDT').bidPrice,
+//             buy: +paribu.EOS_TL.lowestAsk,
+//             result: (+paribu.EOS_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                 (+binance.find(x => x.symbol === 'EOSUSDT').bidPrice )
+//         });
+//         pairs.push({
+//             title: 'BAT',
+//             commission: commissionWithBinance,
+//             sell: +binance.find(x => x.symbol === 'BATUSDT').bidPrice,
+//             buy: +paribu.BAT_TL.lowestAsk,
+//             result: (+paribu.BAT_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                 (+binance.find(x => x.symbol === 'BATUSDT').bidPrice )
+//         });
+//         pairs.push({
+//             title: 'BTTC',
+//             commission: commissionWithBinance,
+//             sell: +binance.find(x => x.symbol === 'BTTCUSDT').bidPrice * 10000,
+//             buy: +paribu.BTTC_TL.lowestAsk * 10000,
+//             result: (+paribu.BTTC_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                 (+binance.find(x => x.symbol === 'BTTCUSDT').bidPrice )
+//         });
+//         pairs.push({
+//             title: 'TRX',
+//             commission: commissionWithBinance,
+//             sell: +binance.find(x => x.symbol === 'TRXUSDT').bidPrice,
+//             buy: +paribu.TRX_TL.lowestAsk,
+//             result: (+paribu.TRX_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                 (+binance.find(x => x.symbol === 'TRXUSDT').bidPrice )
+//         });
+//         pairs.push({
+//             title: 'HOT',
+//             commission: commissionWithBinance,
+//             sell: +binance.find(x => x.symbol === 'HOTUSDT').bidPrice,
+//             buy: +paribu.HOT_TL.lowestAsk,
+//             result: (+paribu.HOT_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                 (+binance.find(x => x.symbol === 'HOTUSDT').bidPrice )
+//         });
+//         pairs.push({
+//             title: 'CHZ',
+//             commission: commissionWithBinance,
+//             sell: +binance.find(x => x.symbol === 'CHZUSDT').bidPrice,
+//             buy: +paribu.CHZ_TL.lowestAsk,
+//             result: (+paribu.CHZ_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                 (+binance.find(x => x.symbol === 'CHZUSDT').bidPrice )
+//         });
+//         pairs.push({
+//             title: 'ADA',
+//             commission: commissionWithBinance,
+//             sell: +binance.find(x => x.symbol === 'ADAUSDT').bidPrice,
+//             buy: +paribu.ADA_TL.lowestAsk,
+//             result: (+paribu.ADA_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                 (+binance.find(x => x.symbol === 'ADAUSDT').bidPrice )
+//         });
+//         pairs.push({
+//             title: 'NEO',
+//             commission: commissionWithBinance,
+//             sell: +binance.find(x => x.symbol === 'NEOUSDT').bidPrice,
+//             buy: +paribu.NEO_TL.lowestAsk,
+//             result: (+paribu.NEO_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                 (+binance.find(x => x.symbol === 'NEOUSDT').bidPrice )
+//         });
+//         pairs.push({
+//             title: 'LINK',
+//             commission: commissionWithBinance,
+//             sell: +binance.find(x => x.symbol === 'LINKUSDT').bidPrice,
+//             buy: +paribu.LINK_TL.lowestAsk,
+//             result: (+paribu.LINK_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                 (+binance.find(x => x.symbol === 'LINKUSDT').bidPrice )
+//         });
+//         if (binance.some(x => x.symbol === 'DOGEUSDT'))
+//             pairs.push({
+//                 title: 'DOGE',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'DOGEUSDT').bidPrice,
+//                 buy: +paribu.DOGE_TL.lowestAsk,
+//                 result: (+paribu.DOGE_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     (+binance.find(x => x.symbol === 'DOGEUSDT').bidPrice )
+//             });
+
+
+//         if (paribu.WAVES_TL)
+//             pairs.push({
+//                 title: 'WAVES',
+//                 commission: commissionWithBinance,
+//                 sell: +binance.find(x => x.symbol === 'WAVESBTC').bidPrice,
+//                 buy: +paribu.WAVES_TL.lowestAsk,
+//                 result: (+paribu.WAVES_TL.lowestAsk * (1 + commissionWithBinance)) /
+//                     ((binance.find(x => x.symbol === 'WAVESBTC').bidPrice *
+//                             binance.find(x => x.symbol === 'BTCUSDT').bidPrice) )
+//             });
     }
 
 
