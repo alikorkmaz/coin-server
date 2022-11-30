@@ -14,7 +14,7 @@ app.use(express.static('public'));
 
 app.use(express.json());
 
-app.get('/binance', async (req, res) => {
+app.get('/', async (req, res) => {
     let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json()).catch(x => {console.log("binance get failed\n")});
     
     res.send(
@@ -22,7 +22,7 @@ app.get('/binance', async (req, res) => {
     );
 });
 
-app.listen(process.env.PORT || 3000, () => console.log('listening..') + "\n");
+app.listen(process.env.PORT || 8080, () => console.log('listening..') + "\n");
 
 process.on('uncaughtException', function(err) {
     p.send({
