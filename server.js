@@ -25,9 +25,4 @@ app.get('/', async (req, res) => {
 app.listen(process.env.PORT || 80, () => console.log('listening..') + "\n");
 
 process.on('uncaughtException', function(err) {
-    p.send({
-            message: err,
-        },
-        function(err, result) {},
-    );
 });
