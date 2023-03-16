@@ -612,7 +612,7 @@ setInterval(async function(){
 
 
         data.filter(pair => (pair.title.includes("BTCTURK") 
-                             && !pair.title.includes("ENJ") 
+                             && !pair.title.includes("aaa") 
                              && !pair.title.includes("TERrrrrrrrRA") 
                              && !pair.title.includes("asdfasd") 
                              && !pair.title.includes("ddddddddd") 
@@ -620,7 +620,7 @@ setInterval(async function(){
             .forEach(pair => {
 
 
-                if(tetheriniz < pair.result){
+                if(tetheriniz < pair.result && alert.some(title => title === pair.title)){
                             p.send({
                                     message: "btcturke bi bak",
                                 },
