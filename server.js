@@ -1174,6 +1174,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'SPELL', pairs),
             getWithSymbol(binance, 'QNT', pairs),
             getWithSymbol(binance, 'STG', pairs),
+            getWithSymbol(binance, 'OP', pairs),
             getWithSymbol(binance, 'APT', pairs),
                     getWithSymbol(binance, 'USDC', pairs),
             getBox(gate, 'CEEK', pairs),
@@ -1927,6 +1928,17 @@ app.get('/coinbasereverse', async (req, res) => {
                     (+binance.find(x => x.symbol === 'CRVUSDT').bidPrice )
             });
 
+
+
+        if (paribu.OP_TL)
+            pairs.push({
+                title: 'OP',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'OPUSDT').bidPrice,
+                buy: +paribu.OP_TL.lowestAsk,
+                result: (+paribu.OP_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'OPUSDT').bidPrice )
+            });
 
 
                 if (paribu.GALA_TL)
