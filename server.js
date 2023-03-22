@@ -676,7 +676,7 @@ setInterval(async function(){
 
 }, 10000);
 
-let pair_sayisi = 109;
+let pair_sayisi = 110;
 setInterval(async function(){
     
     let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
@@ -694,7 +694,7 @@ setInterval(async function(){
                             );
 
                             setTimeout(function(){
-                                pair_sayisi = 110;
+                                pair_sayisi = 111;
                             }, 60000);
                 }
             
@@ -1157,6 +1157,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'ENS', pairs),
             getWithSymbol(binance, 'AUDIO', pairs),
             getWithSymbol(binance, 'CLV', pairs),
+            getWithSymbol(binance, 'RNDR', pairs),
             getWithSymbol(binance, 'SAND', pairs),
             getWithSymbol(binance, 'TLM', pairs),
             getWithSymbol(binance, 'ALICE', pairs),
@@ -1810,6 +1811,16 @@ app.get('/coinbasereverse', async (req, res) => {
                     (+binance.find(x => x.symbol === 'USDCUSDT').bidPrice )
             });
         
+        
+                                    if (paribu.RNDR_TL)
+            pairs.push({
+                title: 'RNDR',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'RNDRUSDT').bidPrice,
+                buy: +paribu.RNDR_TL.lowestAsk,
+                result: (+paribu.RNDR_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'RNDRUSDT').bidPrice )
+            });
         
         
         
