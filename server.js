@@ -1174,6 +1174,7 @@ app.get('/v2/coinbase', async (req, res) => {
             getWithSymbol(binance, 'RAD', pairs),
             getWithSymbol(binance, 'SPELL', pairs),
             getWithSymbol(binance, 'QNT', pairs),
+            getWithSymbol(binance, 'ARB', pairs),
             getWithSymbol(binance, 'STG', pairs),
             getWithSymbol(binance, 'OP', pairs),
             getWithSymbol(binance, 'APT', pairs),
@@ -1863,6 +1864,24 @@ app.get('/coinbasereverse', async (req, res) => {
                 result: (+paribu.COMP_TL.lowestAsk * (1 + commissionWithBinance)) /
                     (+binance.find(x => x.symbol === 'COMPUSDT').bidPrice )
             });
+        
+        
+        
+                
+
+        
+                              if (paribu.ARB_TL)
+            pairs.push({
+                title: 'ARB',
+                commission: commissionWithBinance,
+                sell: +binance.find(x => x.symbol === 'ARBUSDT').bidPrice,
+                buy: +paribu.ARB_TL.lowestAsk,
+                result: (+paribu.ARB_TL.lowestAsk * (1 + commissionWithBinance)) /
+                    (+binance.find(x => x.symbol === 'ARBUSDT').bidPrice )
+            });  
+        
+        
+        
         
                 if (paribu.SNX_TL)
             pairs.push({
