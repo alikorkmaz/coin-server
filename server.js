@@ -545,11 +545,12 @@ setInterval(() => {
                     }, 30000);
                     return;
                 }
-
+                
                 if (
                     pair.result < tetherBuy - (ticksizAlarm*2) &&
                     text === '' &&
-                    !alertReverse.some(title => title === pair.title)
+                    !alertReverse.some(title => title === pair.title) &&
+                    !pair.title.includes("RNDR")
                 ) {
                     text = "ticksizTersAlarm: " + pair.title + ": " + pair.result.toString().substring(0, 5);
                     console.log(text + "\n");
