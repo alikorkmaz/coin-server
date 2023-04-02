@@ -1254,7 +1254,7 @@ function gerTickerli(paribuCoin, symbol, commissionWithBinance,binance){
                     commission: commissionWithBinance,
                     buy: +binance.find(x => x.symbol === (symbol+'USDT')).askPrice,
                     sell: +paribuCoin.highestBid,
-                    result: (+paribuCoin.highestBid * (1 - commissionWithBinance)) / (+binance.find(x => x.symbol === (symbol+'USDT'))).askPrice),
+                    result: (+paribuCoin.highestBid * (1 - commissionWithBinance)) / (+binance.find(x => x.symbol === (symbol+'USDT')).askPrice),
 
     }}
     catch{
