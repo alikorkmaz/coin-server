@@ -1246,6 +1246,23 @@ app.get('/v5/coinbase', async (req, res) => {
 
 });
 
+function gerTickerli(paribuCoin, symbol, commissionWithBinance,binance){
+    try{
+    return {
+
+                    title: symbol,
+                    commission: commissionWithBinance,
+                    buy: +binance.find(x => x.symbol === (symbol+'USDT')).askPrice,
+                    sell: +paribuCoin.highestBid,
+                    result: (+paribuCoin.highestBid * (1 - commissionWithBinance)) / (+binance.find(x => x.symbol === (symbol+'USDT'))).askPrice),
+
+    }}
+    catch{
+        return null;
+    }
+
+}
+
 app.get('/v2/coinbase', async (req, res) => {
     let pairs = [];
     let commission = 0.0065;
