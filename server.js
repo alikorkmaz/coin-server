@@ -14,33 +14,33 @@ app.use(express.static('public'));
 
 app.use(express.json());
 
-app.get('/tetherTask', async (req, res) => {
-    // let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
-    // tetherBuy = +paribu.USDT_TL.lowestAsk + tetherMargin;
+// app.get('/tetherTask', async (req, res) => {
+//     // let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
+//     // tetherBuy = +paribu.USDT_TL.lowestAsk + tetherMargin;
 
 
-    paribu = await fetch('https://v3.paribu.com/app/markets/usdt-tl?interval=1000').then(r => r.json()).catch(x => {});            
-    let book = paribu.data.orderBook.sell || {};
+//     paribu = await fetch('https://v3.paribu.com/app/markets/usdt-tl?interval=1000').then(r => r.json()).catch(x => {});            
+//     let book = paribu.data.orderBook.sell || {};
 
-    let tetherEnergy = 30000;
-    let tetherResult = -1;
-    Object.keys(book).forEach((key,item) => { 
-        tetherEnergy = tetherEnergy - book[key];
-      if (tetherEnergy < 0 && tetherResult == -1) {
-        tetherResult = Number(key); 
-      }
-    })
-    if(tetherResult === -1) {
-        tetherBuy = 99;
-    } else {
-        tetherBuy = +tetherResult + tetherMargin;    
-    }
+//     let tetherEnergy = 30000;
+//     let tetherResult = -1;
+//     Object.keys(book).forEach((key,item) => { 
+//         tetherEnergy = tetherEnergy - book[key];
+//       if (tetherEnergy < 0 && tetherResult == -1) {
+//         tetherResult = Number(key); 
+//       }
+//     })
+//     if(tetherResult === -1) {
+//         tetherBuy = 99;
+//     } else {
+//         tetherBuy = +tetherResult + tetherMargin;    
+//     }
     
 
-    res.send(
-        {}
-    );
-});
+//     res.send(
+//         {}
+//     );
+// });
 
 
 app.get('/alarm', async (req, res) => {
