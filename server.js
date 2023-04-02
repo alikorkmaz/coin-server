@@ -1353,7 +1353,7 @@ app.get('/v2/coinbase', async (req, res) => {
     }
 
     res.send(
-        pairs.filter()
+        pairs.filter(v => v)
         .filter(pair => pair.title && pair.commission && pair.sell && pair.buy && pair.result)
         .sort((a, b) => b.result - a.result),
     );
