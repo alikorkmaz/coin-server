@@ -1092,7 +1092,7 @@ async function gateTaskYedek() {
 
 let lastBinanceBtcPrice;
 
-app.get('/v2/coinbase', async (req, res) => {
+app.get('/v5/coinbase', async (req, res) => {
     let pairs = [];
 
     // let binance = await fetch('http://ec2-52-67-99-93.sa-east-1.compute.amazonaws.com:3000/').then(r => r.json()).catch(x => {console.log("binance get failed\n")});
@@ -1244,6 +1244,102 @@ app.get('/v2/coinbase', async (req, res) => {
     }
 
 
+});
+
+app.get('/v2/coinbase', async (req, res) => {
+    let pairs = [];
+    let commission = 0.0065;
+    let commissionWithBinance = 0.0065;
+    let commissionWithBinanceUSDT = 0.0055;
+
+
+    let binance = await fetch('https://api.binance.com/api/v3/ticker/bookTicker').then(r => r.json()).catch(x => {console.log("binance get failed\n")});
+
+    let paribu = await fetch('https://www.paribu.com/ticker').then(r => r.json()).catch(x => {});
+
+
+    if (paribu) {
+
+        tetherBuy = +paribu.USDT_TL.lowestAsk + tetherMargin;
+
+        pairs.push(gerTickerli(paribu.UNI, "UNI", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.BAL, "BAL", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.REEF, "REEF", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.BAND, "BAND", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.LRC, "LRC", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.AAVE, "AAVE", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.AVAX, "AVAX", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.OMG, "OMG", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.RVN, "RVN", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.XTZ, "XTZ", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.MKR, "MKR", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.ATOM, "ATOM", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.ONT, "ONT", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.DOT, "DOT", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.BTC, "BTC", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.ETH, "ETH", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.XRP, "XRP", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.LTC, "LTC", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.XLM, "XLM", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.EOS, "EOS", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.BAT, "BAT", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.BTTC, "BTTC", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.TRX, "TRX", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.HOT, "HOT", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.CHZ, "CHZ", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.ADA, "ADA", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.NEO, "NEO", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.LINK, "LINK", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.DOGE, "DOGE", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.WAVES, "WAVES", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.ZIL, "ZIL", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.ENJ, "ENJ", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.THETA, "THETA", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.OGN, "OGN", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.ALGO, "ALGO", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.GRT, "GRT", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.MATIC, "MATIC", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.OXT, "OXT", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.BCH, "BCH", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.CRV, "CRV", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.MANA, "MANA", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.IOTA, "IOTA", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.MINA, "MINA", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.SOL, "SOL", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.KEEP, "KEEP", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.VET, "VET", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.ANKR, "ANKR", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.SHIB, "SHIB", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.ICP, "ICP", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.FTM, "FTM", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.INJ, "INJ", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.LPT, "LPT", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.AXS, "AXS", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.ENS, "ENS", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.AUDIO, "AUDIO", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.CLV, "CLV", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.SAND, "SAND", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.TLM, "TLM", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.ALICE, "ALICE", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.GALA, "GALA", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.APE, "APE", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.T, "T", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.TVK, "TVK", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.UMA, "UMA", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu['1INCH'], "1INCH", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.STORJ, "STORJ", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.SNX, "SNX", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.COMP, "COMP", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.FET, "FET", commissionWithBinance,binance));
+        pairs.push(gerTickerli(paribu.RAD, "RAD", commissionWithBinance,binance));
+
+    }
+
+    res.send(
+        pairs
+        .filter(pair => pair.title && pair.commission && pair.sell && pair.buy && pair.result)
+        .sort((a, b) => b.result - a.result),
+    );
 });
 
 app.get('/coinbase', async (req, res) => {
