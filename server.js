@@ -327,7 +327,7 @@ async function getBtcturkReverse(btcturk, binance, pairs) {
                 +binance.find((x) => x.symbol === mySymbol + "USDT").bidPrice *
                 1000,
               result:
-                (+paribu.find((x) => x.symbol === mySymbol + "TRY").ask *
+                (+btcturk.find((x) => x.pair === mySymbol + "TRY").ask *
                   (1 + commissionWithBinance)) /
                 +binance.find((x) => x.symbol === mySymbol + "USDT").bidPrice,
             });
@@ -341,7 +341,7 @@ async function getBtcturkReverse(btcturk, binance, pairs) {
                   +binance.find((x) => x.symbol === "BTCUSDT").bidPrice) /
                 1000,
               result:
-                (+paribu.find((x) => x.symbol === mySymbol + "TRY").ask *
+                (+btcturk.find((x) => x.pair === mySymbol + "TRY").ask *
                   (1 + commissionWithBinance)) /
                 (+binance.find((x) => x.symbol === mySymbol + "BTC").bidPrice *
                   +binance.find((x) => x.symbol === "BTCUSDT").bidPrice),
@@ -354,7 +354,7 @@ async function getBtcturkReverse(btcturk, binance, pairs) {
               sell: +binance.find((x) => x.symbol === mySymbol + "BUSD")
                 .bidPrice,
               result:
-                (+paribu.find((x) => x.symbol === mySymbol + "TRY").ask *
+                (+btcturk.find((x) => x.pair === mySymbol + "TRY").ask *
                   (1 + (commissionWithBinance + 0.012))) /
                 +binance.find((x) => x.symbol === mySymbol + "BUSD").bidPrice,
             });
@@ -366,7 +366,7 @@ async function getBtcturkReverse(btcturk, binance, pairs) {
               sell: +binance.find((x) => x.symbol === mySymbol + "USDT")
                 .bidPrice,
               result:
-                (+paribu.find((x) => x.symbol === mySymbol + "TRY").ask *
+                (+btcturk.find((x) => x.pair === mySymbol + "TRY").ask *
                   (1 + commissionWithBinance)) /
                 +binance.find((x) => x.symbol === mySymbol + "USDT").bidPrice,
             });
