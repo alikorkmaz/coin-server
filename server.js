@@ -55,9 +55,18 @@ let commissionWithBinance = 0.0065;
 let commissionWithGate = 0.012;
 let tetherKur = 19.77;
 let reelKur = 19.20;
+let tetherMargin = 0.1;
 
 setInterval(() => {
-    paribuTask();
+  fetch('http://ec2-52-67-99-93.sa-east-1.compute.amazonaws.com:3000/coinbase')
+        .then(response => response.json())
+        .then(data => {
+          data.forEach((x) => {
+            if (x.result + tetherMargin > tetherKur) {
+              ringAlarm(x.title);
+            }
+          });
+  });
 }, 10000);
 
 function ringAlarm(text) {
@@ -121,7 +130,7 @@ async function paribuTask() {
     })
     .catch((x) => console.log(x));
   
-  tetherKur = +paribu.find(x => x.symbol === "USDT").lowestAsk;
+  tetherKur = paribu.find(x => x.symbol === "USDT").lowestAsk;
   return paribu;
 }
 
