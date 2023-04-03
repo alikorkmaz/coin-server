@@ -121,7 +121,7 @@ async function paribuTask() {
     })
     .catch((x) => console.log(x));
   
-  tetherKur = paribu.find(x => x.symbol === "USDT").askPrice;
+  tetherKur = +paribu.find(x => x.symbol === "USDT").askPrice;
   return paribu;
 }
 
