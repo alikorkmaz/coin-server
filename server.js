@@ -301,7 +301,7 @@ app.get("/coinbase", async (req, res) => {
       .sort((a, b) => b.result - a.result)
       .filter(
         (pair) =>
-          pair.title && pair.commission && pair.sell && pair.buy && pair.result
+          pair.title && pair.commission && pair.sell && pair.buy && pair.result && pair.result > tetherKur
       )
   );
 });
@@ -438,7 +438,7 @@ app.get("/coinbaseReverse", async (req, res) => {
       .sort((a, b) => a.result - b.result)
       .filter(
         (pair) =>
-          pair.title && pair.commission && pair.sell && pair.buy && pair.result
+          pair.title && pair.commission && pair.sell && pair.buy && pair.result && pair.result < tetherKur
       )
   );
 });
