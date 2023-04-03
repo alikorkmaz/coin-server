@@ -68,6 +68,19 @@ app.get("/test", (req, res) => {
   res.send("SUCCESS");
 });
 
+app.get('/reelkur', (req, res) => {
+  res.send({
+      kur: 19.2
+  });
+});
+
+app.get('/kur', (req, res) => {
+  res.send({
+      kur: 19.77
+  });
+});
+
+
 async function binanceTask() {
   return fetch("https://api.binance.com/api/v3/ticker/bookTicker")
     .then((r) => r.json())
