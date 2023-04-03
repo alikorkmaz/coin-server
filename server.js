@@ -57,6 +57,25 @@ let tetherKur = 19.77;
 let reelKur = 19.20;
 let tetherMargin = 0.1;
 
+let lastCallTime = 0;
+const callInterval = 60 * 1000; // 60 seconds in milliseconds
+function ringAlarm(text) {
+  const now = Date.now();
+  if (now - lastCallTime < callInterval) {
+    console.log('p.send was called too recently. Skipping call.');
+    return;
+  }
+
+  p.send({ message: text }, function (err, result) {
+    if (err) {
+      console.error("Error occurred when ringing the alarm: ", err);
+    } else {
+      console.log("Alarm successfully rung!");
+      lastCallTime = now;
+    }
+  });
+}
+
 setInterval(() => {
   fetch('http://ec2-52-67-99-93.sa-east-1.compute.amazonaws.com:3000/coinbase')
         .then(response => response.json())
@@ -69,13 +88,6 @@ setInterval(() => {
   });
 }, 10000);
 
-function ringAlarm(text) {
-  p.send({ message: text }, function (err, result) {
-    {
-      "Error occured when ringing the alarm: " + err;
-    }
-  });
-}
 
 app.get("/test", (req, res) => {
   console.log("CONSOLE TEST" + "\n");
