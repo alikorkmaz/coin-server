@@ -55,8 +55,8 @@ let commissionWithBinance = 0.0065;
 let commissionWithGate = 0.012;
 let tetherKur = 19.77;
 let reelKur = 19.20;
-let tetherMargin = 0.1;
-let tetherMarginReverse = 0.2;
+let tetherMargin = 0.2;
+let tetherMarginReverse = 0.5;
 
 let lastCallTime = 0;
 const callInterval = 60 * 1000; // 60 seconds in milliseconds
