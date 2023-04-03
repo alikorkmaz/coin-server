@@ -81,8 +81,8 @@ setInterval(() => {
         .then(response => response.json())
         .then(data => {
           data.forEach((x) => {
-            if (x.result > tetherKur + tetherMargin) {
-              ringAlarm(x.title);
+            if (x.result > tetherKur + tetherMargin && alert.includes(x.title)) {
+              ringAlarm(x.title);x
             }
           });
   });
