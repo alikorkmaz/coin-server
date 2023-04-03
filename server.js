@@ -53,6 +53,12 @@ var p = new Push({
 
 let commissionWithBinance = 0.0065;
 let commissionWithGate = 0.012;
+let tetherKur = 19.77;
+let reelKur = 19.20;
+
+setInterval(() => {
+    paribuTask();
+}, 10000);
 
 function ringAlarm(text) {
   p.send({ message: text }, function (err, result) {
@@ -70,13 +76,13 @@ app.get("/test", (req, res) => {
 
 app.get('/reelkur', (req, res) => {
   res.send({
-      kur: 19.2
+      kur: reelKur
   });
 });
 
 app.get('/kur', (req, res) => {
   res.send({
-      kur: 19.77
+      kur: tetherKur
   });
 });
 
@@ -99,7 +105,7 @@ async function gateTask(symbol) {
     .catch((x) => console.log(symbol + " gate failied"));
 }
 
-async function paribuTask(symbol) {
+async function paribuTask() {
   let paribu = [];
   await fetch("https://www.paribu.com/ticker")
     .then((r) => r.json())
@@ -114,6 +120,8 @@ async function paribuTask(symbol) {
       );
     })
     .catch((x) => console.log(x));
+  
+  tetherKur = paribu.find(x => x.symbol === "USDT").askPrice;
   return paribu;
 }
 
