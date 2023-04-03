@@ -56,6 +56,7 @@ let commissionWithGate = 0.012;
 let tetherKur = 19.77;
 let reelKur = 19.20;
 let tetherMargin = 0.1;
+let tetherMarginReverse = 0.2;
 
 let lastCallTime = 0;
 const callInterval = 60 * 1000; // 60 seconds in milliseconds
@@ -82,9 +83,18 @@ setInterval(() => {
         .then(data => {
           data.forEach((x) => {
             if (x.result > tetherKur + tetherMargin && alert.includes(x.title)) {
-              ringAlarm(x.title);x
+              ringAlarm(x.title);
             }
           });
+  });
+  fetch('http://ec2-52-67-99-93.sa-east-1.compute.amazonaws.com:3000/coinbaseReverse')
+      .then(response => response.json())
+      .then(data => {
+        data.forEach((x) => {
+          if (x.result < tetherKur - tetherMarginReverse && alertReverse.includes(x.title)) {
+            ringAlarm("REV - " + x.title);
+          }
+        });
   });
 }, 10000);
 
