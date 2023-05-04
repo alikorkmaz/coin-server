@@ -82,7 +82,7 @@ setInterval(() => {
         .then(response => response.json())
         .then(data => {
           data.forEach((x) => {
-            if (x.result > tetherKur + tetherMargin && alert.includes(x.title)) {
+            if (x.result > tetherKur + tetherMargin && !alert.includes(x.title)) {
               ringAlarm(x.title);
             }
           });
@@ -91,7 +91,7 @@ setInterval(() => {
       .then(response => response.json())
       .then(data => {
         data.forEach((x) => {
-          if (x.result < tetherKur - tetherMarginReverse && alertReverse.includes(x.title)) {
+          if (x.result < tetherKur - tetherMarginReverse && !alertReverse.includes(x.title)) {
             ringAlarm("REV - " + x.title);
           }
         });
