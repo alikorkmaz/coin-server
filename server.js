@@ -177,9 +177,7 @@ async function getBtcturk(btcturk, binance, pairs) {
         if (item.pairNormalized.split("_")[1] != "TRY") return;
 
         if (
-          binance.find((x) => x.symbol === mySymbol + "USDT") ||
-          mySymbol === "GLM" ||
-          mySymbol === "LUNC"
+          binance.find((x) => x.symbol === mySymbol + "USDT")
         )
           if (mySymbol === "SHIB") {
             pairs.push({
@@ -194,32 +192,6 @@ async function getBtcturk(btcturk, binance, pairs) {
                 (+btcturk.find((x) => x.pair === mySymbol + "TRY").bid *
                   (1 - commissionWithBinance)) /
                 +binance.find((x) => x.symbol === mySymbol + "USDT").askPrice,
-            });
-          } else if (mySymbol === "GLM") {
-            pairs.push({
-              title: mySymbol + " - BTCTURK",
-              commission: commissionWithBinance,
-              buy:
-                +binance.find((x) => x.symbol === mySymbol + "BTC").askPrice *
-                +binance.find((x) => x.symbol === "BTCUSDT").askPrice,
-              sell: +btcturk.find((x) => x.pair === mySymbol + "TRY").bid,
-              result:
-                (+btcturk.find((x) => x.pair === mySymbol + "TRY").bid *
-                  (1 - commissionWithBinance)) /
-                (+binance.find((x) => x.symbol === mySymbol + "BTC").askPrice *
-                  +binance.find((x) => x.symbol === "BTCUSDT").askPrice),
-            });
-          } else if (mySymbol === "LUNC") {
-            pairs.push({
-              title: mySymbol + " - BTCTURK",
-              commission: commissionWithBinance,
-              buy: +binance.find((x) => x.symbol === mySymbol + "BUSD")
-                .askPrice,
-              sell: +btcturk.find((x) => x.pair === mySymbol + "TRY").bid,
-              result:
-                (+btcturk.find((x) => x.pair === mySymbol + "TRY").bid *
-                  (1 - (commissionWithBinance + 0.012))) /
-                +binance.find((x) => x.symbol === mySymbol + "BUSD").askPrice,
             });
           } else {
             pairs.push({
@@ -242,6 +214,14 @@ async function getBtcturk(btcturk, binance, pairs) {
 async function getParibu(paribu, binance, pairs) {
   paribu.forEach((item) => {
     try {
+      
+      
+      
+          
+    //shib,pepe,bttc icin 3 sifir ekle
+    
+      
+      
       pairs.push({
         title: item.symbol + " - PARIBU",
         commission: commissionWithBinance,
@@ -252,6 +232,10 @@ async function getParibu(paribu, binance, pairs) {
             (1 - commissionWithBinance)) /
           +binance.find((x) => x.symbol === item.symbol + "USDT").askPrice,
       });
+      
+      
+      
+      
     } catch {
       console.log(item.symbol);
     }
