@@ -214,28 +214,29 @@ async function getBtcturk(btcturk, binance, pairs) {
 async function getParibu(paribu, binance, pairs) {
   paribu.forEach((item) => {
     try {
-      
-      
-      
-          
-    //shib,pepe,bttc icin 3 sifir ekle
-    
-      
-      
-      pairs.push({
-        title: item.symbol + " - PARIBU",
-        commission: commissionWithBinance,
-        buy: +binance.find((x) => x.symbol === item.symbol + "USDT").askPrice,
-        sell: +paribu.find((x) => x.symbol === item.symbol).highestBid,
-        result:
-          (+paribu.find((x) => x.symbol === item.symbol).highestBid *
-            (1 - commissionWithBinance)) /
-          +binance.find((x) => x.symbol === item.symbol + "USDT").askPrice,
-      });
-      
-      
-      
-      
+      if (mySymbol === "SHIB" || mySymbol === "PEPE" || mySymbol === "BTTC") {
+        pairs.push({
+          title: item.symbol + " - PARIBU",
+          commission: commissionWithBinance,
+          buy: +binance.find((x) => x.symbol === item.symbol + "USDT").askPrice * 1000,
+          sell: +paribu.find((x) => x.symbol === item.symbol).highestBid * 1000,
+          result:
+            (+paribu.find((x) => x.symbol === item.symbol).highestBid *
+              (1 - commissionWithBinance)) /
+            +binance.find((x) => x.symbol === item.symbol + "USDT").askPrice,
+        });
+      } else {
+        pairs.push({
+          title: item.symbol + " - PARIBU",
+          commission: commissionWithBinance,
+          buy: +binance.find((x) => x.symbol === item.symbol + "USDT").askPrice,
+          sell: +paribu.find((x) => x.symbol === item.symbol).highestBid,
+          result:
+            (+paribu.find((x) => x.symbol === item.symbol).highestBid *
+              (1 - commissionWithBinance)) /
+            +binance.find((x) => x.symbol === item.symbol + "USDT").askPrice,
+        });
+      }
     } catch {
       console.log(item.symbol);
     }
