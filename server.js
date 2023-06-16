@@ -260,7 +260,7 @@ async function getGate(gate, paribu, pairs) {
 
 app.get("/coinbase", async (req, res) => {
   let pairs = [];
-  const [paribu, btcturk, binance, gateCeek, gateAtlas, gateFlr, gateRaca] =
+  const [paribu, btcturk, binance, gateCeek, gateAtlas, gateFlr, gateRaca, gateBlur] =
     await Promise.all([
       paribuTask(),
       btcturkTask(),
@@ -269,6 +269,7 @@ app.get("/coinbase", async (req, res) => {
       gateTask("ATLAS"),
       gateTask("FLR"),
       gateTask("RACA"),
+      gateTask("BLUR"),
     ]);
 
   await Promise.all([
@@ -278,6 +279,7 @@ app.get("/coinbase", async (req, res) => {
     getGate(gateAtlas, paribu, pairs),
     getGate(gateFlr, paribu, pairs),
     getGate(gateRaca, paribu, pairs),
+    getGate(gateBlur, paribu, pairs),
   ]);
 
   res.send(
@@ -397,7 +399,7 @@ async function getGateReverse(gate, paribu, pairs) {
 
 app.get("/coinbaseReverse", async (req, res) => {
   let pairs = [];
-  const [paribu, btcturk, binance, gateCeek, gateAtlas, gateFlr, gateRaca] =
+  const [paribu, btcturk, binance, gateCeek, gateAtlas, gateFlr, gateRaca, gateBlur] =
     await Promise.all([
       paribuTask(),
       btcturkTask(),
@@ -406,6 +408,7 @@ app.get("/coinbaseReverse", async (req, res) => {
       gateTask("ATLAS"),
       gateTask("FLR"),
       gateTask("RACA"),
+      gateTask("BLUR"),
     ]);
 
   await Promise.all([
@@ -415,6 +418,7 @@ app.get("/coinbaseReverse", async (req, res) => {
     getGateReverse(gateAtlas, paribu, pairs),
     getGateReverse(gateFlr, paribu, pairs),
     getGateReverse(gateRaca, paribu, pairs),
+    getGateReverse(gateBlur, paribu, pairs),
   ]);
 
   res.send(
