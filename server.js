@@ -214,6 +214,7 @@ async function getBtcturk(btcturk, binance, pairs) {
 async function getParibu(paribu, binance, pairs) {
   paribu.forEach((item) => {
     try {
+      let mySymbol = item.symbol;
       if (mySymbol === "SHIB" || mySymbol === "PEPE" || mySymbol === "BTTC") {
         pairs.push({
           title: item.symbol + " - PARIBU",
@@ -238,7 +239,7 @@ async function getParibu(paribu, binance, pairs) {
         });
       }
     } catch {
-      console.log(item.symbol);
+      console.log("error occured on getParibu: ", item.symbol);
     }
   });
 }
@@ -256,7 +257,9 @@ async function getGate(gate, paribu, pairs) {
       result:
         (paribuItem.highestBid * (1 - commissionWithGate)) / +item.lowest_ask,
     });
-  } catch {}
+  } catch {
+    console.log("error occured on getGate");
+  }
 }
 
 app.get("/coinbase", async (req, res) => {
@@ -360,7 +363,9 @@ async function getBtcturkReverse(btcturk, binance, pairs) {
           }
       } catch {}
     });
-  } catch {}
+  } catch {
+        console.log("error occured on /coinbase");
+  }
 }
 
 async function getParibuReverse(paribu, binance, pairs) {
@@ -377,7 +382,7 @@ async function getParibuReverse(paribu, binance, pairs) {
           +binance.find((x) => x.symbol === item.symbol + "USDT").bidPrice,
       });
     } catch {
-      console.log(item.symbol);
+      console.log("error occured on getParibuReverse",item.symbol);
     }
   });
 }
@@ -395,7 +400,9 @@ async function getGateReverse(gate, paribu, pairs) {
       result:
         (paribuItem.lowestAsk * (1 + commissionWithGate)) / +item.highest_bid,
     });
-  } catch {}
+  } catch {
+    console.log("error occured on getGateReverse",item.symbol);
+  }
 }
 
 app.get("/coinbaseReverse", async (req, res) => {
