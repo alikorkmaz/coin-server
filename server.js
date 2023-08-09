@@ -55,8 +55,8 @@ let commissionWithBinance = 0.0065;
 let commissionWithGate = 0.012;
 let tetherKur = 19.77;
 let reelKur = 19.20;
-let tetherMargin = 0.2;
-let tetherMarginReverse = 0.5;
+let tetherMargin = 0.5;
+let tetherMarginReverse = 1;
 
 let lastCallTime = 0;
 const callInterval = 60 * 1000; // 60 seconds in milliseconds
@@ -193,7 +193,11 @@ async function getBtcturk(btcturk, binance, pairs) {
                   (1 - commissionWithBinance)) /
                 +binance.find((x) => x.symbol === mySymbol + "USDT").askPrice,
             });
-          } else {
+          } 
+          else if (mySymbol === "GAL") {
+            //DO NOTHING
+          } 
+          else {
             pairs.push({
               title: mySymbol + " - BTCTURK",
               commission: commissionWithBinance,
