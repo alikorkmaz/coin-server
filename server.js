@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
 const cron = require("node-cron");
-const cheerio = require("cheerio"); // Import cheerio
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -448,11 +447,11 @@ async function checkForTextAndRingAlarm() {
   try {
     const response = await fetch("https://emagaza.darphane.gov.tr/altin-hatira-para");
     const html = await response.text();
-    const $ = cheerio.load(html);
-    if (html.includes("Kayıt bulunamadı.")) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    if (doc.body.textContent.includes("Kayıt bulunamadı.")) {
       console.log("Text found: Kayıt bulunamadı.");
     } else {
-      // Text not found, call ringAlarm method
       console.log("Text not found. Calling ringAlarm method.");
       ringAlarm("DARPHANEYE MALLAR GELDI");
     }
@@ -461,9 +460,7 @@ async function checkForTextAndRingAlarm() {
   }
 }
 
-cron.schedule("*/5 * * * *", () => {
-  checkForTextAndRingAlarm();
-});
+setInterval(checkForTextAndRingAlarm, 10000); 
 
 
 app.listen(process.env.PORT || 3000, () => console.log("listening..") + "\n");
