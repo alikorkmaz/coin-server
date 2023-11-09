@@ -445,32 +445,32 @@ app.get("/coinbaseReverse", async (req, res) => {
   );
 });
 
-async function checkForTextAndRingAlarm() {
-  try {
-    const response = await fetch("https://emagaza.darphane.gov.tr/altin-hatira-para");
-    const html = await response.text();
+// async function checkForTextAndRingAlarm() {
+//   try {
+//     const response = await fetch("https://emagaza.darphane.gov.tr/altin-hatira-para");
+//     const html = await response.text();
 
-    // Create a DOM from the HTML
-    const dom = new JSDOM(html);
+//     // Create a DOM from the HTML
+//     const dom = new JSDOM(html);
 
-    // Access the document object
-    const doc = dom.window.document;
+//     // Access the document object
+//     const doc = dom.window.document;
 
-    // Check if the specified text is found
-    if (doc.body.textContent.includes("Kayıt bulunamadı.")) {
-      console.log("Text found: Kayıt bulunamadı.");
-    } else {
-      // Text not found, call ringAlarm method
-      console.log("Text not found. Calling ringAlarm method.");
-      ringAlarm("DARPHANEYE MALLAR GELDI");
-    }
-  } catch (error) {
-    console.error("Error while fetching or parsing HTML:", error);
-  }
-}
+//     // Check if the specified text is found
+//     if (doc.body.textContent.includes("Kayıt bulunamadı.")) {
+//       console.log("Text found: Kayıt bulunamadı.");
+//     } else {
+//       // Text not found, call ringAlarm method
+//       console.log("Text not found. Calling ringAlarm method.");
+//       ringAlarm("DARPHANEYE MALLAR GELDI");
+//     }
+//   } catch (error) {
+//     console.error("Error while fetching or parsing HTML:", error);
+//   }
+// }
 
-// Call checkForTextAndRingAlarm every 10 seconds using setInterval
-setInterval(checkForTextAndRingAlarm, 10000); 
+// // Call checkForTextAndRingAlarm every 10 seconds using setInterval
+// setInterval(checkForTextAndRingAlarm, 10000); 
 
 
 app.listen(process.env.PORT || 3000, () => console.log("listening..") + "\n");
