@@ -221,7 +221,7 @@ async function getParibu(paribu, binance, pairs) {
   paribu.forEach((item) => {
     try {
       let mySymbol = item.symbol;
-      if (mySymbol === "SHIB" || mySymbol === "PEPE" || mySymbol === "BTTC") {
+      if (mySymbol === "SHIB" || mySymbol === "PEPE" || mySymbol === "BTTC" || mySymbol === "PEPE" || mySymbol === "FLOKI" || mySymbol === "BONK" ) {
         pairs.push({
           title: item.symbol + " - PARIBU",
           commission: commissionWithBinance,
@@ -294,11 +294,11 @@ app.get("/coinbase", async (req, res) => {
 
   res.send(
     pairs
-      .sort((a, b) => b.result - a.result)
       .filter(
-        (pair) =>
-          pair.title && pair.commission && pair.sell && pair.buy && pair.result && pair.result
+        (pair) => pair.title && pair.commission && pair.sell && pair.buy && pair.result && pair.result && pair.result > tetherKur * 0.99
       )
+      .sort((a, b) => b.result - a.result)
+      
   );
 });
 
@@ -437,11 +437,11 @@ app.get("/coinbaseReverse", async (req, res) => {
 
   res.send(
     pairs
-      .sort((a, b) => a.result - b.result)
       .filter(
         (pair) =>
-          pair.title && pair.commission && pair.sell && pair.buy && pair.result && pair.result
+          pair.title && pair.commission && pair.sell && pair.buy && pair.result && pair.result && pair.result < tetherKur * 0.99
       )
+      .sort((a, b) => a.result - b.result)
   );
 });
 
