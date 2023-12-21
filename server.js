@@ -310,9 +310,7 @@ async function getBtcturkReverse(btcturk, binance, pairs) {
         if (item.pairNormalized.split("_")[1] != "TRY") return;
 
         if (
-          binance.find((x) => x.symbol === mySymbol + "USDT") ||
-          mySymbol === "GLM" ||
-          mySymbol === "LUNC"
+          binance.find((x) => x.symbol === mySymbol + "USDT")
         )
           if (mySymbol === "SHIB") {
             pairs.push({
@@ -326,33 +324,6 @@ async function getBtcturkReverse(btcturk, binance, pairs) {
                 (+btcturk.find((x) => x.pair === mySymbol + "TRY").ask *
                   (1 + commissionWithBinance)) /
                 +binance.find((x) => x.symbol === mySymbol + "USDT").bidPrice,
-            });
-          } else if (mySymbol === "GLM") {
-            pairs.push({
-              title: mySymbol + " - BTCTURK",
-              commission: commissionWithBinance,
-              buy: +btcturk.find((x) => x.pair === mySymbol + "TRY").ask,
-              sell:
-                (+binance.find((x) => x.symbol === mySymbol + "BTC").bidPrice *
-                  +binance.find((x) => x.symbol === "BTCUSDT").bidPrice) /
-                1000,
-              result:
-                (+btcturk.find((x) => x.pair === mySymbol + "TRY").ask *
-                  (1 + commissionWithBinance)) /
-                (+binance.find((x) => x.symbol === mySymbol + "BTC").bidPrice *
-                  +binance.find((x) => x.symbol === "BTCUSDT").bidPrice),
-            });
-          } else if (mySymbol === "LUNC") {
-            pairs.push({
-              title: mySymbol + " - BTCTURK",
-              commission: commissionWithBinance,
-              buy: +btcturk.find((x) => x.pair === mySymbol + "TRY").ask,
-              sell: +binance.find((x) => x.symbol === mySymbol + "BUSD")
-                .bidPrice,
-              result:
-                (+btcturk.find((x) => x.pair === mySymbol + "TRY").ask *
-                  (1 + (commissionWithBinance + 0.012))) /
-                +binance.find((x) => x.symbol === mySymbol + "BUSD").bidPrice,
             });
           } else if (mySymbol === "GAL") {
             //DO NOTHING
