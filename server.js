@@ -354,6 +354,8 @@ async function getBtcturkReverse(btcturk, binance, pairs) {
                   (1 + (commissionWithBinance + 0.012))) /
                 +binance.find((x) => x.symbol === mySymbol + "BUSD").bidPrice,
             });
+          } else if (mySymbol === "GAL") {
+            //DO NOTHING
           } else {
             pairs.push({
               title: mySymbol + " - BTCTURK",
