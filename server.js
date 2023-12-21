@@ -439,7 +439,7 @@ app.get("/coinbaseReverse", async (req, res) => {
     pairs
       .filter(
         (pair) =>
-          pair.title && pair.commission && pair.sell && pair.buy && pair.result && pair.result && pair.result < tetherKur * 0.99
+          pair.title && pair.commission && pair.sell && pair.buy && pair.result && pair.result && pair.result < tetherKur * 1.01
       )
       .sort((a, b) => a.result - b.result)
   );
