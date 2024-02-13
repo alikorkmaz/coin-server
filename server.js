@@ -56,12 +56,9 @@ var p = new Push({
 let commissionWithBinance = 0.0065;
 let commissionWithGate = 0.012;
 let tetherKur = 19.77;
-let reelKur = 19.20;
-let tetherMargin = 0.5;
-let tetherMarginReverse = 1;
 
 let lastCallTime = 0;
-const callInterval = 60 * 1000; // 60 seconds in milliseconds
+const callInterval = 60 * 1000;
 function ringAlarm(text) {
   const now = Date.now();
   if (now - lastCallTime < callInterval) {
@@ -84,7 +81,7 @@ setInterval(() => {
         .then(response => response.json())
         .then(data => {
           data.forEach((x) => {
-            if (x.result > tetherKur + tetherMargin && !alert.includes(x.title)) {
+            if (x.result > tetherKur + tetherKur*0.03 && !alert.includes(x.title)) {
               ringAlarm(x.title);
             }
           });
@@ -93,7 +90,7 @@ setInterval(() => {
       .then(response => response.json())
       .then(data => {
         data.forEach((x) => {
-          if (x.result < tetherKur - tetherMarginReverse && !alertReverse.includes(x.title)) {
+          if (x.result < tetherKur - tetherKur*0.06 && !alertReverse.includes(x.title)) {
             ringAlarm("REV - " + x.title);
           }
         });
@@ -109,7 +106,7 @@ app.get("/test", (req, res) => {
 
 app.get('/reelkur', (req, res) => {
   res.send({
-      kur: reelKur
+      kur: 30
   });
 });
 
