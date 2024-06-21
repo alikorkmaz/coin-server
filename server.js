@@ -86,7 +86,7 @@ function ringAlarm(text) {
 }
 
 setInterval(() => {
-  fetch('http://ec2-54-207-24-64.sa-east-1.compute.amazonaws.com:3000/coinbase')
+  fetch('/coinbase')
     .then(response => response.json())
     .then(data => {
       data.forEach((x) => {
@@ -96,7 +96,7 @@ setInterval(() => {
       });
     });
 
-  fetch('http://ec2-54-207-24-64.sa-east-1.compute.amazonaws.com:3000/coinbaseReverse')
+  fetch('/coinbaseReverse')
     .then(response => response.json())
     .then(data => {
       data.forEach((x) => {
