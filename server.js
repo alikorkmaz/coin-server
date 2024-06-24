@@ -86,22 +86,27 @@ function ringAlarm(text) {
 }
 
 setInterval(() => {
-  getCoinbaseData().then(data => {
-    data.forEach((x) => {
-      if (x.result > tetherKur + tetherKur * 0.03 && !alert.includes(x.title)) {
-        ringAlarm(x.title);
-      }
+  fetch('http://ec2-15-228-58-25.sa-east-1.compute.amazonaws.com:3000/coinbase')
+    .then(response => response.json())
+    .then(data => {
+      data.forEach((x) => {
+        if (x.result > tetherKur + tetherKur * 0.03 && !alert.includes(x.title)) {
+          ringAlarm(x.title);
+        }
+      });
     });
-  });
 
-  getCoinbaseReverseData().then(data => {
-    data.forEach((x) => {
-      if (x.result < tetherKur - tetherKur * 0.06 && !alertReverse.includes(x.title)) {
-        ringAlarm("REV - " + x.title);
-      }
+  fetch('http://ec2-15-228-58-25.sa-east-1.compute.amazonaws.com:3000/coinbaseReverse')
+    .then(response => response.json())
+    .then(data => {
+      data.forEach((x) => {
+        if (x.result < tetherKur - tetherKur * 0.06 && !alertReverse.includes(x.title)) {
+          ringAlarm("REV - " + x.title);
+        }
+      });
     });
-  });
 }, 10000);
+
 
 app.get("/test", (req, res) => {
   console.log("CONSOLE TEST" + "\n");
@@ -246,109 +251,169 @@ async function getParibu(paribu, binance, pairs) {
   }
 }
 
-async function getGate(paribu, pairs) {
-  for (const item of paribu) {
-    try {
-      let mySymbol = item.symbol;
-      let gateResult = await gateTask(mySymbol);
-
-      if (gateResult.length === 0 || gateResult[0].lowest_ask === null || gateResult[0].highest_bid === null) {
-        continue;
-      }
-
-      if (mySymbol === "SHIB" || mySymbol === "PEPE" || mySymbol === "BTTC" || mySymbol === "PEPE" || mySymbol === "FLOKI" || mySymbol === "BONK") {
-        pairs.push({
-          title: mySymbol + " - GATEIO",
-          commission: commissionWithGate,
-          buy: +gateResult[0].lowest_ask * 1000,
-          sell: +paribu.find((x) => x.symbol === mySymbol).highestBid * 1000,
-          result: (+paribu.find((x) => x.symbol === mySymbol).highestBid * (1 - commissionWithGate)) / +gateResult[0].lowest_ask,
-        });
-      } else {
-        pairs.push({
-          title: mySymbol + " - GATEIO",
-          commission: commissionWithGate,
-          buy: +gateResult[0].lowest_ask,
-          sell: +paribu.find((x) => x.symbol === mySymbol).highestBid,
-          result: (+paribu.find((x) => x.symbol === mySymbol).highestBid * (1 - commissionWithGate)) / +gateResult[0].lowest_ask,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-}
-
-async function getGateReverse(paribu, pairs) {
-  for (const item of paribu) {
-    try {
-      let mySymbol = item.symbol;
-      let gateResult = await gateTask(mySymbol);
-
-      if (gateResult.length === 0 || gateResult[0].lowest_ask === null || gateResult[0].highest_bid === null) {
-        continue;
-      }
-
-      if (mySymbol === "SHIB" || mySymbol === "PEPE" || mySymbol === "BTTC" || mySymbol === "PEPE" || mySymbol === "FLOKI" || mySymbol === "BONK") {
-        pairs.push({
-          title: mySymbol + " - GATEIO",
-          commission: commissionWithGate,
-          buy: +paribu.find((x) => x.symbol === mySymbol).lowestAsk * 1000,
-          sell: +gateResult[0].highest_bid * 1000,
-          result: (+gateResult[0].highest_bid * (1 - commissionWithGate)) / +paribu.find((x) => x.symbol === mySymbol).lowestAsk,
-        });
-      } else {
-        pairs.push({
-          title: mySymbol + " - GATEIO",
-          commission: commissionWithGate,
-          buy: +paribu.find((x) => x.symbol === mySymbol).lowestAsk,
-          sell: +gateResult[0].highest_bid,
-          result: (+gateResult[0].highest_bid * (1 - commissionWithGate)) / +paribu.find((x) => x.symbol === mySymbol).lowestAsk,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
+async function getGate(gate, paribu, pairs) {
+  try {
+    const item = gate[0];
+    const symbol = item.currency_pair.replace("_USDT", "");
+    const paribuItem = paribu.find((x) => x.symbol == symbol);
+    pairs.push({
+      title: symbol + " - GATE",
+      commission: commissionWithGate,
+      buy: +item.lowest_ask,
+      sell: +paribuItem.highestBid,
+      result: (paribuItem.highestBid * (1 - commissionWithGate)) / +item.lowest_ask,
+    });
+  } catch (error) {
+    console.log("error occured on getGate", error);
   }
 }
 
 app.get("/coinbase", async (req, res) => {
   try {
-    const result = await getCoinbaseData();
-    res.send(result);
+    const [paribu, btcturk, binance, gateCeek, gateAtlas, gateFlr, gateRaca, gateBlur] = await Promise.all([
+      paribuTask(),
+      btcturkTask(),
+      binanceTask(),
+      gateTask("CEEK"),
+      gateTask("ATLAS"),
+      gateTask("FLR"),
+      gateTask("RACA"),
+      gateTask("BLUR"),
+    ]);
+
+    const pairs = [];
+    await Promise.all([
+      getBtcturk(btcturk, binance, pairs),
+      getParibu(paribu, binance, pairs),
+      getGate(gateCeek, paribu, pairs),
+      getGate(gateAtlas, paribu, pairs),
+      getGate(gateFlr, paribu, pairs),
+      getGate(gateRaca, paribu, pairs),
+      getGate(gateBlur, paribu, pairs),
+    ]);
+
+    res.send(
+      pairs
+        .filter(pair => pair.title && pair.commission && pair.sell && pair.buy && pair.result && pair.result)
+        .sort((a, b) => b.result - a.result)
+    );
   } catch (error) {
-    console.log("error on /coinbase endpoint", error);
-    res.send([]);
+    console.error("Error in /coinbase route:", error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
-async function getCoinbaseData() {
-  let pairs = [];
-  let binance = await binanceTask();
-  let paribu = await paribuTask();
-  let btcturk = await btcturkTask();
-  await getParibu(paribu, binance, pairs);
-  await getBtcturk(btcturk, binance, pairs);
-  await getGate(paribu, pairs);
-  return pairs;
+async function getBtcturkReverse(btcturk, binance, pairs) {
+  try {
+    btcturk.forEach((item) => {
+      try {
+        let mySymbol = item.pairNormalized.split("_")[0];
+        if (item.pairNormalized.split("_")[1] != "TRY") return;
+
+        if (binance.find((x) => x.symbol === mySymbol + "USDT")) {
+          if (mySymbol === "SHIB") {
+            pairs.push({
+              title: mySymbol + " - BTCTURK",
+              commission: commissionWithBinance,
+              buy: +btcturk.find((x) => x.pair === mySymbol + "TRY").ask * 1000,
+              sell: +binance.find((x) => x.symbol === mySymbol + "USDT").bidPrice * 1000,
+              result: (+btcturk.find((x) => x.pair === mySymbol + "TRY").ask * (1 + commissionWithBinance)) /
+                +binance.find((x) => x.symbol === mySymbol + "USDT").bidPrice,
+            });
+          } else if (mySymbol === "GAL") {
+            //DO NOTHING
+          } else {
+            pairs.push({
+              title: mySymbol + " - BTCTURK",
+              commission: commissionWithBinance,
+              buy: +btcturk.find((x) => x.pair === mySymbol + "TRY").ask,
+              sell: +binance.find((x) => x.symbol === mySymbol + "USDT").bidPrice,
+              result: (+btcturk.find((x) => x.pair === mySymbol + "TRY").ask * (1 + commissionWithBinance)) /
+                +binance.find((x) => x.symbol === mySymbol + "USDT").bidPrice,
+            });
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  } catch (error) {
+    console.log("error occured on /coinbase", error);
+  }
+}
+
+async function getParibuReverse(paribu, binance, pairs) {
+  try {
+    paribu.forEach((item) => {
+      try {
+        pairs.push({
+          title: item.symbol + " - PARIBU",
+          commission: commissionWithBinance,
+          buy: +paribu.find((x) => x.symbol === item.symbol).lowestAsk,
+          sell: +binance.find((x) => x.symbol === item.symbol + "USDT").bidPrice,
+          result: (+paribu.find((x) => x.symbol === item.symbol).lowestAsk * (1 + commissionWithBinance)) /
+            +binance.find((x) => x.symbol === item.symbol + "USDT").bidPrice,
+        });
+      } catch (error) {
+        console.log("error occured on getParibuReverse", item.symbol, error);
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function getGateReverse(gate, paribu, pairs) {
+  try {
+    const item = gate[0];
+    const symbol = item.currency_pair.replace("_USDT", "");
+    const paribuItem = paribu.find((x) => x.symbol == symbol);
+    pairs.push({
+      title: symbol + " - GATE",
+      commission: commissionWithGate,
+      buy: +paribuItem.lowestAsk,
+      sell: +item.highest_bid,
+      result: (paribuItem.lowestAsk * (1 + commissionWithGate)) / +item.highest_bid,
+    });
+  } catch (error) {
+    console.log("error occured on getGateReverse", error);
+  }
 }
 
 app.get("/coinbaseReverse", async (req, res) => {
   try {
-    const result = await getCoinbaseReverseData();
-    res.send(result);
+    const [paribu, btcturk, binance, gateCeek, gateAtlas, gateFlr, gateRaca, gateBlur] = await Promise.all([
+      paribuTask(),
+      btcturkTask(),
+      binanceTask(),
+      gateTask("CEEK"),
+      gateTask("ATLAS"),
+      gateTask("FLR"),
+      gateTask("RACA"),
+      gateTask("BLUR"),
+    ]);
+
+    const pairs = [];
+    await Promise.all([
+      getBtcturkReverse(btcturk, binance, pairs),
+      getParibuReverse(paribu, binance, pairs),
+      getGateReverse(gateCeek, paribu, pairs),
+      getGateReverse(gateAtlas, paribu, pairs),
+      getGateReverse(gateFlr, paribu, pairs),
+      getGateReverse(gateRaca, paribu, pairs),
+      getGateReverse(gateBlur, paribu, pairs),
+    ]);
+
+    res.send(
+      pairs
+        .filter(pair => pair.title && pair.commission && pair.sell && pair.buy && pair.result && pair.result)
+        .sort((a, b) => a.result - b.result)
+    );
   } catch (error) {
-    console.log("error on /coinbaseReverse endpoint", error);
-    res.send([]);
+    console.error("Error in /coinbaseReverse route:", error);
+    res.status(500).send("Internal Server Error");
   }
 });
-
-async function getCoinbaseReverseData() {
-  let pairs = [];
-  let paribu = await paribuTask();
-  await getGateReverse(paribu, pairs);
-  return pairs;
-}
 
 // async function checkForTextAndRingAlarm() {
 //   try {
@@ -374,6 +439,7 @@ async function getCoinbaseReverseData() {
 //   }
 // }
 
-app.listen(3000, () => {
-  console.log("Server started on port 3000");
-});
+// // Call checkForTextAndRingAlarm every 10 seconds using setInterval
+// setInterval(checkForTextAndRingAlarm, 10000); 
+
+app.listen(process.env.PORT || 3000, () => console.log("listening.."));
