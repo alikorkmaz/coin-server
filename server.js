@@ -475,6 +475,7 @@ async function checkForAppointmentAndRingAlarm() {
   }
 }
 
+checkForAppointmentAndRingAlarm();
 // Call checkForAppointmentAndRingAlarm every 30 mins using setInterval
 setInterval(checkForAppointmentAndRingAlarm, 60000*30);
 
