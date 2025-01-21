@@ -5,7 +5,6 @@ const cron = require("node-cron");
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
-// Middleware for setting CORS headers
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -17,6 +16,8 @@ app.use((req, res, next) => {
 
 app.use(express.static("public"));
 app.use(express.json());
+
+const baseUrl= 'http://ec2-15-228-240-175.sa-east-1.compute.amazonaws.com:3000';
 
 let alert = [];
 let alertReverse = [];
@@ -86,7 +87,7 @@ function ringAlarm(text) {
 }
 
 setInterval(() => {
-  fetch('http://ec2-15-228-58-25.sa-east-1.compute.amazonaws.com:3000/coinbase')
+  fetch(baseUrl + '/coinbase')
     .then(response => response.json())
     .then(data => {
       data.forEach((x) => {
@@ -96,7 +97,7 @@ setInterval(() => {
       });
     });
 
-  fetch('http://ec2-15-228-58-25.sa-east-1.compute.amazonaws.com:3000/coinbaseReverse')
+  fetch(baseUrl + '/coinbaseReverse')
     .then(response => response.json())
     .then(data => {
       data.forEach((x) => {
