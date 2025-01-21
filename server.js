@@ -2,8 +2,8 @@ const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
 const cron = require("node-cron");
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
+// const jsdom = require("jsdom");
+// const { JSDOM } = jsdom;
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
