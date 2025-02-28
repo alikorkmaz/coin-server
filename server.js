@@ -473,11 +473,12 @@ async function checkForAppointmentAndRingAlarm() {
     }
   } catch (error) {
     console.error("Error while fetching or parsing the response:", error);
+    ringAlarm("Error while fetching APPOINTMENTS!");
   }
 }
 
 checkForAppointmentAndRingAlarm();
 // Call checkForAppointmentAndRingAlarm every 30 mins using setInterval
-setInterval(checkForAppointmentAndRingAlarm, 60000*30);
+setInterval(checkForAppointmentAndRingAlarm, 60000*3);
 
 app.listen(process.env.PORT || 3000, () => console.log("listening.."));
