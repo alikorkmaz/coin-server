@@ -67,7 +67,9 @@ let commissionWithGate = 0.012;
 let tetherKur = 19.77;
 
 let lastCallTime = 0;
-const callInterval = 60 * 1000;
+let lastCallTimeHourly = 0;
+const callInterval = 60 * 1000; // 1 dakika
+const hourlyCallInterval = 60 * 60 * 1000; // 1 saat
 
 function ringAlarm(text) {
   const now = Date.now();
@@ -82,6 +84,23 @@ function ringAlarm(text) {
     } else {
       console.log("Alarm successfully rung!");
       lastCallTime = now;
+    }
+  });
+}
+
+function ringAlarmOnceHour(text) {
+  const now = Date.now();
+  if (now - lastCallTimeHourly < hourlyCallInterval) {
+    console.log('p.send was called within the last hour. Skipping call.');
+    return;
+  }
+
+  p.send({ message: text }, function (err, result) {
+    if (err) {
+      console.error("Error occurred when ringing the hourly alarm: ", err);
+    } else {
+      console.log("Hourly alarm successfully rung!");
+      lastCallTimeHourly = now;
     }
   });
 }
@@ -479,6 +498,6 @@ async function checkForAppointmentAndRingAlarm() {
 
 checkForAppointmentAndRingAlarm();
 // Call checkForAppointmentAndRingAlarm every 30 mins using setInterval
-setInterval(checkForAppointmentAndRingAlarm, 60000*3);
+setInterval(checkForAppointmentAndRingAlarm, 60000);
 
 app.listen(process.env.PORT || 3000, () => console.log("listening.."));
