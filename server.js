@@ -459,45 +459,43 @@ app.get("/coinbaseReverse", async (req, res) => {
 //   }
 // }
 
-// // Call checkForTextAndRingAlarm every 10 seconds using setInterval
 // setInterval(checkForTextAndRingAlarm, 10000); 
 
-async function checkForAppointmentAndRingAlarm() {
-  try {
-    const response = await fetch("https://appointment.as-visa.com/Macaristan/TarihGetir", {
-      method: "POST",
-      headers: {
-        "Accept": "application/json, text/javascript, */*; q=0.01",
-        "Accept-Language": "en-US,en;q=0.9,tr;q=0.8",
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        "Origin": "https://appointment.as-visa.com",
-        "Referer": "https://appointment.as-visa.com/tr/istanbul-bireysel-basvuru",
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-        "X-Requested-With": "XMLHttpRequest",
-        "sec-ch-ua": '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
-        "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": '"macOS"',
-      },
-      body: "tabId=Portekiz+Bireysel+Randevu+(C)&countryid=T%C3%9CRK%C4%B0YE"
-    });
+// async function checkForAppointmentAndRingAlarm() {
+//   try {
+//     const response = await fetch("https://appointment.as-visa.com/Macaristan/TarihGetir", {
+//       method: "POST",
+//       headers: {
+//         "Accept": "application/json, text/javascript, */*; q=0.01",
+//         "Accept-Language": "en-US,en;q=0.9,tr;q=0.8",
+//         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+//         "Origin": "https://appointment.as-visa.com",
+//         "Referer": "https://appointment.as-visa.com/tr/istanbul-bireysel-basvuru",
+//         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+//         "X-Requested-With": "XMLHttpRequest",
+//         "sec-ch-ua": '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+//         "sec-ch-ua-mobile": "?0",
+//         "sec-ch-ua-platform": '"macOS"',
+//       },
+//       body: "tabId=Portekiz+Bireysel+Randevu+(C)&countryid=T%C3%9CRK%C4%B0YE"
+//     });
 
-    const data = await response.json();
+//     const data = await response.json();
 
-    // Check if the response is not an empty array
-    if (Array.isArray(data) && data.length === 0) {
-      console.log("No appointments available.");
-    } else {
-      console.log("Appointments available. Calling ringAlarm method.");
-      ringAlarm("APPOINTMENTS ARE AVAILABLE!");
-    }
-  } catch (error) {
-    console.error("Error while fetching or parsing the response:", error);
-    ringAlarm("Error while fetching APPOINTMENTS!");
-  }
-}
+//     // Check if the response is not an empty array
+//     if (Array.isArray(data) && data.length === 0) {
+//       console.log("No appointments available.");
+//     } else {
+//       console.log("Appointments available. Calling ringAlarm method.");
+//       ringAlarm("APPOINTMENTS ARE AVAILABLE!");
+//     }
+//   } catch (error) {
+//     console.error("Error while fetching or parsing the response:", error);
+//     ringAlarm("Error while fetching APPOINTMENTS!");
+//   }
+// }
 
-checkForAppointmentAndRingAlarm();
-// Call checkForAppointmentAndRingAlarm every 30 mins using setInterval
-setInterval(checkForAppointmentAndRingAlarm, 60000);
+// checkForAppointmentAndRingAlarm();
+// setInterval(checkForAppointmentAndRingAlarm, 60000);
 
 app.listen(process.env.PORT || 3000, () => console.log("listening.."));
