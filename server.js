@@ -461,41 +461,46 @@ app.get("/coinbaseReverse", async (req, res) => {
 
 // setInterval(checkForTextAndRingAlarm, 10000); 
 
-// async function checkForAppointmentAndRingAlarm() {
-//   try {
-//     const response = await fetch("https://appointment.as-visa.com/Macaristan/TarihGetir", {
-//       method: "POST",
-//       headers: {
-//         "Accept": "application/json, text/javascript, */*; q=0.01",
-//         "Accept-Language": "en-US,en;q=0.9,tr;q=0.8",
-//         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-//         "Origin": "https://appointment.as-visa.com",
-//         "Referer": "https://appointment.as-visa.com/tr/istanbul-bireysel-basvuru",
-//         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-//         "X-Requested-With": "XMLHttpRequest",
-//         "sec-ch-ua": '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
-//         "sec-ch-ua-mobile": "?0",
-//         "sec-ch-ua-platform": '"macOS"',
-//       },
-//       body: "tabId=Portekiz+Bireysel+Randevu+(C)&countryid=T%C3%9CRK%C4%B0YE"
-//     });
+async function checkForAppointmentAndRingAlarm() {
+  if(alertReverse.length>10) return;
+  try {
+    const response = await fetch("https://appointment.as-visa.com/Macaristan/TarihGetir", {
+      "headers": {
+        "accept": "application/json, text/javascript, */*; q=0.01",
+        "accept-language": "en-US,en;q=0.9,tr;q=0.8",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "requestverificationtoken": "CfDJ8NyLMf4m3dBNhfCBjRfvs-AKyGaKlwj_wVTP9FCMyDn-6qvgN6vQqPgmlJon4Wt-nJcifQZFJ0yeofavkYxOKpF24BnFQ--J6-1u7LTP2wPlfPUypzd5VR7lFIpKxBZtcGN83u8xgakx307XE8VLnGI",
+        "sec-ch-ua": "\"Chromium\";v=\"136\", \"Google Chrome\";v=\"136\", \"Not.A/Brand\";v=\"99\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-origin",
+        "x-requested-with": "XMLHttpRequest",
+        "cookie": "_ga_KQC6SY9TRV=GS2.1.s1751404418$o11$g0$t1751404418$j60$l0$h0; _ga=GA1.2.893294245.1737061640; _gid=GA1.2.1516146233.1751404419; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8NyLMf4m3dBNhfCBjRfvs-Al36yFV525Q8LCL4Gjur_F-dIBpw5hbjyzU30sw2VS_FYhjfB2WykLmgtQJPiVR59QwTSuPRHN0jSpDRVj49Gys7eSYvWtTTKU2cGtWIpvOE1wqPbvwxIuHbM81H5CO88; .AspNetCore.Session=CfDJ8NyLMf4m3dBNhfCBjRfvs%2BCPPzVBBewfkRXEadjoFJGTP44X7UnnITfUU4mDXKqAx1T10x2lHDL0mR8cfRUi0l4Id7c%2FCEZQqE9hYEoQRwVOT8fe9nnfwwex8dCy7OJLX6SdGXpinoduF0BlUMU4kKPUANyLsaYpc8Y1hrAm8ent",
+        "Referer": "https://appointment.as-visa.com/tr/istanbul-bireysel-basvuru",
+        "Referrer-Policy": "strict-origin-when-cross-origin"
+      },
+      "body": "tabId=Portekiz+Bireysel+Randevu+(C)&countryid=T%C3%9CRK%C4%B0YE",
+      "method": "POST"
+    });
 
-//     const data = await response.json();
+    const data = await response.json();
 
-//     // Check if the response is not an empty array
-//     if (Array.isArray(data) && data.length === 0) {
-//       console.log("No appointments available.");
-//     } else {
-//       console.log("Appointments available. Calling ringAlarm method.");
-//       ringAlarm("APPOINTMENTS ARE AVAILABLE!");
-//     }
-//   } catch (error) {
-//     console.error("Error while fetching or parsing the response:", error);
-//     ringAlarm("Error while fetching APPOINTMENTS!");
-//   }
-// }
+    // Check if the response is not an empty array
+    if (Array.isArray(data) && data.length === 0) {
+      console.log("No appointments available.");
+    } else {
+      console.log("Appointments available. Calling ringAlarm method.");
+      ringAlarm("APPOINTMENTS ARE AVAILABLE!");
+    }
+  } catch (error) {
+    console.error("Error while fetching or parsing the response:", error);
+    ringAlarm("Error while fetching APPOINTMENTS!");
+  }
+}
 
-// checkForAppointmentAndRingAlarm();
-// setInterval(checkForAppointmentAndRingAlarm, 60000);
+checkForAppointmentAndRingAlarm();
+setInterval(checkForAppointmentAndRingAlarm, 60000);
 
 app.listen(process.env.PORT || 3000, () => console.log("listening.."));
